@@ -1,1 +1,1 @@
-This is the "Gray" team's stupid blackjack Solution for Cherry's class
+This is the Gray Team's StupidBlackjack for Software Engineering (CYEN 481).
