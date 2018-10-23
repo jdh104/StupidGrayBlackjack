@@ -26,7 +26,8 @@ namespace StupidBlackjackSln.Code
         /// <param name="port">The port to connect to</param>
         public Connector(String domain, int port)
         {
-
+            this.hostDomain = domain;
+            this.hostPort = port;
         }
 
         /// <summary>
