@@ -27,13 +27,13 @@ namespace StupidBlackjackSln.Code {
 
         public StupidServer() {
             clients = new ArrayList();
-            server = new TcpListener(DEFAULT_PORT);
+            server = new TcpListener(this.port);
         }
 
         public StupidServer(int port) {
             this.port = port;
             clients = new ArrayList();
-            server = new TcpListener(port);
+            server = new TcpListener(this.port);
         }
 
         private void LoopAccept() {
