@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace StupidBlackjackSln.Code
 {
-    class Connector
+    class StupidConnector
     {
         private Socket socket;
         private String serverDomain = "";
@@ -31,6 +31,14 @@ namespace StupidBlackjackSln.Code
         {
             this.serverDomain = domain;
             this.serverPort = port;
+        }
+
+        public Socket generateSocket(String domain, int port) {
+            IPHostEntry ipHostInfo = Dns.GetHostEntry(Dns.GetHostName());  
+            IPAddress ipAddress = ipHostInfo.AddressList[0];  
+            IPEndPoint remoteEP = new IPEndPoint(ipAddress,11000);
+
+            Socket sender = new Socket(ipAddress.AddressFamily, SocketType.Stream, ProtocolType.Tcp );
         }
 
         /// <summary>
