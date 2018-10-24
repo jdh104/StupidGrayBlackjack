@@ -73,13 +73,14 @@ namespace StupidBlackjackSln.Code
         /// <returns>An array of strings containing game names and id's</returns>
         public String FetchListOfGames()
         {
-            this.sendString("list");
+            this.sendString(StupidServer.FETCH_COMMAND);
 
-            byte[] buffer = new byte[40];
-            netstream.Read(buffer, 0, buffer.Length());
-            buffer = new byte[Int32.Parse(GetStringFromBytes(buffer))];
-            netstream.Read(buffer, 0, buffer.Length());
-            return GetStringFromBytes(buffer);
+            // First get the size of the incoming string
+            int buffer_size = 40;
+            buffer_size = Int32.Parse(RecieveString(buffer_size));
+
+            // Then return the incoming string
+            return RecieveString(buffer_size);
         }
 
         /// <summary>
@@ -90,18 +91,26 @@ namespace StupidBlackjackSln.Code
         public int HostNewGame(String serverName)
         {
             byte[] buffer = new byte[StupidServer.ID_SIZE_IN_BYTES];
-            this.sendString("new");
-            netstream.Read(buffer, 0, buffer.Length());
-            return Int32.Parse(GetStringFromBytes(buffer));
+            this.sendString(StupidServer.HOST_NEW_GAME_COMMAND);
+            return Int32.Parse(RecieveString(StupidServer.ID_SIZE_IN_BYTES));
         }
 
         /// <summary>
         /// Join a game using its identification number.
         /// </summary>
         /// <param name="id">id of game to join</param>
-        public void JoinGameByID(int id)
+        /// <returns>True if join succeeded</returns>
+        public bool JoinGameByID(int id)
         {
-            this.sendString("join " + id);
+            this.sendString(StupidServer.JOIN_GAME_BY_ID_COMMAND + " " + id);
+            String response = RecieveString(1);
+            return response.Equals(StupidServer.JOIN_SUCCESS);
+        }
+
+        private String RecieveString(int size) {
+            byte[] buffer = new byte[size];
+            netstream.Read(buffer, 0, size);
+            return GetStringFromBytes(buffer);
         }
 
         /// <summary>
@@ -110,7 +119,7 @@ namespace StupidBlackjackSln.Code
         /// <param name="id">The id of the game to remove</param>
         public void RemoveHostedGame(int id)
         {
-            this.sendString("rm " + id);
+            this.sendString(StupidServer.REMOVE_GAME_BY_ID_COMMAND + " " + id);
         }
 
         private void sendString(String s)
