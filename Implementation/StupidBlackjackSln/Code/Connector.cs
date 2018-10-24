@@ -11,8 +11,8 @@ namespace StupidBlackjackSln.Code
     class Connector
     {
         private Socket socket;
-        private String hostDomain = "";
-        private int hostPort = 0;
+        private String serverDomain = "";
+        private int serverPort = 0;
 
         /// <summary>
         /// Create a new connection to the default matchmaking server.
@@ -29,8 +29,8 @@ namespace StupidBlackjackSln.Code
         /// <param name="port">The port to connect to</param>
         public Connector(String domain, int port)
         {
-            this.hostDomain = domain;
-            this.hostPort = port;
+            this.serverDomain = domain;
+            this.serverPort = port;
         }
 
         /// <summary>
