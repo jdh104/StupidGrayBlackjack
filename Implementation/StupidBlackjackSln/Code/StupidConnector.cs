@@ -10,7 +10,8 @@ namespace StupidBlackjackSln.Code
 {
     class StupidConnector
     {
-        private Socket socket;
+        private TcpClient client;
+        private NetworkStream netstream;
         private String serverDomain = "";
         private int serverPort = 0;
 
@@ -19,7 +20,8 @@ namespace StupidBlackjackSln.Code
         /// </summary>
         public Connector()
         {
-            
+            this.client = GenerateTcpClient(serverDomain, serverPort);
+            this.netstream = client.GetStream();
         }
 
         /// <summary>
@@ -31,14 +33,19 @@ namespace StupidBlackjackSln.Code
         {
             this.serverDomain = domain;
             this.serverPort = port;
+            this.client = GenerateTcpClient(serverDomain, serverPort);
         }
 
-        public Socket generateSocket(String domain, int port) {
-            IPHostEntry ipHostInfo = Dns.GetHostEntry(Dns.GetHostName());  
-            IPAddress ipAddress = ipHostInfo.AddressList[0];  
-            IPEndPoint remoteEP = new IPEndPoint(ipAddress,11000);
-
-            Socket sender = new Socket(ipAddress.AddressFamily, SocketType.Stream, ProtocolType.Tcp );
+        /// <summary>
+        ///
+        /// </summary>
+        /// <param name="domain"></param>
+        /// <param name="port"></param>
+        /// <returns></returns>
+        private TcpClient GenerateTcpClient(String domain, int port)
+        {
+            IPAddress serverIp = Dns.GetHostEntry(domain).AddressList[0];
+            //TODO
         }
 
         /// <summary>
@@ -75,6 +82,10 @@ namespace StupidBlackjackSln.Code
         /// <param name="id">The id of the game to remove</param>
         public void RemoveHostedGame(int id)
         {
+
+        }
+
+        private void sendString(String s) {
 
         }
     }
