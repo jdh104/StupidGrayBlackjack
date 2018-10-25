@@ -61,7 +61,7 @@ namespace StupidBlackjackSln.Code {
                 }
             }
 
-            server.Close();
+            server.Server.Close();
         }
 
         private void InterpretCommand(String cmd) {
