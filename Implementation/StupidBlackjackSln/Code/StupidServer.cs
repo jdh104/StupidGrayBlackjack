@@ -54,14 +54,14 @@ namespace StupidBlackjackSln.Code {
             lock (clients) {
                 lock (streams) {
                     lock (threads) {
+                        foreach (Thread t in threads) {
+                            t.Abort();
+                        }
                         foreach (TcpClient c in clients) {
                             c.Close();
                         }
                         foreach (NetworkStream n in streams) {
                             n.Close();
-                        }
-                        foreach (Thread t in threads) {
-                            t.Abort();
                         }
                     }
                 }
