@@ -61,7 +61,7 @@ namespace StupidBlackjackSln.Code {
                             n.Close();
                         }
                         foreach (Thread t in threads) {
-                            t.Close();
+                            t.Abort();
                         }
                     }
                 }
