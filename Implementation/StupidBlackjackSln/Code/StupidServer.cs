@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace StupidBlackjackSln.Code {
     class StupidServer {
 
-        public static const int ID_SIZE_IN_BYTES = 0;
+        public static const int ID_SIZE_IN_BYTES = 32;
         public static const int DEFAULT_PORT = 61537;
         public static const String DEFAULT_DOMAIN = "";
         public static const int MAX_COMMAND_LENGTH = 64;
