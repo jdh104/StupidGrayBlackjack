@@ -14,6 +14,7 @@ namespace StupidBlackjackSln.Code {
         public static const int ID_SIZE_IN_BYTES = 0;
         public static const int DEFAULT_PORT = 0;
         public static const String DEFAULT_DOMAIN = "";
+        public static const int MAX_COMMAND_LENGTH = 64;
         public static const String JOIN_SUCCESS = "1";
         public static const String FETCH_COMMAND = "f";
         public static const String HOST_NEW_GAME_COMMAND = "h";
@@ -23,6 +24,7 @@ namespace StupidBlackjackSln.Code {
         private bool started;
         private int port = DEFAULT_PORT;
         private ArrayList clients;
+        private ArrayList streams;
         private TcpListener server;
 
         public StupidServer() {
@@ -36,16 +38,43 @@ namespace StupidBlackjackSln.Code {
             server = new TcpListener(this.port);
         }
 
+        private void Broadcast(String s) {
+            byte[] buffer = Encoding.ASCII.GetBytes(s);
+            lock (streams) {
+                foreach (NetworkStream ns in streams) {
+                    ns.Write(buffer, 0, buffer.Length());
+                }
+            }
+        }
+
+        private void InterpretCommand(String cmd) {
+            //TODO
+        }
+
         private void LoopAccept() {
             while (true) {
                 TcpClient c = server.AcceptTcpClient();
-                clients.Add(c);
+                
+                lock (clients) {
+                    clients.Add(c);
+                }
+                
                 new Thread(LoopListen).Start(c);
             }
         }
 
         private void LoopListen(TcpClient c) {
-            NetworkStream s = c.GetStream();
+            NetworkStream ns = c.GetStream();
+
+            lock (streams) {
+                streams.Add(ns);
+            }
+
+            byte[] buffer = new byte[MAX_COMMAND_LENGTH];
+            while (true) {
+                ns.Read(buffer, 0, MAX_COMMAND_LENGTH);
+                this.InterpretCommand(Encoding.ASCII.GetString(buffer, 0, MAX_COMMAND_LENGTH));
+            }
         }
 
         public void Start() {
@@ -61,7 +90,7 @@ namespace StupidBlackjackSln.Code {
         }
 
         public void Stop() {
-            //this.started = false;
+            //TODO
         }
     }
 }
