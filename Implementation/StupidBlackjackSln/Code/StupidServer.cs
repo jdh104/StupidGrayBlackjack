@@ -21,7 +21,6 @@ namespace StupidBlackjackSln.Code {
         public static const String JOIN_GAME_BY_ID_COMMAND = "j";
         public static const String REMOVE_GAME_BY_ID_COMMAND = "r";
 
-        private bool started;
         private int port = DEFAULT_PORT;
         private ArrayList clients;
         private ArrayList streams;
@@ -45,6 +44,24 @@ namespace StupidBlackjackSln.Code {
                     ns.Write(buffer, 0, buffer.Length());
                 }
             }
+        }
+
+        /// <summary>
+        /// Close all connections. Call this before terminating.
+        /// </summary>
+        public void Close() {
+            lock (clients) {
+                lock (streams) {
+                    foreach (TcpClient c in clients) {
+                        c.Close();
+                    }
+                    foreach (NetworkStream n in streams) {
+                        n.Close();
+                    }
+                }
+            }
+
+            server.Close();
         }
 
         private void InterpretCommand(String cmd) {
@@ -80,7 +97,6 @@ namespace StupidBlackjackSln.Code {
         public void Start() {
             try {
                 server.Start();
-                this.started = true;
                 //TODO add some status message
             } catch (Exception e) {
                 //TODO

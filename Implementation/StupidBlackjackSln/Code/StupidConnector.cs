@@ -41,6 +41,9 @@ namespace StupidBlackjackSln.Code
             this.netstream = client.GetStream();
         }
 
+        /// <summary>
+        /// Close the connection. Use before terminating application
+        /// </summary>
         public void Close() {
             netstream.Close();
             client.Close();
