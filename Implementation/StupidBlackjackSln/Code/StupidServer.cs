@@ -25,6 +25,7 @@ namespace StupidBlackjackSln.Code {
         private ArrayList clients;
         private ArrayList streams;
         private TcpListener server;
+        private ArrayList threads;
 
         public StupidServer() {
             clients = new ArrayList();
@@ -52,11 +53,16 @@ namespace StupidBlackjackSln.Code {
         public void Close() {
             lock (clients) {
                 lock (streams) {
-                    foreach (TcpClient c in clients) {
-                        c.Close();
-                    }
-                    foreach (NetworkStream n in streams) {
-                        n.Close();
+                    lock (threads) {
+                        foreach (TcpClient c in clients) {
+                            c.Close();
+                        }
+                        foreach (NetworkStream n in streams) {
+                            n.Close();
+                        }
+                        foreach (Thread t in threads) {
+                            t.Close();
+                        }
                     }
                 }
             }
@@ -76,7 +82,9 @@ namespace StupidBlackjackSln.Code {
                     clients.Add(c);
                 }
                 
-                new Thread(LoopListen).Start(c);
+                Thread t = new Thread(LoopListen);
+                threads.Add(t);
+                t.Start(c);
             }
         }
 
@@ -102,7 +110,9 @@ namespace StupidBlackjackSln.Code {
                 //TODO
             }
 
-            new Thread(LoopAccept).Start();
+            Thread t = new Thread(LoopAccept);
+            threads.Add(t);
+            t.Start();
         }
     }
 }
