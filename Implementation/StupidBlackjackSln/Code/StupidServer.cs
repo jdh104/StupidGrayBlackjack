@@ -104,9 +104,5 @@ namespace StupidBlackjackSln.Code {
 
             new Thread(LoopAccept).Start();
         }
-
-        public void Stop() {
-            //TODO
-        }
     }
 }
