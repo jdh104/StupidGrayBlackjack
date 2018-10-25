@@ -87,7 +87,7 @@ namespace StupidBlackjackSln.Code
         /// Create a new game session on the matchmaking server.
         /// </summary>
         /// <param name="serverName">Display name for the game session.</param>
-        /// <returns>The generated id number for the game.</returns>
+        /// <returns>The generated id number for the game, or 0 if failed.</returns>
         public int HostNewGame(String serverName)
         {
             byte[] buffer = new byte[StupidServer.ID_SIZE_IN_BYTES];
