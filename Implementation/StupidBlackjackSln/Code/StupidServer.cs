@@ -83,7 +83,11 @@ namespace StupidBlackjackSln.Code {
                 }
                 
                 Thread t = new Thread(LoopListen);
-                threads.Add(t);
+                
+                lock (threads) {
+                    threads.Add(t);
+                }
+
                 t.Start(c);
             }
         }
