@@ -22,7 +22,7 @@ namespace StupidBlackjackSln.Code
         {
             this.serverDomain = StupidServer.DEFAULT_DOMAIN;
             this.serverPort = StupidServer.DEFAULT_PORT;
-            this.client = GenerateTcpClient(serverDomain, serverPort);
+            this.client = new TcpClient(serverDomain, serverPort);
             this.netstream = client.GetStream();
         }
 
@@ -35,7 +35,7 @@ namespace StupidBlackjackSln.Code
         {
             this.serverDomain = domain;
             this.serverPort = port;
-            this.client = GenerateTcpClient(serverDomain, serverPort);
+            this.client = new TcpClient(serverDomain, serverPort);
             this.netstream = client.GetStream();
         }
 
@@ -45,18 +45,6 @@ namespace StupidBlackjackSln.Code
         public void Close() {
             netstream.Close();
             client.Close();
-        }
-
-        /// <summary>
-        ///
-        /// </summary>
-        /// <param name="domain"></param>
-        /// <param name="port"></param>
-        /// <returns></returns>
-        private TcpClient GenerateTcpClient(String domain, int port)
-        {
-            //IPAddress serverIp = Dns.GetHostEntry(domain).AddressList[0];
-            return new TcpClient(domain, port);
         }
 
         /// <summary>
