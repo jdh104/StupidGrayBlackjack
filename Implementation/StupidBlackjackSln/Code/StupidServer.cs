@@ -11,15 +11,15 @@ using System.Threading.Tasks;
 namespace StupidBlackjackSln.Code {
     class StupidServer {
 
-        public static const int ID_SIZE_IN_BYTES = 32;
-        public static const int DEFAULT_PORT = 61537;
-        public static const String DEFAULT_DOMAIN = "";
-        public static const int MAX_COMMAND_LENGTH = 64;
-        public static const String JOIN_SUCCESS = "1";
-        public static const String FETCH_COMMAND = "f";
-        public static const String HOST_NEW_GAME_COMMAND = "h";
-        public static const String JOIN_GAME_BY_ID_COMMAND = "j";
-        public static const String REMOVE_GAME_BY_ID_COMMAND = "r";
+        public const int ID_SIZE_IN_BYTES = 32;
+        public const int DEFAULT_PORT = 61537;
+        public const String DEFAULT_DOMAIN = "";
+        public const int MAX_COMMAND_LENGTH = 64;
+        public const String JOIN_SUCCESS = "1";
+        public const String FETCH_COMMAND = "f";
+        public const String HOST_NEW_GAME_COMMAND = "h";
+        public const String JOIN_GAME_BY_ID_COMMAND = "j";
+        public const String REMOVE_GAME_BY_ID_COMMAND = "r";
 
         private int port = DEFAULT_PORT;
         private ArrayList clients;
@@ -42,7 +42,7 @@ namespace StupidBlackjackSln.Code {
             byte[] buffer = Encoding.ASCII.GetBytes(s);
             lock (streams) {
                 foreach (NetworkStream ns in streams) {
-                    ns.Write(buffer, 0, buffer.Length());
+                    ns.Write(buffer, 0, buffer.Length);
                 }
             }
         }
@@ -82,13 +82,13 @@ namespace StupidBlackjackSln.Code {
                     clients.Add(c);
                 }
                 
-                Thread t = new Thread(LoopListen);
+                Thread t = new Thread(() => LoopListen(c));
                 
                 lock (threads) {
                     threads.Add(t);
                 }
 
-                t.Start(c);
+                t.Start();
             }
         }
 

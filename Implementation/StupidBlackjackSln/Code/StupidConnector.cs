@@ -6,8 +6,6 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 
-using StupidBlackjackSln.Code.StupidServer;
-
 namespace StupidBlackjackSln.Code
 {
     class StupidConnector
@@ -20,7 +18,7 @@ namespace StupidBlackjackSln.Code
         /// <summary>
         /// Create a new connection to the default matchmaking server.
         /// </summary>
-        public Connector()
+        public StupidConnector()
         {
             this.serverDomain = StupidServer.DEFAULT_DOMAIN;
             this.serverPort = StupidServer.DEFAULT_PORT;
@@ -33,7 +31,7 @@ namespace StupidBlackjackSln.Code
         /// </summary>
         /// <param name="domain">The domain name (or ip) of the server</param>
         /// <param name="port">The port to connect to</param>
-        public Connector(String domain, int port)
+        public StupidConnector(String domain, int port)
         {
             this.serverDomain = domain;
             this.serverPort = port;
@@ -67,7 +65,7 @@ namespace StupidBlackjackSln.Code
         /// <param name="b">Byte array to convert</param>
         /// <returns>The string represented by the given byte array</return>
         private String GetStringFromBytes(byte[] b) {
-            return Encoding.ASCII.GetString(b, 0, b.Length());
+            return Encoding.ASCII.GetString(b, 0, b.Length);
         }
 
         /// <summary>
@@ -128,7 +126,7 @@ namespace StupidBlackjackSln.Code
         private void sendString(String s)
         {
             byte[] data = Encoding.ASCII.GetBytes(s);
-            netstream.Write(data, 0, data.Length());
+            netstream.Write(data, 0, data.Length);
         }
     }
 }
