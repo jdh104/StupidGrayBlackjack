@@ -9,6 +9,10 @@ using System.Threading;
 using System.Threading.Tasks;
 
 namespace StupidBlackjackSln.Code {
+    /// <summary>
+    /// Wrapper class for TcpListener that does threaded client 
+    /// accepting and listening for StupidBlackjack
+    /// </summary>
     class StupidServer {
 
         public const int ID_SIZE_IN_BYTES = 32;

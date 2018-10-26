@@ -8,6 +8,10 @@ using System.Threading.Tasks;
 
 namespace StupidBlackjackSln.Code
 {
+    /// <summary>
+    /// A wrapper for client-side socket implementation
+    /// for StupidBlackjack
+    /// </summary>
     class StupidConnector
     {
         private TcpClient client;
