@@ -49,6 +49,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Code\BlackjackPlayer.cs" />
+    <Compile Include="Code\StupidConnector.cs" />
+    <Compile Include="Code\StupidServer.cs" />
     <Compile Include="FrmTitle.cs">
       <SubType>Form</SubType>
     </Compile>
