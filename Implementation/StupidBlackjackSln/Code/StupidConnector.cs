@@ -100,6 +100,11 @@ namespace StupidBlackjackSln.Code
             return response.Equals(StupidServer.JOIN_SUCCESS);
         }
 
+        /// <summary>
+        /// Read `size` bytes from the NetworkStream connection.
+        /// </summary>
+        /// <param name="size">The number of bytes to recieve</param>
+        /// <returns>The recieved String</returns>
         private String RecieveString(int size) {
             byte[] buffer = new byte[size];
             netstream.Read(buffer, 0, size);
@@ -115,6 +120,10 @@ namespace StupidBlackjackSln.Code
             this.sendString(StupidServer.REMOVE_GAME_BY_ID_COMMAND + " " + id);
         }
 
+        /// <summary>
+        /// Send a string to the server to be interpreted as a command.
+        /// </summary>
+        /// <param name="s">String to send</param>
         private void sendString(String s)
         {
             byte[] data = Encoding.ASCII.GetBytes(s);
