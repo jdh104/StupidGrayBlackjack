@@ -32,15 +32,15 @@ namespace StupidBlackjackSln {
     /// <summary>
     /// Get singleton instance of StupidServer.
     /// </summary>
-    /// <returns> The singleton instance of StupidServer</returns>
+    /// <returns> The singleton instance of StupidServer, null if not started</returns>
     public static StupidServer GetServer() {
       return server;
     }
 
     /// <summary>
-    /// Start a singleton StupidServer
+    /// Start a singleton StupidServer if not already started.
     /// </summary>
-    /// <returns>Started instance of StupidServer</returns>
+    /// <returns>Started instance of StupidServer, or null if a server has already been started</returns>
     public static StupidServer StartNewServer() {
       if (server != null) {
         server = new StupidServer();
