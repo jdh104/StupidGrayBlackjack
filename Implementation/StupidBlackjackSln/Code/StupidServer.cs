@@ -27,9 +27,9 @@ namespace StupidBlackjackSln.Code {
 
         private int port = DEFAULT_PORT;
         private ArrayList clients;
-        private ArrayList streams;
+        private ArrayList streams = new ArrayList();
         private TcpListener server;
-        private ArrayList threads;
+        private ArrayList threads = new ArrayList();
 
         public StupidServer() {
             clients = new ArrayList();
