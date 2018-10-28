@@ -85,6 +85,7 @@ namespace StupidBlackjackSln.Code {
                 }
                 
                 server.Server.Close();
+                started = false;
             }
         }
 
