@@ -40,10 +40,14 @@ namespace StupidBlackjackSln {
     /// <summary>
     /// Start a singleton StupidServer
     /// </summary>
-    public static void StartStupidServer() {
+    /// <returns>Started instance of StupidServer</returns>
+    public static StupidServer StartNewServer() {
       if (server != null) {
         server = new StupidServer();
         server.Start();
+        return server;
+      } else {
+        return null;
       }
     }
   }
