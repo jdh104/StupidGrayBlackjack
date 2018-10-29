@@ -107,7 +107,11 @@ namespace StupidBlackjackSln.Code {
         /// </summary>
         private void LoopAccept() {
             while (true) {
-                TcpClient c = server.AcceptTcpClient();
+                while (!server.Pending())
+                {
+                    Thread.Sleep(100);
+                }
+                TcpClient c =  server.AcceptTcpClient();
                 
                 lock (clients) {
                     clients.Add(c);
