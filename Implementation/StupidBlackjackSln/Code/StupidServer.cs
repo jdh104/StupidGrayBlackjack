@@ -68,20 +68,23 @@ namespace StupidBlackjackSln.Code {
         /// </summary>
         public void Close() {
             if (started) {
-                lock (clients) {
-                    lock (streams) {
-                        lock (threads) {
-                            foreach (Thread t in threads) {
-                                t.Abort();
-                            }
-                            foreach (TcpClient c in clients) {
-                                c.Close();
-                            }
-                            foreach (NetworkStream n in streams) {
-                                n.Close();
-                            }
-                        }
+
+                lock (threads)
+                {
+                    foreach (Thread t in threads)
+                    {
+                        t.Abort();
                     }
+                }
+
+                foreach (TcpClient c in clients)
+                {
+                    c.Close();
+                }
+
+                foreach (NetworkStream n in streams)
+                {
+                    n.Close();
                 }
                 
                 server.Server.Close();
