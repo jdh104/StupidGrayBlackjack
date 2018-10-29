@@ -34,7 +34,7 @@ namespace StupidBlackjackSln.Code {
 
         /// <summary>
         /// Default constructor, sets up server with default settings.
-        /// <summary>
+        /// </summary>
         public StupidServer() {
             clients = new ArrayList();
             server = new TcpListener(this.port);
