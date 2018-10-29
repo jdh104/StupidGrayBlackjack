@@ -43,7 +43,7 @@ namespace StupidBlackjackSln {
     /// </summary>
     /// <returns>Started instance of StupidServer, or null if a server has already been started</returns>
     public static StupidServer StartNewServer() {
-      if (server != null) {
+      if (server == null) {
         server = new StupidServer();
         server.Start();
         return server;
