@@ -95,6 +95,7 @@ namespace StupidBlackjackSln.Code {
         /// <param name="cmd">The command string to process</param>
         /// <returns>True if command was recognized, else false</returns>
         private bool InterpretCommand(String cmd) {
+            return false;
             //TODO
         }
 
