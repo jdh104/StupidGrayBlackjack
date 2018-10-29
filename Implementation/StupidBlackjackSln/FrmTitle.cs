@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using StupidBlackjackSln;
 
 namespace StupidBlackjackSln {
   public partial class frmTitle : Form {
@@ -34,5 +35,13 @@ namespace StupidBlackjackSln {
       frmNewGame.Show();
       this.Hide();
     }
-  }
+
+		private void button2_Click(object sender, EventArgs e)
+		{
+			FrmServer f = new FrmServer();
+			f.Show();
+			this.Hide();
+			Program.StartNewServer();
+		}
+	}
 }
