@@ -68,7 +68,7 @@ namespace StupidBlackjackSln.Code {
         /// </summary>
         public void Close() {
             if (started) {
-
+                
                 lock (threads)
                 {
                     foreach (Thread t in threads)
