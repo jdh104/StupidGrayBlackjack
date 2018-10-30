@@ -67,7 +67,7 @@
             this.btnNewGame.BackColor = System.Drawing.Color.Gainsboro;
             this.btnNewGame.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnNewGame.BackgroundImage")));
             this.btnNewGame.Font = new System.Drawing.Font("Poor Richard", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnNewGame.ForeColor = System.Drawing.Color.Transparent;
+            this.btnNewGame.ForeColor = System.Drawing.Color.Gainsboro;
             this.btnNewGame.Location = new System.Drawing.Point(24, 654);
             this.btnNewGame.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.btnNewGame.Name = "btnNewGame";
@@ -82,7 +82,7 @@
             this.btnRulebook.BackColor = System.Drawing.Color.Gainsboro;
             this.btnRulebook.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnRulebook.BackgroundImage")));
             this.btnRulebook.Font = new System.Drawing.Font("Poor Richard", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRulebook.ForeColor = System.Drawing.Color.Transparent;
+            this.btnRulebook.ForeColor = System.Drawing.Color.Gainsboro;
             this.btnRulebook.Location = new System.Drawing.Point(492, 654);
             this.btnRulebook.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.btnRulebook.Name = "btnRulebook";
