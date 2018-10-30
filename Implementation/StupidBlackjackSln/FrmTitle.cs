@@ -39,15 +39,21 @@ namespace StupidBlackjackSln
 
         private void btnNewGame_Click(object sender, EventArgs e)
         {
-            Program.StartNewConnector();
+            try
+            {
+                Program.StartNewConnector();
+            }
+            catch (Exception ex)
+            {
+                //TODO
+            }
             new FrmNewGame().Show();
             this.Hide();
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            FrmServer f = new FrmServer();
-            f.Show();
+            new FrmServer().Show();
             this.Hide();
             Program.StartNewServer();
         }
