@@ -115,9 +115,46 @@ namespace StupidBlackjackSln.Code {
         /// </summary>
         /// <param name="cmd">The command string to process</param>
         /// <returns>True if command was recognized, else false</returns>
-        private bool InterpretCommand(String cmd) {
-            return false;
-            //TODO
+        private bool InterpretCommand(String cmd, NetworkStream sender) {
+            String[] args = cmd.Trim().Split(' ');
+            if (args[0] == FETCH_COMMAND)
+            {
+                String ToSend = "";
+                foreach (GameRep game in games)
+                {
+                    ToSend += (game.ToString() + ";");
+                }
+                return true;
+            }
+            else if (args[0] == HOST_NEW_GAME_COMMAND)
+            {
+                String new_game_name = args[1];
+                int key;
+                try
+                {
+                    key = Int32.Parse(args[2]);
+                }
+                catch (Exception e)
+                {
+                    return false;
+                }
+                games.Add(new GameRep(new_game_name, key));
+                return true;
+            }
+            else if (args[0] == JOIN_GAME_BY_ID_COMMAND)
+            {
+
+                return true;
+            }
+            else if (args[0] == REMOVE_GAME_BY_ID_COMMAND)
+            {
+
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         /// <summary>
@@ -160,7 +197,7 @@ namespace StupidBlackjackSln.Code {
             byte[] buffer = new byte[MAX_COMMAND_LENGTH];
             while (true) {
                 ns.Read(buffer, 0, MAX_COMMAND_LENGTH);
-                this.InterpretCommand(Encoding.ASCII.GetString(buffer, 0, MAX_COMMAND_LENGTH));
+                this.InterpretCommand(Encoding.ASCII.GetString(buffer, 0, MAX_COMMAND_LENGTH), ns);
             }
         }
 
@@ -187,22 +224,28 @@ namespace StupidBlackjackSln.Code {
         private class GameRep
         {
 
+            private static int nextID = 1;
             private ArrayList clients = new ArrayList(); // <TcpClient>
             public int key;
             public int id;
             public String name;
             public int population = 0;
 
-            public GameRep(String _name, int _id, int _key)
+            public GameRep(String _name, int _key)
             {
                 name = _name;
-                id = _id;
+                id = nextID++;
                 key = _key;
             }
 
             public void AddClient(TcpClient NewClient)
             {
                 clients.Add(NewClient);
+            }
+
+            public override string ToString()
+            {
+                return id.ToString() + " " + name + " " + key;
             }
         }
     }
