@@ -16,11 +16,6 @@ namespace StupidBlackjackSln
 {
     public partial class frmTitle : Form
     {
-        //private static extern IntPtr AddFontMemResourceEx(IntPtr pbFont, uint cbFont,
-        //    IntPtr pdv, [System.Runtime.InteropServices.In] ref uint pcFonts);
-
-        //private PrivateFontCollection fonts = new PrivateFontCollection();
-        //Font myfont;
 
         public frmTitle()
         {

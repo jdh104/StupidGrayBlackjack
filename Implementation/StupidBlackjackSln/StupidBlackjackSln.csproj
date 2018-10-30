@@ -132,6 +132,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Resources\POORICH.TTF" />
     <None Include="Resources\table texture.jpg" />
   </ItemGroup>
   <ItemGroup>
