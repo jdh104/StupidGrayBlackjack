@@ -36,7 +36,7 @@ namespace StupidBlackjackSln.Code {
         /// Default constructor, sets up server with default settings.
         /// </summary>
         public StupidServer() {
-            IPAddress ipAddress = Dns.Resolve(GetLocalIPAddress()).AddressList[0];
+            IPAddress ipAddress = IPAddress.Parse(GetLocalIPAddress());
             IPEndPoint ipLocalEndPoint = new IPEndPoint(ipAddress, DEFAULT_PORT);
             clients = new ArrayList();
             server = new TcpListener(ipLocalEndPoint);
@@ -48,7 +48,7 @@ namespace StupidBlackjackSln.Code {
         /// <param name="port">Port to listen on</param>
         public StupidServer(int port) {
             this.port = port;
-            IPAddress ipAddress = Dns.Resolve(GetLocalIPAddress()).AddressList[0];
+            IPAddress ipAddress = IPAddress.Parse(GetLocalIPAddress());
             IPEndPoint ipLocalEndPoint = new IPEndPoint(ipAddress, port);
             clients = new ArrayList();
             server = new TcpListener(ipLocalEndPoint);
