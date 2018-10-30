@@ -18,9 +18,11 @@ namespace StupidBlackjackSln.Code
         private static int port = StupidServer.DEFAULT_PORT;
 
         private TcpClient client;
+        private int key = new Random().Next(Int32.MaxValue);
         private NetworkStream netstream;
         private String serverDomain;
         private int serverPort;
+
 
         /// <summary>
         /// Create a new connection to the default matchmaking server.
@@ -67,7 +69,7 @@ namespace StupidBlackjackSln.Code
         /// Fetch a list of the games currently being hosted on the matchmaking server.
         /// </summary>
         /// <returns>An array of strings containing game names and id's</returns>
-        public String FetchListOfGames()
+        public String[] FetchListOfGames()
         {
             this.SendString(StupidServer.FETCH_COMMAND);
 
@@ -76,7 +78,7 @@ namespace StupidBlackjackSln.Code
             buffer_size = Int32.Parse(RecieveString(buffer_size));
 
             // Then return the incoming string
-            return RecieveString(buffer_size);
+            return RecieveString(buffer_size).Split(';');
         }
 
         /// <summary>
