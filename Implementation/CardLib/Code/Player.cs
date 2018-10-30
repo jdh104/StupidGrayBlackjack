@@ -11,6 +11,8 @@ namespace StupidBlackjackSln.Code {
       protected set;
     }
 
+        public static Boolean isTurn;
+
     public List<Card> Hand {
       get;
       protected set;
@@ -31,5 +33,7 @@ namespace StupidBlackjackSln.Code {
     }
     
     protected abstract void calcScore();
+
+    
   }
 }

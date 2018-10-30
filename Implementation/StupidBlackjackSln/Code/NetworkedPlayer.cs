@@ -10,7 +10,6 @@ namespace StupidBlackjackSln.Code
     {
         public NetworkedPlayer()
         {
-            //TODO
         }
     }
 }

@@ -14,7 +14,7 @@ namespace StupidBlackjackSln
 {
     public partial class FrmNewGame : Form
     {
-        private Deck deck;
+        public static Deck deck;
         private Player player1;
         private PictureBox[] picPlayerCards;
 
@@ -74,6 +74,11 @@ namespace StupidBlackjackSln
             textName += suit;
 
             return (Bitmap)Resources.ResourceManager.GetObject(textName);
+        }
+
+        private void btnStand_Click(object sender, EventArgs e)
+        {
+            Player.isTurn = false; 
         }
     }
 }
