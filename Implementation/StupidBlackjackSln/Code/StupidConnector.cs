@@ -14,6 +14,9 @@ namespace StupidBlackjackSln.Code
     /// </summary>
     class StupidConnector
     {
+        private static String ip = StupidServer.DEFAULT_DOMAIN;
+        private static int port = StupidServer.DEFAULT_PORT;
+
         private TcpClient client;
         private NetworkStream netstream;
         private String serverDomain;
@@ -24,8 +27,8 @@ namespace StupidBlackjackSln.Code
         /// </summary>
         public StupidConnector()
         {
-            this.serverDomain = StupidServer.DEFAULT_DOMAIN;
-            this.serverPort = StupidServer.DEFAULT_PORT;
+            this.serverDomain = ip;
+            this.serverPort = port;
             this.client = new TcpClient(serverDomain, serverPort);
             this.netstream = client.GetStream();
         }
@@ -66,7 +69,7 @@ namespace StupidBlackjackSln.Code
         /// <returns>An array of strings containing game names and id's</returns>
         public String FetchListOfGames()
         {
-            this.sendString(StupidServer.FETCH_COMMAND);
+            this.SendString(StupidServer.FETCH_COMMAND);
 
             // First get the size of the incoming string
             int buffer_size = 40;
@@ -84,7 +87,7 @@ namespace StupidBlackjackSln.Code
         public int HostNewGame(String serverName)
         {
             byte[] buffer = new byte[StupidServer.ID_SIZE_IN_BYTES];
-            this.sendString(StupidServer.HOST_NEW_GAME_COMMAND);
+            this.SendString(StupidServer.HOST_NEW_GAME_COMMAND);
             return Int32.Parse(RecieveString(StupidServer.ID_SIZE_IN_BYTES));
         }
 
@@ -95,7 +98,7 @@ namespace StupidBlackjackSln.Code
         /// <returns>True if join succeeded</returns>
         public bool JoinGameByID(int id)
         {
-            this.sendString(StupidServer.JOIN_GAME_BY_ID_COMMAND + " " + id);
+            this.SendString(StupidServer.JOIN_GAME_BY_ID_COMMAND + " " + id);
             String response = RecieveString(1);
             return response.Equals(StupidServer.JOIN_SUCCESS);
         }
@@ -117,17 +120,35 @@ namespace StupidBlackjackSln.Code
         /// <param name="id">The id of the game to remove</param>
         public void RemoveHostedGame(int id)
         {
-            this.sendString(StupidServer.REMOVE_GAME_BY_ID_COMMAND + " " + id);
+            this.SendString(StupidServer.REMOVE_GAME_BY_ID_COMMAND + " " + id);
         }
 
         /// <summary>
         /// Send a string to the server to be interpreted as a command.
         /// </summary>
         /// <param name="s">String to send</param>
-        private void sendString(String s)
+        private void SendString(String s)
         {
             byte[] data = Encoding.ASCII.GetBytes(s);
             netstream.Write(data, 0, data.Length);
+        }
+
+        /// <summary>
+        /// Set IP address of server.
+        /// </summary>
+        /// <param name="ip"></param>
+        public static void SetIP(String ip)
+        {
+            StupidConnector.ip = ip;
+        }
+
+        /// <summary>
+        /// Set port of server.
+        /// </summary>
+        /// <param name="port"></param>
+        public static void SetPort(int port)
+        {
+            StupidConnector.port = port;
         }
     }
 }

@@ -75,6 +75,18 @@
     <Compile Include="FrmRulebook.Designer.cs">
       <DependentUpon>FrmRulebook.cs</DependentUpon>
     </Compile>
+    <Compile Include="Matchmaking.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Matchmaking.Designer.cs">
+      <DependentUpon>Matchmaking.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Options.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Options.Designer.cs">
+      <DependentUpon>Options.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="FrmServer.resx">
@@ -88,6 +100,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FrmRulebook.resx">
       <DependentUpon>FrmRulebook.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Matchmaking.resx">
+      <DependentUpon>Matchmaking.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Options.resx">
+      <DependentUpon>Options.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

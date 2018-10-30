@@ -17,7 +17,7 @@ namespace StupidBlackjackSln.Code {
 
         public const int ID_SIZE_IN_BYTES = 32;
         public const int DEFAULT_PORT = 61537;
-        public const String DEFAULT_DOMAIN = "";
+        public const String DEFAULT_DOMAIN = "173.217.233.48";
         public const int MAX_COMMAND_LENGTH = 64;
         public const String JOIN_SUCCESS = "1";
         public const String FETCH_COMMAND = "f";

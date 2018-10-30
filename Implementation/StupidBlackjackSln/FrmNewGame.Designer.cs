@@ -96,7 +96,7 @@
             // btnHit
             // 
             this.btnHit.AutoSize = true;
-            this.btnHit.Location = new System.Drawing.Point(256, 356);
+            this.btnHit.Location = new System.Drawing.Point(147, 341);
             this.btnHit.Margin = new System.Windows.Forms.Padding(6);
             this.btnHit.Name = "btnHit";
             this.btnHit.Size = new System.Drawing.Size(60, 44);
@@ -108,12 +108,13 @@
             // btnStand
             // 
             this.btnStand.AutoSize = true;
-            this.btnStand.Location = new System.Drawing.Point(424, 356);
+            this.btnStand.Location = new System.Drawing.Point(461, 341);
             this.btnStand.Margin = new System.Windows.Forms.Padding(6);
             this.btnStand.Name = "btnStand";
             this.btnStand.Size = new System.Drawing.Size(106, 44);
             this.btnStand.TabIndex = 6;
             this.btnStand.Text = "Stand";
+            this.btnStand.UseCompatibleTextRendering = true;
             this.btnStand.UseVisualStyleBackColor = true;
             // 
             // lblPlayerScore

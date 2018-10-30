@@ -9,6 +9,7 @@ namespace StupidBlackjackSln {
   static class Program {
 
     private static StupidServer server = null;
+    private static StupidConnector connector = null;
 
     /// <summary>
     /// The main entry point for the application.
@@ -30,6 +31,11 @@ namespace StupidBlackjackSln {
         }
     }
 
+    public static StupidConnector GetConnector()
+        {
+            return connector;
+        }
+
     /// <summary>
     /// Get singleton instance of StupidServer.
     /// </summary>
@@ -38,6 +44,19 @@ namespace StupidBlackjackSln {
       return server;
     }
 
+    public static StupidConnector StartNewConnector()
+        {
+            if (connector == null)
+            {
+                connector = new StupidConnector();
+                return connector;
+            }
+            else
+            {
+                return null;
+            }
+        }
+   
     /// <summary>
     /// Start a singleton StupidServer if not already started.
     /// </summary>

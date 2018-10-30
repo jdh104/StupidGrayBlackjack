@@ -82,6 +82,7 @@
             // 
             // btnOptions
             // 
+            this.btnOptions.AutoSize = true;
             this.btnOptions.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnOptions.Location = new System.Drawing.Point(1020, 654);
             this.btnOptions.Margin = new System.Windows.Forms.Padding(6);
@@ -90,6 +91,7 @@
             this.btnOptions.TabIndex = 4;
             this.btnOptions.Text = "Options";
             this.btnOptions.UseVisualStyleBackColor = true;
+            this.btnOptions.Click += new System.EventHandler(this.btnOptions_Click);
             // 
             // Server
             // 
@@ -107,6 +109,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSize = true;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
             this.BackgroundImage = global::StupidBlackjackSln.Properties.Resources.table_texture;
             this.ClientSize = new System.Drawing.Size(1905, 1012);

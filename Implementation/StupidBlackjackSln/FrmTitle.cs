@@ -31,8 +31,8 @@ namespace StupidBlackjackSln {
     }
 
     private void btnNewGame_Click(object sender, EventArgs e) {
-      FrmNewGame frmNewGame = new FrmNewGame();
-      frmNewGame.Show();
+      Program.StartNewConnector();
+      new FrmNewGame().Show();
       this.Hide();
     }
 
@@ -43,5 +43,10 @@ namespace StupidBlackjackSln {
 			this.Hide();
 			Program.StartNewServer();
 		}
-	}
+
+        private void btnOptions_Click(object sender, EventArgs e)
+        {
+            new Options().ShowDialog();
+        }
+    }
 }
