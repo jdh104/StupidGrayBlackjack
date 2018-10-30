@@ -36,8 +36,10 @@ namespace StupidBlackjackSln.Code {
         /// Default constructor, sets up server with default settings.
         /// </summary>
         public StupidServer() {
+            IPAddress ipAddress = Dns.Resolve(GetLocalIPAddress()).AddressList[0];
+            IPEndPoint ipLocalEndPoint = new IPEndPoint(ipAddress, DEFAULT_PORT);
             clients = new ArrayList();
-            server = new TcpListener(this.port);
+            server = new TcpListener(ipLocalEndPoint);
         }
 
         /// <summary>
@@ -46,8 +48,10 @@ namespace StupidBlackjackSln.Code {
         /// <param name="port">Port to listen on</param>
         public StupidServer(int port) {
             this.port = port;
+            IPAddress ipAddress = Dns.Resolve(GetLocalIPAddress()).AddressList[0];
+            IPEndPoint ipLocalEndPoint = new IPEndPoint(ipAddress, port);
             clients = new ArrayList();
-            server = new TcpListener(this.port);
+            server = new TcpListener(ipLocalEndPoint);
         }
 
         /// <summary>
@@ -90,6 +94,19 @@ namespace StupidBlackjackSln.Code {
                 server.Server.Close();
                 started = false;
             }
+        }
+
+        public static string GetLocalIPAddress()
+        {
+            var host = Dns.GetHostEntry(Dns.GetHostName());
+            foreach (var ip in host.AddressList)
+            {
+                if (ip.AddressFamily == AddressFamily.InterNetwork)
+                {
+                    return ip.ToString();
+                }
+            }
+            throw new Exception("No network adapters with an IPv4 address in the system!");
         }
 
         /// <summary>
