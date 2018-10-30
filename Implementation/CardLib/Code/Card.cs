@@ -6,6 +6,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace StupidBlackjackSln.Code {
+  /// <summary>
+  /// Card class.
+  /// </summary>
   public class Card {
     // "value:suit"
     public const char DELIM = ':';
