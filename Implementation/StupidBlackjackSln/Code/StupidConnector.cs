@@ -74,13 +74,7 @@ namespace StupidBlackjackSln.Code
         public String[] FetchListOfGames()
         {
             this.SendString(StupidServer.FETCH_COMMAND);
-
-            // First get the size of the incoming string
-            int buffer_size = 40;
-            buffer_size = Int32.Parse(RecieveString(buffer_size));
-
-            // Then return the incoming string
-            return RecieveString(buffer_size).Split(';');
+            return RecieveString().Split(';');
         }
 
         /// <summary>
@@ -90,9 +84,8 @@ namespace StupidBlackjackSln.Code
         /// <returns>The generated id number for the game, or 0 if failed.</returns>
         public int HostNewGame(String serverName)
         {
-            byte[] buffer = new byte[StupidServer.ID_SIZE_IN_BYTES];
             this.SendString(StupidServer.HOST_NEW_GAME_COMMAND);
-            return Int32.Parse(RecieveString(StupidServer.ID_SIZE_IN_BYTES));
+            return Int32.Parse(RecieveString());
         }
 
         /// <summary>
@@ -103,18 +96,24 @@ namespace StupidBlackjackSln.Code
         public bool JoinGameByID(int id)
         {
             this.SendString(StupidServer.JOIN_GAME_BY_ID_COMMAND + " " + id);
-            String response = RecieveString(1);
+            String response = RecieveString();
             return response.Equals(StupidServer.JOIN_SUCCESS);
         }
 
         /// <summary>
-        /// Read `size` bytes from the NetworkStream connection.
+        /// Read an incoming string from the NetworkStream connection.
         /// </summary>
-        /// <param name="size">The number of bytes to recieve</param>
         /// <returns>The recieved String</returns>
-        private String RecieveString(int size) {
-            byte[] buffer = new byte[size];
-            netstream.Read(buffer, 0, size);
+        private String RecieveString() {
+            //Protocol for recieving the correct size string.
+            int buffer_size = 40;
+            byte[] buffer = new byte[buffer_size];
+            netstream.Read(buffer, 0, buffer_size);
+            buffer_size = Int32.Parse(GetStringFromBytes(buffer));
+            buffer = new byte[buffer_size];
+
+            //Actually read in the string
+            netstream.Read(buffer, 0, buffer_size);
             return GetStringFromBytes(buffer);
         }
 
@@ -134,6 +133,8 @@ namespace StupidBlackjackSln.Code
         private void SendString(String s)
         {
             byte[] data = Encoding.ASCII.GetBytes(s);
+            byte[] data_size = Encoding.ASCII.GetBytes(s.Length.ToString());
+            netstream.Write(data_size, 0, data_size.Length);
             netstream.Write(data, 0, data.Length);
         }
 

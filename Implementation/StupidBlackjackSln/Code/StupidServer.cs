@@ -67,11 +67,10 @@ namespace StupidBlackjackSln.Code
         /// <param name="s">String to broadcast</param>
         private void Broadcast(String s)
         {
-            byte[] buffer = Encoding.ASCII.GetBytes(s);
             lock (streams) {
-                foreach (NetworkStream ns in streams)
+                foreach (TcpClient client in clients)
                 {
-                    ns.Write(buffer, 0, buffer.Length);
+                    this.SendString(client, s);
                 }
             }
         }
@@ -138,6 +137,7 @@ namespace StupidBlackjackSln.Code
                 {
                     ToSend += (game.ToString() + ";");
                 }
+
                 return true;
             }
             else if (args[0] == HOST_NEW_GAME_COMMAND)
@@ -249,6 +249,19 @@ namespace StupidBlackjackSln.Code
             Thread t = new Thread(LoopAccept);
             threads.Add(t);
             t.Start();
+        }
+
+        /// <summary>
+        /// Send a string to a client.
+        /// </summary>
+        /// <param name="client">TcpClient object to send to</param>
+        /// <param name="s">String to send</param>
+        private void SendString(TcpClient client, String s)
+        {
+            byte[] data = Encoding.ASCII.GetBytes(s);
+            byte[] data_size = Encoding.ASCII.GetBytes(s.Length.ToString());
+            client.GetStream().Write(data_size, 0, data_size.Length);
+            client.GetStream().Write(data, 0, data.Length);
         }
 
         /// <summary>
