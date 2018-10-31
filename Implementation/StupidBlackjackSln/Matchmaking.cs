@@ -46,7 +46,7 @@ namespace StupidBlackjackSln
                     lstBoxGames.Items.Add(game);
                 }
             }
-            for (int i=0; i<lstBoxGames.Items.Count; i++)
+            for (int i = 0; i < lstBoxGames.Items.Count; i++)
             {
                 if (!games.Contains(lstBoxGames.Items[i]))
                 {
@@ -73,8 +73,19 @@ namespace StupidBlackjackSln
         private void lstBoxGames_SelectedIndexChanged(object sender, EventArgs e)
         {
             String[] games = Program.GetConnector().FetchListOfGames();
-            foreach (String game in games)
-                lstBoxGames.Items.Add(game);
+
+            if (games == null)
+            {
+                lstBoxGames.SelectionMode = SelectionMode.None;
+                lstBoxGames.Items.Add("(none)");
+            }
+            else
+            {
+                lstBoxGames.SelectionMode = SelectionMode.One;
+                foreach (String game in games)
+                    lstBoxGames.Items.Add(game);
+            }
+
         }
     }
 }
