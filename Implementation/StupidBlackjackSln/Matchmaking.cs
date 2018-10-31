@@ -60,7 +60,12 @@ namespace StupidBlackjackSln
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnRefresh_Click(object sender, EventArgs e)
         {
             RefreshGameList();
         }
@@ -70,6 +75,11 @@ namespace StupidBlackjackSln
 
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void lstBoxGames_SelectedIndexChanged(object sender, EventArgs e)
         {
             String[] games = Program.GetConnector().FetchListOfGames();
