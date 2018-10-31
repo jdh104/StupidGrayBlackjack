@@ -313,7 +313,7 @@ namespace StupidBlackjackSln.Code
 
             public override string ToString()
             {
-                return id.ToString() + " " + name + " " + key;
+                return id.ToString() + " " + name;
             }
         }
     }
