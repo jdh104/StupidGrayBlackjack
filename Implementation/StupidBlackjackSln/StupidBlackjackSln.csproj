@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Code\BlackjackPlayer.cs" />
+    <Compile Include="Code\NetworkedPlayer.cs" />
     <Compile Include="Code\StupidConnector.cs" />
     <Compile Include="Code\StupidServer.cs" />
     <Compile Include="FrmServer.cs">
