@@ -40,7 +40,7 @@ namespace StupidBlackjackSln
                 Application.Exit();
         }
 
-        private void btnNewGame_Click(object sender, EventArgs e)
+        private void btnNewOnlineGame_Click(object sender, EventArgs e)
         {
             try
             {
@@ -83,6 +83,14 @@ namespace StupidBlackjackSln
         private void groupBox2_Enter(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnNewGame_Click(object sender, EventArgs e)
+        {
+            FrmNewGame firstGame = new FrmNewGame();
+            firstGame.FormClosed += new FormClosedEventHandler(firstGame_FormClosed);
+            firstGame.Show();
+            this.Hide();
         }
     }
 }
