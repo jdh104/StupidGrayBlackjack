@@ -15,11 +15,21 @@ namespace StupidBlackjackSln
     {
 
         private Thread RefreshThread;
+        private GroupBox radioBtns;
 
         public Matchmaking()
         {
             InitializeComponent();
+            GroupRadioButtons();
             RefreshThread = new Thread(RefreshLoop);
+        }
+
+        public void GroupRadioButtons()
+        {
+            this.radioBtns = new System.Windows.Forms.GroupBox();
+
+            this.radioBtns.Controls.Add(this.radioBtnExistingGame);
+            this.radioBtns.Controls.Add(this.radioBtnNewGame);
         }
 
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
