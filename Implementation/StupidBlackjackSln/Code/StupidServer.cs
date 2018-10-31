@@ -250,7 +250,8 @@ namespace StupidBlackjackSln.Code
         /// <summary>
         /// Bind to port and begin accepting clients.
         /// </summary>
-        public void Start()
+        /// <returns>itself (for chaining)</returns>
+        public StupidServer Start()
         {
             try
             {
@@ -266,6 +267,7 @@ namespace StupidBlackjackSln.Code
             Thread t = new Thread(LoopAccept);
             threads.Add(t);
             t.Start();
+            return this;
         }
 
         /// <summary>

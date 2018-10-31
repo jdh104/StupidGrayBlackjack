@@ -52,9 +52,15 @@ namespace StupidBlackjackSln
             return server;
         }
 
+        /// <summary>
+        /// Quasi-Singleton design for connector component
+        /// </summary>
+        /// <returns>The started StupidConnector object</returns>
         public static StupidConnector StartNewConnector()
         {
-            if (connector == null)
+            return connector ?? (connector = new StupidConnector());
+            
+            /*if (connector == null)
             {
                 connector = new StupidConnector();
                 return connector;
@@ -62,15 +68,18 @@ namespace StupidBlackjackSln
             else
             {
                 return null;
-            }
+            }*/
         }
 
         /// <summary>
-        /// Start a singleton StupidServer if not already started.
+        /// Start a quasi-singleton StupidServer if not already started.
         /// </summary>
         /// <returns>Started instance of StupidServer, or null if a server has already been started</returns>
         public static StupidServer StartNewServer()
         {
+            return server ?? (server = new StupidServer().Start());
+
+            /*
             if (server == null)
             {
                 server = new StupidServer();
@@ -80,7 +89,7 @@ namespace StupidBlackjackSln
             else
             {
                 return null;
-            }
+            }*/
         }
     }
 }
