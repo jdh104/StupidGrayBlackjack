@@ -69,5 +69,12 @@ namespace StupidBlackjackSln
         {
 
         }
+
+        private void lstBoxGames_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            String[] games = Program.GetConnector().FetchListOfGames();
+            foreach (String game in games)
+                lstBoxGames.Items.Add(game);
+        }
     }
 }
