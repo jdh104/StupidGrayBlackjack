@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace StupidBlackjackSln.Code
@@ -144,6 +145,7 @@ namespace StupidBlackjackSln.Code
             byte[] data = Encoding.ASCII.GetBytes(s);
             byte[] data_size = Encoding.ASCII.GetBytes(s.Length.ToString());
             netstream.Write(data_size, 0, data_size.Length);
+            Thread.Sleep(1000);
             netstream.Write(data, 0, data.Length);
         }
 

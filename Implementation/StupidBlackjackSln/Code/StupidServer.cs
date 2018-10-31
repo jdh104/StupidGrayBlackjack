@@ -280,6 +280,7 @@ namespace StupidBlackjackSln.Code
             byte[] data = Encoding.ASCII.GetBytes(s);
             byte[] data_size = Encoding.ASCII.GetBytes(s.Length.ToString());
             client.GetStream().Write(data_size, 0, data_size.Length);
+            Thread.Sleep(1000);
             client.GetStream().Write(data, 0, data.Length);
         }
 
