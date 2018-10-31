@@ -48,12 +48,19 @@ namespace StupidBlackjackSln
             }
             catch (Exception ex)
             {
-                new FrmNewGame().Show();
+                FrmNewGame firstGame = new FrmNewGame();
+                firstGame.FormClosed += new FormClosedEventHandler(firstGame_FormClosed);
+                firstGame.Show();
                 this.Hide();
                 return;
             }
             new Matchmaking().Show();
             this.Hide();
+        }
+
+        private void firstGame_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            this.Show();    //unhides the title screen when the newGame Form closes
         }
 
         private void button2_Click(object sender, EventArgs e)

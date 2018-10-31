@@ -48,10 +48,7 @@ namespace StupidBlackjackSln
 
         private void FrmNewGame_FormClosed(object sender, FormClosedEventArgs e)
         {
-            foreach (Form f in Application.OpenForms)
-            {
-                f.Close();
-            }
+            
         }
 
         private void btnHit_Click(object sender, EventArgs e)
@@ -79,6 +76,11 @@ namespace StupidBlackjackSln
         private void btnStand_Click(object sender, EventArgs e)
         {
             Player.isTurn = false; 
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }
