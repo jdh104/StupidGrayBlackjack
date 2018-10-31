@@ -1,28 +1,33 @@
-﻿namespace StupidBlackjackSln {
-  partial class frmTitle {
-    /// <summary>
-    /// Required designer variable.
-    /// </summary>
-    private System.ComponentModel.IContainer components = null;
+﻿namespace StupidBlackjackSln
+{
+    partial class frmTitle
+    {
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
 
-    /// <summary>
-    /// Clean up any resources being used.
-    /// </summary>
-    /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-    protected override void Dispose(bool disposing) {
-      if (disposing && (components != null)) {
-        components.Dispose();
-      }
-      base.Dispose(disposing);
-    }
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
 
-    #region Windows Form Designer generated code
+        #region Windows Form Designer generated code
 
-    /// <summary>
-    /// Required method for Designer support - do not modify
-    /// the contents of this method with the code editor.
-    /// </summary>
-    private void InitializeComponent() {
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
             this.lblTitle = new System.Windows.Forms.Label();
             this.btnNewGame = new System.Windows.Forms.Button();
             this.btnRulebook = new System.Windows.Forms.Button();
@@ -119,16 +124,16 @@
             this.ResumeLayout(false);
             this.PerformLayout();
 
+        }
+
+        #endregion
+
+        private System.Windows.Forms.Label lblTitle;
+        private System.Windows.Forms.Button btnNewGame;
+        private System.Windows.Forms.Button btnRulebook;
+        private System.Windows.Forms.Button btnExitGame;
+        private System.Windows.Forms.Button btnOptions;
+        private System.Windows.Forms.Button Server;
     }
-
-    #endregion
-
-    private System.Windows.Forms.Label lblTitle;
-    private System.Windows.Forms.Button btnNewGame;
-    private System.Windows.Forms.Button btnRulebook;
-    private System.Windows.Forms.Button btnExitGame;
-    private System.Windows.Forms.Button btnOptions;
-		private System.Windows.Forms.Button Server;
-	}
 }
 
