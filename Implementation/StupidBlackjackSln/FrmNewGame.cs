@@ -81,6 +81,8 @@ namespace StupidBlackjackSln
         private void button1_Click(object sender, EventArgs e)
         {
             this.Close();
+            //Get rid of connection to server
+            //TODO
         }
     }
 }
