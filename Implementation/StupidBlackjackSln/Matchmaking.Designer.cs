@@ -65,6 +65,7 @@
             // radioBtnNewGame
             // 
             this.radioBtnNewGame.AutoSize = true;
+            this.radioBtnNewGame.Checked = true;
             this.radioBtnNewGame.Location = new System.Drawing.Point(36, 356);
             this.radioBtnNewGame.Margin = new System.Windows.Forms.Padding(4);
             this.radioBtnNewGame.Name = "radioBtnNewGame";
@@ -83,6 +84,7 @@
             this.Ok.TabIndex = 3;
             this.Ok.Text = "Okay";
             this.Ok.UseVisualStyleBackColor = true;
+            this.Ok.Click += new System.EventHandler(this.Ok_Click);
             // 
             // Cancel
             // 

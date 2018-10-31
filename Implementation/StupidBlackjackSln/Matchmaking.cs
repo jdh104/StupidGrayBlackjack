@@ -21,6 +21,11 @@ namespace StupidBlackjackSln
         {
             InitializeComponent();
             GroupRadioButtons();
+
+            // Set default game name to Game_<key>
+            int id = Program.GetConnector().GetKey();
+            newGameName.Text = "Game_" + id.ToString();
+
             RefreshThread = new Thread(RefreshLoop);
         }
 
@@ -106,6 +111,19 @@ namespace StupidBlackjackSln
                     lstBoxGames.Items.Add(game);
             }
 
+        }
+
+        private void Ok_Click(object sender, EventArgs e)
+        {
+            if (radioBtnNewGame.Checked)
+            {
+                Program.GetConnector().HostNewGame(newGameName.Text);
+            }
+
+            if (radioBtnExistingGame.Checked)
+            {
+
+            } 
         }
     }
 }
