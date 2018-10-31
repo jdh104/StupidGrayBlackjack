@@ -99,7 +99,11 @@ namespace StupidBlackjackSln.Code {
             }
         }
 
-        public static string GetLocalIPAddress()
+        /// <summary>
+        /// Grab the machine's usable network address.
+        /// </summary>
+        /// <returns>The machine's local address as a string representation.</returns>
+        private static string GetLocalIPAddress()
         {
             var host = Dns.GetHostEntry(Dns.GetHostName());
             foreach (var ip in host.AddressList)
@@ -117,7 +121,7 @@ namespace StupidBlackjackSln.Code {
         /// </summary>
         /// <param name="cmd">The command string to process</param>
         /// <returns>True if command was recognized, else false</returns>
-        private bool InterpretCommand(String cmd, NetworkStream sender) {
+        private bool InterpretCommand(String cmd, TcpClient sender) {
             String[] args = cmd.Trim().Split(' ');
             if (args[0] == FETCH_COMMAND)
             {
@@ -145,6 +149,15 @@ namespace StupidBlackjackSln.Code {
             }
             else if (args[0] == JOIN_GAME_BY_ID_COMMAND)
             {
+                int id;
+                try
+                {
+                    id = Int32.Parse(args[1]);
+                }
+                catch (Exception e)
+                {
+                    return false;
+                }
 
                 return true;
             }
@@ -199,7 +212,7 @@ namespace StupidBlackjackSln.Code {
             byte[] buffer = new byte[MAX_COMMAND_LENGTH];
             while (true) {
                 ns.Read(buffer, 0, MAX_COMMAND_LENGTH);
-                this.InterpretCommand(Encoding.ASCII.GetString(buffer, 0, MAX_COMMAND_LENGTH), ns);
+                this.InterpretCommand(Encoding.ASCII.GetString(buffer, 0, MAX_COMMAND_LENGTH), c);
             }
         }
 
