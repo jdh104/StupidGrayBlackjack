@@ -18,9 +18,11 @@ namespace StupidBlackjackSln.Code
         private static int port = StupidServer.DEFAULT_PORT;
 
         private TcpClient client;
+        private int key = new Random().Next(Int32.MaxValue);
         private NetworkStream netstream;
         private String serverDomain;
         private int serverPort;
+
 
         /// <summary>
         /// Create a new connection to the default matchmaking server.
@@ -149,23 +151,6 @@ namespace StupidBlackjackSln.Code
         public static void SetPort(int port)
         {
             StupidConnector.port = port;
-        }
-
-
-        private class GameRep
-        {
-
-            public int key;
-            public int id;
-            public String name;
-            public int population = 0;
-
-            public GameRep(String _name, int _id, int _key)
-            {
-                name = _name;
-                id = _id;
-                key = _key;
-            }
         }
     }
 }

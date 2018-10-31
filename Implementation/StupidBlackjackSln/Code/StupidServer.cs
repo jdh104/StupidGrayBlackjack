@@ -28,6 +28,7 @@ namespace StupidBlackjackSln.Code {
         private bool started = false;
         private int port = DEFAULT_PORT;
         private ArrayList clients;
+        private ArrayList games = new ArrayList();
         private ArrayList streams = new ArrayList();
         private TcpListener server;
         private ArrayList threads = new ArrayList();
@@ -180,9 +181,13 @@ namespace StupidBlackjackSln.Code {
             t.Start();
         }
 
+        /// <summary>
+        /// Class for representing potential games on the server.
+        /// </summary>
         private class GameRep
         {
 
+            private ArrayList clients = new ArrayList(); // <TcpClient>
             public int key;
             public int id;
             public String name;
@@ -193,6 +198,11 @@ namespace StupidBlackjackSln.Code {
                 name = _name;
                 id = _id;
                 key = _key;
+            }
+
+            public void AddClient(TcpClient NewClient)
+            {
+                clients.Add(NewClient);
             }
         }
     }
