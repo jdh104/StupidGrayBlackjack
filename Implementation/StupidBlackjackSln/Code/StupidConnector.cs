@@ -93,7 +93,7 @@ namespace StupidBlackjackSln.Code
         /// <returns>The generated id number for the game, or 0 if failed.</returns>
         public int HostNewGame(String serverName)
         {
-            this.SendString(StupidServer.HOST_NEW_GAME_COMMAND);
+            this.SendString(StupidServer.HOST_NEW_GAME_COMMAND + " " + serverName + "  " + key.ToString());
             return Int32.Parse(RecieveString());
         }
 
