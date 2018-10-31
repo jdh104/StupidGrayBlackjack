@@ -45,9 +45,11 @@ namespace StupidBlackjackSln
             }
             catch (Exception ex)
             {
-                //TODO
+                new FrmNewGame().Show();
+                this.Hide();
+                return;
             }
-            new FrmNewGame().Show();
+            new Matchmaking().Show();
             this.Hide();
         }
 

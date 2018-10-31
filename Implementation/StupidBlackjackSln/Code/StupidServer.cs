@@ -179,5 +179,21 @@ namespace StupidBlackjackSln.Code {
             threads.Add(t);
             t.Start();
         }
+
+        private class GameRep
+        {
+
+            public int key;
+            public int id;
+            public String name;
+            public int population = 0;
+
+            public GameRep(String _name, int _id, int _key)
+            {
+                name = _name;
+                id = _id;
+                key = _key;
+            }
+        }
     }
 }

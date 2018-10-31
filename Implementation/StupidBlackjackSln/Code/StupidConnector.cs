@@ -67,7 +67,7 @@ namespace StupidBlackjackSln.Code
         /// Fetch a list of the games currently being hosted on the matchmaking server.
         /// </summary>
         /// <returns>An array of strings containing game names and id's</returns>
-        public String FetchListOfGames()
+        public String[] FetchListOfGames()
         {
             this.SendString(StupidServer.FETCH_COMMAND);
 
@@ -76,7 +76,7 @@ namespace StupidBlackjackSln.Code
             buffer_size = Int32.Parse(RecieveString(buffer_size));
 
             // Then return the incoming string
-            return RecieveString(buffer_size);
+            return RecieveString(buffer_size).Split(';');
         }
 
         /// <summary>
@@ -149,6 +149,23 @@ namespace StupidBlackjackSln.Code
         public static void SetPort(int port)
         {
             StupidConnector.port = port;
+        }
+
+
+        private class GameRep
+        {
+
+            public int key;
+            public int id;
+            public String name;
+            public int population = 0;
+
+            public GameRep(String _name, int _id, int _key)
+            {
+                name = _name;
+                id = _id;
+                key = _key;
+            }
         }
     }
 }
