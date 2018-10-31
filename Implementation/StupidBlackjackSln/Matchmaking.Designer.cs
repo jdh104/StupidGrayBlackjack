@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.lstBoxGames = new System.Windows.Forms.ListBox();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.Ok = new System.Windows.Forms.Button();
@@ -38,14 +38,14 @@
             this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // listBox1
+            // lstBoxGames
             // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(40, 41);
-            this.listBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(214, 108);
-            this.listBox1.TabIndex = 0;
+            this.lstBoxGames.FormattingEnabled = true;
+            this.lstBoxGames.Location = new System.Drawing.Point(40, 41);
+            this.lstBoxGames.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.lstBoxGames.Name = "lstBoxGames";
+            this.lstBoxGames.Size = new System.Drawing.Size(214, 108);
+            this.lstBoxGames.TabIndex = 0;
             // 
             // radioButton1
             // 
@@ -134,7 +134,7 @@
             this.Controls.Add(this.Ok);
             this.Controls.Add(this.radioButton2);
             this.Controls.Add(this.radioButton1);
-            this.Controls.Add(this.listBox1);
+            this.Controls.Add(this.lstBoxGames);
             this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "Matchmaking";
             this.Text = "Matchmaking";
@@ -146,7 +146,7 @@
 
         #endregion
 
-        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.ListBox lstBoxGames;
         private System.Windows.Forms.RadioButton radioButton1;
         private System.Windows.Forms.RadioButton radioButton2;
         private System.Windows.Forms.Button Ok;

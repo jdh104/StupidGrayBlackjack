@@ -39,6 +39,20 @@ namespace StupidBlackjackSln
         private void RefreshGameList()
         {
             String[] games = Program.GetConnector().FetchListOfGames();
+            foreach (String game in games)
+            {
+                if (!lstBoxGames.Items.Contains(game))
+                {
+                    lstBoxGames.Items.Add(game);
+                }
+            }
+            for (int i=0; i<lstBoxGames.Items.Count; i++)
+            {
+                if (!games.Contains(lstBoxGames.Items[i]))
+                {
+                    lstBoxGames.Items.RemoveAt(i);
+                }
+            }
         }
 
         private void label1_Click(object sender, EventArgs e)
