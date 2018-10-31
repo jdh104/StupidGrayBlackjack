@@ -152,7 +152,9 @@ namespace StupidBlackjackSln.Code
                 {
                     return false;
                 }
-                games.Add(new GameRep(new_game_name, key));
+                GameRep newGame = new GameRep(new_game_name, key);
+                games.Add(newGame);
+                this.SendString(sender, newGame.id.ToString());
                 return true;
             }
             else if (args[0] == JOIN_GAME_BY_ID_COMMAND)
