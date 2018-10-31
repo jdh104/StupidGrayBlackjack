@@ -78,6 +78,15 @@ namespace StupidBlackjackSln.Code
         }
 
         /// <summary>
+        /// Get the "security" key associated with this connector object.
+        /// </summary>
+        /// <returns>key... u should be able to figure this out.</returns>
+        public int GetKey()
+        {
+            return key;
+        }
+
+        /// <summary>
         /// Create a new game session on the matchmaking server.
         /// </summary>
         /// <param name="serverName">Display name for the game session.</param>

@@ -53,7 +53,7 @@ namespace StupidBlackjackSln
         }
 
         /// <summary>
-        /// Quasi-Singleton design for connector component
+        /// Start a quasi-singleton StupidConnector if one does not already exist.
         /// </summary>
         /// <returns>The started StupidConnector object</returns>
         public static StupidConnector StartNewConnector()
