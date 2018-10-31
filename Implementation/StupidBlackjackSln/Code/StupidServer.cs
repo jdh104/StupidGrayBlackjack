@@ -137,7 +137,7 @@ namespace StupidBlackjackSln.Code
                 {
                     ToSend += (game.ToString() + ";");
                 }
-
+                this.SendString(sender, ToSend);
                 return true;
             }
             else if (args[0] == HOST_NEW_GAME_COMMAND)
@@ -221,13 +221,30 @@ namespace StupidBlackjackSln.Code
             lock (streams) {
                 streams.Add(ns);
             }
-
-            byte[] buffer = new byte[MAX_COMMAND_LENGTH];
+            
             while (true)
             {
-                ns.Read(buffer, 0, MAX_COMMAND_LENGTH);
-                this.InterpretCommand(Encoding.ASCII.GetString(buffer, 0, MAX_COMMAND_LENGTH), c);
+                String command = this.RecieveString(c);
+                this.InterpretCommand(command, c);
             }
+        }
+
+        /// <summary>
+        /// Read an incoming string from the NetworkStream connection.
+        /// </summary>
+        /// <returns>The recieved String</returns>
+        private String RecieveString(TcpClient client)
+        {
+            //Protocol for recieving the correct size string.
+            int buffer_size = 40;
+            byte[] buffer = new byte[buffer_size];
+            client.GetStream().Read(buffer, 0, buffer_size);
+            buffer_size = Int32.Parse(Encoding.ASCII.GetString(buffer, 0, buffer.Length));
+            buffer = new byte[buffer_size];
+
+            //Actually read in the string
+            client.GetStream().Read(buffer, 0, buffer_size);
+            return Encoding.ASCII.GetString(buffer, 0, buffer.Length);
         }
 
         /// <summary>
