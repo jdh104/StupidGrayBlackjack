@@ -116,8 +116,31 @@ namespace StupidBlackjackSln.Code {
         /// <param name="cmd">The command string to process</param>
         /// <returns>True if command was recognized, else false</returns>
         private bool InterpretCommand(String cmd) {
-            return false;
-            //TODO
+            String[] args = cmd.Trim().Split(' ');
+            if (args[0] == FETCH_COMMAND)
+            {
+
+                return true;
+            }
+            else if (args[0] == HOST_NEW_GAME_COMMAND)
+            {
+
+                return true;
+            }
+            else if (args[0] == JOIN_GAME_BY_ID_COMMAND)
+            {
+
+                return true;
+            }
+            else if (args[0] == REMOVE_GAME_BY_ID_COMMAND)
+            {
+
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         /// <summary>
