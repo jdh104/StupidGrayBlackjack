@@ -10,12 +10,14 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace StupidBlackjackSln.Code {
+namespace StupidBlackjackSln.Code
+{
     /// <summary>
     /// Wrapper class for TcpListener that does threaded client 
     /// accepting and listening for StupidBlackjack
     /// </summary>
-    class StupidServer {
+    class StupidServer
+    {
 
         public const int ID_SIZE_IN_BYTES = 32;
         public const int DEFAULT_PORT = 61537;
@@ -38,7 +40,8 @@ namespace StupidBlackjackSln.Code {
         /// <summary>
         /// Default constructor, sets up server with default settings.
         /// </summary>
-        public StupidServer() {
+        public StupidServer()
+        {
             IPAddress ipAddress = IPAddress.Parse(GetLocalIPAddress());
             IPEndPoint ipLocalEndPoint = new IPEndPoint(ipAddress, DEFAULT_PORT);
             clients = new ArrayList();
@@ -49,7 +52,8 @@ namespace StupidBlackjackSln.Code {
         /// Constructor with port specification, use to specify port to listen on.
         /// </summary>
         /// <param name="port">Port to listen on</param>
-        public StupidServer(int port) {
+        public StupidServer(int port)
+        {
             this.port = port;
             IPAddress ipAddress = IPAddress.Parse(GetLocalIPAddress());
             IPEndPoint ipLocalEndPoint = new IPEndPoint(ipAddress, port);
@@ -61,10 +65,12 @@ namespace StupidBlackjackSln.Code {
         /// Send a message to all connected clients
         /// </summary>
         /// <param name="s">String to broadcast</param>
-        private void Broadcast(String s) {
+        private void Broadcast(String s)
+        {
             byte[] buffer = Encoding.ASCII.GetBytes(s);
             lock (streams) {
-                foreach (NetworkStream ns in streams) {
+                foreach (NetworkStream ns in streams)
+                {
                     ns.Write(buffer, 0, buffer.Length);
                 }
             }
@@ -73,9 +79,10 @@ namespace StupidBlackjackSln.Code {
         /// <summary>
         /// Close all connections. Call this before terminating.
         /// </summary>
-        public void Close() {
-            if (started) {
-                
+        public void Close()
+        {
+            if (started)
+            {
                 lock (threads)
                 {
                     foreach (Thread t in threads)
@@ -121,7 +128,8 @@ namespace StupidBlackjackSln.Code {
         /// </summary>
         /// <param name="cmd">The command string to process</param>
         /// <returns>True if command was recognized, else false</returns>
-        private bool InterpretCommand(String cmd, TcpClient sender) {
+        private bool InterpretCommand(String cmd, TcpClient sender)
+        {
             String[] args = cmd.Trim().Split(' ');
             if (args[0] == FETCH_COMMAND)
             {
@@ -175,22 +183,26 @@ namespace StupidBlackjackSln.Code {
         /// <summary>
         /// Infinite loop for accepting incoming clients. Called only by Start().
         /// </summary>
-        private void LoopAccept() {
-            while (true) {
+        private void LoopAccept()
+        {
+            while (true)
+            {
                 while (!server.Pending())
                 {
                     Thread.Sleep(100);
                 }
                 TcpClient c =  server.AcceptTcpClient();
                 
-                lock (clients) {
+                lock (clients)
+                {
                     clients.Add(c);
                 }
                 
                 // TODO understand what this means
                 Thread t = new Thread(() => LoopListen(c));
                 
-                lock (threads) {
+                lock (threads)
+                {
                     threads.Add(t);
                 }
 
@@ -202,7 +214,8 @@ namespace StupidBlackjackSln.Code {
         /// Infinite loop for recieving and interpreting client commands.
         /// </summary>
         /// <param name="c">TcpClient to listen on</param>
-        private void LoopListen(TcpClient c) {
+        private void LoopListen(TcpClient c)
+        {
             NetworkStream ns = c.GetStream();
 
             lock (streams) {
@@ -210,7 +223,8 @@ namespace StupidBlackjackSln.Code {
             }
 
             byte[] buffer = new byte[MAX_COMMAND_LENGTH];
-            while (true) {
+            while (true)
+            {
                 ns.Read(buffer, 0, MAX_COMMAND_LENGTH);
                 this.InterpretCommand(Encoding.ASCII.GetString(buffer, 0, MAX_COMMAND_LENGTH), c);
             }
@@ -219,12 +233,16 @@ namespace StupidBlackjackSln.Code {
         /// <summary>
         /// Bind to port and begin accepting clients.
         /// </summary>
-        public void Start() {
-            try {
+        public void Start()
+        {
+            try
+            {
                 server.Start();
                 started = true;
                 //TODO add some status message
-            } catch (Exception e) {
+            }
+            catch (Exception e)
+            {
                 //TODO
             }
 
