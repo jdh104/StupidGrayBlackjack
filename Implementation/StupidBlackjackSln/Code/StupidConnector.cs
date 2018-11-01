@@ -107,11 +107,11 @@ namespace StupidBlackjackSln.Code
         {
             this.WriteLine(StupidServer.JOIN_GAME_BY_ID_COMMAND + " " + id);
             String response = ReadLine();
-            return response.Equals(StupidServer.JOIN_SUCCESS);
+            return response.Equals(StupidServer.COMMAND_SUCCEEDED);
         }
         
         /// <summary>
-        ///
+        /// 
         /// </summary>
         /// <param name="client"></param>
         /// <returns></returns>
@@ -192,7 +192,7 @@ namespace StupidBlackjackSln.Code
         ///
         private void WriteLine(String toWrite)
         {
-            byte[] data = Encoding.ASCII.GetBytes(toWrite);
+            byte[] data = Encoding.ASCII.GetBytes(toWrite.Trim());
             client.GetStream().Write(data, 0, data.Length);
             client.GetStream().Write(new byte[] {StupidServer.NEWLINE}, 0, 1);
         }

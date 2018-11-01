@@ -19,16 +19,17 @@ namespace StupidBlackjackSln.Code
     class StupidServer
     {
 
-        public const int ID_SIZE_IN_BYTES = 32;
-        public const int DEFAULT_PORT = 61537;
-        public const String DEFAULT_DOMAIN = "173.217.233.48";
-        public const int MAX_COMMAND_LENGTH = 64;
-        public const String JOIN_SUCCESS = "1";
-        public const String FETCH_COMMAND = "f";
-        public const String HOST_NEW_GAME_COMMAND = "h";
-        public const String JOIN_GAME_BY_ID_COMMAND = "j";
-        public const String REMOVE_GAME_BY_ID_COMMAND = "r";
-        public static byte NEWLINE = Encoding.ASCII.GetBytes("\n")[0];
+        public static readonly int ID_SIZE_IN_BYTES = 32;
+        public static readonly int DEFAULT_PORT = 61537;
+        public static readonly String DEFAULT_DOMAIN = "173.217.233.48";
+        public static readonly int MAX_COMMAND_LENGTH = 64;
+        public static readonly String COMMAND_SUCCEEDED = "1";
+        public static readonly String COMMAND_FAILED = "2";
+        public static readonly String FETCH_COMMAND = "f";
+        public static readonly String HOST_NEW_GAME_COMMAND = "h";
+        public static readonly String JOIN_GAME_BY_ID_COMMAND = "j";
+        public static readonly String REMOVE_GAME_BY_ID_COMMAND = "r";
+        public static readonly byte NEWLINE = Encoding.ASCII.GetBytes("\n")[0];
 
         private bool started = false;
         private int port = DEFAULT_PORT;
@@ -170,13 +171,44 @@ namespace StupidBlackjackSln.Code
                 {
                     return false;
                 }
-
-                return true;
+                lock (games)
+                {
+                    foreach (GameRep game in games)
+                    {
+                        if (game.id == id && !game.started)
+                        {
+                            game.AddClient(sender);
+                            return true;
+                        }
+                    }
+                }
+                return false;
             }
             else if (args[0] == REMOVE_GAME_BY_ID_COMMAND)
             {
-                // TODO
-                return true;
+                int id, key;
+                try
+                {
+                    id = Int32.Parse(args[1]);
+                    key = Int32.Parse(args[2]);
+                }
+                catch (Exception e)
+                {
+                    return false;
+                }
+                lock (games)
+                {
+                    for (int i=0; i<games.Count; i++)
+                    {
+                        GameRep game = (GameRep)games[i];
+                        if (game.id == id && game.key == key)
+                        {
+                            games.RemoveAt(i);
+                            return true;
+                        }
+                    }
+                }
+                return false;
             }
             else
             {
@@ -229,7 +261,7 @@ namespace StupidBlackjackSln.Code
             while (true)
             {
                 String command = this.ReadLine(c);
-                this.InterpretCommand(command, c);
+                this.WriteLine(c, this.InterpretCommand(command, c) ? COMMAND_SUCCEEDED : COMMAND_FAILED);
             }
         }
 
@@ -314,7 +346,7 @@ namespace StupidBlackjackSln.Code
         ///
         private void WriteLine(TcpClient client, String toWrite)
         {
-            byte[] data = Encoding.ASCII.GetBytes(toWrite);
+            byte[] data = Encoding.ASCII.GetBytes(toWrite.Trim());
             client.GetStream().Write(data, 0, data.Length);
             client.GetStream().Write(new byte[] {NEWLINE}, 0, 1);
         }
@@ -327,6 +359,7 @@ namespace StupidBlackjackSln.Code
 
             private static int nextID = 1;
             private ArrayList clients = new ArrayList(); // <TcpClient>
+            public bool started = false;
             public int key;
             public int id;
             public String name;
