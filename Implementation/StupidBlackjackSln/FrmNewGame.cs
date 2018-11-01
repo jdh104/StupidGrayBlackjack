@@ -17,10 +17,12 @@ namespace StupidBlackjackSln
         public static Deck deck;
         private Player player1;
         private PictureBox[] picPlayerCards;
+        private int ticks = 15;  //15 seconds for a player's turn
 
         public FrmNewGame()
         {
             InitializeComponent();
+            timer1.Start();
             picPlayerCards = new PictureBox[5];
             for (int i = 0; i < 5; i++)
             {
@@ -83,6 +85,19 @@ namespace StupidBlackjackSln
             this.Close();
             //Get rid of connection to server
             //TODO
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            ticks--;    //Time ticks down each second
+            label2.Text = ticks.ToString();
+            this.Text = ticks.ToString();
+
+            if (ticks <= 0)
+            {
+                this.Text = "Turn Over";
+                timer1.Stop();        //ToDo
+            }                        //This would end the player's turn and make them Stand.
         }
     }
 }
