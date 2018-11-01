@@ -120,7 +120,7 @@ namespace StupidBlackjackSln.Code
             byte[] buffer = new byte[1];
             String reading = "";
             client.GetStream().Read(buffer, 0, 1); //Read 1 byte at a time
-            while (buffer[0] != NEWLINE)
+            while (!buffer[0].Equals(StupidServer.NEWLINE))
             {
                 reading += Encoding.ASCII.GetString(buffer);
                 client.GetStream().Read(buffer, 0, 1);
@@ -194,7 +194,7 @@ namespace StupidBlackjackSln.Code
         {
             byte[] data = Encoding.ASCII.GetBytes(s);
             client.GetStream().Write(data, 0, data.Length);
-            client.GetStream().Write(new byte[] {NEWLINE}, 0, 1);
+            client.GetStream().Write(new byte[] {StupidServer.NEWLINE}, 0, 1);
         }
     }
 }

@@ -243,7 +243,7 @@ namespace StupidBlackjackSln.Code
             byte[] buffer = new byte[1];
             String reading = "";
             client.GetStream().Read(buffer, 0, 1); //Read 1 byte at a time
-            while (buffer[0] != NEWLINE)
+            while (!buffer[0].Equals(NEWLINE))
             {
                 reading += Encoding.ASCII.GetString(buffer);
                 client.GetStream().Read(buffer, 0, 1);
