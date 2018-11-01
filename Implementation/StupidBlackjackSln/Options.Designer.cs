@@ -48,7 +48,7 @@
             // txtBoxIP
             // 
             this.txtBoxIP.Location = new System.Drawing.Point(62, 11);
-            this.txtBoxIP.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtBoxIP.Margin = new System.Windows.Forms.Padding(2);
             this.txtBoxIP.Name = "txtBoxIP";
             this.txtBoxIP.Size = new System.Drawing.Size(153, 20);
             this.txtBoxIP.TabIndex = 2;
@@ -56,7 +56,7 @@
             // txtBoxPort
             // 
             this.txtBoxPort.Location = new System.Drawing.Point(72, 50);
-            this.txtBoxPort.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtBoxPort.Margin = new System.Windows.Forms.Padding(2);
             this.txtBoxPort.Name = "txtBoxPort";
             this.txtBoxPort.Size = new System.Drawing.Size(72, 20);
             this.txtBoxPort.TabIndex = 3;
@@ -64,7 +64,7 @@
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(30, 83);
-            this.button1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button1.Margin = new System.Windows.Forms.Padding(2);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(64, 25);
             this.button1.TabIndex = 4;
@@ -92,9 +92,9 @@
             this.Controls.Add(this.txtBoxPort);
             this.Controls.Add(this.txtBoxIP);
             this.Controls.Add(this.label2);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Options";
-            this.Text = "Options";
+            this.Text = "Stupid Gray Blackjack Options";
             this.ResumeLayout(false);
             this.PerformLayout();
 

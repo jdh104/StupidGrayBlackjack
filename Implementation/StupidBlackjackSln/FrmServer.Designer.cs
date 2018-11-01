@@ -56,7 +56,7 @@
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.CloseServer);
             this.Name = "FrmServer";
-            this.Text = "Form1";
+            this.Text = "Stupid Gray Blackjack Matchmaking Server";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FrmServer_FormClosed);
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).EndInit();
             this.ResumeLayout(false);

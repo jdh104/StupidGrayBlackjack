@@ -26,7 +26,6 @@ namespace StupidBlackjackSln.Code
         private String serverDomain;
         private int serverPort;
 
-
         /// <summary>
         /// Create a new connection to the default matchmaking server.
         /// </summary>

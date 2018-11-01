@@ -172,7 +172,7 @@
             this.Controls.Add(this.picPlayerCard2);
             this.Controls.Add(this.picPlayerCard1);
             this.Name = "FrmNewGame";
-            this.Text = "FrmNewGame";
+            this.Text = "Stupid Gray Blackjack";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FrmNewGame_FormClosed);
             this.Load += new System.EventHandler(this.FrmNewGame_Load);
             ((System.ComponentModel.ISupportInitialize)(this.picPlayerCard1)).EndInit();
