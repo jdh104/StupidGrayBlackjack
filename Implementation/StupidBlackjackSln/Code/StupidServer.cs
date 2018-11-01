@@ -146,10 +146,11 @@ namespace StupidBlackjackSln.Code
             }
             else if (c.Equals(HOST_NEW_GAME_COMMAND))
             {
-                String new_game_name = args[1];
+                String new_game_name;
                 int key;
                 try
                 {
+                    new_game_name = args[1];
                     key = Int32.Parse(args[2]);
                 }
                 catch (Exception)
@@ -157,9 +158,19 @@ namespace StupidBlackjackSln.Code
                     return false;
                 }
                 GameRep newGame = new GameRep(new_game_name, key);
-                games.Add(newGame);
-                this.WriteLine(sender, newGame.id.ToString());
-                return true;
+                lock (games)
+                {
+                    foreach (GameRep game in games)
+                    {
+                        if (game.name.Equals(new_game_name))
+                        {
+                            return false;
+                        }
+                    }
+                    games.Add(newGame);
+                    this.WriteLine(sender, newGame.id.ToString());
+                    return true;
+                }
             }
             else if (c.Equals(JOIN_GAME_BY_ID_COMMAND))
             {
