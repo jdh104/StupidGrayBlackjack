@@ -34,7 +34,7 @@ namespace StupidBlackjackSln
 
         private void Host_WaitingForConnection_Load(object sender, EventArgs e)
         {
-            //int numPlayers = Program.GetConnector();
+            int numPlayers = Program.GetConnector().GetGamePopulationByID(id);
             String gameName = "";
 
             if (numPlayers == 0)

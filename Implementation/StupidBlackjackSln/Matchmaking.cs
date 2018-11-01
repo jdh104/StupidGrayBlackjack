@@ -82,6 +82,8 @@ namespace StupidBlackjackSln
 
         private void Ok_Click(object sender, EventArgs e)
         {
+            int id;
+
             if (radioBtnNewGame.Checked)
             {
                 if (!CheckNewGameInput())
@@ -91,7 +93,19 @@ namespace StupidBlackjackSln
                 }
 
                 else
-                    Program.GetConnector().HostNewGame(newGameName.Text);
+                { 
+                    id = Program.GetConnector().HostNewGame(newGameName.Text);
+
+                    if (id == 0)
+                    {
+                        labelError.Text = "Error: Game name already taken";
+                        labelError.Show();
+                    }
+                    else
+                    {
+                        Host_WaitingForConnection hostDialog = new Host_WaitingForConnection(id);
+                    }
+                }
             }
 
             if (radioBtnExistingGame.Checked)
