@@ -74,7 +74,7 @@ namespace StupidBlackjackSln.Code
         /// <returns>An array of strings containing game names and id's</returns>
         public String[] FetchListOfGames()
         {
-            this.SendString(StupidServer.FETCH_COMMAND);
+            this.WriteLine(StupidServer.FETCH_COMMAND);
             return RecieveString().Split(';');
         }
 
@@ -94,8 +94,8 @@ namespace StupidBlackjackSln.Code
         /// <returns>The generated id number for the game, or 0 if failed.</returns>
         public int HostNewGame(String serverName)
         {
-            this.SendString(StupidServer.HOST_NEW_GAME_COMMAND + " " + serverName + " " + key.ToString());
-            return Int32.Parse(RecieveString());
+            this.WriteLine(StupidServer.HOST_NEW_GAME_COMMAND + " " + serverName + " " + key.ToString());
+            return Int32.Parse(ReadLine());
         }
 
         /// <summary>
@@ -105,12 +105,30 @@ namespace StupidBlackjackSln.Code
         /// <returns>True if join succeeded</returns>
         public bool JoinGameByID(int id)
         {
-            this.SendString(StupidServer.JOIN_GAME_BY_ID_COMMAND + " " + id);
-            String response = RecieveString();
+            this.WriteLine(StupidServer.JOIN_GAME_BY_ID_COMMAND + " " + id);
+            String response = ReadLine();
             return response.Equals(StupidServer.JOIN_SUCCESS);
         }
-
+        
         /// <summary>
+        ///
+        /// </summary>
+        /// <param name="client"></param>
+        /// <returns></returns>
+        private String ReadLine(TcpClient client)
+        {
+            byte[] buffer = new byte[1];
+            String reading = "";
+            client.GetStream().Read(buffer, 0, 1); //Read 1 byte at a time
+            while (buffer[0] != NEWLINE)
+            {
+                reading += Encoding.ASCII.GetString(buffer);
+                client.GetStream().Read(buffer, 0, 1);
+            }
+            return reading;
+        }
+        
+        /*/// <summary>
         /// Read an incoming string from the NetworkStream connection.
         /// </summary>
         /// <returns>The recieved String</returns>
@@ -125,7 +143,7 @@ namespace StupidBlackjackSln.Code
             //Actually read in the string
             netstream.Read(buffer, 0, buffer_size);
             return GetStringFromBytes(buffer);
-        }
+        }*/
 
         /// <summary>
         /// Remove a previously hosted game from the matchmaking server.
@@ -133,10 +151,10 @@ namespace StupidBlackjackSln.Code
         /// <param name="id">The id of the game to remove</param>
         public void RemoveHostedGame(int id)
         {
-            this.SendString(StupidServer.REMOVE_GAME_BY_ID_COMMAND + " " + id);
+            this.WriteLine(StupidServer.REMOVE_GAME_BY_ID_COMMAND + " " + id);
         }
 
-        /// <summary>
+        /*/// <summary>
         /// Send a string to the server to be interpreted as a command.
         /// </summary>
         /// <param name="s">String to send</param>
@@ -147,7 +165,7 @@ namespace StupidBlackjackSln.Code
             netstream.Write(data_size, 0, data_size.Length);
             Thread.Sleep(1000);
             netstream.Write(data, 0, data.Length);
-        }
+        }*/
 
         /// <summary>
         /// Set IP address of server.
@@ -165,6 +183,18 @@ namespace StupidBlackjackSln.Code
         public static void SetPort(int port)
         {
             StupidConnector.port = port;
+        }
+        
+        ///
+        ///
+        ///
+        ///
+        ///
+        private void WriteLine(TcpClient client, String toWrite)
+        {
+            byte[] data = Encoding.ASCII.GetBytes(s);
+            client.GetStream().Write(data, 0, data.Length);
+            client.GetStream().Write(new byte[] {NEWLINE}, 0, 1);
         }
     }
 }

@@ -28,6 +28,7 @@ namespace StupidBlackjackSln.Code
         public const String HOST_NEW_GAME_COMMAND = "h";
         public const String JOIN_GAME_BY_ID_COMMAND = "j";
         public const String REMOVE_GAME_BY_ID_COMMAND = "r";
+        public const byte NEWLINE = Encoding.ASCII.GetBytes("\n");
 
         private bool started = false;
         private int port = DEFAULT_PORT;
@@ -70,7 +71,7 @@ namespace StupidBlackjackSln.Code
             lock (streams) {
                 foreach (TcpClient client in clients)
                 {
-                    this.SendString(client, s);
+                    this.WriteLine(client, s);
                 }
             }
         }
@@ -137,7 +138,7 @@ namespace StupidBlackjackSln.Code
                 {
                     ToSend += (game.ToString() + ";");
                 }
-                this.SendString(sender, ToSend);
+                this.WriteLine(sender, ToSend);
                 return true;
             }
             else if (args[0] == HOST_NEW_GAME_COMMAND)
@@ -154,11 +155,12 @@ namespace StupidBlackjackSln.Code
                 }
                 GameRep newGame = new GameRep(new_game_name, key);
                 games.Add(newGame);
-                this.SendString(sender, newGame.id.ToString());
+                this.WriteLine(sender, newGame.id.ToString());
                 return true;
             }
             else if (args[0] == JOIN_GAME_BY_ID_COMMAND)
             {
+                // TODO
                 int id;
                 try
                 {
@@ -173,12 +175,12 @@ namespace StupidBlackjackSln.Code
             }
             else if (args[0] == REMOVE_GAME_BY_ID_COMMAND)
             {
-
+                // TODO
                 return true;
             }
             else
             {
-                return false;
+                return false; //Command unrecognized
             }
         }
 
@@ -226,12 +228,30 @@ namespace StupidBlackjackSln.Code
             
             while (true)
             {
-                String command = this.RecieveString(c);
+                String command = this.ReadLine(c);
                 this.InterpretCommand(command, c);
             }
         }
 
         /// <summary>
+        ///
+        /// </summary>
+        /// <param name="client"></param>
+        /// <returns></returns>
+        private String ReadLine(TcpClient client)
+        {
+            byte[] buffer = new byte[1];
+            String reading = "";
+            client.GetStream().Read(buffer, 0, 1); //Read 1 byte at a time
+            while (buffer[0] != NEWLINE)
+            {
+                reading += Encoding.ASCII.GetString(buffer);
+                client.GetStream().Read(buffer, 0, 1);
+            }
+            return reading;
+        }
+
+        /*/// <summary>
         /// Read an incoming string from the NetworkStream connection.
         /// </summary>
         /// <returns>The recieved String</returns>
@@ -242,12 +262,13 @@ namespace StupidBlackjackSln.Code
             byte[] buffer = new byte[buffer_size];
             client.GetStream().Read(buffer, 0, buffer_size);
             buffer_size = Int32.Parse(Encoding.ASCII.GetString(buffer, 0, buffer.Length));
+            Int32.Parse(this.ReadLine(client));
             buffer = new byte[buffer_size];
 
             //Actually read in the string
             client.GetStream().Read(buffer, 0, buffer_size);
             return Encoding.ASCII.GetString(buffer, 0, buffer.Length);
-        }
+        }*/
 
         /// <summary>
         /// Bind to port and begin accepting clients.
@@ -272,7 +293,7 @@ namespace StupidBlackjackSln.Code
             return this;
         }
 
-        /// <summary>
+        /*/// <summary>
         /// Send a string to a client.
         /// </summary>
         /// <param name="client">TcpClient object to send to</param>
@@ -284,6 +305,18 @@ namespace StupidBlackjackSln.Code
             client.GetStream().Write(data_size, 0, data_size.Length);
             Thread.Sleep(1000);
             client.GetStream().Write(data, 0, data.Length);
+        }*/
+
+        ///
+        ///
+        ///
+        ///
+        ///
+        private void WriteLine(TcpClient client, String toWrite)
+        {
+            byte[] data = Encoding.ASCII.GetBytes(s);
+            client.GetStream().Write(data, 0, data.Length);
+            client.GetStream().Write(new byte[] {NEWLINE}, 0, 1);
         }
 
         /// <summary>
