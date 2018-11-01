@@ -1,15 +1,5 @@
-﻿using StupidBlackjackSln.Properties;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Drawing.Text;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
 using System.Windows.Forms;
-using StupidBlackjackSln;
 
 
 namespace StupidBlackjackSln
@@ -63,13 +53,6 @@ namespace StupidBlackjackSln
             this.Show();    //unhides the title screen when the newGame Form closes
         }
 
-        private void btnNewMatchServer_Click(object sender, EventArgs e)
-        {
-            new FrmServer().Show();
-            this.Hide();
-            Program.StartNewServer();
-        }
-
         private void btnOptions_Click(object sender, EventArgs e)
         {
             new Options().ShowDialog();
@@ -91,6 +74,13 @@ namespace StupidBlackjackSln
             firstGame.FormClosed += new FormClosedEventHandler(firstGame_FormClosed);
             firstGame.Show();
             this.Hide();
+        }
+
+        private void btnServer_Click(object sender, EventArgs e)
+        {
+            new FrmServer().Show();
+            this.Hide();
+            Program.StartNewServer();
         }
     }
 }
