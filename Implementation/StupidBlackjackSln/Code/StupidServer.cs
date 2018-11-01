@@ -28,7 +28,7 @@ namespace StupidBlackjackSln.Code
         public const String HOST_NEW_GAME_COMMAND = "h";
         public const String JOIN_GAME_BY_ID_COMMAND = "j";
         public const String REMOVE_GAME_BY_ID_COMMAND = "r";
-        public const byte NEWLINE = Encoding.ASCII.GetBytes("\n")[0];
+        public static byte NEWLINE = Encoding.ASCII.GetBytes("\n")[0];
 
         private bool started = false;
         private int port = DEFAULT_PORT;
@@ -314,7 +314,7 @@ namespace StupidBlackjackSln.Code
         ///
         private void WriteLine(TcpClient client, String toWrite)
         {
-            byte[] data = Encoding.ASCII.GetBytes(s);
+            byte[] data = Encoding.ASCII.GetBytes(toWrite);
             client.GetStream().Write(data, 0, data.Length);
             client.GetStream().Write(new byte[] {NEWLINE}, 0, 1);
         }

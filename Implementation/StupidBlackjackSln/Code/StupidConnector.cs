@@ -75,7 +75,7 @@ namespace StupidBlackjackSln.Code
         public String[] FetchListOfGames()
         {
             this.WriteLine(StupidServer.FETCH_COMMAND);
-            return RecieveString().Split(';');
+            return ReadLine().Split(';');
         }
 
         /// <summary>
@@ -115,7 +115,7 @@ namespace StupidBlackjackSln.Code
         /// </summary>
         /// <param name="client"></param>
         /// <returns></returns>
-        private String ReadLine(TcpClient client)
+        private String ReadLine()
         {
             byte[] buffer = new byte[1];
             String reading = "";
@@ -190,9 +190,9 @@ namespace StupidBlackjackSln.Code
         ///
         ///
         ///
-        private void WriteLine(TcpClient client, String toWrite)
+        private void WriteLine(String toWrite)
         {
-            byte[] data = Encoding.ASCII.GetBytes(s);
+            byte[] data = Encoding.ASCII.GetBytes(toWrite);
             client.GetStream().Write(data, 0, data.Length);
             client.GetStream().Write(new byte[] {StupidServer.NEWLINE}, 0, 1);
         }
