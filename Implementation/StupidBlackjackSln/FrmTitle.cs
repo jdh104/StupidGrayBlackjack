@@ -44,8 +44,7 @@ namespace StupidBlackjackSln
                 this.Hide();
                 return;
             }
-            new Matchmaking().Show();
-            this.Hide();
+            new Matchmaking().ShowDialog();
         }
 
         private void firstGame_FormClosed(object sender, FormClosedEventArgs e)
