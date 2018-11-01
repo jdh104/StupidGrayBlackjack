@@ -155,6 +155,7 @@ namespace StupidBlackjackSln.Code
                 }
                 catch (Exception)
                 {
+                    this.WriteLine(sender, "0");
                     return false;
                 }
                 GameRep newGame = new GameRep(new_game_name, key);
@@ -164,6 +165,7 @@ namespace StupidBlackjackSln.Code
                     {
                         if (game.name.Equals(new_game_name))
                         {
+                            this.WriteLine(sender, "0");
                             return false;
                         }
                     }
@@ -278,7 +280,7 @@ namespace StupidBlackjackSln.Code
             while (true)
             {
                 String command = this.ReadLine(c);
-                this.WriteLine(c, this.InterpretCommand(command, c) ? COMMAND_SUCCEEDED : COMMAND_FAILED);
+                this.InterpretCommand(command, c);
             }
         }
 
