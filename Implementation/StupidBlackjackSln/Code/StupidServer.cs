@@ -29,6 +29,7 @@ namespace StupidBlackjackSln.Code
         public static readonly String HOST_NEW_GAME_COMMAND = "h";
         public static readonly String JOIN_GAME_BY_ID_COMMAND = "j";
         public static readonly String REMOVE_GAME_BY_ID_COMMAND = "r";
+        public static readonly String START_GAME_BY_ID_COMMAND = "s";
         public static readonly byte NEWLINE = Encoding.ASCII.GetBytes("\n")[0];
 
         private bool started = false;
@@ -132,7 +133,8 @@ namespace StupidBlackjackSln.Code
         private bool InterpretCommand(String cmd, TcpClient sender)
         {
             String[] args = cmd.Trim().Split(' ');
-            if (args[0] == FETCH_COMMAND)
+            String c = args[0];
+            if (c.Equals(FETCH_COMMAND))
             {
                 String ToSend = "";
                 foreach (GameRep game in games)
@@ -142,7 +144,7 @@ namespace StupidBlackjackSln.Code
                 this.WriteLine(sender, ToSend);
                 return true;
             }
-            else if (args[0] == HOST_NEW_GAME_COMMAND)
+            else if (c.Equals(HOST_NEW_GAME_COMMAND))
             {
                 String new_game_name = args[1];
                 int key;
@@ -159,7 +161,7 @@ namespace StupidBlackjackSln.Code
                 this.WriteLine(sender, newGame.id.ToString());
                 return true;
             }
-            else if (args[0] == JOIN_GAME_BY_ID_COMMAND)
+            else if (c.Equals(JOIN_GAME_BY_ID_COMMAND))
             {
                 // TODO
                 int id;
@@ -184,7 +186,7 @@ namespace StupidBlackjackSln.Code
                 }
                 return false;
             }
-            else if (args[0] == REMOVE_GAME_BY_ID_COMMAND)
+            else if (c.Equals(REMOVE_GAME_BY_ID_COMMAND))
             {
                 int id, key;
                 try
@@ -209,6 +211,10 @@ namespace StupidBlackjackSln.Code
                     }
                 }
                 return false;
+            }
+            else if (c.Equals(START_GAME_BY_ID_COMMAND))
+            {
+                return true;
             }
             else
             {
