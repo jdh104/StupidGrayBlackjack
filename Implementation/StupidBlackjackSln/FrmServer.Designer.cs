@@ -42,10 +42,12 @@
             // CloseServer
             // 
             this.CloseServer.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.CloseServer.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.CloseServer.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CloseServer.Location = new System.Drawing.Point(12, 392);
+            this.CloseServer.Location = new System.Drawing.Point(0, 777);
+            this.CloseServer.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.CloseServer.Name = "CloseServer";
-            this.CloseServer.Size = new System.Drawing.Size(776, 46);
+            this.CloseServer.Size = new System.Drawing.Size(1600, 88);
             this.CloseServer.TabIndex = 0;
             this.CloseServer.Text = "Close Server";
             this.CloseServer.UseVisualStyleBackColor = true;
@@ -54,22 +56,26 @@
             // txtBoxStatus
             // 
             this.txtBoxStatus.BackColor = System.Drawing.Color.Black;
+            this.txtBoxStatus.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtBoxStatus.Font = new System.Drawing.Font("Courier New", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtBoxStatus.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-            this.txtBoxStatus.Location = new System.Drawing.Point(12, 12);
+            this.txtBoxStatus.Location = new System.Drawing.Point(0, 0);
+            this.txtBoxStatus.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.txtBoxStatus.Multiline = true;
             this.txtBoxStatus.Name = "txtBoxStatus";
-            this.txtBoxStatus.Size = new System.Drawing.Size(776, 374);
+            this.txtBoxStatus.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.txtBoxStatus.Size = new System.Drawing.Size(1600, 777);
             this.txtBoxStatus.TabIndex = 1;
             this.txtBoxStatus.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // FrmServer
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1600, 865);
             this.Controls.Add(this.txtBoxStatus);
             this.Controls.Add(this.CloseServer);
+            this.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.Name = "FrmServer";
             this.Text = "Stupid Gray Blackjack Matchmaking Server";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FrmServer_FormClosed);
