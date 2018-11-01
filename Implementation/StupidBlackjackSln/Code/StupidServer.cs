@@ -19,6 +19,8 @@ namespace StupidBlackjackSln.Code
     class StupidServer
     {
 
+        delegate void StringDelegateReturningVoid(String s);
+
         public static readonly int ID_SIZE_IN_BYTES = 32;
         public static readonly int DEFAULT_PORT = 61537;
         public static readonly String DEFAULT_DOMAIN = "173.217.233.48";
@@ -55,6 +57,7 @@ namespace StupidBlackjackSln.Code
             IPEndPoint ipLocalEndPoint = new IPEndPoint(ip, DEFAULT_PORT);
             clients = new ArrayList();
             server = new TcpListener(ipLocalEndPoint);
+            GameRep.nextID = 1;
             if (outputbox != null)
             {
                 lock (outputbox)
@@ -75,6 +78,7 @@ namespace StupidBlackjackSln.Code
             IPEndPoint ipLocalEndPoint = new IPEndPoint(ip, port);
             clients = new ArrayList();
             server = new TcpListener(ipLocalEndPoint);
+            GameRep.nextID = 1;
             if (outputbox != null)
             {
                 lock (outputbox)
@@ -104,7 +108,8 @@ namespace StupidBlackjackSln.Code
             lock (clients) {
                 lock (outputbox)
                 {
-                    OutputToForm("Broadcasting:\n" + s);
+                    OutputToForm("Broadcasting:");
+                    OutputToForm(s);
                 }
                 foreach (TcpClient client in clients)
                 {
@@ -175,6 +180,9 @@ namespace StupidBlackjackSln.Code
         {
             lock (outputbox)
             {
+                this.OutputToForm("Recieved Command:");
+                this.OutputToForm(cmd);
+
                 String[] args = cmd.Trim().Split(' ');
                 String c = args[0];
                 if (c.Equals(FETCH_COMMAND))
@@ -189,7 +197,8 @@ namespace StupidBlackjackSln.Code
                     {
                         ToSend += (game.ToString() + ";");
                     }
-                    this.OutputToForm("Responded with:\n COMMAND_SUCCEEDED " + ToSend);
+                    this.OutputToForm("Responded with:");
+                    this.OutputToForm("COMMAND_SUCCEEDED " + ToSend);
                     return COMMAND_SUCCEEDED + " " + ToSend;
                 }
                 else if (c.Equals(GET_GAME_NAME_BY_ID_COMMAND))
@@ -399,15 +408,16 @@ namespace StupidBlackjackSln.Code
         {
             NetworkStream ns = c.GetStream();
 
-            lock (streams) {
+            lock (streams)
+            {
                 streams.Add(ns);
             }
 
-            lock(outputbox)
+            lock (outputbox)
             {
                 OutputToForm("Listener Active for client: " + c.ToString());
             }
-            
+
             while (true)
             {
                 String command = this.ReadLine(c);
@@ -423,7 +433,15 @@ namespace StupidBlackjackSln.Code
         {
             if (outputbox != null)
             {
-                outputbox.Text += s + "\r\n";
+                if (this.outputbox.InvokeRequired)
+                {
+                    StringDelegateReturningVoid d = new StringDelegateReturningVoid(OutputToForm);
+                    outputbox.Parent.Invoke(d, new object[] { s });
+                }
+                else
+                {
+                    this.outputbox.AppendText(s + "\r\n");
+                }
             }
         }
 
@@ -490,7 +508,7 @@ namespace StupidBlackjackSln.Code
         /// </summary>
         private class GameRep
         {
-            private static int nextID = 1;
+            public static int nextID;
             private ArrayList clients = new ArrayList(); // <TcpClient>
             public bool started = false;
             public int key;
