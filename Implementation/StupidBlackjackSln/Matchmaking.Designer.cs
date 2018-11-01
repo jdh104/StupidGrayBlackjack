@@ -42,7 +42,7 @@
             // 
             // Ok
             // 
-            this.Ok.Location = new System.Drawing.Point(448, 575);
+            this.Ok.Location = new System.Drawing.Point(515, 575);
             this.Ok.Margin = new System.Windows.Forms.Padding(4);
             this.Ok.Name = "Ok";
             this.Ok.Size = new System.Drawing.Size(100, 46);
@@ -53,7 +53,7 @@
             // 
             // Cancel
             // 
-            this.Cancel.Location = new System.Drawing.Point(268, 575);
+            this.Cancel.Location = new System.Drawing.Point(335, 575);
             this.Cancel.Margin = new System.Windows.Forms.Padding(4);
             this.Cancel.Name = "Cancel";
             this.Cancel.Size = new System.Drawing.Size(116, 46);
@@ -72,20 +72,20 @@
             this.groupMatchmaking.Controls.Add(this.lstBoxGames);
             this.groupMatchmaking.Location = new System.Drawing.Point(12, 12);
             this.groupMatchmaking.Name = "groupMatchmaking";
-            this.groupMatchmaking.Size = new System.Drawing.Size(537, 556);
+            this.groupMatchmaking.Size = new System.Drawing.Size(602, 556);
             this.groupMatchmaking.TabIndex = 8;
             this.groupMatchmaking.TabStop = false;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(395, 308);
+            this.button1.Location = new System.Drawing.Point(487, 282);
             this.button1.Margin = new System.Windows.Forms.Padding(4);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(108, 52);
             this.button1.TabIndex = 13;
             this.button1.Text = "Refresh";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.button1.Click += new System.EventHandler(this.btnRefresh_Click);
             // 
             // label1
             // 
@@ -122,22 +122,23 @@
             // radioBtnExistingGame
             // 
             this.radioBtnExistingGame.AutoSize = true;
-            this.radioBtnExistingGame.Location = new System.Drawing.Point(34, 59);
+            this.radioBtnExistingGame.Location = new System.Drawing.Point(34, 31);
             this.radioBtnExistingGame.Margin = new System.Windows.Forms.Padding(4);
             this.radioBtnExistingGame.Name = "radioBtnExistingGame";
             this.radioBtnExistingGame.Size = new System.Drawing.Size(182, 29);
             this.radioBtnExistingGame.TabIndex = 9;
             this.radioBtnExistingGame.Text = "Existing Game";
             this.radioBtnExistingGame.UseVisualStyleBackColor = true;
+            this.radioBtnExistingGame.CheckedChanged += new System.EventHandler(this.radioBtnExistingGame_CheckedChanged);
             // 
             // lstBoxGames
             // 
             this.lstBoxGames.FormattingEnabled = true;
             this.lstBoxGames.ItemHeight = 25;
-            this.lstBoxGames.Location = new System.Drawing.Point(78, 98);
+            this.lstBoxGames.Location = new System.Drawing.Point(78, 70);
             this.lstBoxGames.Margin = new System.Windows.Forms.Padding(4);
             this.lstBoxGames.Name = "lstBoxGames";
-            this.lstBoxGames.Size = new System.Drawing.Size(424, 204);
+            this.lstBoxGames.Size = new System.Drawing.Size(517, 204);
             this.lstBoxGames.TabIndex = 8;
             this.lstBoxGames.SelectedIndexChanged += new System.EventHandler(this.lstBoxGames_SelectedIndexChanged_1);
             // 
@@ -145,7 +146,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(571, 634);
+            this.ClientSize = new System.Drawing.Size(630, 634);
             this.Controls.Add(this.groupMatchmaking);
             this.Controls.Add(this.Cancel);
             this.Controls.Add(this.Ok);

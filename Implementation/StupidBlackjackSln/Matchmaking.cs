@@ -70,16 +70,6 @@ namespace StupidBlackjackSln
 
         private void Matchmaking_Load(object sender, EventArgs e)
         {
-
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void lstBoxGames_SelectedIndexChanged(object sender, EventArgs e)
-        {
             String[] games = Program.GetConnector().FetchListOfGames();
 
             if (games == null)
@@ -93,6 +83,16 @@ namespace StupidBlackjackSln
                 foreach (String game in games)
                     lstBoxGames.Items.Add(game);
             }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void lstBoxGames_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
 
         }
 
@@ -109,12 +109,17 @@ namespace StupidBlackjackSln
             } 
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btnRefresh_Click(object sender, EventArgs e)
         {
             this.RefreshGameList();
         }
 
         private void lstBoxGames_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void radioBtnExistingGame_CheckedChanged(object sender, EventArgs e)
         {
 
         }
