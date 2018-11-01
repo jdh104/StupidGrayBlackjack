@@ -28,12 +28,15 @@ namespace StupidBlackjackSln.Code
         public static readonly String COMMAND_SYNTAX_ERROR = "2";
         public static readonly String COMMAND_FAILED = "3";
         public static readonly String FETCH_COMMAND = "f";
+        public static readonly String GET_GAME_NAME_BY_ID_COMMAND = "n";
+        public static readonly String GET_GAME_POP_BY_ID_COMMAND = "p";
         public static readonly String HOST_NEW_GAME_COMMAND = "h";
         public static readonly String JOIN_GAME_BY_ID_COMMAND = "j";
         public static readonly String REMOVE_GAME_BY_ID_COMMAND = "r";
         public static readonly String START_GAME_BY_ID_COMMAND = "s";
         public static readonly byte NEWLINE = Encoding.ASCII.GetBytes("\n")[0];
 
+        private System.Windows.Forms.TextBox outputbox;
         private bool started = false;
         private int port = DEFAULT_PORT;
         private ArrayList clients;
@@ -64,6 +67,15 @@ namespace StupidBlackjackSln.Code
             IPEndPoint ipLocalEndPoint = new IPEndPoint(ipAddress, port);
             clients = new ArrayList();
             server = new TcpListener(ipLocalEndPoint);
+        }
+
+        /// <summary>
+        /// Make the StupidServer output debugging info to a Winforms Textbox.
+        /// </summary>
+        /// <param name="tbox">The textbox to assign</param>
+        public void BindOutputToMultiLineTextBox(System.Windows.Forms.TextBox tbox)
+        {
+            this.outputbox = tbox;
         }
 
         /// <summary>
@@ -284,6 +296,18 @@ namespace StupidBlackjackSln.Code
             {
                 String command = this.ReadLine(c);
                 this.WriteLine(c, this.InterpretCommand(command, c));
+            }
+        }
+
+        /// <summary>
+        /// Output debug info to a bound winforms textbox.
+        /// </summary>
+        /// <param name="s">The string to append</param>
+        private void OutputToForm(String s)
+        {
+            if (outputbox != null)
+            {
+                outputbox.Text += "\n" + s;
             }
         }
 

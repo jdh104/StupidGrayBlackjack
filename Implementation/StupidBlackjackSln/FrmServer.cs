@@ -17,6 +17,7 @@ namespace StupidBlackjackSln
 		public FrmServer()
 		{
 			InitializeComponent();
+            Program.GetServer().BindOutputToMultiLineTextBox(this.txtBoxStatus);
 		}
 
 		private void CloseServer_Click(object sender, EventArgs e)
@@ -27,6 +28,11 @@ namespace StupidBlackjackSln
         private void FrmServer_FormClosed(object sender, FormClosedEventArgs e)
         {
             Program.CloseStupidServer();
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -87,6 +87,42 @@ namespace StupidBlackjackSln.Code
         }
 
         /// <summary>
+        /// Get the number of players connected to a hosted game, including the host.
+        /// </summary>
+        /// <param name="id">The game id to query</param>
+        /// <returns>population of a game, or null if failed</returns>
+        public int? GetGamePopulationByID(int id)
+        {
+            String[] response = this.WriteLine(StupidServer.GET_GAME_POP_BY_ID_COMMAND + " " + id.ToString());
+            if (!response[0].Equals(StupidServer.COMMAND_SUCCEEDED))
+            {
+                return null;
+            }
+            else
+            {
+                return Int32.Parse(response[1]);
+            }
+        }
+
+        /// <summary>
+        /// Get the name of a hosted game.
+        /// </summary>
+        /// <param name="id">The game id to query</param>
+        /// <returns>Name of a game, or null if failed</returns>
+        public String GetGameNameByID(int id)
+        {
+            String[] response = this.WriteLine(StupidServer.GET_GAME_NAME_BY_ID_COMMAND + " " + id.ToString());
+            if (!response[0].Equals(StupidServer.COMMAND_SUCCEEDED))
+            {
+                return null;
+            }
+            else
+            {
+                return response[1];
+            }
+        }
+
+        /// <summary>
         /// Get the "security" key associated with this connector object.
         /// </summary>
         public int GetKey()
