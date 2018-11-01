@@ -68,7 +68,7 @@ namespace StupidBlackjackSln.Code
         /// <param name="s">String to broadcast</param>
         private void Broadcast(String s)
         {
-            lock (streams) {
+            lock (clients) {
                 foreach (TcpClient client in clients)
                 {
                     this.WriteLine(client, s);
