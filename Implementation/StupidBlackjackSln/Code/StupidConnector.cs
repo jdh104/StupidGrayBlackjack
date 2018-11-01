@@ -75,7 +75,8 @@ namespace StupidBlackjackSln.Code
         public String[] FetchListOfGames()
         {
             this.WriteLine(StupidServer.FETCH_COMMAND);
-            return ReadLine().Split(';');
+            String[] list = ReadLine().Split(';');
+            return (String[])list.Take(list.Length - 1);  // Don't return the empty string at the end
         }
 
         /// <summary>
