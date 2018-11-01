@@ -70,18 +70,7 @@ namespace StupidBlackjackSln
         /// <returns>The started StupidConnector object</returns>
         public static StupidConnector StartNewConnector()
         {
-            // the null coalescence operator 
             return connector ?? (connector = new StupidConnector());
-            
-            /*if (connector == null)
-            {
-                connector = new StupidConnector();
-                return connector;
-            }
-            else
-            {
-                return null;
-            }*/
         }
 
         /// <summary>
@@ -91,18 +80,16 @@ namespace StupidBlackjackSln
         public static StupidServer StartNewServer()
         {
             return server ?? (server = new StupidServer().Start());
+        }
 
-            /*
-            if (server == null)
-            {
-                server = new StupidServer();
-                server.Start();
-                return server;
-            }
-            else
-            {
-                return null;
-            }*/
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="outputbox"></param>
+        /// <returns></returns>
+        public static StupidServer StartNewServer(System.Windows.Forms.TextBox outputbox)
+        {
+            return server ?? (server = new StupidServer().BindOutputToMultiLineTextBox(outputbox).Start());
         }
     }
 }

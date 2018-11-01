@@ -44,16 +44,24 @@ namespace StupidBlackjackSln.Code
         private ArrayList streams = new ArrayList();
         private TcpListener server;
         private ArrayList threads = new ArrayList();
+        private IPAddress ip;
 
         /// <summary>
         /// Default constructor, sets up server with default settings.
         /// </summary>
         public StupidServer()
         {
-            IPAddress ipAddress = IPAddress.Parse(GetLocalIPAddress());
-            IPEndPoint ipLocalEndPoint = new IPEndPoint(ipAddress, DEFAULT_PORT);
+            ip = IPAddress.Parse(GetLocalIPAddress());
+            IPEndPoint ipLocalEndPoint = new IPEndPoint(ip, DEFAULT_PORT);
             clients = new ArrayList();
             server = new TcpListener(ipLocalEndPoint);
+            if (outputbox != null)
+            {
+                lock (outputbox)
+                {
+                    OutputToForm("Server successfully created");
+                }
+            }
         }
 
         /// <summary>
@@ -63,19 +71,28 @@ namespace StupidBlackjackSln.Code
         public StupidServer(int port)
         {
             this.port = port;
-            IPAddress ipAddress = IPAddress.Parse(GetLocalIPAddress());
-            IPEndPoint ipLocalEndPoint = new IPEndPoint(ipAddress, port);
+            ip = IPAddress.Parse(GetLocalIPAddress());
+            IPEndPoint ipLocalEndPoint = new IPEndPoint(ip, port);
             clients = new ArrayList();
             server = new TcpListener(ipLocalEndPoint);
+            if (outputbox != null)
+            {
+                lock (outputbox)
+                {
+                    OutputToForm("Server successfully created");
+                }
+            }
         }
 
         /// <summary>
         /// Make the StupidServer output debugging info to a Winforms Textbox.
         /// </summary>
         /// <param name="tbox">The textbox to assign</param>
-        public void BindOutputToMultiLineTextBox(System.Windows.Forms.TextBox tbox)
+        /// <returns>this, for chaining purposes</returns>
+        public StupidServer BindOutputToMultiLineTextBox(System.Windows.Forms.TextBox tbox)
         {
             this.outputbox = tbox;
+            return this;
         }
 
         /// <summary>
@@ -85,6 +102,10 @@ namespace StupidBlackjackSln.Code
         private void Broadcast(String s)
         {
             lock (clients) {
+                lock (outputbox)
+                {
+                    OutputToForm("Broadcasting:\n" + s);
+                }
                 foreach (TcpClient client in clients)
                 {
                     this.WriteLine(client, s);
@@ -97,28 +118,34 @@ namespace StupidBlackjackSln.Code
         /// </summary>
         public void Close()
         {
+            OutputToForm("Recieved shutdown signal...");
             if (started)
             {
                 lock (threads)
                 {
+                    OutputToForm("Aborting all connection threads...");
                     foreach (Thread t in threads)
                     {
                         t.Abort();
                     }
                 }
 
+                OutputToForm("Closing Client connections...");
                 foreach (TcpClient c in clients)
                 {
                     c.Close();
                 }
 
+                OutputToForm("Closing Client network streams...");
                 foreach (NetworkStream n in streams)
                 {
                     n.Close();
                 }
-                
+
+                OutputToForm("Shutting down server...");
                 server.Server.Close();
                 started = false;
+                OutputToForm("Server killed");
             }
         }
 
@@ -146,153 +173,179 @@ namespace StupidBlackjackSln.Code
         /// <returns>The response to be sent back to the client</returns>
         private String InterpretCommand(String cmd, TcpClient sender)
         {
-            String[] args = cmd.Trim().Split(' ');
-            String c = args[0];
-            if (c.Equals(FETCH_COMMAND))
+            lock (outputbox)
             {
-                if (games.Count == 0)
+                String[] args = cmd.Trim().Split(' ');
+                String c = args[0];
+                if (c.Equals(FETCH_COMMAND))
                 {
+                    if (games.Count == 0)
+                    {
+                        this.OutputToForm("Responded with COMMAND_FAILED");
+                        return COMMAND_FAILED;
+                    }
+                    String ToSend = "";
+                    foreach (GameRep game in games)
+                    {
+                        ToSend += (game.ToString() + ";");
+                    }
+                    this.OutputToForm("Responded with:\n COMMAND_SUCCEEDED " + ToSend);
+                    return COMMAND_SUCCEEDED + " " + ToSend;
+                }
+                else if (c.Equals(GET_GAME_NAME_BY_ID_COMMAND))
+                {
+                    int id;
+                    try
+                    {
+                        id = Int32.Parse(args[1]);
+                    }
+                    catch (Exception)
+                    {
+                        OutputToForm("Syntax error: cannot parse game id");
+                        return COMMAND_SYNTAX_ERROR;
+                    }
+                    lock (games)
+                    {
+                        OutputToForm("Locked resources: Searching for game: " + id.ToString());
+                        foreach (GameRep game in games)
+                        {
+                            if (game.id == id)
+                            {
+                                OutputToForm("Found game: " + game.name);
+                                return COMMAND_SUCCEEDED + " " + game.name;
+                            }
+                        }
+                        OutputToForm("Failed to find game: " + id.ToString());
+                        return COMMAND_FAILED;
+                    }
+                }
+                else if (c.Equals(GET_GAME_POP_BY_ID_COMMAND))
+                {
+                    int id;
+                    try
+                    {
+                        id = Int32.Parse(args[1]);
+                    }
+                    catch (Exception)
+                    {
+                        OutputToForm("Syntax error: cannot parse game id");
+                        return COMMAND_SYNTAX_ERROR;
+                    }
+                    lock (games)
+                    {
+                        OutputToForm("Locked resources: Searching for population of game: " + id.ToString());
+                        foreach (GameRep game in games)
+                        {
+                            if (game.id == id)
+                            {
+                                OutputToForm("Found game: " + game.name + ", pop: " + game.population.ToString());
+                                return COMMAND_SUCCEEDED + " " + game.population.ToString();
+                            }
+                        }
+                        OutputToForm("Failed to find game: " + id.ToString());
+                        return COMMAND_FAILED;
+                    }
+                }
+                else if (c.Equals(HOST_NEW_GAME_COMMAND))
+                {
+                    String new_game_name;
+                    int key;
+                    try
+                    {
+                        new_game_name = args[1];
+                        key = Int32.Parse(args[2]);
+                    }
+                    catch (Exception)
+                    {
+                        OutputToForm("Syntax Error: Failed to parse name and key");
+                        return COMMAND_SYNTAX_ERROR;
+                    }
+                    lock (games)
+                    {
+                        OutputToForm("Resources Locked: Checking for game: " + new_game_name);
+                        foreach (GameRep game in games)
+                        {
+                            if (game.name.Equals(new_game_name) || game.name.Trim().Equals(""))
+                            {
+                                OutputToForm("Found duplicate game, Responding with COMMAND_FAILED");
+                                return COMMAND_FAILED;
+                            }
+                        }
+                        OutputToForm("Constructing New Game: " + new_game_name + " with key: " + key.ToString());
+                        GameRep newGame = new GameRep(new_game_name, key);
+                        games.Add(newGame);
+                        return COMMAND_SUCCEEDED + " " + newGame.id.ToString();
+                    }
+                }
+                else if (c.Equals(JOIN_GAME_BY_ID_COMMAND))
+                {
+                    // TODO
+                    int id;
+                    try
+                    {
+                        id = Int32.Parse(args[1]);
+                    }
+                    catch (Exception)
+                    {
+                        OutputToForm("Syntax Error: Failed to parse id");
+                        return COMMAND_SYNTAX_ERROR;
+                    }
+                    lock (games)
+                    {
+                        OutputToForm("Resources Locked: Searching for game: " + id.ToString());
+                        foreach (GameRep game in games)
+                        {
+                            if (game.id == id && !game.started)
+                            {
+                                OutputToForm("Found requested game, linking");
+                                game.AddClient(sender);
+                                return COMMAND_SUCCEEDED + " " + game.population.ToString();
+                            }
+                        }
+                    }
+                    OutputToForm("Could not find requested game, responding with COMMAND_FAILED");
                     return COMMAND_FAILED;
                 }
-                String ToSend = "";
-                foreach (GameRep game in games)
+                else if (c.Equals(REMOVE_GAME_BY_ID_COMMAND))
                 {
-                    ToSend += (game.ToString() + ";");
-                }
-                return COMMAND_SUCCEEDED + " " + ToSend;
-            }
-            else if (c.Equals(GET_GAME_NAME_BY_ID_COMMAND))
-            {
-                int id;
-                try
-                {
-                    id = Int32.Parse(args[1]);
-                }
-                catch (Exception)
-                {
-                    return COMMAND_SYNTAX_ERROR;
-                }
-                lock (games)
-                {
-                    foreach (GameRep game in games)
+                    int id, key;
+                    try
                     {
-                        if (game.id == id)
+                        id = Int32.Parse(args[1]);
+                        key = Int32.Parse(args[2]);
+                    }
+                    catch (Exception)
+                    {
+                        OutputToForm("Syntax Error: Failed to parse id and key");
+                        return COMMAND_SYNTAX_ERROR;
+                    }
+                    lock (games)
+                    {
+                        OutputToForm("Locked Resources: Searching for game: " + id.ToString());
+                        for (int i = 0; i < games.Count; i++)
                         {
-                            return COMMAND_SUCCEEDED + " " + game.name;
+                            GameRep game = (GameRep)games[i];
+                            if (game.id == id && game.key == key)
+                            {
+                                OutputToForm("Found game: " + id.ToString() + ", removing");
+                                games.RemoveAt(i);
+                                return COMMAND_SUCCEEDED;
+                            }
                         }
                     }
+                    OutputToForm("Failed to remove game: Game " + id.ToString() + " doesn't exist or key does not match");
                     return COMMAND_FAILED;
                 }
-            }
-            else if (c.Equals(GET_GAME_POP_BY_ID_COMMAND))
-            {
-                int id;
-                try
+                else if (c.Equals(START_GAME_BY_ID_COMMAND))
                 {
-                    id = Int32.Parse(args[1]);
+                    // TODO
+                    return COMMAND_UNRECOGNIZED;
                 }
-                catch (Exception)
+                else
                 {
-                    return COMMAND_SYNTAX_ERROR;
+                    OutputToForm("Unrecognized command, responding with COMMAND_UNRECOGNIZED");
+                    return COMMAND_UNRECOGNIZED;
                 }
-                lock (games)
-                {
-                    foreach (GameRep game in games)
-                    {
-                        if (game.id == id)
-                        {
-                            return COMMAND_SUCCEEDED + " " + game.population.ToString();
-                        }
-                    }
-                    return COMMAND_FAILED;
-                }
-            }
-            else if (c.Equals(HOST_NEW_GAME_COMMAND))
-            {
-                String new_game_name;
-                int key;
-                try
-                {
-                    new_game_name = args[1];
-                    key = Int32.Parse(args[2]);
-                }
-                catch (Exception)
-                {
-                    return COMMAND_SYNTAX_ERROR;
-                }
-                lock (games)
-                {
-                    foreach (GameRep game in games)
-                    {
-                        if (game.name.Equals(new_game_name) || game.name.Trim().Equals(""))
-                        {
-                            return COMMAND_FAILED;
-                        }
-                    }
-                    GameRep newGame = new GameRep(new_game_name, key);
-                    games.Add(newGame);
-                    return COMMAND_SUCCEEDED + " " + newGame.id.ToString();
-                }
-            }
-            else if (c.Equals(JOIN_GAME_BY_ID_COMMAND))
-            {
-                // TODO
-                int id;
-                try
-                {
-                    id = Int32.Parse(args[1]);
-                }
-                catch (Exception)
-                {
-                    return COMMAND_SYNTAX_ERROR;
-                }
-                lock (games)
-                {
-                    foreach (GameRep game in games)
-                    {
-                        if (game.id == id && !game.started)
-                        {
-                            game.AddClient(sender);
-                            return COMMAND_SUCCEEDED + " " + game.population.ToString();
-                        }
-                    }
-                }
-                return COMMAND_FAILED;
-            }
-            else if (c.Equals(REMOVE_GAME_BY_ID_COMMAND))
-            {
-                int id, key;
-                try
-                {
-                    id = Int32.Parse(args[1]);
-                    key = Int32.Parse(args[2]);
-                }
-                catch (Exception)
-                {
-                    return COMMAND_SYNTAX_ERROR;
-                }
-                lock (games)
-                {
-                    for (int i=0; i<games.Count; i++)
-                    {
-                        GameRep game = (GameRep)games[i];
-                        if (game.id == id && game.key == key)
-                        {
-                            games.RemoveAt(i);
-                            return COMMAND_SUCCEEDED;
-                        }
-                    }
-                }
-                return COMMAND_FAILED;
-            }
-            else if (c.Equals(START_GAME_BY_ID_COMMAND))
-            {
-                // TODO
-                return COMMAND_UNRECOGNIZED;
-            }
-            else
-            {
-                return COMMAND_UNRECOGNIZED;
             }
         }
 
@@ -307,6 +360,12 @@ namespace StupidBlackjackSln.Code
                 {
                     Thread.Sleep(100);
                 }
+
+                lock (outputbox)
+                {
+                    OutputToForm("Pending new client...");
+                }
+
                 TcpClient c =  server.AcceptTcpClient();
                 
                 lock (clients)
@@ -320,6 +379,12 @@ namespace StupidBlackjackSln.Code
                 lock (threads)
                 {
                     threads.Add(t);
+                }
+
+                lock (outputbox)
+                {
+                    OutputToForm("Accepted new client: " + c.ToString());
+                    OutputToForm("Starting new listener thread: " + t.ToString());
                 }
 
                 t.Start();
@@ -336,6 +401,11 @@ namespace StupidBlackjackSln.Code
 
             lock (streams) {
                 streams.Add(ns);
+            }
+
+            lock(outputbox)
+            {
+                OutputToForm("Listener Active for client: " + c.ToString());
             }
             
             while (true)
@@ -381,17 +451,22 @@ namespace StupidBlackjackSln.Code
         /// <returns>this (for chaining purposes)</returns>
         public StupidServer Start()
         {
+
+            OutputToForm("Attempting to bind server to: " + ip.ToString() + ":" + port.ToString());
+
             try
             {
                 server.Start();
                 started = true;
                 //TODO add some status message
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                OutputToForm("Server failed to start:\n" + e.ToString());
                 //TODO
             }
 
+            OutputToForm("Server successfully started!");
             Thread t = new Thread(LoopAccept);
             threads.Add(t);
             t.Start();

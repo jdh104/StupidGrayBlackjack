@@ -17,7 +17,7 @@ namespace StupidBlackjackSln
 		public FrmServer()
 		{
 			InitializeComponent();
-            Program.GetServer().BindOutputToMultiLineTextBox(this.txtBoxStatus);
+            Program.StartNewServer(this.txtBoxStatus);
 		}
 
 		private void CloseServer_Click(object sender, EventArgs e)
