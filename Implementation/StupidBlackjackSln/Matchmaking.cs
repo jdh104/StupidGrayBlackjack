@@ -16,8 +16,6 @@ namespace StupidBlackjackSln
     public partial class Matchmaking : Form
     {
 
-        private Thread RefreshThread;
-
         public Matchmaking()
         {
             InitializeComponent();
@@ -26,7 +24,6 @@ namespace StupidBlackjackSln
             int id = Program.GetConnector().GetKey();
             newGameName.Text = "Game_" + id.ToString();
 
-            RefreshThread = new Thread(RefreshLoop);
         }
 
 
@@ -35,34 +32,37 @@ namespace StupidBlackjackSln
 
         }
 
-        private void RefreshLoop()
-        {
-            while (true)
-            {
-                Thread.Sleep(3000);
-                this.RefreshGameList();
-            }
-        }
-
         private void RefreshGameList()
         {
             String[] games = Program.GetConnector().FetchListOfGames();
-            // Add games that aren't already in the list
-            foreach (String game in games)
+
+
+            // If there are no games, do not allow user to select anything in ListBox
+            // Add "(none)" so user knows there are no games being hosted
+            if (games == null)
             {
-                if (!lstBoxGames.Items.Contains(game))
-                {
-                    lstBoxGames.Items.Add(game);
-                }
+                lstBoxGames.SelectionMode = SelectionMode.None;
+                lstBoxGames.Items.Add("(none)");
             }
-            // Removes games that are no longer being hosted
-            for (int i = 0; i < lstBoxGames.Items.Count; i++)
+
+            // Since there are games, add them to ListBox
+            else
             {
-                if (!games.Contains(lstBoxGames.Items[i]))
-                {
-                    lstBoxGames.Items.RemoveAt(i);
-                }
+                // User can only select one game in list
+                lstBoxGames.SelectionMode = SelectionMode.One;
+
+                // Add games that aren't already in the list
+                foreach (String game in games)
+                    if (!lstBoxGames.Items.Contains(game))
+                        lstBoxGames.Items.Add(game);                    
+
+                // Removes games that are no longer being hosted
+                for (int i = 0; i < lstBoxGames.Items.Count; i++)
+                    if (!games.Contains(lstBoxGames.Items[i]))
+                        lstBoxGames.Items.RemoveAt(i);
             }
+
+
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -77,23 +77,7 @@ namespace StupidBlackjackSln
         /// <param name="e"></param>
         private void Matchmaking_Load(object sender, EventArgs e)
         {
-            String[] games = Program.GetConnector().FetchListOfGames();
-
-            // If there are no games, do not allow user to select anything in ListBox
-            // Add "(none)" so user knows there are no games being hosted
-            if (games == null)
-            {
-                lstBoxGames.SelectionMode = SelectionMode.None;
-                lstBoxGames.Items.Add("(none)");
-            }
-
-            // Since there are games, add them to ListBox
-            else
-            {
-                lstBoxGames.SelectionMode = SelectionMode.One;
-                foreach (String game in games)
-                    lstBoxGames.Items.Add(game);
-            }
+            this.RefreshGameList();
         }
 
         /// <summary>
@@ -107,6 +91,18 @@ namespace StupidBlackjackSln
 
         }
 
+        /// <summary>
+        /// Check new game name for restricted characters
+        /// </summary>
+        /// <returns></returns>
+        private bool CheckNewGameInput()
+        {
+            // TODO
+            string checkString = newGameName.Text;
+
+            return true;
+        }
+
         private void Ok_Click(object sender, EventArgs e)
         {
             if (radioBtnNewGame.Checked)
@@ -117,7 +113,7 @@ namespace StupidBlackjackSln
             if (radioBtnExistingGame.Checked)
             {
                 // TODO
-            } 
+            }
         }
 
         private void btnRefresh_Click(object sender, EventArgs e)
