@@ -77,8 +77,8 @@ namespace StupidBlackjackSln
 
         private void btnServer_Click(object sender, EventArgs e)
         {
-            new FrmServer().ShowDialog();
             Program.StartNewServer();
+            new FrmServer().ShowDialog();
         }
     }
 }

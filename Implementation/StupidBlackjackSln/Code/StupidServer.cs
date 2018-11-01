@@ -283,7 +283,7 @@ namespace StupidBlackjackSln.Code
             while (true)
             {
                 String command = this.ReadLine(c);
-                this.InterpretCommand(command, c);
+                this.WriteLine(c, this.InterpretCommand(command, c));
             }
         }
 
