@@ -423,7 +423,7 @@ namespace StupidBlackjackSln.Code
         {
             if (outputbox != null)
             {
-                outputbox.Text += "\n" + s;
+                outputbox.Text += s + "\r\n";
             }
         }
 

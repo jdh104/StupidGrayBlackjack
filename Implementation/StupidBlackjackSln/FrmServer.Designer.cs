@@ -60,7 +60,6 @@
             this.txtBoxStatus.Name = "txtBoxStatus";
             this.txtBoxStatus.Size = new System.Drawing.Size(776, 374);
             this.txtBoxStatus.TabIndex = 1;
-            this.txtBoxStatus.Text = "<Status>";
             this.txtBoxStatus.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // FrmServer
