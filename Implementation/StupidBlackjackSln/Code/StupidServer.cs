@@ -368,7 +368,7 @@ namespace StupidBlackjackSln.Code
 
             public override string ToString()
             {
-                return id.ToString() + " " + name;
+                return id.ToString() + ":" + name;
             }
         }
     }

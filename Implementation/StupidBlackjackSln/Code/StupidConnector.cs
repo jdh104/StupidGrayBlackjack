@@ -74,14 +74,15 @@ namespace StupidBlackjackSln.Code
         /// <returns>An array of strings containing game names and id's</returns>
         public String[] FetchListOfGames()
         {
-            String[] list = this.WriteLine(StupidServer.FETCH_COMMAND);
-            if (!list[0].Equals(StupidServer.COMMAND_SUCCEEDED))
+            String[] response = this.WriteLine(StupidServer.FETCH_COMMAND);
+            if (!response[0].Equals(StupidServer.COMMAND_SUCCEEDED))
             {
                 return null;
             }
             else
             {
                 // Don't return the empty string at the end
+                String[] list = response[1].Split(';');
                 return new List<string>(list).GetRange(1, list.Length - 1).ToArray();
             }
         }
