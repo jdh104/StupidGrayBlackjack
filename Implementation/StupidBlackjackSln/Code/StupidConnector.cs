@@ -125,10 +125,9 @@ namespace StupidBlackjackSln.Code
         }
         
         /// <summary>
-        /// 
+        /// Read from StupidServer until a newline is reached
         /// </summary>
-        /// <param name="client"></param>
-        /// <returns></returns>
+        /// <returns>Characters from the StupidServer</returns>
         private String ReadLine()
         {
             byte[] buffer = new byte[1];
