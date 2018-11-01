@@ -75,7 +75,7 @@ namespace StupidBlackjackSln.Code
         public String[] FetchListOfGames()
         {
             String[] list = this.WriteLine(StupidServer.FETCH_COMMAND);
-            if (list.Length == 1)
+            if (!list[0].Equals(StupidServer.COMMAND_SUCCEEDED))
             {
                 return null;
             }
@@ -102,7 +102,7 @@ namespace StupidBlackjackSln.Code
         public int HostNewGame(String serverName)
         {
             String[] response = this.WriteLine(StupidServer.HOST_NEW_GAME_COMMAND + " " + serverName + " " + key.ToString());
-            if (response.Length == 1)
+            if (!response[0].Equals(StupidServer.COMMAND_SUCCEEDED))
             {
                 return 0;
             }
