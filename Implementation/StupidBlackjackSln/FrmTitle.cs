@@ -63,7 +63,7 @@ namespace StupidBlackjackSln
             this.Show();    //unhides the title screen when the newGame Form closes
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void btnNewMatchServer_Click(object sender, EventArgs e)
         {
             new FrmServer().Show();
             this.Hide();
