@@ -103,7 +103,7 @@ namespace StupidBlackjackSln
                     }
                     else
                     {
-                        Host_WaitingForConnection hostDialog = new Host_WaitingForConnection(id);
+                        new Host_WaitingForConnection(id).ShowDialog();
                     }
                 }
             }

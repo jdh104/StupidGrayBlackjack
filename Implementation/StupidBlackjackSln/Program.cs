@@ -14,6 +14,7 @@ namespace StupidBlackjackSln
 
         private static StupidServer server = null;
         private static StupidConnector connector = null;
+        private static AchievementMonitor achievements = new AchievementMonitor();
 
         /// <summary>
         /// The main entry point for the application.
