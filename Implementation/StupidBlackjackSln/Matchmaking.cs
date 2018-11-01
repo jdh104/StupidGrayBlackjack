@@ -1,4 +1,6 @@
-﻿using System;
+﻿//Classmaster: Madelyn
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -110,6 +112,11 @@ namespace StupidBlackjackSln
         private void button1_Click(object sender, EventArgs e)
         {
             this.RefreshGameList();
+        }
+
+        private void lstBoxGames_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+
         }
     }
 }

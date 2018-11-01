@@ -139,6 +139,7 @@
             this.lstBoxGames.Name = "lstBoxGames";
             this.lstBoxGames.Size = new System.Drawing.Size(424, 204);
             this.lstBoxGames.TabIndex = 8;
+            this.lstBoxGames.SelectedIndexChanged += new System.EventHandler(this.lstBoxGames_SelectedIndexChanged_1);
             // 
             // Matchmaking
             // 
