@@ -1,4 +1,6 @@
-﻿using System;
+﻿//ClassMaster: Jonah
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -19,11 +21,12 @@ namespace StupidBlackjackSln
 
 		private void CloseServer_Click(object sender, EventArgs e)
 		{
-            // TODO change this name, dummies. We're getting graded on this Stupid Thing ^(TM)
-			frmTitle dicks = new frmTitle();
-			dicks.Show();
-			this.Hide();
-			Program.CloseStupidServer();
+            this.Close();
 		}
-	}
+
+        private void FrmServer_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Program.CloseStupidServer();
+        }
+    }
 }

@@ -28,37 +28,38 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-			this.fileSystemWatcher1 = new System.IO.FileSystemWatcher();
-			this.CloseServer = new System.Windows.Forms.Button();
-			((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).BeginInit();
-			this.SuspendLayout();
-			// 
-			// fileSystemWatcher1
-			// 
-			this.fileSystemWatcher1.EnableRaisingEvents = true;
-			this.fileSystemWatcher1.SynchronizingObject = this;
-			// 
-			// CloseServer
-			// 
-			this.CloseServer.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.CloseServer.Location = new System.Drawing.Point(653, 12);
-			this.CloseServer.Name = "CloseServer";
-			this.CloseServer.Size = new System.Drawing.Size(135, 46);
-			this.CloseServer.TabIndex = 0;
-			this.CloseServer.Text = "Close";
-			this.CloseServer.UseVisualStyleBackColor = true;
-			this.CloseServer.Click += new System.EventHandler(this.CloseServer_Click);
-			// 
-			// FrmServer
-			// 
-			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(800, 450);
-			this.Controls.Add(this.CloseServer);
-			this.Name = "FrmServer";
-			this.Text = "Form1";
-			((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).EndInit();
-			this.ResumeLayout(false);
+            this.fileSystemWatcher1 = new System.IO.FileSystemWatcher();
+            this.CloseServer = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).BeginInit();
+            this.SuspendLayout();
+            // 
+            // fileSystemWatcher1
+            // 
+            this.fileSystemWatcher1.EnableRaisingEvents = true;
+            this.fileSystemWatcher1.SynchronizingObject = this;
+            // 
+            // CloseServer
+            // 
+            this.CloseServer.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CloseServer.Location = new System.Drawing.Point(653, 12);
+            this.CloseServer.Name = "CloseServer";
+            this.CloseServer.Size = new System.Drawing.Size(135, 46);
+            this.CloseServer.TabIndex = 0;
+            this.CloseServer.Text = "Close";
+            this.CloseServer.UseVisualStyleBackColor = true;
+            this.CloseServer.Click += new System.EventHandler(this.CloseServer_Click);
+            // 
+            // FrmServer
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.CloseServer);
+            this.Name = "FrmServer";
+            this.Text = "Form1";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FrmServer_FormClosed);
+            ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).EndInit();
+            this.ResumeLayout(false);
 
 		}
 
