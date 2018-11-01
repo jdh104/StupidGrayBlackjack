@@ -13,7 +13,6 @@ namespace StupidBlackjackSln
     public partial class Host_WaitingForConnection : Form
     {
         private int id;
-        private int id1;
 
         public Host_WaitingForConnection(int id)
         {
@@ -34,7 +33,7 @@ namespace StupidBlackjackSln
 
         private void Host_WaitingForConnection_Load(object sender, EventArgs e)
         {
-            int numPlayers = Program.GetConnector().GetGamePopulationByID(id);
+            int? numPlayers = Program.GetConnector().GetGamePopulationByID(id);
             String gameName = "";
 
             if (numPlayers == 0)
@@ -47,7 +46,7 @@ namespace StupidBlackjackSln
             }
             else
             {
-                lblNumPlayers.Text = numPlayers.ToString + " players have joined your game (" + gameName + ")";
+                lblNumPlayers.Text = numPlayers.ToString() + " players have joined your game (" + gameName + ")";
             }
             lblNumPlayers.Show(); 
         }

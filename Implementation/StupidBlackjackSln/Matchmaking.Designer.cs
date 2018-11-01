@@ -157,8 +157,6 @@
             this.lstBoxGames.TabIndex = 8;
             this.lstBoxGames.SelectedIndexChanged += new System.EventHandler(this.Matchmaking_Load);
             // 
-<<<<<<< Updated upstream
-=======
             // labelError
             // 
             this.labelError.AutoSize = true;
@@ -169,7 +167,6 @@
             this.labelError.Text = "labelError";
             this.labelError.Visible = false;
             // 
->>>>>>> Stashed changes
             // Matchmaking
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
