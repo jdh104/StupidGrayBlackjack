@@ -82,7 +82,7 @@ namespace StupidBlackjackSln.Code
             else
             {
                 // Don't return the empty string at the end
-                return new List<string>(list).GetRange(0, list.Length - 1).ToArray();
+                return new List<string>(list).GetRange(1, list.Length - 1).ToArray();
             }
         }
 

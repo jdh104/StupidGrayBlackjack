@@ -138,6 +138,10 @@ namespace StupidBlackjackSln.Code
             String c = args[0];
             if (c.Equals(FETCH_COMMAND))
             {
+                if (games.Count == 0)
+                {
+                    return COMMAND_FAILED;
+                }
                 String ToSend = "";
                 foreach (GameRep game in games)
                 {
