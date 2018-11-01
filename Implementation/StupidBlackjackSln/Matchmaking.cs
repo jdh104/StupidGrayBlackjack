@@ -66,16 +66,6 @@ namespace StupidBlackjackSln
 
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void btnRefresh_Click(object sender, EventArgs e)
-        {
-            RefreshGameList();
-        }
-
         private void Matchmaking_Load(object sender, EventArgs e)
         {
 
@@ -115,6 +105,11 @@ namespace StupidBlackjackSln
             {
                 // TODO
             } 
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.RefreshGameList();
         }
     }
 }
