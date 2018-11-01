@@ -27,7 +27,80 @@ namespace StupidBlackjackSln
         }
 
 
-        private void radioButton1_CheckedChanged(object sender, EventArgs e)
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            this.RefreshGameList();
+        }
+
+        private void Cancel_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            Program.CloseStupidConnector();
+        }
+
+        /// <summary>
+        /// Check new game name for restricted characters (spaces, semi colons, colons, newline)
+        /// </summary>
+        /// <returns></returns>
+        private bool CheckNewGameInput()
+        {
+            String checkString = newGameName.Text;
+
+            if (checkString.Contains(" "))
+                return false;
+            else if (checkString.Contains(";"))
+                return false;
+            else if (checkString.Contains(":"))
+                return false;
+            else if (checkString.Contains("\t"))
+                return false;
+            else if (checkString.Contains("\n"))
+                return false;
+            else
+                return true;
+        }
+
+        private void lstBoxGames_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Matchmaking_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Program.CloseStupidConnector();
+        }
+
+        /// <summary>
+        /// When matchmaking dialog is opened, run this
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Matchmaking_Load(object sender, EventArgs e)
+        {
+            this.RefreshGameList();
+        }
+
+        private void Ok_Click(object sender, EventArgs e)
+        {
+            if (radioBtnNewGame.Checked)
+            {
+                if (!CheckNewGameInput())
+                {
+                    labelError.Text = "Error: Check your game name for restricted characters (space, semi colons, colons, newline)";
+                    labelError.Show();
+                }
+
+                else
+                    Program.GetConnector().HostNewGame(newGameName.Text);
+            }
+
+            if (radioBtnExistingGame.Checked)
+            {
+                // TODO
+            }
+        }
+
+        private void RadioBtnExistingGame_CheckedChanged(object sender, EventArgs e)
         {
 
         }
@@ -54,7 +127,7 @@ namespace StupidBlackjackSln
                 // Add games that aren't already in the list
                 foreach (String game in games)
                     if (!lstBoxGames.Items.Contains(game))
-                        lstBoxGames.Items.Add(game);                    
+                        lstBoxGames.Items.Add(game);
 
                 // Removes games that are no longer being hosted
                 for (int i = 0; i < lstBoxGames.Items.Count; i++)
@@ -65,76 +138,7 @@ namespace StupidBlackjackSln
 
         }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
 
-        }
-
-        /// <summary>
-        /// When matchmaking dialog is opened, run this
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void Matchmaking_Load(object sender, EventArgs e)
-        {
-            this.RefreshGameList();
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void lstBoxGames_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-
-        }
-
-        /// <summary>
-        /// Check new game name for restricted characters
-        /// </summary>
-        /// <returns></returns>
-        private bool CheckNewGameInput()
-        {
-            // TODO
-            string checkString = newGameName.Text;
-
-            return true;
-        }
-
-        private void Ok_Click(object sender, EventArgs e)
-        {
-            if (radioBtnNewGame.Checked)
-            {
-                Program.GetConnector().HostNewGame(newGameName.Text);
-            }
-
-            if (radioBtnExistingGame.Checked)
-            {
-                // TODO
-            }
-        }
-
-        private void btnRefresh_Click(object sender, EventArgs e)
-        {
-            this.RefreshGameList();
-        }
-
-        private void lstBoxGames_SelectedIndexChanged_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void radioBtnExistingGame_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Cancel_Click(object sender, EventArgs e)
-        {
-            this.Close();
-            Program.CloseStupidConnector();
-        }
+      
     }
 }

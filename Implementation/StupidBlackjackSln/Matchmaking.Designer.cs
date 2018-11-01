@@ -37,6 +37,7 @@
             this.radioBtnNewGame = new System.Windows.Forms.RadioButton();
             this.radioBtnExistingGame = new System.Windows.Forms.RadioButton();
             this.lstBoxGames = new System.Windows.Forms.ListBox();
+            this.labelError = new System.Windows.Forms.Label();
             this.groupMatchmaking.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -65,6 +66,7 @@
             // groupMatchmaking
             // 
             this.groupMatchmaking.BackColor = System.Drawing.Color.Transparent;
+            this.groupMatchmaking.Controls.Add(this.labelError);
             this.groupMatchmaking.Controls.Add(this.button1);
             this.groupMatchmaking.Controls.Add(this.label1);
             this.groupMatchmaking.Controls.Add(this.newGameName);
@@ -130,7 +132,7 @@
             this.radioBtnExistingGame.TabIndex = 9;
             this.radioBtnExistingGame.Text = "Existing Game";
             this.radioBtnExistingGame.UseVisualStyleBackColor = true;
-            this.radioBtnExistingGame.CheckedChanged += new System.EventHandler(this.radioBtnExistingGame_CheckedChanged);
+            this.radioBtnExistingGame.CheckedChanged += new System.EventHandler(this.RadioBtnExistingGame_CheckedChanged);
             // 
             // lstBoxGames
             // 
@@ -141,7 +143,17 @@
             this.lstBoxGames.Name = "lstBoxGames";
             this.lstBoxGames.Size = new System.Drawing.Size(517, 204);
             this.lstBoxGames.TabIndex = 8;
-            this.lstBoxGames.SelectedIndexChanged += new System.EventHandler(this.lstBoxGames_SelectedIndexChanged_1);
+            this.lstBoxGames.SelectedIndexChanged += new System.EventHandler(this.Matchmaking_Load);
+            // 
+            // labelError
+            // 
+            this.labelError.AutoSize = true;
+            this.labelError.Location = new System.Drawing.Point(153, 477);
+            this.labelError.Name = "labelError";
+            this.labelError.Size = new System.Drawing.Size(105, 25);
+            this.labelError.TabIndex = 14;
+            this.labelError.Text = "labelError";
+            this.labelError.Visible = false;
             // 
             // Matchmaking
             // 
@@ -154,6 +166,7 @@
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Matchmaking";
             this.Text = "Matchmaking";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Matchmaking_FormClosed);
             this.Load += new System.EventHandler(this.Matchmaking_Load);
             this.groupMatchmaking.ResumeLayout(false);
             this.groupMatchmaking.PerformLayout();
@@ -171,5 +184,6 @@
         private System.Windows.Forms.RadioButton radioBtnNewGame;
         private System.Windows.Forms.RadioButton radioBtnExistingGame;
         private System.Windows.Forms.ListBox lstBoxGames;
+        private System.Windows.Forms.Label labelError;
     }
 }
