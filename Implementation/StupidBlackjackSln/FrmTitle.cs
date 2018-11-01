@@ -46,7 +46,7 @@ namespace StupidBlackjackSln
             {
                 Program.StartNewConnector();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 FrmNewGame firstGame = new FrmNewGame();
                 firstGame.FormClosed += new FormClosedEventHandler(firstGame_FormClosed);

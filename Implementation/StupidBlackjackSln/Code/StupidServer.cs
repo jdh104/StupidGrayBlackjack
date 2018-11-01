@@ -150,7 +150,7 @@ namespace StupidBlackjackSln.Code
                 {
                     key = Int32.Parse(args[2]);
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                     return false;
                 }
@@ -167,7 +167,7 @@ namespace StupidBlackjackSln.Code
                 {
                     id = Int32.Parse(args[1]);
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                     return false;
                 }
@@ -192,7 +192,7 @@ namespace StupidBlackjackSln.Code
                     id = Int32.Parse(args[1]);
                     key = Int32.Parse(args[2]);
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                     return false;
                 }
@@ -314,7 +314,7 @@ namespace StupidBlackjackSln.Code
                 started = true;
                 //TODO add some status message
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 //TODO
             }
