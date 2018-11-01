@@ -161,6 +161,52 @@ namespace StupidBlackjackSln.Code
                 }
                 return COMMAND_SUCCEEDED + " " + ToSend;
             }
+            else if (c.Equals(GET_GAME_NAME_BY_ID_COMMAND))
+            {
+                int id;
+                try
+                {
+                    id = Int32.Parse(args[1]);
+                }
+                catch (Exception)
+                {
+                    return COMMAND_SYNTAX_ERROR;
+                }
+                lock (games)
+                {
+                    foreach (GameRep game in games)
+                    {
+                        if (game.id == id)
+                        {
+                            return COMMAND_SUCCEEDED + " " + game.name;
+                        }
+                    }
+                    return COMMAND_FAILED;
+                }
+            }
+            else if (c.Equals(GET_GAME_POP_BY_ID_COMMAND))
+            {
+                int id;
+                try
+                {
+                    id = Int32.Parse(args[1]);
+                }
+                catch (Exception)
+                {
+                    return COMMAND_SYNTAX_ERROR;
+                }
+                lock (games)
+                {
+                    foreach (GameRep game in games)
+                    {
+                        if (game.id == id)
+                        {
+                            return COMMAND_SUCCEEDED + " " + game.population.ToString();
+                        }
+                    }
+                    return COMMAND_FAILED;
+                }
+            }
             else if (c.Equals(HOST_NEW_GAME_COMMAND))
             {
                 String new_game_name;
