@@ -392,8 +392,8 @@ namespace StupidBlackjackSln.Code
 
                 lock (outputbox)
                 {
-                    OutputToForm("Accepted new client: " + c.ToString());
-                    OutputToForm("Starting new listener thread: " + t.ToString());
+                    OutputToForm("Accepted new client: " + c.Client.RemoteEndPoint.ToString());
+                    OutputToForm("Starting new listener thread: " + t.GetHashCode().ToString());
                 }
 
                 t.Start();
@@ -415,7 +415,7 @@ namespace StupidBlackjackSln.Code
 
             lock (outputbox)
             {
-                OutputToForm("Listener Active for client: " + c.ToString());
+                OutputToForm("Listener Active for client: " + c.Client.RemoteEndPoint.ToString());
             }
 
             while (true)
@@ -514,7 +514,7 @@ namespace StupidBlackjackSln.Code
             public int key;
             public int id;
             public String name;
-            public int population = 0;
+            public int population = 1;
 
             public GameRep(String _name, int _key)
             {

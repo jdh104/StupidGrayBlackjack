@@ -41,6 +41,7 @@
             // 
             // CloseServer
             // 
+            this.CloseServer.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.CloseServer.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CloseServer.Location = new System.Drawing.Point(12, 392);
             this.CloseServer.Name = "CloseServer";
