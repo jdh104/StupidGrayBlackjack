@@ -47,6 +47,7 @@ namespace StupidBlackjackSln
         private void RefreshGameList()
         {
             String[] games = Program.GetConnector().FetchListOfGames();
+            // Add games that aren't already in the list
             foreach (String game in games)
             {
                 if (!lstBoxGames.Items.Contains(game))
@@ -54,6 +55,7 @@ namespace StupidBlackjackSln
                     lstBoxGames.Items.Add(game);
                 }
             }
+            // Removes games that are no longer being hosted
             for (int i = 0; i < lstBoxGames.Items.Count; i++)
             {
                 if (!games.Contains(lstBoxGames.Items[i]))
@@ -68,15 +70,24 @@ namespace StupidBlackjackSln
 
         }
 
+        /// <summary>
+        /// When matchmaking dialog is opened, run this
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Matchmaking_Load(object sender, EventArgs e)
         {
             String[] games = Program.GetConnector().FetchListOfGames();
 
+            // If there are no games, do not allow user to select anything in ListBox
+            // Add "(none)" so user knows there are no games being hosted
             if (games == null)
             {
                 lstBoxGames.SelectionMode = SelectionMode.None;
                 lstBoxGames.Items.Add("(none)");
             }
+
+            // Since there are games, add them to ListBox
             else
             {
                 lstBoxGames.SelectionMode = SelectionMode.One;
@@ -122,6 +133,11 @@ namespace StupidBlackjackSln
         private void radioBtnExistingGame_CheckedChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void Cancel_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }
