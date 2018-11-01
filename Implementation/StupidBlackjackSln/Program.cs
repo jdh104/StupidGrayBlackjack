@@ -27,6 +27,18 @@ namespace StupidBlackjackSln
         }
 
         /// <summary>
+        /// Close the singleton StupidConnector if it exists.
+        /// </summary>
+        public static void CloseStupidConnector()
+        {
+            if (connector != null)
+            {
+                connector.Close();
+                connector = null;
+            }
+        }
+
+        /// <summary>
         /// Close the singleton StupidServer if it exists.
         /// </summary>
         public static void CloseStupidServer()
