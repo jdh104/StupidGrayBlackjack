@@ -70,6 +70,7 @@ namespace StupidBlackjackSln
         /// <returns>The started StupidConnector object</returns>
         public static StupidConnector StartNewConnector()
         {
+            // the null coalescence operator 
             return connector ?? (connector = new StupidConnector());
             
             /*if (connector == null)
