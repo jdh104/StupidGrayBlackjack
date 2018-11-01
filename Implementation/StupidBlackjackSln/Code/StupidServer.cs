@@ -181,7 +181,7 @@ namespace StupidBlackjackSln.Code
             lock (outputbox)
             {
                 this.OutputToForm("Recieved Command:");
-                this.OutputToForm(cmd);
+                this.OutputToForm(">>> " + cmd);
 
                 String[] args = cmd.Trim().Split(' ');
                 String c = args[0];
