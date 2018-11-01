@@ -28,7 +28,7 @@ namespace StupidBlackjackSln.Code
         public const String HOST_NEW_GAME_COMMAND = "h";
         public const String JOIN_GAME_BY_ID_COMMAND = "j";
         public const String REMOVE_GAME_BY_ID_COMMAND = "r";
-        public const byte NEWLINE = Encoding.ASCII.GetBytes("\n");
+        public const byte NEWLINE = Encoding.ASCII.GetBytes("\n")[0];
 
         private bool started = false;
         private int port = DEFAULT_PORT;
