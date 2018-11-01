@@ -83,7 +83,7 @@ namespace StupidBlackjackSln.Code
             {
                 // Don't return the empty string at the end
                 String[] list = response[1].Split(';');
-                return new List<string>(list).GetRange(1, list.Length - 1).ToArray();
+                return new List<string>(list).GetRange(0, list.Length - 1).ToArray();
             }
         }
 

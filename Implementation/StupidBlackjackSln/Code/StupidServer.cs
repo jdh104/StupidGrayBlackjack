@@ -166,7 +166,7 @@ namespace StupidBlackjackSln.Code
                 {
                     foreach (GameRep game in games)
                     {
-                        if (game.name.Equals(new_game_name))
+                        if (game.name.Equals(new_game_name) || game.name.Trim().Equals(""))
                         {
                             return COMMAND_FAILED;
                         }
