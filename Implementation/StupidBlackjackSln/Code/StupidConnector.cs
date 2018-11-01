@@ -74,8 +74,7 @@ namespace StupidBlackjackSln.Code
         /// <returns>An array of strings containing game names and id's</returns>
         public String[] FetchListOfGames()
         {
-            this.WriteLine(StupidServer.FETCH_COMMAND);
-            String[] list = ReadLine().Split(';');
+            String[] list = this.WriteLine(StupidServer.FETCH_COMMAND);
             if (list.Length == 1)
             {
                 return null;
@@ -90,7 +89,6 @@ namespace StupidBlackjackSln.Code
         /// <summary>
         /// Get the "security" key associated with this connector object.
         /// </summary>
-        /// <returns>key... u should be able to figure this out.</returns>
         public int GetKey()
         {
             return key;
@@ -103,8 +101,15 @@ namespace StupidBlackjackSln.Code
         /// <returns>The generated id number for the game, or 0 if failed.</returns>
         public int HostNewGame(String serverName)
         {
-            this.WriteLine(StupidServer.HOST_NEW_GAME_COMMAND + " " + serverName + " " + key.ToString());
-            return Int32.Parse(ReadLine());
+            String[] response = this.WriteLine(StupidServer.HOST_NEW_GAME_COMMAND + " " + serverName + " " + key.ToString());
+            if (response.Length == 1)
+            {
+                return 0;
+            }
+            else
+            {
+                return Int32.Parse(response[1]);
+            }
         }
 
         /// <summary>
@@ -114,9 +119,8 @@ namespace StupidBlackjackSln.Code
         /// <returns>True if join succeeded</returns>
         public bool JoinGameByID(int id)
         {
-            this.WriteLine(StupidServer.JOIN_GAME_BY_ID_COMMAND + " " + id);
-            String response = ReadLine();
-            return response.Equals(StupidServer.COMMAND_SUCCEEDED);
+            String[] response = this.WriteLine(StupidServer.JOIN_GAME_BY_ID_COMMAND + " " + id);
+            return response[0].Equals(StupidServer.COMMAND_SUCCEEDED);
         }
         
         /// <summary>
@@ -136,23 +140,6 @@ namespace StupidBlackjackSln.Code
             }
             return reading;
         }
-        
-        /*/// <summary>
-        /// Read an incoming string from the NetworkStream connection.
-        /// </summary>
-        /// <returns>The recieved String</returns>
-        private String RecieveString() {
-            //Protocol for recieving the correct size string.
-            int buffer_size = 40;
-            byte[] buffer = new byte[buffer_size];
-            netstream.Read(buffer, 0, buffer_size);
-            buffer_size = Int32.Parse(GetStringFromBytes(buffer));
-            buffer = new byte[buffer_size];
-
-            //Actually read in the string
-            netstream.Read(buffer, 0, buffer_size);
-            return GetStringFromBytes(buffer);
-        }*/
 
         /// <summary>
         /// Remove a previously hosted game from the matchmaking server.
@@ -162,19 +149,6 @@ namespace StupidBlackjackSln.Code
         {
             this.WriteLine(StupidServer.REMOVE_GAME_BY_ID_COMMAND + " " + id);
         }
-
-        /*/// <summary>
-        /// Send a string to the server to be interpreted as a command.
-        /// </summary>
-        /// <param name="s">String to send</param>
-        private void SendString(String s)
-        {
-            byte[] data = Encoding.ASCII.GetBytes(s);
-            byte[] data_size = Encoding.ASCII.GetBytes(s.Length.ToString());
-            netstream.Write(data_size, 0, data_size.Length);
-            Thread.Sleep(1000);
-            netstream.Write(data, 0, data.Length);
-        }*/
 
         /// <summary>
         /// Set IP address of server.
@@ -194,16 +168,17 @@ namespace StupidBlackjackSln.Code
             StupidConnector.port = port;
         }
         
-        ///
-        ///
-        ///
-        ///
-        ///
-        private void WriteLine(String toWrite)
+        /// <summary>
+        /// Write a String to the connection followed by a newline character, and get a response.
+        /// </summary>
+        /// <param name="toWrite">The String to send</param>
+        /// <returns>The Server's response split by spaces</returns>
+        private String[] WriteLine(String toWrite)
         {
             byte[] data = Encoding.ASCII.GetBytes(toWrite.Trim());
             client.GetStream().Write(data, 0, data.Length);
             client.GetStream().Write(new byte[] {StupidServer.NEWLINE}, 0, 1);
+            return this.ReadLine().Trim().Split(' ');
         }
     }
 }

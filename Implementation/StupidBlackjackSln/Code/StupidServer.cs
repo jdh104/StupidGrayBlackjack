@@ -23,8 +23,10 @@ namespace StupidBlackjackSln.Code
         public static readonly int DEFAULT_PORT = 61537;
         public static readonly String DEFAULT_DOMAIN = "173.217.233.48";
         public static readonly int MAX_COMMAND_LENGTH = 64;
-        public static readonly String COMMAND_SUCCEEDED = "1";
-        public static readonly String COMMAND_FAILED = "2";
+        public static readonly String COMMAND_SUCCEEDED = "0";
+        public static readonly String COMMAND_UNRECOGNIZED = "1";
+        public static readonly String COMMAND_SYNTAX_ERROR = "2";
+        public static readonly String COMMAND_FAILED = "3";
         public static readonly String FETCH_COMMAND = "f";
         public static readonly String HOST_NEW_GAME_COMMAND = "h";
         public static readonly String JOIN_GAME_BY_ID_COMMAND = "j";
@@ -129,8 +131,8 @@ namespace StupidBlackjackSln.Code
         /// Disambiguate a recieved command and perform desired operation.
         /// </summary>
         /// <param name="cmd">The command string to process</param>
-        /// <returns>True if command was recognized, else false</returns>
-        private bool InterpretCommand(String cmd, TcpClient sender)
+        /// <returns>The response to be sent back to the client</returns>
+        private String InterpretCommand(String cmd, TcpClient sender)
         {
             String[] args = cmd.Trim().Split(' ');
             String c = args[0];
@@ -141,8 +143,7 @@ namespace StupidBlackjackSln.Code
                 {
                     ToSend += (game.ToString() + ";");
                 }
-                this.WriteLine(sender, ToSend);
-                return true;
+                return COMMAND_SUCCEEDED + " " + ToSend;
             }
             else if (c.Equals(HOST_NEW_GAME_COMMAND))
             {
@@ -155,23 +156,20 @@ namespace StupidBlackjackSln.Code
                 }
                 catch (Exception)
                 {
-                    this.WriteLine(sender, "0");
-                    return false;
+                    return COMMAND_SYNTAX_ERROR;
                 }
-                GameRep newGame = new GameRep(new_game_name, key);
                 lock (games)
                 {
                     foreach (GameRep game in games)
                     {
                         if (game.name.Equals(new_game_name))
                         {
-                            this.WriteLine(sender, "0");
-                            return false;
+                            return COMMAND_FAILED;
                         }
                     }
+                    GameRep newGame = new GameRep(new_game_name, key);
                     games.Add(newGame);
-                    this.WriteLine(sender, newGame.id.ToString());
-                    return true;
+                    return COMMAND_SUCCEEDED + " " + newGame.id.ToString();
                 }
             }
             else if (c.Equals(JOIN_GAME_BY_ID_COMMAND))
@@ -184,7 +182,7 @@ namespace StupidBlackjackSln.Code
                 }
                 catch (Exception)
                 {
-                    return false;
+                    return COMMAND_SYNTAX_ERROR;
                 }
                 lock (games)
                 {
@@ -193,11 +191,11 @@ namespace StupidBlackjackSln.Code
                         if (game.id == id && !game.started)
                         {
                             game.AddClient(sender);
-                            return true;
+                            return COMMAND_SUCCEEDED + " " + game.population.ToString();
                         }
                     }
                 }
-                return false;
+                return COMMAND_FAILED;
             }
             else if (c.Equals(REMOVE_GAME_BY_ID_COMMAND))
             {
@@ -209,7 +207,7 @@ namespace StupidBlackjackSln.Code
                 }
                 catch (Exception)
                 {
-                    return false;
+                    return COMMAND_SYNTAX_ERROR;
                 }
                 lock (games)
                 {
@@ -219,19 +217,20 @@ namespace StupidBlackjackSln.Code
                         if (game.id == id && game.key == key)
                         {
                             games.RemoveAt(i);
-                            return true;
+                            return COMMAND_SUCCEEDED;
                         }
                     }
                 }
-                return false;
+                return COMMAND_FAILED;
             }
             else if (c.Equals(START_GAME_BY_ID_COMMAND))
             {
-                return true;
+                // TODO
+                return COMMAND_UNRECOGNIZED;
             }
             else
             {
-                return false; //Command unrecognized
+                return COMMAND_UNRECOGNIZED;
             }
         }
 
@@ -285,10 +284,10 @@ namespace StupidBlackjackSln.Code
         }
 
         /// <summary>
-        ///
+        /// Read in a line from a client's netstream.
         /// </summary>
-        /// <param name="client"></param>
-        /// <returns></returns>
+        /// <param name="client">The TcpClient to read from</param>
+        /// <returns>The String read</returns>
         private String ReadLine(TcpClient client)
         {
             byte[] buffer = new byte[1];
@@ -302,29 +301,10 @@ namespace StupidBlackjackSln.Code
             return reading;
         }
 
-        /*/// <summary>
-        /// Read an incoming string from the NetworkStream connection.
-        /// </summary>
-        /// <returns>The recieved String</returns>
-        private String RecieveString(TcpClient client)
-        {
-            //Protocol for recieving the correct size string.
-            int buffer_size = 40;
-            byte[] buffer = new byte[buffer_size];
-            client.GetStream().Read(buffer, 0, buffer_size);
-            buffer_size = Int32.Parse(Encoding.ASCII.GetString(buffer, 0, buffer.Length));
-            Int32.Parse(this.ReadLine(client));
-            buffer = new byte[buffer_size];
-
-            //Actually read in the string
-            client.GetStream().Read(buffer, 0, buffer_size);
-            return Encoding.ASCII.GetString(buffer, 0, buffer.Length);
-        }*/
-
         /// <summary>
-        /// Bind to port and begin accepting clients.
+        /// Bind to the server's port and start accepting and listening to clients.
         /// </summary>
-        /// <returns>itself (for chaining)</returns>
+        /// <returns>this (for chaining purposes)</returns>
         public StupidServer Start()
         {
             try
@@ -344,25 +324,11 @@ namespace StupidBlackjackSln.Code
             return this;
         }
 
-        /*/// <summary>
-        /// Send a string to a client.
+        /// <summary>
+        /// Write a string to a client's netstream followed by the newline character.
         /// </summary>
-        /// <param name="client">TcpClient object to send to</param>
-        /// <param name="s">String to send</param>
-        private void SendString(TcpClient client, String s)
-        {
-            byte[] data = Encoding.ASCII.GetBytes(s);
-            byte[] data_size = Encoding.ASCII.GetBytes(s.Length.ToString());
-            client.GetStream().Write(data_size, 0, data_size.Length);
-            Thread.Sleep(1000);
-            client.GetStream().Write(data, 0, data.Length);
-        }*/
-
-        ///
-        ///
-        ///
-        ///
-        ///
+        /// <param name="client">The TcpClient object to send to</param>
+        /// <param name="toWrite">The String to be written</param>
         private void WriteLine(TcpClient client, String toWrite)
         {
             byte[] data = Encoding.ASCII.GetBytes(toWrite.Trim());
@@ -375,7 +341,6 @@ namespace StupidBlackjackSln.Code
         /// </summary>
         private class GameRep
         {
-
             private static int nextID = 1;
             private ArrayList clients = new ArrayList(); // <TcpClient>
             public bool started = false;
@@ -394,6 +359,7 @@ namespace StupidBlackjackSln.Code
             public void AddClient(TcpClient NewClient)
             {
                 clients.Add(NewClient);
+                population++;
             }
 
             public override string ToString()
