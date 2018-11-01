@@ -76,7 +76,15 @@ namespace StupidBlackjackSln.Code
         {
             this.WriteLine(StupidServer.FETCH_COMMAND);
             String[] list = ReadLine().Split(';');
-            return new List<string>(list).GetRange(0, list.Length - 1).ToArray(); // Don't return the empty string at the end
+            if (list.Length == 1)
+            {
+                return null;
+            }
+            else
+            {
+                // Don't return the empty string at the end
+                return new List<string>(list).GetRange(0, list.Length - 1).ToArray();
+            }
         }
 
         /// <summary>
