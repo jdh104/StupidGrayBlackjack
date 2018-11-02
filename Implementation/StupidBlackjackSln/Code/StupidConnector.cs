@@ -67,6 +67,12 @@ namespace StupidBlackjackSln.Code
             return Encoding.ASCII.GetString(b, 0, b.Length);
         }
 
+        public bool HasResponse()
+        {
+            //return client.
+            return false;
+        }
+
         /// <summary>
         /// Fetch a list of the games currently being hosted on the matchmaking server.
         /// </summary>
