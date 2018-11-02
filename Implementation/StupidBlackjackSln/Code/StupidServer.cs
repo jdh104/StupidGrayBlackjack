@@ -29,13 +29,13 @@ namespace StupidBlackjackSln.Code
         public static readonly String COMMAND_UNRECOGNIZED = "1";
         public static readonly String COMMAND_SYNTAX_ERROR = "2";
         public static readonly String COMMAND_FAILED = "3";
-        public static readonly String FETCH_COMMAND = "f";
-        public static readonly String GET_GAME_NAME_BY_ID_COMMAND = "n";
-        public static readonly String GET_GAME_POP_BY_ID_COMMAND = "p";
-        public static readonly String HOST_NEW_GAME_COMMAND = "h";
-        public static readonly String JOIN_GAME_BY_ID_COMMAND = "j";
-        public static readonly String REMOVE_GAME_BY_ID_COMMAND = "r";
-        public static readonly String START_GAME_BY_ID_COMMAND = "s";
+        public static readonly String FETCH_COMMAND = "FETCH";
+        public static readonly String GET_GAME_NAME_BY_ID_COMMAND = "GNAME";
+        public static readonly String GET_GAME_POP_BY_ID_COMMAND = "GPOP";
+        public static readonly String HOST_NEW_GAME_COMMAND = "HOST";
+        public static readonly String JOIN_GAME_BY_ID_COMMAND = "JOIN";
+        public static readonly String REMOVE_GAME_BY_ID_COMMAND = "REMOVE";
+        public static readonly String START_GAME_BY_ID_COMMAND = "START";
         public static readonly byte NEWLINE = Encoding.ASCII.GetBytes("\n")[0];
 
         private System.Windows.Forms.TextBox outputbox;
@@ -180,7 +180,7 @@ namespace StupidBlackjackSln.Code
         {
             lock (outputbox)
             {
-                this.OutputToForm("Server: " + ip + ":" + port + "/>" + cmd);
+                this.OutputToForm("s" + ip + ":" + port + "/>" + cmd);
 
                 String[] args = cmd.Trim().Split(' ');
                 String c = args[0];
