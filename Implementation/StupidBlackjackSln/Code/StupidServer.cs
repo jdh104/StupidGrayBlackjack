@@ -180,7 +180,7 @@ namespace StupidBlackjackSln.Code
         {
             lock (outputbox)
             {
-                this.OutputToForm(">>> " + cmd);
+                this.OutputToForm("Server: " + ip + ":" + port + "/>" + cmd);
 
                 String[] args = cmd.Trim().Split(' ');
                 String c = args[0];
