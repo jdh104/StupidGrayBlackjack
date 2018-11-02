@@ -167,6 +167,12 @@ namespace StupidBlackjackSln.Code
             String[] response = this.WriteLine(StupidServer.JOIN_GAME_BY_ID_COMMAND + " " + id + " " + key);
             return response[0].Equals(StupidServer.COMMAND_SUCCEEDED);
         }
+
+        public bool LeaveGameByID(int id, int key)
+        {
+            String[] response = this.WriteLine(StupidServer.REMOVE_PLAYER_FROM_GAME_COMMAND + " " + id + " " + key);
+            return response[0].Equals(StupidServer.COMMAND_SUCCEEDED);
+        }
         
         /// <summary>
         /// Read from StupidServer until a newline is reached
