@@ -136,11 +136,13 @@ namespace StupidBlackjackSln
 
 
             // If there are no games, do not allow user to select anything in ListBox
-            // Add "(none)" so user knows there are no games being hosted
-            if (games == null && lstBoxGames.Items.Count.Equals(0))
+            // Add "(none)" so user knows there are no games being hosted, if it's not already there
+            if (games == null)
             {
                 lstBoxGames.SelectionMode = SelectionMode.None;
-                lstBoxGames.Items.Add("(none)");
+
+                if (lstBoxGames.Items.Count == 0)
+                    lstBoxGames.Items.Add("(none)");
             }
 
             // Since there are games, add them to ListBox
