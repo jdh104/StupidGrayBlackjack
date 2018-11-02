@@ -180,7 +180,6 @@ namespace StupidBlackjackSln.Code
         {
             lock (outputbox)
             {
-                this.OutputToForm("Recieved Command:");
                 this.OutputToForm(">>> " + cmd);
 
                 String[] args = cmd.Trim().Split(' ');
