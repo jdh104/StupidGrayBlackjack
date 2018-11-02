@@ -103,6 +103,16 @@ namespace StupidBlackjackSln.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap _10_win_icon {
+            get {
+                object obj = ResourceManager.GetObject("10_win_icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap _2_of_clubs {
             get {
                 object obj = ResourceManager.GetObject("_2_of_clubs", resourceCulture);
@@ -136,6 +146,16 @@ namespace StupidBlackjackSln.Properties {
         internal static System.Drawing.Bitmap _2_of_spades {
             get {
                 object obj = ResourceManager.GetObject("_2_of_spades", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap _25_win_icon {
+            get {
+                object obj = ResourceManager.GetObject("25_win_icon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -646,6 +666,16 @@ namespace StupidBlackjackSln.Properties {
         internal static System.Drawing.Bitmap king_of_spades2 {
             get {
                 object obj = ResourceManager.GetObject("king_of_spades2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap one_win_icon {
+            get {
+                object obj = ResourceManager.GetObject("one_win_icon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
