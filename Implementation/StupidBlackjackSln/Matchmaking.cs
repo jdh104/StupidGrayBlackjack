@@ -1,4 +1,4 @@
-﻿//Classmaster: Madelyn
+﻿// Classmaster: Madelyn
 
 using System;
 using System.Collections.Generic;
@@ -62,7 +62,7 @@ namespace StupidBlackjackSln
 
         private void lstBoxGames_SelectedIndexChanged_1(object sender, EventArgs e)
         {
-
+            radioBtnExistingGame.Select();
         }
 
         private void Matchmaking_FormClosed(object sender, FormClosedEventArgs e)
