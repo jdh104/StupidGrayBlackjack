@@ -55,5 +55,11 @@ namespace StupidBlackjackSln
             Program.CloseStupidConnector();
             this.Close();
         }
+
+        private void Host_WaitingForConnection_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Program.GetConnector().RemoveHostedGame(id);
+            this.Close();
+        }
     }
 }

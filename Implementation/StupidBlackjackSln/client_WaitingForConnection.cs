@@ -20,12 +20,6 @@ namespace StupidBlackjackSln
             InitializeComponent();
         }
 
-        private void BtnLeaveGame_Click(object sender, EventArgs e)
-        {
-            Program.CloseStupidConnector();
-            this.Close();
-        }
-
         private int GetID()
         {
             return id;
@@ -36,5 +30,21 @@ namespace StupidBlackjackSln
             this.id = id;
         }
 
+        private void BtnLeaveGame_Click(object sender, EventArgs e)
+        {
+            Program.CloseStupidConnector();
+            this.Close();
+        }
+
+        private void Client_WaitingForConnection_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Client_WaitingForConnection_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            // TODO Program.UnjoinGameByID(id);
+            this.Close();
+        }
     }
 }

@@ -96,7 +96,8 @@
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.lblNumPlayers);
             this.Name = "Host_WaitingForConnection";
-            this.Text = "waitingForConnectionDialog";
+            this.Text = "New Online Game";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Host_WaitingForConnection_FormClosed);
             this.Load += new System.EventHandler(this.Host_WaitingForConnection_Load);
             this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
