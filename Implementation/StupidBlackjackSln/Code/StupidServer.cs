@@ -34,7 +34,8 @@ namespace StupidBlackjackSln.Code
         public static readonly String GET_GAME_POP_BY_ID_COMMAND = "GPOP";
         public static readonly String HOST_NEW_GAME_COMMAND = "HOST";
         public static readonly String JOIN_GAME_BY_ID_COMMAND = "JOIN";
-        public static readonly String REMOVE_GAME_BY_ID_COMMAND = "REMOVE";
+        public static readonly String REMOVE_GAME_BY_ID_COMMAND = "RGAME";
+        public static readonly String REMOVE_PLAYER_FROM_GAME_COMMAND = "RPLAYER";
         public static readonly String START_GAME_BY_ID_COMMAND = "START";
         public static readonly byte NEWLINE = Encoding.ASCII.GetBytes("\n")[0];
 
@@ -285,11 +286,11 @@ namespace StupidBlackjackSln.Code
                 }
                 else if (c.Equals(JOIN_GAME_BY_ID_COMMAND))
                 {
-                    // TODO
-                    int id;
+                    int id, key;
                     try
                     {
                         id = Int32.Parse(args[1]);
+                        key = Int32.Parse(args[2]);
                     }
                     catch (Exception)
                     {
@@ -304,7 +305,7 @@ namespace StupidBlackjackSln.Code
                             if (game.id == id && !game.started)
                             {
                                 OutputToForm("Found requested game, linking");
-                                game.AddClient(sender);
+                                game.AddClient(key, sender);
                                 return COMMAND_SUCCEEDED + " " + game.population.ToString();
                             }
                         }
@@ -341,6 +342,44 @@ namespace StupidBlackjackSln.Code
                     }
                     OutputToForm("Failed to remove game: Game " + id.ToString() + " doesn't exist or key does not match");
                     return COMMAND_FAILED;
+                }
+                else if (c.Equals(REMOVE_PLAYER_FROM_GAME_COMMAND))
+                {
+                    int id, key;
+                    try
+                    {
+                        id = Int32.Parse(args[1]);
+                        key = Int32.Parse(args[2]);
+                    }
+                    catch (Exception)
+                    {
+                        OutputToForm("Syntax Error: Failed to parse id and key");
+                        return COMMAND_SYNTAX_ERROR;
+                    }
+                    lock (games)
+                    {
+                        OutputToForm("Locked Resources: Searching for game: " + id);
+                        foreach (GameRep game in games)
+                        {
+                            if (game.id == id)
+                            {
+                                OutputToForm("Found game " + id);
+                                if (game.ContainsClientByKey(key))
+                                {
+                                    OutputToForm("Removing client with key: " + key);
+                                    game.RemoveClientByKey(key);
+                                    return COMMAND_SUCCEEDED;
+                                }
+                                else
+                                {
+                                    OutputToForm("Client" + key + " not found in game dict");
+                                    return COMMAND_FAILED;
+                                }
+                            }
+                        }
+                        OutputToForm("Failed to find game, responded with COMMAND_FAILED");
+                        return COMMAND_FAILED;
+                    }
                 }
                 else if (c.Equals(START_GAME_BY_ID_COMMAND))
                 {
@@ -506,7 +545,7 @@ namespace StupidBlackjackSln.Code
         private class GameRep
         {
             public static int nextID;
-            private ArrayList clients = new ArrayList(); // <TcpClient>
+            private Dictionary<int, TcpClient> client_dict = new Dictionary<int, TcpClient>(); // <TcpClient>
             public bool started = false;
             public int key;
             public int id;
@@ -520,10 +559,20 @@ namespace StupidBlackjackSln.Code
                 key = _key;
             }
 
-            public void AddClient(TcpClient NewClient)
+            public void AddClient(int key, TcpClient NewClient)
             {
-                clients.Add(NewClient);
+                client_dict.Add(key, NewClient);
                 population++;
+            }
+
+            public bool ContainsClientByKey(int key)
+            {
+                return client_dict.ContainsKey(key);
+            }
+
+            public void RemoveClientByKey(int key)
+            {
+                client_dict.Remove(key);
             }
 
             public override string ToString()

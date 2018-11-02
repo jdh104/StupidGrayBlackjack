@@ -67,10 +67,13 @@ namespace StupidBlackjackSln.Code
             return Encoding.ASCII.GetString(b, 0, b.Length);
         }
 
+        /// <summary>
+        /// Check if StupidConnector has a line to read.
+        /// </summary>
+        /// <returns>true if pending, false otherwise</returns>
         public bool HasResponse()
         {
-            //return client.
-            return false;
+            return client.GetStream().DataAvailable;
         }
 
         /// <summary>
@@ -159,9 +162,9 @@ namespace StupidBlackjackSln.Code
         /// </summary>
         /// <param name="id">id of game to join</param>
         /// <returns>True if join succeeded</returns>
-        public bool JoinGameByID(int id)
+        public bool JoinGameByID(int id, int key)
         {
-            String[] response = this.WriteLine(StupidServer.JOIN_GAME_BY_ID_COMMAND + " " + id);
+            String[] response = this.WriteLine(StupidServer.JOIN_GAME_BY_ID_COMMAND + " " + id + " " + key);
             return response[0].Equals(StupidServer.COMMAND_SUCCEEDED);
         }
         
