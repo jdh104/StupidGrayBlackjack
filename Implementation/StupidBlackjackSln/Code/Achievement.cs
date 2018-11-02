@@ -14,12 +14,16 @@ namespace StupidBlackjackSln.Code
         private String name;
         private String description;
         private Bitmap icon;
+        //Time that the achievement was received
+        private DateTime timeEarned;
 
         public Achievement(String name, String description, String iconName)
         {
-            setName(name);
-            setDescription(description);
-            //setIcon();
+            this.name = name;
+            this.description = description;
+            //setIcon
+            //Saves the current time as timeEarned
+            timeEarned = DateTime.Now;
         }
 
         public Bitmap getIcon()
@@ -27,19 +31,9 @@ namespace StupidBlackjackSln.Code
             return icon;
         }
 
-        public void setIcon(Bitmap newIcon)
-        {
-            icon = newIcon;
-        }
-
         public String getName()
         {
             return name;
-        }
-
-        public void setName(String newName)
-        {
-            name = newName;
         }
 
         public String getDescription()
@@ -47,11 +41,15 @@ namespace StupidBlackjackSln.Code
             return description;
         }
 
-        public void setDescription(String newDescription)
+        public DateTime getTimeEarned()
         {
-            name = newDescription;
+            return timeEarned;
         }
 
-        
+        //Returns the time earned in a readable format
+        public String getReadableTime()
+        {
+            return timeEarned.ToString();
+        }
     }
 }

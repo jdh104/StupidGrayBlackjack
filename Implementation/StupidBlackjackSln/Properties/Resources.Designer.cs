@@ -63,6 +63,16 @@ namespace StupidBlackjackSln.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap _1_win_icon {
+            get {
+                object obj = ResourceManager.GetObject("_1_win_icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap _10_of_clubs {
             get {
                 object obj = ResourceManager.GetObject("_10_of_clubs", resourceCulture);
@@ -105,7 +115,17 @@ namespace StupidBlackjackSln.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap _10_win_icon {
             get {
-                object obj = ResourceManager.GetObject("10_win_icon", resourceCulture);
+                object obj = ResourceManager.GetObject("_10_win_icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap _100_win_icon {
+            get {
+                object obj = ResourceManager.GetObject("_100_win_icon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -155,7 +175,7 @@ namespace StupidBlackjackSln.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap _25_win_icon {
             get {
-                object obj = ResourceManager.GetObject("25_win_icon", resourceCulture);
+                object obj = ResourceManager.GetObject("_25_win_icon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -503,9 +523,29 @@ namespace StupidBlackjackSln.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap blackjack_icon {
+            get {
+                object obj = ResourceManager.GetObject("blackjack_icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap greenfelt {
             get {
                 object obj = ResourceManager.GetObject("greenfelt", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap instant_win_icon {
+            get {
+                object obj = ResourceManager.GetObject("instant_win_icon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -673,9 +713,9 @@ namespace StupidBlackjackSln.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap one_win_icon {
+        internal static System.Drawing.Bitmap online_win_icon {
             get {
-                object obj = ResourceManager.GetObject("one_win_icon", resourceCulture);
+                object obj = ResourceManager.GetObject("online_win_icon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

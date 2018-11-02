@@ -136,9 +136,6 @@
   <data name="king_of_diamonds" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\king_of_diamonds.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="one_win_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\one_win_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="_5_of_diamonds" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\5_of_diamonds.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -286,7 +283,7 @@
   <data name="_3_of_clubs" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\3_of_clubs.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="10_win_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="_10_win_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\10_win_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="jack_of_clubs2" type="System.Resources.ResXFileRef, System.Windows.Forms">
@@ -331,7 +328,22 @@
   <data name="_10_of_hearts" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\10_of_hearts.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="25_win_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="_25_win_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\25_win_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="blackjack_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\blackjack_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="instant_win_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\instant_win_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="online_win_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\online_win_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_100_win_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\100_win_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_1_win_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\1_win_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>
