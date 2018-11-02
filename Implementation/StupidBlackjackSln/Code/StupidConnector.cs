@@ -182,7 +182,7 @@ namespace StupidBlackjackSln.Code
         /// <param name="id">The id of the game to remove</param>
         public void RemoveHostedGame(int id)
         {
-            this.WriteLine(StupidServer.REMOVE_GAME_BY_ID_COMMAND + " " + id);
+            this.WriteLine(StupidServer.REMOVE_GAME_BY_ID_COMMAND + " " + id + " " + key);
         }
 
         /// <summary>
