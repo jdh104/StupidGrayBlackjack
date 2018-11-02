@@ -93,7 +93,7 @@ namespace StupidBlackjackSln
                 }
 
                 else
-                { 
+                {
                     id = Program.GetConnector().HostNewGame(newGameName.Text);
 
                     if (id == 0)
@@ -110,7 +110,18 @@ namespace StupidBlackjackSln
 
             if (radioBtnExistingGame.Checked)
             {
-                // TODO
+                try
+                {
+                    String game = lstBoxGames.SelectedItem.ToString();
+                    id = Int32.Parse(game.Split(':')[0]);
+
+                    new Client_WaitingForConnection(id).ShowDialog();
+                }
+                catch
+                {
+                    // possible TODO
+                }
+
             }
         }
 
@@ -153,6 +164,6 @@ namespace StupidBlackjackSln
         }
 
 
-      
+
     }
 }

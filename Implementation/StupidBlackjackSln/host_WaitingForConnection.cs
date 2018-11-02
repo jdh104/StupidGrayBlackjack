@@ -20,12 +20,6 @@ namespace StupidBlackjackSln
             SetID(id);
         }
 
-        private void BtnLeaveGame_Click(object sender, EventArgs e)
-        {
-            Program.CloseStupidConnector();
-            this.Close();
-        }
-
         private int GetID()
         {
             return id;
@@ -34,7 +28,7 @@ namespace StupidBlackjackSln
         private void Host_WaitingForConnection_Load(object sender, EventArgs e)
         {
             int? numPlayers = Program.GetConnector().GetGamePopulationByID(id);
-            String gameName = "";
+            String gameName = Program.GetConnector().GetGameNameByID(id);
 
             if (numPlayers == 0)
             {
@@ -56,5 +50,10 @@ namespace StupidBlackjackSln
             this.id = id;
         }
 
+        private void BtnLeaveGame_Click(object sender, EventArgs e)
+        {
+            Program.CloseStupidConnector();
+            this.Close();
+        }
     }
 }

@@ -12,20 +12,18 @@ namespace StupidBlackjackSln
 {
     public partial class Client_WaitingForConnection : Form
     {
+
+
         public Client_WaitingForConnection()
         {
             InitializeComponent();
         }
 
-        private void btnLeaveGame_Click(object sender, EventArgs e)
+        private void BtnLeaveGame_Click(object sender, EventArgs e)
         {
             Program.CloseStupidConnector();
             this.Close();
         }
 
-        private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
     }
 }

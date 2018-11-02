@@ -42,20 +42,21 @@
             this.panel1.BackColor = System.Drawing.Color.Transparent;
             this.panel1.Controls.Add(this.btnLeaveGame);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(0, 339);
-            this.panel1.Margin = new System.Windows.Forms.Padding(10, 0, 10, 10);
+            this.panel1.Location = new System.Drawing.Point(0, 319);
+            this.panel1.Margin = new System.Windows.Forms.Padding(10);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(793, 41);
+            this.panel1.Padding = new System.Windows.Forms.Padding(10, 0, 10, 10);
+            this.panel1.Size = new System.Drawing.Size(793, 61);
             this.panel1.TabIndex = 3;
             // 
             // btnLeaveGame
             // 
             this.btnLeaveGame.BackColor = System.Drawing.Color.Gainsboro;
             this.btnLeaveGame.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btnLeaveGame.Location = new System.Drawing.Point(0, 0);
+            this.btnLeaveGame.Location = new System.Drawing.Point(10, 0);
             this.btnLeaveGame.Margin = new System.Windows.Forms.Padding(0);
             this.btnLeaveGame.Name = "btnLeaveGame";
-            this.btnLeaveGame.Size = new System.Drawing.Size(166, 41);
+            this.btnLeaveGame.Size = new System.Drawing.Size(166, 51);
             this.btnLeaveGame.TabIndex = 1;
             this.btnLeaveGame.Text = "Leave game";
             this.btnLeaveGame.UseVisualStyleBackColor = false;
@@ -70,12 +71,12 @@
             this.tableLayoutPanel1.Controls.Add(this.label1, 0, 0);
             this.tableLayoutPanel1.GrowStyle = System.Windows.Forms.TableLayoutPanelGrowStyle.FixedSize;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(20, 20, 20, 3);
+            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(10, 20, 20, 3);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(793, 339);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(793, 306);
             this.tableLayoutPanel1.TabIndex = 4;
             // 
             // label1
@@ -87,7 +88,7 @@
             this.label1.ForeColor = System.Drawing.Color.Gainsboro;
             this.label1.Location = new System.Drawing.Point(3, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(787, 169);
+            this.label1.Size = new System.Drawing.Size(787, 153);
             this.label1.TabIndex = 2;
             this.label1.Text = "Waiting for the host to start game...";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -100,7 +101,7 @@
             this.lblNumPlayers.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lblNumPlayers.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblNumPlayers.ForeColor = System.Drawing.Color.Gainsboro;
-            this.lblNumPlayers.Location = new System.Drawing.Point(157, 234);
+            this.lblNumPlayers.Location = new System.Drawing.Point(157, 210);
             this.lblNumPlayers.Name = "lblNumPlayers";
             this.lblNumPlayers.Size = new System.Drawing.Size(479, 39);
             this.lblNumPlayers.TabIndex = 3;

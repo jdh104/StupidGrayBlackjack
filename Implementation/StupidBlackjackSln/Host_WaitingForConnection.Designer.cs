@@ -30,8 +30,8 @@
         {
             this.lblNumPlayers = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.btnHostStartGame = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.BtnLeaveGame = new System.Windows.Forms.Button();
+            this.BtnHostStartGame = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -54,8 +54,8 @@
             // 
             this.panel1.BackColor = System.Drawing.Color.Transparent;
             this.panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.panel1.Controls.Add(this.button1);
-            this.panel1.Controls.Add(this.btnHostStartGame);
+            this.panel1.Controls.Add(this.BtnLeaveGame);
+            this.panel1.Controls.Add(this.BtnHostStartGame);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel1.Location = new System.Drawing.Point(0, 378);
             this.panel1.Name = "panel1";
@@ -63,27 +63,29 @@
             this.panel1.Size = new System.Drawing.Size(889, 49);
             this.panel1.TabIndex = 7;
             // 
-            // btnHostStartGame
+            // BtnLeaveGame
             // 
-            this.btnHostStartGame.BackColor = System.Drawing.Color.Gainsboro;
-            this.btnHostStartGame.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnHostStartGame.Location = new System.Drawing.Point(713, 0);
-            this.btnHostStartGame.Name = "btnHostStartGame";
-            this.btnHostStartGame.Size = new System.Drawing.Size(166, 39);
-            this.btnHostStartGame.TabIndex = 7;
-            this.btnHostStartGame.Text = "Start game";
-            this.btnHostStartGame.UseVisualStyleBackColor = false;
+            this.BtnLeaveGame.BackColor = System.Drawing.Color.Gainsboro;
+            this.BtnLeaveGame.Dock = System.Windows.Forms.DockStyle.Left;
+            this.BtnLeaveGame.Location = new System.Drawing.Point(10, 0);
+            this.BtnLeaveGame.Name = "BtnLeaveGame";
+            this.BtnLeaveGame.Size = new System.Drawing.Size(166, 39);
+            this.BtnLeaveGame.TabIndex = 8;
+            this.BtnLeaveGame.Text = "Leave game";
+            this.BtnLeaveGame.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.BtnLeaveGame.UseVisualStyleBackColor = false;
+            this.BtnLeaveGame.Click += new System.EventHandler(this.BtnLeaveGame_Click);
             // 
-            // button1
+            // BtnHostStartGame
             // 
-            this.button1.BackColor = System.Drawing.Color.Gainsboro;
-            this.button1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.button1.Location = new System.Drawing.Point(10, 0);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(166, 39);
-            this.button1.TabIndex = 8;
-            this.button1.Text = "Leave game";
-            this.button1.UseVisualStyleBackColor = false;
+            this.BtnHostStartGame.BackColor = System.Drawing.Color.Gainsboro;
+            this.BtnHostStartGame.Dock = System.Windows.Forms.DockStyle.Right;
+            this.BtnHostStartGame.Location = new System.Drawing.Point(713, 0);
+            this.BtnHostStartGame.Name = "BtnHostStartGame";
+            this.BtnHostStartGame.Size = new System.Drawing.Size(166, 39);
+            this.BtnHostStartGame.TabIndex = 7;
+            this.BtnHostStartGame.Text = "Start game";
+            this.BtnHostStartGame.UseVisualStyleBackColor = false;
             // 
             // Host_WaitingForConnection
             // 
@@ -105,7 +107,7 @@
 
         private System.Windows.Forms.Label lblNumPlayers;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button btnHostStartGame;
+        private System.Windows.Forms.Button BtnLeaveGame;
+        private System.Windows.Forms.Button BtnHostStartGame;
     }
 }
