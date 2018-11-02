@@ -52,14 +52,12 @@ namespace StupidBlackjackSln
 
         private void BtnLeaveGame_Click(object sender, EventArgs e)
         {
-            Program.CloseStupidConnector();
             this.Close();
         }
 
         private void Host_WaitingForConnection_FormClosed(object sender, FormClosedEventArgs e)
         {
             Program.GetConnector().RemoveHostedGame(id);
-            this.Close();
         }
     }
 }
