@@ -12,10 +12,11 @@ namespace StupidBlackjackSln
 {
     public partial class Client_WaitingForConnection : Form
     {
+        private int id;
 
-
-        public Client_WaitingForConnection()
+        public Client_WaitingForConnection(int id)
         {
+            SetID(id);
             InitializeComponent();
         }
 
@@ -23,6 +24,16 @@ namespace StupidBlackjackSln
         {
             Program.CloseStupidConnector();
             this.Close();
+        }
+
+        private int GetID()
+        {
+            return id;
+        }
+
+        private void SetID(int id)
+        {
+            this.id = id;
         }
 
     }
