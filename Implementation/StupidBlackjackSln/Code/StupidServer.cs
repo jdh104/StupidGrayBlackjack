@@ -41,7 +41,7 @@ namespace StupidBlackjackSln.Code
         private System.Windows.Forms.TextBox outputbox;
         private bool started = false;
         private int port = DEFAULT_PORT;
-        private ArrayList clients;
+        private ArrayList clients = new ArrayList();
         private ArrayList games = new ArrayList();
         private ArrayList streams = new ArrayList();
         private TcpListener server;
@@ -55,7 +55,6 @@ namespace StupidBlackjackSln.Code
         {
             ip = IPAddress.Parse(GetLocalIPAddress());
             IPEndPoint ipLocalEndPoint = new IPEndPoint(ip, DEFAULT_PORT);
-            clients = new ArrayList();
             server = new TcpListener(ipLocalEndPoint);
             GameRep.nextID = 1;
             if (outputbox != null)
@@ -76,7 +75,6 @@ namespace StupidBlackjackSln.Code
             this.port = port;
             ip = IPAddress.Parse(GetLocalIPAddress());
             IPEndPoint ipLocalEndPoint = new IPEndPoint(ip, port);
-            clients = new ArrayList();
             server = new TcpListener(ipLocalEndPoint);
             GameRep.nextID = 1;
             if (outputbox != null)
