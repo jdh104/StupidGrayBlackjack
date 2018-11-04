@@ -99,5 +99,6 @@ namespace StupidBlackjackSln
                 timer1.Stop();        //ToDo
             }                        //This would end the player's turn and make them Stand.
         }
+
     }
 }

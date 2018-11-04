@@ -146,9 +146,8 @@
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(124, 90);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(108, 37);
+            this.label2.Size = new System.Drawing.Size(0, 37);
             this.label2.TabIndex = 9;
-            this.label2.Text = "label2";
             // 
             // timer1
             // 
