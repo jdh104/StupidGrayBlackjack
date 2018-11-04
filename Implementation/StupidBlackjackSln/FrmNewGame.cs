@@ -80,7 +80,7 @@ namespace StupidBlackjackSln
             Player.isTurn = false; 
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void buttonExit_Click(object sender, EventArgs e)
         {
             this.Close();
             //Get rid of connection to server
