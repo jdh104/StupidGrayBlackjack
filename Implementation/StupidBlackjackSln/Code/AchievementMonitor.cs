@@ -14,7 +14,7 @@ namespace StupidBlackjackSln.Code
         private List<Achievement> achievements = null;
         private int winCount = 0;
 
-        private AchievementMonitor()
+        public AchievementMonitor()
         {
             achievements = new List<Achievement>();
         }
