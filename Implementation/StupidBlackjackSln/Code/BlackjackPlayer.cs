@@ -8,6 +8,19 @@ namespace StupidBlackjackSln.Code
 {
     class BlackjackPlayer : Player
     {
+        private bool hasBusted = false;     //true if they go over 21
+        private bool hasWon = false;       // true if they win
+
+        public bool getBusted()
+        {
+            return hasBusted;
+        }
+
+        public bool getWon()
+        {
+            return hasWon;
+        }
+
         protected override void calcScore()
         {
             this.Score = 0;
