@@ -42,9 +42,14 @@ namespace StupidBlackjackSln
 
         }
 
+        /// <summary>
+        /// On form close, leave game.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Client_WaitingForConnection_FormClosed(object sender, FormClosedEventArgs e)
         {
-            // TODO Program.UnjoinGameByID(id);
+            Program.GetConnector().LeaveGameByID(id);
         }
     }
 }
