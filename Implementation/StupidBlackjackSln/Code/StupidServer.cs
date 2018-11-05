@@ -19,11 +19,9 @@ namespace StupidBlackjackSln.Code
     class StupidServer
     {
         delegate void StringDelegateReturningVoid(String s);
-
-        public static readonly int ID_SIZE_IN_BYTES = 32;
+        
         public static readonly int DEFAULT_PORT = 61537;
         public static readonly String DEFAULT_DOMAIN = "173.217.233.48";
-        public static readonly int MAX_COMMAND_LENGTH = 64;
         public static readonly String COMMAND_SUCCEEDED = "0";
         public static readonly String COMMAND_UNRECOGNIZED = "1";
         public static readonly String COMMAND_SYNTAX_ERROR = "2";
@@ -38,6 +36,7 @@ namespace StupidBlackjackSln.Code
         public static readonly String START_GAME_BY_ID_COMMAND = "START";
         public static readonly String UPDATE_GAME_CONNECTION_BROKEN = "U_BREAK";
         public static readonly String UPDATE_GAME_HAS_STARTED = "U_START";
+        public static readonly String UPDATE_PLAYER_JOINED = "U_JOINED";
         public static readonly byte NEWLINE = Encoding.ASCII.GetBytes("\n")[0];
 
         private System.Windows.Forms.TextBox outputbox;
@@ -286,6 +285,7 @@ namespace StupidBlackjackSln.Code
                         }
                         OutputToForm("Constructing New Game: " + new_game_name + " with key: " + key.ToString());
                         GameRep newGame = new GameRep(new_game_name, key);
+                        newGame.SetHost(sender);
                         games.Add(newGame);
                         return COMMAND_SUCCEEDED + " " + newGame.id.ToString();
                     }
@@ -312,6 +312,7 @@ namespace StupidBlackjackSln.Code
                             {
                                 OutputToForm("Found requested game, linking");
                                 game.AddClient(key, sender);
+                                this.WriteLine(game.GetHost(), UPDATE_PLAYER_JOINED);
                                 return COMMAND_SUCCEEDED + " " + game.population.ToString();
                             }
                         }
@@ -535,6 +536,14 @@ namespace StupidBlackjackSln.Code
             }
         }
 
+        private void PurgeDeadGames()
+        {
+            lock (games)
+            {
+                //foreach ()
+            }
+        }
+
         /// <summary>
         /// Read in a line from a client's netstream.
         /// </summary>
@@ -629,9 +638,19 @@ namespace StupidBlackjackSln.Code
                 return client_dict.Values.ToArray<TcpClient>();
             }
 
+            public TcpClient GetHost()
+            {
+                return client_dict[-1];
+            }
+
             public void RemoveClientByKey(int key)
             {
                 client_dict.Remove(key);
+            }
+
+            public void SetHost(TcpClient host)
+            {
+                client_dict.Add(-1, host);
             }
 
             public override string ToString()

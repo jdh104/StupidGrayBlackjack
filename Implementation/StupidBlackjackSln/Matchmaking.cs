@@ -85,6 +85,7 @@ namespace StupidBlackjackSln
         private void lstBoxGames_SelectedIndexChanged_1(object sender, EventArgs e)
         {
             radioBtnExistingGame.Select();
+            //elapsed.hours + ":" + elapsed.minutes + ":" + elapsed.seconds;
         }
 
         private void Matchmaking_FormClosed(object sender, FormClosedEventArgs e)
