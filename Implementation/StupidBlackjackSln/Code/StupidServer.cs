@@ -336,6 +336,11 @@ namespace StupidBlackjackSln.Code
                             {
                                 OutputToForm("Found game: " + id.ToString() + ", removing");
                                 games.RemoveAt(i);
+                                foreach (TcpClient cli in game.GetClientList())
+                                {
+                                    cli.GetStream().Close();
+                                    cli.Close();
+                                }
                                 return COMMAND_SUCCEEDED;
                             }
                         }
@@ -568,6 +573,12 @@ namespace StupidBlackjackSln.Code
             public bool ContainsClientByKey(int key)
             {
                 return client_dict.ContainsKey(key);
+            }
+
+            public TcpClient[] GetClientList()
+            {
+                return null;
+                //TODO
             }
 
             public void RemoveClientByKey(int key)
