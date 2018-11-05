@@ -26,28 +26,28 @@ namespace StupidBlackjackSln.Code
             timeEarned = DateTime.Now;
         }
 
-        public Bitmap getIcon()
+        public Bitmap GetIcon()
         {
             return icon;
         }
 
-        public String getName()
+        public String GetName()
         {
             return name;
         }
 
-        public String getDescription()
+        public String GetDescription()
         {
             return description;
         }
 
-        public DateTime getTimeEarned()
+        public DateTime GetTimeEarned()
         {
             return timeEarned;
         }
 
         //Returns the time earned in a readable format
-        public String getReadableTime()
+        public String GetReadableTime()
         {
             return timeEarned.ToString();
         }
