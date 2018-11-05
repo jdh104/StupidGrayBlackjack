@@ -162,13 +162,18 @@ namespace StupidBlackjackSln.Code
         /// </summary>
         /// <param name="id">id of game to join</param>
         /// <returns>True if join succeeded</returns>
-        public bool JoinGameByID(int id, int key)
+        public bool JoinGameByID(int id)
         {
             String[] response = this.WriteLine(StupidServer.JOIN_GAME_BY_ID_COMMAND + " " + id + " " + key);
             return response[0].Equals(StupidServer.COMMAND_SUCCEEDED);
         }
 
-        public bool LeaveGameByID(int id, int key)
+        /// <summary>
+        /// Remove the player from a particular hosted game.
+        /// </summary>
+        /// <param name="id">The id of the game to be removed from</param>
+        /// <returns>True if the server responds with COMMAND_SUCCEEDED, else false</returns>
+        public bool LeaveGameByID(int id)
         {
             String[] response = this.WriteLine(StupidServer.REMOVE_PLAYER_FROM_GAME_COMMAND + " " + id + " " + key);
             return response[0].Equals(StupidServer.COMMAND_SUCCEEDED);
