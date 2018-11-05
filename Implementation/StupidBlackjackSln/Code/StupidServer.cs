@@ -199,7 +199,10 @@ namespace StupidBlackjackSln.Code
                     String ToSend = "";
                     foreach (GameRep game in games)
                     {
-                        ToSend += (game.ToString() + ";");
+                        if (!game.started)
+                        {
+                            ToSend += (game.ToString() + ";");
+                        }
                     }
                     this.OutputToForm("Responded with:");
                     this.OutputToForm("COMMAND_SUCCEEDED " + ToSend);
@@ -429,7 +432,6 @@ namespace StupidBlackjackSln.Code
                         }
                         else
                         {
-                            games.Remove(gameToStart);
                             return COMMAND_SUCCEEDED;
                         }
                     }
@@ -502,7 +504,8 @@ namespace StupidBlackjackSln.Code
                 OutputToForm("Listener Active for client: " + GetIPAddressOf(c));
             }
 
-            while (true)
+            bool not_killed = true;
+            while (not_killed)
             {
                 try
                 {
@@ -511,8 +514,7 @@ namespace StupidBlackjackSln.Code
                 }
                 catch (System.IO.IOException)
                 {
-                    // We want to kill this thread
-                    return;
+                    not_killed = false;
                 }
             }
         }
