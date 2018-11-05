@@ -190,6 +190,7 @@ namespace StupidBlackjackSln.Code
                 String c = args[0];
                 if (c.Equals(FETCH_COMMAND))
                 {
+                    this.PurgeDeadGames();
                     if (games.Count == 0)
                     {
                         this.OutputToForm("Responded with COMMAND_FAILED");
@@ -536,11 +537,20 @@ namespace StupidBlackjackSln.Code
             }
         }
 
+        /// <summary>
+        /// Remove all games hosted by a dead connection
+        /// </summary>
         private void PurgeDeadGames()
         {
             lock (games)
             {
-                //foreach ()
+                foreach (GameRep game in games)
+                {
+                    if (!game.GetHost().Connected)
+                    {
+                        games.Remove(game);
+                    }
+                }
             }
         }
 
