@@ -28,10 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.lblNumPlayers = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.lbl_time = new System.Windows.Forms.Label();
             this.BtnLeaveGame = new System.Windows.Forms.Button();
             this.BtnHostStartGame = new System.Windows.Forms.Button();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.lbl_ConnectorUpdate = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -54,6 +58,7 @@
             // 
             this.panel1.BackColor = System.Drawing.Color.Transparent;
             this.panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.panel1.Controls.Add(this.lbl_time);
             this.panel1.Controls.Add(this.BtnLeaveGame);
             this.panel1.Controls.Add(this.BtnHostStartGame);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
@@ -62,6 +67,23 @@
             this.panel1.Padding = new System.Windows.Forms.Padding(10, 0, 10, 10);
             this.panel1.Size = new System.Drawing.Size(889, 53);
             this.panel1.TabIndex = 7;
+            // 
+            // lbl_time
+            // 
+            this.lbl_time.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lbl_time.AutoSize = true;
+            this.lbl_time.BackColor = System.Drawing.Color.Transparent;
+            this.lbl_time.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_time.ForeColor = System.Drawing.Color.Gainsboro;
+            this.lbl_time.Location = new System.Drawing.Point(375, -5);
+            this.lbl_time.Margin = new System.Windows.Forms.Padding(3, 0, 3, 10);
+            this.lbl_time.Name = "lbl_time";
+            this.lbl_time.Padding = new System.Windows.Forms.Padding(10);
+            this.lbl_time.Size = new System.Drawing.Size(132, 62);
+            this.lbl_time.TabIndex = 10;
+            this.lbl_time.Text = "Timer";
+            this.lbl_time.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // BtnLeaveGame
             // 
@@ -86,6 +108,23 @@
             this.BtnHostStartGame.TabIndex = 7;
             this.BtnHostStartGame.Text = "Start game";
             this.BtnHostStartGame.UseVisualStyleBackColor = false;
+            this.BtnHostStartGame.Click += new System.EventHandler(this.BtnHostStartGame_Click);
+            // 
+            // lbl_ConnectorUpdate
+            // 
+            this.lbl_ConnectorUpdate.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lbl_ConnectorUpdate.AutoSize = true;
+            this.lbl_ConnectorUpdate.BackColor = System.Drawing.Color.Transparent;
+            this.lbl_ConnectorUpdate.ForeColor = System.Drawing.Color.Gainsboro;
+            this.lbl_ConnectorUpdate.Location = new System.Drawing.Point(408, 18);
+            this.lbl_ConnectorUpdate.Name = "lbl_ConnectorUpdate";
+            this.lbl_ConnectorUpdate.Size = new System.Drawing.Size(93, 25);
+            this.lbl_ConnectorUpdate.TabIndex = 8;
+            this.lbl_ConnectorUpdate.Text = "Update: ";
+            this.lbl_ConnectorUpdate.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lbl_ConnectorUpdate.Visible = false;
             // 
             // Host_WaitingForConnection
             // 
@@ -93,6 +132,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::StupidBlackjackSln.Properties.Resources.greenfelt;
             this.ClientSize = new System.Drawing.Size(889, 427);
+            this.Controls.Add(this.lbl_ConnectorUpdate);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.lblNumPlayers);
             this.Name = "Host_WaitingForConnection";
@@ -100,7 +140,9 @@
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Host_WaitingForConnection_FormClosed);
             this.Load += new System.EventHandler(this.Host_WaitingForConnection_Load);
             this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -110,5 +152,8 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button BtnLeaveGame;
         private System.Windows.Forms.Button BtnHostStartGame;
+        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Label lbl_time;
+        private System.Windows.Forms.Label lbl_ConnectorUpdate;
     }
 }

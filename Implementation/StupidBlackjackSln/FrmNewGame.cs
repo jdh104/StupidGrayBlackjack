@@ -1,4 +1,6 @@
-﻿using StupidBlackjackSln.Code;
+﻿// Class Master: Jeremy Thomas
+
+using StupidBlackjackSln.Code;
 using StupidBlackjackSln.Properties;
 using System;
 using System.Collections.Generic;
@@ -18,7 +20,12 @@ namespace StupidBlackjackSln
         private Player player1;
         private PictureBox[] picPlayerCards;
         private int ticks = 15;  //15 seconds for a player's turn
+        private int gameID;
 
+
+        /// <summary>
+        /// For a local game
+        /// </summary>
         public FrmNewGame()
         {
             InitializeComponent();
@@ -28,6 +35,24 @@ namespace StupidBlackjackSln
             {
                 picPlayerCards[i] = Controls.Find("picPlayerCard" + (i + 1).ToString(), true)[0] as PictureBox;
             }
+        }
+
+
+        /// <summary>
+        /// For an online game
+        /// </summary>
+        /// <param name="id"></param>
+        public FrmNewGame(int id)
+        {
+            InitializeComponent();
+            timer1.Start();
+            picPlayerCards = new PictureBox[5];
+            for (int i = 0; i < 5; i++)
+            {
+                picPlayerCards[i] = Controls.Find("picPlayerCard" + (i + 1).ToString(), true)[0] as PictureBox;
+            }
+
+            this.gameID = id;
         }
 
         private void FrmNewGame_Load(object sender, EventArgs e)

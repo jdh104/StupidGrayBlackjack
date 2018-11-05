@@ -55,9 +55,10 @@
             this.lblTitle.BackColor = System.Drawing.Color.Transparent;
             this.lblTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 48F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTitle.ForeColor = System.Drawing.Color.Gainsboro;
-            this.lblTitle.Location = new System.Drawing.Point(234, 58);
+            this.lblTitle.Location = new System.Drawing.Point(468, 112);
+            this.lblTitle.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(519, 73);
+            this.lblTitle.Size = new System.Drawing.Size(1013, 147);
             this.lblTitle.TabIndex = 0;
             this.lblTitle.Text = "Stupid Blackjack";
             this.lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -68,11 +69,12 @@
             this.btnNewOnlineGame.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnNewOnlineGame.BackgroundImage")));
             this.btnNewOnlineGame.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnNewOnlineGame.ForeColor = System.Drawing.Color.Gainsboro;
-            this.btnNewOnlineGame.Location = new System.Drawing.Point(20, 426);
+            this.btnNewOnlineGame.Location = new System.Drawing.Point(40, 819);
+            this.btnNewOnlineGame.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.btnNewOnlineGame.Name = "btnNewOnlineGame";
-            this.btnNewOnlineGame.Size = new System.Drawing.Size(458, 61);
+            this.btnNewOnlineGame.Size = new System.Drawing.Size(916, 117);
             this.btnNewOnlineGame.TabIndex = 1;
-            this.btnNewOnlineGame.Text = "New Online Game";
+            this.btnNewOnlineGame.Text = "Play Online Game";
             this.btnNewOnlineGame.UseVisualStyleBackColor = false;
             this.btnNewOnlineGame.Click += new System.EventHandler(this.btnNewOnlineGame_Click);
             // 
@@ -82,9 +84,10 @@
             this.btnRulebook.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnRulebook.BackgroundImage")));
             this.btnRulebook.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnRulebook.ForeColor = System.Drawing.Color.Gainsboro;
-            this.btnRulebook.Location = new System.Drawing.Point(246, 340);
+            this.btnRulebook.Location = new System.Drawing.Point(492, 654);
+            this.btnRulebook.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.btnRulebook.Name = "btnRulebook";
-            this.btnRulebook.Size = new System.Drawing.Size(227, 60);
+            this.btnRulebook.Size = new System.Drawing.Size(454, 115);
             this.btnRulebook.TabIndex = 2;
             this.btnRulebook.Text = "Rulebook";
             this.btnRulebook.UseVisualStyleBackColor = false;
@@ -97,9 +100,10 @@
             this.btnExitGame.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.btnExitGame.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnExitGame.ForeColor = System.Drawing.Color.Gainsboro;
-            this.btnExitGame.Location = new System.Drawing.Point(744, 340);
+            this.btnExitGame.Location = new System.Drawing.Point(1488, 654);
+            this.btnExitGame.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.btnExitGame.Name = "btnExitGame";
-            this.btnExitGame.Size = new System.Drawing.Size(197, 60);
+            this.btnExitGame.Size = new System.Drawing.Size(394, 115);
             this.btnExitGame.TabIndex = 3;
             this.btnExitGame.Text = "Exit Game";
             this.btnExitGame.UseVisualStyleBackColor = false;
@@ -112,9 +116,10 @@
             this.btnOptions.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnOptions.BackgroundImage")));
             this.btnOptions.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnOptions.ForeColor = System.Drawing.Color.Gainsboro;
-            this.btnOptions.Location = new System.Drawing.Point(510, 340);
+            this.btnOptions.Location = new System.Drawing.Point(1020, 654);
+            this.btnOptions.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.btnOptions.Name = "btnOptions";
-            this.btnOptions.Size = new System.Drawing.Size(197, 60);
+            this.btnOptions.Size = new System.Drawing.Size(394, 115);
             this.btnOptions.TabIndex = 4;
             this.btnOptions.Text = "Options";
             this.btnOptions.UseVisualStyleBackColor = false;
@@ -126,9 +131,10 @@
             this.btnServer.BackgroundImage = global::StupidBlackjackSln.Properties.Resources.greenfelt;
             this.btnServer.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnServer.ForeColor = System.Drawing.Color.Gainsboro;
-            this.btnServer.Location = new System.Drawing.Point(510, 426);
+            this.btnServer.Location = new System.Drawing.Point(1020, 819);
+            this.btnServer.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.btnServer.Name = "btnServer";
-            this.btnServer.Size = new System.Drawing.Size(431, 61);
+            this.btnServer.Size = new System.Drawing.Size(862, 117);
             this.btnServer.TabIndex = 6;
             this.btnServer.Text = "Start a new matchmaking server";
             this.btnServer.UseVisualStyleBackColor = false;
@@ -144,10 +150,10 @@
             // 
             this.pictureBox2.BackColor = System.Drawing.Color.Gainsboro;
             this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
-            this.pictureBox2.Location = new System.Drawing.Point(86, 27);
-            this.pictureBox2.Margin = new System.Windows.Forms.Padding(2);
+            this.pictureBox2.Location = new System.Drawing.Point(172, 52);
+            this.pictureBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(50, 44);
+            this.pictureBox2.Size = new System.Drawing.Size(100, 85);
             this.pictureBox2.TabIndex = 8;
             this.pictureBox2.TabStop = false;
             // 
@@ -159,11 +165,11 @@
             this.groupBox1.Controls.Add(this.pictureBox2);
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.ForeColor = System.Drawing.Color.Gainsboro;
-            this.groupBox1.Location = new System.Drawing.Point(246, 149);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
+            this.groupBox1.Location = new System.Drawing.Point(492, 287);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox1.Size = new System.Drawing.Size(223, 87);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Size = new System.Drawing.Size(446, 167);
             this.groupBox1.TabIndex = 10;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Achievements";
@@ -172,10 +178,10 @@
             // 
             this.pictureBox3.BackColor = System.Drawing.Color.Gainsboro;
             this.pictureBox3.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox3.Image")));
-            this.pictureBox3.Location = new System.Drawing.Point(168, 27);
-            this.pictureBox3.Margin = new System.Windows.Forms.Padding(2);
+            this.pictureBox3.Location = new System.Drawing.Point(336, 52);
+            this.pictureBox3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(50, 44);
+            this.pictureBox3.Size = new System.Drawing.Size(100, 85);
             this.pictureBox3.TabIndex = 10;
             this.pictureBox3.TabStop = false;
             // 
@@ -183,10 +189,10 @@
             // 
             this.pictureBox1.BackColor = System.Drawing.Color.Gainsboro;
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(3, 27);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(2);
+            this.pictureBox1.Location = new System.Drawing.Point(6, 52);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(50, 44);
+            this.pictureBox1.Size = new System.Drawing.Size(100, 85);
             this.pictureBox1.TabIndex = 8;
             this.pictureBox1.TabStop = false;
             // 
@@ -195,11 +201,11 @@
             this.groupBox2.BackColor = System.Drawing.Color.Transparent;
             this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox2.ForeColor = System.Drawing.Color.Gainsboro;
-            this.groupBox2.Location = new System.Drawing.Point(510, 149);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(2);
+            this.groupBox2.Location = new System.Drawing.Point(1020, 287);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox2.Size = new System.Drawing.Size(197, 87);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox2.Size = new System.Drawing.Size(394, 167);
             this.groupBox2.TabIndex = 11;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Statistics";
@@ -210,10 +216,10 @@
             this.btnNewGame.BackgroundImage = global::StupidBlackjackSln.Properties.Resources.greenfelt;
             this.btnNewGame.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnNewGame.ForeColor = System.Drawing.Color.Gainsboro;
-            this.btnNewGame.Location = new System.Drawing.Point(20, 340);
-            this.btnNewGame.Margin = new System.Windows.Forms.Padding(2);
+            this.btnNewGame.Location = new System.Drawing.Point(40, 654);
+            this.btnNewGame.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btnNewGame.Name = "btnNewGame";
-            this.btnNewGame.Size = new System.Drawing.Size(192, 60);
+            this.btnNewGame.Size = new System.Drawing.Size(384, 115);
             this.btnNewGame.TabIndex = 12;
             this.btnNewGame.Text = "New Game";
             this.btnNewGame.UseVisualStyleBackColor = true;
@@ -221,12 +227,12 @@
             // 
             // frmTitle
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
             this.BackgroundImage = global::StupidBlackjackSln.Properties.Resources.table_texture;
-            this.ClientSize = new System.Drawing.Size(905, 489);
+            this.ClientSize = new System.Drawing.Size(1810, 940);
             this.Controls.Add(this.btnNewGame);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
@@ -236,6 +242,7 @@
             this.Controls.Add(this.btnRulebook);
             this.Controls.Add(this.btnNewOnlineGame);
             this.Controls.Add(this.lblTitle);
+            this.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.Name = "frmTitle";
             this.Text = "Stupid Gray Blackjack";
             this.Load += new System.EventHandler(this.Form1_Load);
