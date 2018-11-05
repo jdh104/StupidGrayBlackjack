@@ -142,7 +142,7 @@ namespace StupidBlackjackSln
                     id = Int32.Parse(game.Split(':')[0]);
                     key = Program.GetConnector().GetKey();
 
-                    Program.GetConnector().JoinGameByID(id, key);
+                    Program.GetConnector().JoinGameByID(id);
                     new Client_WaitingForConnection(id).ShowDialog();
                 }
                 catch
