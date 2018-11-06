@@ -35,25 +35,29 @@ namespace StupidBlackjackSln
         }
         
         /// <summary>
-        /// 
+        /// Load the Host's waiting for connection dialog. Start timer. 
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void Host_WaitingForConnection_Load(object sender, EventArgs e)
         {
+            // Set up timer to show time from time starting game to present
             DateTime startTime = DateTime.Now;
             timer1.Tick += (s, ev) => {
                 TimeSpan elapsed_span = DateTime.Now - startTime;
                 DateTime elapsed_time = DateTime.Today.Add(elapsed_span);
                 lbl_time.Text = elapsed_time.ToString("mm:ss");
 
+                // Check for any update from server
                 String update = Program.GetConnector().CheckForUpdate();
-
+                
                 if (update != null)
                 {
                     lbl_ConnectorUpdate.Text = ParseUpdate(update);
                     lbl_ConnectorUpdate.Show();
                 }
+
+                // Update number of players in game
                 UpdatePlayers();
             };
             timer1.Interval = 750;
@@ -61,18 +65,25 @@ namespace StupidBlackjackSln
             
         }
 
+        /// <summary>
+        /// Parse input string for update type and return meaningful update message
+        /// </summary>
+        /// <param name="update"></param>
+        /// <returns></returns>
         private String ParseUpdate(String update)
         {
             if (update.Equals(StupidServer.UPDATE_GAME_CONNECTION_BROKEN))
                 return "Host left game. Please leave and join another game.";
             else if (update.Equals(StupidServer.UPDATE_PLAYER_JOINED))
                 return "A player joined!";
-            // if (update.Equals(StupidServer.UPDATE_GAME_HAS_STARTED))
-            // return "Host has started the game!";
             else
                 return "";
         }
 
+
+        /// <summary>
+        /// Update number of players on screen.
+        /// </summary>
         private void UpdatePlayers()
         {
             int? numPlayers = Program.GetConnector().GetGamePopulationByID(id);
@@ -90,6 +101,11 @@ namespace StupidBlackjackSln
             lblNumPlayers.Show();
         }
 
+        /// <summary>
+        /// Provide functionality to "Start Game" button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtnHostStartGame_Click(object sender, EventArgs e)
         {
             new FrmNewGame(id).Show();
