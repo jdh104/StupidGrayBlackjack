@@ -57,10 +57,10 @@
             this.panel1.Controls.Add(this.BtnLeaveGame);
             this.panel1.Controls.Add(this.BtnHostStartGame);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(0, 378);
+            this.panel1.Location = new System.Drawing.Point(0, 374);
             this.panel1.Name = "panel1";
             this.panel1.Padding = new System.Windows.Forms.Padding(10, 0, 10, 10);
-            this.panel1.Size = new System.Drawing.Size(889, 49);
+            this.panel1.Size = new System.Drawing.Size(889, 53);
             this.panel1.TabIndex = 7;
             // 
             // BtnLeaveGame
@@ -69,7 +69,7 @@
             this.BtnLeaveGame.Dock = System.Windows.Forms.DockStyle.Left;
             this.BtnLeaveGame.Location = new System.Drawing.Point(10, 0);
             this.BtnLeaveGame.Name = "BtnLeaveGame";
-            this.BtnLeaveGame.Size = new System.Drawing.Size(166, 39);
+            this.BtnLeaveGame.Size = new System.Drawing.Size(166, 43);
             this.BtnLeaveGame.TabIndex = 8;
             this.BtnLeaveGame.Text = "Leave game";
             this.BtnLeaveGame.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -82,7 +82,7 @@
             this.BtnHostStartGame.Dock = System.Windows.Forms.DockStyle.Right;
             this.BtnHostStartGame.Location = new System.Drawing.Point(713, 0);
             this.BtnHostStartGame.Name = "BtnHostStartGame";
-            this.BtnHostStartGame.Size = new System.Drawing.Size(166, 39);
+            this.BtnHostStartGame.Size = new System.Drawing.Size(166, 43);
             this.BtnHostStartGame.TabIndex = 7;
             this.BtnHostStartGame.Text = "Start game";
             this.BtnHostStartGame.UseVisualStyleBackColor = false;

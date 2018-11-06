@@ -15,6 +15,7 @@ namespace StupidBlackjackSln
 {
     public partial class Matchmaking : Form
     {
+        delegate void myDelegate();
 
         public Matchmaking()
         {
@@ -26,6 +27,27 @@ namespace StupidBlackjackSln
 
         }
 
+        private void AutoRefreshLstBox()
+        {
+            while (true)
+            {
+                Thread.Sleep(5000);
+
+                // listbox, is it ok to do something that isn't thread safe?
+                if (this.lstBoxGames.InvokeRequired)
+                {
+                    // delegate constructs invokable object
+                    myDelegate d = new myDelegate(RefreshGameList);
+                    lstBoxGames.Parent.Invoke(d);
+                }
+                else
+                {
+                    // what function actually does
+                    this.RefreshGameList();
+                }
+            }
+
+        }
 
         private void btnRefresh_Click(object sender, EventArgs e)
         {
@@ -77,12 +99,16 @@ namespace StupidBlackjackSln
         /// <param name="e"></param>
         private void Matchmaking_Load(object sender, EventArgs e)
         {
+            Thread t = new Thread(AutoRefreshLstBox);
+            t.Start();
+
             this.RefreshGameList();
         }
 
         private void Ok_Click(object sender, EventArgs e)
         {
             int id;
+            int key;
 
             if (radioBtnNewGame.Checked)
             {
@@ -114,7 +140,9 @@ namespace StupidBlackjackSln
                 {
                     String game = lstBoxGames.SelectedItem.ToString();
                     id = Int32.Parse(game.Split(':')[0]);
+                    key = Program.GetConnector().GetKey();
 
+                    Program.GetConnector().JoinGameByID(id);
                     new Client_WaitingForConnection(id).ShowDialog();
                 }
                 catch
