@@ -336,11 +336,11 @@ namespace StupidBlackjackSln.Code
                             {
                                 OutputToForm("Found game: " + id.ToString() + ", removing");
                                 games.RemoveAt(i);
-                                foreach (TcpClient cli in game.GetClientList())
+                                /*foreach (TcpClient cli in game.GetClientList())
                                 {
                                     cli.GetStream().Close();
                                     cli.Close();
-                                }
+                                }*/
                                 return COMMAND_SUCCEEDED;
                             }
                         }

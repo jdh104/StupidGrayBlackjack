@@ -51,6 +51,22 @@ namespace StupidBlackjackSln.Code
         }
 
         /// <summary>
+        /// Check for an update from the connected server.
+        /// </summary>
+        /// <returns>The incoming string, or null if none available</returns>
+        public String CheckForUpdate()
+        {
+            if (this.HasResponse())
+            {
+                return this.ReadLine();
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        /// <summary>
         /// Close the connection. Use before terminating application
         /// </summary>
         public void Close() {
