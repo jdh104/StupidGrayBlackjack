@@ -37,6 +37,8 @@ namespace StupidBlackjackSln.Code
         public static readonly String REMOVE_GAME_BY_ID_COMMAND = "RGAME";
         public static readonly String REMOVE_PLAYER_FROM_GAME_COMMAND = "RPLAYER";
         public static readonly String START_GAME_BY_ID_COMMAND = "START";
+        public static readonly String UPDATE_GAME_CONNECTION_BROKEN = "U_BREAK";
+        public static readonly String UPDATE_GAME_HAS_STARTED = "U_START";
         public static readonly byte NEWLINE = Encoding.ASCII.GetBytes("\n")[0];
 
         private System.Windows.Forms.TextBox outputbox;
@@ -153,11 +155,16 @@ namespace StupidBlackjackSln.Code
             }
         }
 
+        private static String GetIPAddressOf(TcpClient client)
+        {
+            return client.Client.RemoteEndPoint.ToString();
+        }
+
         /// <summary>
         /// Grab the machine's usable network address.
         /// </summary>
         /// <returns>The machine's local address as a string representation.</returns>
-        private static string GetLocalIPAddress()
+        private static String GetLocalIPAddress()
         {
             var host = Dns.GetHostEntry(Dns.GetHostName());
             foreach (var ip in host.AddressList)
@@ -334,13 +341,13 @@ namespace StupidBlackjackSln.Code
                             GameRep game = (GameRep)games[i];
                             if (game.id == id && game.key == key)
                             {
-                                OutputToForm("Found game: " + id.ToString() + ", removing");
+                                OutputToForm("Found game: " + id.ToString() + ", removing...");
                                 games.RemoveAt(i);
-                                /*foreach (TcpClient cli in game.GetClientList())
+                                foreach (TcpClient cli in game.GetClientList())
                                 {
-                                    cli.GetStream().Close();
-                                    cli.Close();
-                                }*/
+                                    OutputToForm("\tNotifying client: " + GetIPAddressOf(cli));
+                                    this.WriteLine(cli, UPDATE_GAME_CONNECTION_BROKEN);
+                                }
                                 return COMMAND_SUCCEEDED;
                             }
                         }
@@ -388,8 +395,43 @@ namespace StupidBlackjackSln.Code
                 }
                 else if (c.Equals(START_GAME_BY_ID_COMMAND))
                 {
-                    // TODO
-                    return COMMAND_UNRECOGNIZED;
+                    int id, key;
+                    try
+                    {
+                        id = Int32.Parse(args[1]);
+                        key = Int32.Parse(args[2]);
+                    }
+                    catch (Exception)
+                    {
+                        OutputToForm("Syntax Error: Failed to parse id and key");
+                        return COMMAND_SYNTAX_ERROR;
+                    }
+                    lock (games)
+                    {
+                        OutputToForm("Resource Locked: Searching for game: " + id.ToString());
+                        GameRep gameToStart = null;
+                        foreach (GameRep game in games)
+                        {
+                            if (game.id.Equals(id))
+                            {
+                                game.started = true;
+                                foreach (TcpClient cli in game.GetClientList())
+                                {
+                                    this.WriteLine(cli, UPDATE_GAME_HAS_STARTED);
+                                }
+                                break;
+                            }
+                        }
+                        if (gameToStart == null)
+                        {
+                            return COMMAND_FAILED;
+                        }
+                        else
+                        {
+                            games.Remove(gameToStart);
+                            return COMMAND_SUCCEEDED;
+                        }
+                    }
                 }
                 else
                 {
@@ -433,7 +475,7 @@ namespace StupidBlackjackSln.Code
 
                 lock (outputbox)
                 {
-                    OutputToForm("Accepted new client: " + c.Client.RemoteEndPoint.ToString());
+                    OutputToForm("Accepted new client: " + GetIPAddressOf(c));
                     OutputToForm("Starting new listener thread: " + t.GetHashCode().ToString());
                 }
 
@@ -456,7 +498,7 @@ namespace StupidBlackjackSln.Code
 
             lock (outputbox)
             {
-                OutputToForm("Listener Active for client: " + c.Client.RemoteEndPoint.ToString());
+                OutputToForm("Listener Active for client: " + GetIPAddressOf(c));
             }
 
             while (true)
@@ -577,8 +619,7 @@ namespace StupidBlackjackSln.Code
 
             public TcpClient[] GetClientList()
             {
-                return null;
-                //TODO
+                return client_dict.Values.ToArray<TcpClient>();
             }
 
             public void RemoveClientByKey(int key)
