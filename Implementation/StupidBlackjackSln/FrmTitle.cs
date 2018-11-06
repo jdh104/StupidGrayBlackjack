@@ -81,6 +81,7 @@ namespace StupidBlackjackSln
         }
 
         /// <summary>
+        /// Create tooltips for achievements
         /// Inegrated from https://stackoverflow.com/questions/1339524/c-how-do-i-add-a-tooltip-to-a-control
         /// </summary>
         private void MakeToolTip(Panel p, String message)

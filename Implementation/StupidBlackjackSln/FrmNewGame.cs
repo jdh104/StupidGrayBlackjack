@@ -20,7 +20,7 @@ namespace StupidBlackjackSln
         private Player player1;
         private PictureBox[] picPlayerCards;
         private int ticks = 15;  //15 seconds for a player's turn
-        private int gameID;
+        private int id;
 
 
         /// <summary>
@@ -52,7 +52,7 @@ namespace StupidBlackjackSln
                 picPlayerCards[i] = Controls.Find("picPlayerCard" + (i + 1).ToString(), true)[0] as PictureBox;
             }
 
-            this.gameID = id;
+            this.id = id;
         }
 
         private void FrmNewGame_Load(object sender, EventArgs e)
@@ -75,7 +75,7 @@ namespace StupidBlackjackSln
 
         private void FrmNewGame_FormClosed(object sender, FormClosedEventArgs e)
         {
-            
+            Program.GetConnector().RemoveHostedGame(id);
         }
 
         private void btnHit_Click(object sender, EventArgs e)
@@ -108,8 +108,6 @@ namespace StupidBlackjackSln
         private void buttonExit_Click(object sender, EventArgs e)
         {
             this.Close();
-            //Get rid of connection to server
-            //TODO
         }
 
         private void timer1_Tick(object sender, EventArgs e)
