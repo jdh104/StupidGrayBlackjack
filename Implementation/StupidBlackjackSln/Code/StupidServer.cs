@@ -18,7 +18,6 @@ namespace StupidBlackjackSln.Code
     /// </summary>
     class StupidServer
     {
-
         delegate void StringDelegateReturningVoid(String s);
 
         public static readonly int ID_SIZE_IN_BYTES = 32;
