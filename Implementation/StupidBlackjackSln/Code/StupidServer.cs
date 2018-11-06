@@ -502,8 +502,16 @@ namespace StupidBlackjackSln.Code
 
             while (true)
             {
-                String command = this.ReadLine(c);
-                this.WriteLine(c, this.InterpretCommand(command, c));
+                try
+                {
+                    String command = this.ReadLine(c);
+                    this.WriteLine(c, this.InterpretCommand(command, c));
+                }
+                catch (System.IO.IOException)
+                {
+                    // We want to kill this thread
+                    return;
+                }
             }
         }
 
@@ -586,7 +594,7 @@ namespace StupidBlackjackSln.Code
         }
 
         /// <summary>
-        /// Class for representing potential games on the server.
+        /// Class for representing potential games on the server, to be used internally by StupidServer.
         /// </summary>
         private class GameRep
         {
