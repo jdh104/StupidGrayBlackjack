@@ -24,5 +24,10 @@ namespace StupidBlackjackSln
             StupidConnector.SetPort(Int32.Parse(txtBoxPort.Text));
             this.Close();
         }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }
