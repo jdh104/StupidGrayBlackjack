@@ -102,7 +102,10 @@ namespace StupidBlackjackSln
 
         private void btnStand_Click(object sender, EventArgs e)
         {
-            Player.isTurn = false; 
+            Player.isTurn = false;
+            ticks = 15;    //ends turn and resets time
+            //ToDo Disable hit button
+            btnHit.Enabled = false;
         }
 
         private void buttonExit_Click(object sender, EventArgs e)
@@ -119,10 +122,9 @@ namespace StupidBlackjackSln
             if (ticks <= 0)
             {
                 this.Text = "Turn Over";
-                //timer1.Stop();  
-                ticks = 15;
-                //instead of stopping at 0 I just reset it to 15 again
+                ticks = 15;      //resets time
                 //We could switch turns here and keep going with the clock
+                Player.isTurn = false;
             }                        
         }
 
