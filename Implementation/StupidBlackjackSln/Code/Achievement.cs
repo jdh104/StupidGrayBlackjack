@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Resources;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -19,9 +20,10 @@ namespace StupidBlackjackSln.Code
 
         public Achievement(String name, String description, String iconName)
         {
+            ResourceManager rManager = Properties.Resources.ResourceManager;
             this.name = name;
             this.description = description;
-            //setIcon
+            icon = (Bitmap) rManager.GetObject(iconName);
             //Saves the current time as timeEarned
             timeEarned = DateTime.Now;
         }
