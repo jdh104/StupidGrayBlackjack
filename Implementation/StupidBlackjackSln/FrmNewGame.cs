@@ -119,8 +119,11 @@ namespace StupidBlackjackSln
             if (ticks <= 0)
             {
                 this.Text = "Turn Over";
-                timer1.Stop();        //ToDo
-            }                        //This would end the player's turn and make them Stand.
+                //timer1.Stop();  
+                ticks = 15;
+                //instead of stopping at 0 I just reset it to 15 again
+                //We could switch turns here and keep going with the clock
+            }                        
         }
 
     }
