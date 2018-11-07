@@ -86,6 +86,7 @@
             this.btnExitGame.TabIndex = 9;
             this.btnExitGame.Text = "Exit Table";
             this.btnExitGame.UseVisualStyleBackColor = true;
+            this.btnExitGame.Click += new System.EventHandler(this.buttonExit_Click);
             // 
             // flowPnlPlayers
             // 
