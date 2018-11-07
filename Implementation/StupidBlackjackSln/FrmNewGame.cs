@@ -51,8 +51,18 @@ namespace StupidBlackjackSln
             {
                 picPlayerCards[i] = Controls.Find("picPlayerCard" + (i + 1).ToString(), true)[0] as PictureBox;
             }
+            int? nPlayers = Program.GetConnector().GetGamePopulationByID(id);
+            LoadPlayers(nPlayers);
 
             this.id = id;
+        }
+
+        private void LoadPlayers(int? nPlayers)
+        {
+            for (int i = 0; i < nPlayers; i++)
+            {
+                // TODO make player panel to add
+            }
         }
 
         private void FrmNewGame_Load(object sender, EventArgs e)
@@ -131,6 +141,5 @@ namespace StupidBlackjackSln
                 Player.isTurn = false;
             }                        
         }
-
     }
 }
