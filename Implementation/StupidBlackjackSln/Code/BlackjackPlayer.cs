@@ -8,8 +8,9 @@ namespace StupidBlackjackSln.Code
 {
     class BlackjackPlayer : Player
     {
-        private bool hasBusted = false;     //true if they go over 21
-        private bool hasWon = false;       // true if they win
+        public bool hasBusted = false;     //true if they go over 21
+        public bool hasWon = false;       // true if they win
+        public static Boolean isTurn2;
 
         public bool getBusted()
         {
@@ -59,6 +60,7 @@ namespace StupidBlackjackSln.Code
                     }
                     break;
                 }
+                hasBusted = true;
             }
         }
     }

@@ -17,7 +17,7 @@ namespace StupidBlackjackSln
     public partial class FrmNewGame : Form
     {
         public static Deck deck;
-        private Player player1;
+        private BlackjackPlayer player1;
         private PictureBox[] picPlayerCards;
         private int ticks = 15;  //15 seconds for a player's turn
         private int id = 0;
@@ -112,9 +112,10 @@ namespace StupidBlackjackSln
 
             if (ticks <= 0)
             {
-                ticks = 1;
                 //We could switch turns here and keep going with the clock
-                Player.isTurn = false;
+                BlackjackPlayer.isTurn2 = false;
+                btnHit.Enabled = false;   //Disable Hit Button
+                timer1.Stop();
             }                        
         }
 
@@ -122,11 +123,16 @@ namespace StupidBlackjackSln
         {
             player1.giveCard(deck.dealCard());
             showHand();
+                if(player1.getBusted() == true)
+            {
+                btnHit.Enabled = false;   //Disable Hit Button
+                BlackjackPlayer.isTurn2 = false;
+            }
         }
 
         private void btnStand_Click_1(object sender, EventArgs e)
         {
-            Player.isTurn = false;
+            BlackjackPlayer.isTurn2 = false;
             ticks = 0;    //ends turn and sets time to 0
             btnHit.Enabled = false;   //Disable Hit Button
         }
