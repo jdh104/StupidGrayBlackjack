@@ -50,7 +50,7 @@ namespace StupidBlackjackSln.Code
 
             if (this.Score > 21)
             {
-                while (numAces > 0)
+                while (numAces > 0)  //has 1 or more aces
                 {
                     Score -= 10;
                     if (this.Score > 21)
@@ -60,7 +60,10 @@ namespace StupidBlackjackSln.Code
                     }
                     break;
                 }
-                hasBusted = true;
+                if(this.Score > 21)
+                {
+                    hasBusted = true;
+                }
             }
         }
     }
