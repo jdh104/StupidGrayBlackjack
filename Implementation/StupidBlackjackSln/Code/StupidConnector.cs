@@ -23,8 +23,8 @@ namespace StupidBlackjackSln.Code
         private TcpClient client;
         private int key = new Random().Next(Int32.MaxValue);
         private NetworkStream netstream;
-        private String serverDomain;
-        private int serverPort;
+        private readonly String serverDomain;
+        private readonly int serverPort;
 
         /// <summary>
         /// Create a new connection to the default matchmaking server.
