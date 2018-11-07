@@ -47,16 +47,16 @@ namespace StupidBlackjackSln.Code
             switch (winCount)
             {
                 case 1:
-                    AddAchievement("1 Win", "You won one game!", "1_win_icon.png");
+                    AddAchievement("1 Win", "You won one game!", "_1_win_icon");
                     break;
                 case 10:
-                    AddAchievement("10 Wins", "You won ten games!", "10_win_icon.png");
+                    AddAchievement("10 Wins", "You won ten games!", "_10_win_icon");
                     break;
                 case 25:
-                    AddAchievement("25 Wins", "You won 25 games!", "25_win_icon.png");
+                    AddAchievement("25 Wins", "You won 25 games!", "_25_win_icon");
                     break;
                 case 100:
-                    AddAchievement("100 Wins", "You won 100 games of StupidBlackjack! Do yourself a favor, and don't go to a casino...", "100_win_icon.png");
+                    AddAchievement("100 Wins", "You won 100 games of StupidBlackjack! Do yourself a favor, and don't go to a casino...", "_100_win_icon");
                     break;
                 default:
                     break;
