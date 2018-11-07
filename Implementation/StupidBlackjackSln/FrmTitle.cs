@@ -21,7 +21,7 @@ namespace StupidBlackjackSln
             AchievementMonitor achievements = AchievementMonitor.GetInstance();
             List<Achievement> achievementList = achievements.GetAchievements();
             
-            for (int i = 0; i < achievementList.Count; i++)
+            for (int i = achievementList.Count - 1; i >= 0; i--)
             {
                 //Create new icon
                 PictureBox icon = new PictureBox();
