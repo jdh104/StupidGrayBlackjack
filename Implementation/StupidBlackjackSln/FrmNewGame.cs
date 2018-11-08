@@ -76,6 +76,7 @@ namespace StupidBlackjackSln
         private void FrmNewGame_FormClosed(object sender, FormClosedEventArgs e)
         {
             this.Close();
+            new frmTitle().ShowDialog();
         }
 
         private void btnHit_Click(object sender, EventArgs e)
@@ -111,8 +112,10 @@ namespace StupidBlackjackSln
         private void buttonExit_Click(object sender, EventArgs e)
         {
             //if (this.id != 0)
-              //  Program.GetConnector().RemoveHostedGame(id);
+            //  Program.GetConnector().RemoveHostedGame(id);
+
             this.Close();
+            new frmTitle().ShowDialog();
         }
 
         private void timer1_Tick(object sender, EventArgs e)
