@@ -98,8 +98,8 @@ namespace StupidBlackjackSln.Code
         /// <returns>An array of strings containing game names and id's</returns>
         public String[] FetchListOfGames()
         {
-            String[] response = this.WriteLine(StupidServer.FETCH_COMMAND);
-            if (!response[0].Equals(StupidServer.COMMAND_SUCCEEDED))
+            String[] response = this.WriteLine(StupidServer.CMD_FETCH);
+            if (!response[0].Equals(StupidServer.RESPONSE_SUCCESS))
             {
                 return null;
             }
@@ -118,8 +118,8 @@ namespace StupidBlackjackSln.Code
         /// <returns>population of a game, or null if failed</returns>
         public int? GetGamePopulationByID(int id)
         {
-            String[] response = this.WriteLine(StupidServer.GET_GAME_POP_BY_ID_COMMAND + " " + id.ToString());
-            if (!response[0].Equals(StupidServer.COMMAND_SUCCEEDED))
+            String[] response = this.WriteLine(StupidServer.CMD_GET_GAME_POP_BY_ID + " " + id.ToString());
+            if (!response[0].Equals(StupidServer.RESPONSE_SUCCESS))
             {
                 return null;
             }
@@ -136,8 +136,8 @@ namespace StupidBlackjackSln.Code
         /// <returns>Name of a game, or null if failed</returns>
         public String GetGameNameByID(int id)
         {
-            String[] response = this.WriteLine(StupidServer.GET_GAME_NAME_BY_ID_COMMAND + " " + id.ToString());
-            if (!response[0].Equals(StupidServer.COMMAND_SUCCEEDED))
+            String[] response = this.WriteLine(StupidServer.CMD_GET_GAME_NAME_BY_ID + " " + id.ToString());
+            if (!response[0].Equals(StupidServer.RESPONSE_SUCCESS))
             {
                 return null;
             }
@@ -162,8 +162,8 @@ namespace StupidBlackjackSln.Code
         /// <returns>The generated id number for the game, or 0 if failed.</returns>
         public int HostNewGame(String serverName)
         {
-            String[] response = this.WriteLine(StupidServer.HOST_NEW_GAME_COMMAND + " " + serverName + " " + key.ToString());
-            if (!response[0].Equals(StupidServer.COMMAND_SUCCEEDED))
+            String[] response = this.WriteLine(StupidServer.CMD_HOST_NEW_GAME + " " + serverName + " " + key.ToString());
+            if (!response[0].Equals(StupidServer.RESPONSE_SUCCESS))
             {
                 return 0;
             }
@@ -180,30 +180,42 @@ namespace StupidBlackjackSln.Code
         /// <returns>true if join succeeded</returns>
         public bool JoinGameByID(int id)
         {
-            String[] response = this.WriteLine(StupidServer.JOIN_GAME_BY_ID_COMMAND + " " + id + " " + key);
-            return response[0].Equals(StupidServer.COMMAND_SUCCEEDED);
+            String[] response = this.WriteLine(StupidServer.CMD_JOIN_GAME_BY_ID + " " + id + " " + key);
+            return response[0].Equals(StupidServer.RESPONSE_SUCCESS);
         }
 
         /// <summary>
         /// Remove the player from a particular hosted game.
         /// </summary>
         /// <param name="id">The id of the game to be removed from</param>
-        /// <returns>True if the server responds with COMMAND_SUCCEEDED, else false</returns>
+        /// <returns>True if the server responds with RESPONSE_SUCCESS, else false</returns>
         public bool LeaveGameByID(int id)
         {
-            String[] response = this.WriteLine(StupidServer.REMOVE_PLAYER_FROM_GAME_COMMAND + " " + id + " " + key);
-            return response[0].Equals(StupidServer.COMMAND_SUCCEEDED);
+            String[] response = this.WriteLine(StupidServer.CMD_REMOVE_PLAYER_FROM_GAME + " " + id + " " + key);
+            return response[0].Equals(StupidServer.RESPONSE_SUCCESS);
         }
 
         /// <summary>
         /// Notify other players of the card that you have drawn.
         /// </summary>
         /// <param name="c">The card object to notify</param>
+        /// <param name="connected_game_id">The id of the game connection</param>
         /// <returns>true if the server responds with COMMAND_SUCCEDED, else false</returns>
         public bool NotifyCardDrawn(Card c, int connected_game_id)
         {
-            String[] response = this.WriteLine(StupidServer.NOTIFY_CARD_DRAW + " " + connected_game_id + " " + c.ToString());
-            return response[0].Equals(StupidServer.COMMAND_SUCCEEDED);
+            String[] response = this.WriteLine(StupidServer.NOTIFY_CARD_DRAW + " " + connected_game_id + " " + key.ToString() + " " + c.ToString());
+            return response[0].Equals(StupidServer.RESPONSE_SUCCESS);
+        }
+
+        /// <summary>
+        /// Notify other players that you have stood.
+        /// </summary>
+        /// <param name="connected_game_id">The id of the game connection</param>
+        /// <returns>true if the server responds with RESPONSE_SUCCESS, else false</returns>
+        public bool NotifyStand(int connected_game_id)
+        {
+            String[] response = this.WriteLine(StupidServer.NOTIFY_STAND + " " + connected_game_id + " " + key.ToString());
+            return response[0].Equals(StupidServer.RESPONSE_SUCCESS);
         }
         
         /// <summary>
@@ -229,7 +241,7 @@ namespace StupidBlackjackSln.Code
         /// <param name="id">The id of the game to remove</param>
         public void RemoveHostedGame(int id)
         {
-            this.WriteLine(StupidServer.REMOVE_GAME_BY_ID_COMMAND + " " + id + " " + key);
+            this.WriteLine(StupidServer.CMD_REMOVE_GAME_BY_ID + " " + id + " " + key);
         }
 
         /// <summary>

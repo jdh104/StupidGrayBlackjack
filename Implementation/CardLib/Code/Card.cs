@@ -28,13 +28,19 @@ namespace StupidBlackjackSln.Code
             Bitmap = bitmap;
         }
 
-        public string getValue()
+        public string GetValue()
         {
             return id.Split(DELIM)[0];
         }
-        public string getSuit()
+
+        public string GetSuit()
         {
             return id.Split(DELIM)[1];
+        }
+
+        public String ToString()
+        {
+            return id;
         }
     }
 }
