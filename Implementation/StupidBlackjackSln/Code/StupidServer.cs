@@ -18,14 +18,14 @@ namespace StupidBlackjackSln.Code
     /// </summary>
     class StupidServer
     {
-        delegate void StringDelegateReturningVoid(String s);
+        private delegate void StringDelegateReturningVoid(String s);
         
         public static readonly int DEFAULT_PORT = 61537;
         public static readonly String DEFAULT_DOMAIN = "173.217.233.48";
-        public static readonly String COMMAND_SUCCEEDED = "0";
-        public static readonly String COMMAND_UNRECOGNIZED = "1";
-        public static readonly String COMMAND_SYNTAX_ERROR = "2";
-        public static readonly String COMMAND_FAILED = "3";
+        public static readonly String COMMAND_SUCCEEDED = "CMD_S";
+        public static readonly String COMMAND_UNRECOGNIZED = "CMD_U";
+        public static readonly String COMMAND_SYNTAX_ERROR = "CMD_E";
+        public static readonly String COMMAND_FAILED = "CMD_F";
         public static readonly String FETCH_COMMAND = "FETCH";
         public static readonly String GET_GAME_NAME_BY_ID_COMMAND = "GNAME";
         public static readonly String GET_GAME_POP_BY_ID_COMMAND = "GPOP";
@@ -184,11 +184,11 @@ namespace StupidBlackjackSln.Code
         {
             lock (outputbox)
             {
-                this.OutputToForm("s" + ip + ":" + port + "/>" + cmd);
+                this.OutputToForm(sender.Client.RemoteEndPoint.ToString() + "\r\n$ " + cmd);
 
                 String[] args = cmd.Trim().Split(' ');
-                String c = args[0];
-                if (c.Equals(FETCH_COMMAND))
+                String op = args[0];
+                if (op.Equals(FETCH_COMMAND))
                 {
                     this.PurgeDeadGames();
                     if (games.Count == 0)
@@ -208,7 +208,7 @@ namespace StupidBlackjackSln.Code
                     this.OutputToForm("COMMAND_SUCCEEDED " + ToSend);
                     return COMMAND_SUCCEEDED + " " + ToSend;
                 }
-                else if (c.Equals(GET_GAME_NAME_BY_ID_COMMAND))
+                else if (op.Equals(GET_GAME_NAME_BY_ID_COMMAND))
                 {
                     int id;
                     try
@@ -235,7 +235,7 @@ namespace StupidBlackjackSln.Code
                         return COMMAND_FAILED;
                     }
                 }
-                else if (c.Equals(GET_GAME_POP_BY_ID_COMMAND))
+                else if (op.Equals(GET_GAME_POP_BY_ID_COMMAND))
                 {
                     int id;
                     try
@@ -262,7 +262,7 @@ namespace StupidBlackjackSln.Code
                         return COMMAND_FAILED;
                     }
                 }
-                else if (c.Equals(HOST_NEW_GAME_COMMAND))
+                else if (op.Equals(HOST_NEW_GAME_COMMAND))
                 {
                     String new_game_name;
                     int key;
@@ -294,7 +294,7 @@ namespace StupidBlackjackSln.Code
                         return COMMAND_SUCCEEDED + " " + newGame.id.ToString();
                     }
                 }
-                else if (c.Equals(JOIN_GAME_BY_ID_COMMAND))
+                else if (op.Equals(JOIN_GAME_BY_ID_COMMAND))
                 {
                     int id, key;
                     try
@@ -324,7 +324,7 @@ namespace StupidBlackjackSln.Code
                     OutputToForm("Could not find requested game, responding with COMMAND_FAILED");
                     return COMMAND_FAILED;
                 }
-                else if (c.Equals(REMOVE_GAME_BY_ID_COMMAND))
+                else if (op.Equals(REMOVE_GAME_BY_ID_COMMAND))
                 {
                     int id, key;
                     try
@@ -359,7 +359,7 @@ namespace StupidBlackjackSln.Code
                     OutputToForm("Failed to remove game: Game " + id.ToString() + " doesn't exist or key does not match");
                     return COMMAND_FAILED;
                 }
-                else if (c.Equals(REMOVE_PLAYER_FROM_GAME_COMMAND))
+                else if (op.Equals(REMOVE_PLAYER_FROM_GAME_COMMAND))
                 {
                     int id, key;
                     try
@@ -397,7 +397,7 @@ namespace StupidBlackjackSln.Code
                         return COMMAND_FAILED;
                     }
                 }
-                else if (c.Equals(START_GAME_BY_ID_COMMAND))
+                else if (op.Equals(START_GAME_BY_ID_COMMAND))
                 {
                     int id, key;
                     try
