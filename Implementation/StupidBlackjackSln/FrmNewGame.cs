@@ -92,6 +92,9 @@ namespace StupidBlackjackSln
             if (player1.getBusted() == true)
             {
                 btnHit.Enabled = false;   //Disable Hit Button
+                ticks = 0;    //ends turn and sets time to 0
+                timer1.Stop();
+                lblTimer.Text = ticks.ToString();
                 BlackjackPlayer.isTurn2 = false;
             }
         }
