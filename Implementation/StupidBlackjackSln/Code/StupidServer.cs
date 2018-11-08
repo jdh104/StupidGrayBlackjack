@@ -36,6 +36,7 @@ namespace StupidBlackjackSln.Code
         public static readonly String START_GAME_BY_ID_COMMAND = "START";
         public static readonly String UPDATE_DEALER_DRAW = "U_D_DRAW";
         public static readonly String UPDATE_DEALER_STAND = "U_D_STAND";
+        public static readonly String UPDATE_DEALER_TURN = "U_D_TURN";
         public static readonly String UPDATE_GAME_CONNECTION_BROKEN = "U_BREAK";
         public static readonly String UPDATE_GAME_HAS_STARTED = "U_START";
         public static readonly String UPDATE_PLAYER_CONNECTION_BROKEN = "U_P_BREAK";
@@ -521,6 +522,10 @@ namespace StupidBlackjackSln.Code
                 catch (System.IO.IOException)
                 {
                     not_killed = false;
+                    foreach (GameRep game in games)
+                    {
+                        game.RemoveClient(c);
+                    }
                 }
             }
         }
@@ -615,9 +620,12 @@ namespace StupidBlackjackSln.Code
         /// <param name="toWrite">The String to be written</param>
         private void WriteLine(TcpClient client, String toWrite)
         {
-            byte[] data = Encoding.ASCII.GetBytes(toWrite.Trim());
-            client.GetStream().Write(data, 0, data.Length);
-            client.GetStream().Write(new byte[] {NEWLINE}, 0, 1);
+            if (toWrite != null)
+            {
+                byte[] data = Encoding.ASCII.GetBytes(toWrite.Trim());
+                client.GetStream().Write(data, 0, data.Length);
+                client.GetStream().Write(new byte[] { NEWLINE }, 0, 1);
+            }
         }
 
         /// <summary>
@@ -664,6 +672,23 @@ namespace StupidBlackjackSln.Code
             public void RemoveClientByKey(int key)
             {
                 client_dict.Remove(key);
+            }
+
+            public void RemoveClient(TcpClient cli)
+            {
+                int keytoremove = -2; // guaranteed not to be in client_dict
+                foreach (KeyValuePair<int, TcpClient> kvp in client_dict)
+                {
+                    if (kvp.Value == cli)
+                    {
+                        keytoremove = kvp.Key;
+                        break; // need to get out of loop to remove
+                    }
+                }
+                if (keytoremove != -2)
+                {
+                    client_dict.Remove(keytoremove);
+                }
             }
 
             public void SetHost(TcpClient host)
