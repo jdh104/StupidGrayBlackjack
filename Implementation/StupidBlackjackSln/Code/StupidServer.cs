@@ -34,9 +34,14 @@ namespace StupidBlackjackSln.Code
         public static readonly String REMOVE_GAME_BY_ID_COMMAND = "RGAME";
         public static readonly String REMOVE_PLAYER_FROM_GAME_COMMAND = "RPLAYER";
         public static readonly String START_GAME_BY_ID_COMMAND = "START";
+        public static readonly String UPDATE_DEALER_DRAW = "U_D_DRAW";
+        public static readonly String UPDATE_DEALER_STAND = "U_D_STAND";
         public static readonly String UPDATE_GAME_CONNECTION_BROKEN = "U_BREAK";
         public static readonly String UPDATE_GAME_HAS_STARTED = "U_START";
+        public static readonly String UPDATE_PLAYER_CONNECTION_BROKEN = "U_P_BREAK";
         public static readonly String UPDATE_PLAYER_JOINED = "U_JOINED";
+        public static readonly String UPDATE_PLAYER_DRAW = "U_P_DRAW";
+        public static readonly String UPDATE_PLAYER_STAND = "U_P_STAND";
         public static readonly byte NEWLINE = Encoding.ASCII.GetBytes("\n")[0];
 
         private System.Windows.Forms.TextBox outputbox;
