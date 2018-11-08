@@ -50,17 +50,12 @@ namespace StupidBlackjackSln
             {
                 picPlayerCards[i] = Controls.Find("picPlayerCard" + (i + 1).ToString(), true)[0] as PictureBox;
             }
+
             int? nPlayers = Program.GetConnector().GetGamePopulationByID(id);
             LoadPlayers(nPlayers);
 
-            //TODO get player order by id, key?
-            // get 2d array of keys to order
-            // parse for own key and store
-            // new array "other players" ? thoughts?
-
-            // TODO (contingent on above)
-            //lblYouArePlayer.Text = "You are player " + Program.GetConnector().GetPlayerOrder()[] something;
-            //lblYouArePlayer.Show();
+            // Update information in panel with info from server
+            UpdateInfoFromServer();
 
             this.id = id;
         }
@@ -113,7 +108,6 @@ namespace StupidBlackjackSln
             timer1.Stop();
             btnHit.Enabled = false;   //Disable Hit Button
         }
-
 
         /// <summary>
         /// Find image corresponding to card
@@ -188,12 +182,39 @@ namespace StupidBlackjackSln
             flowPnlPlayers.Show();
         }
 
+        /// <summary>
+        /// Parse input string for update type and return meaningful update message
+        /// </summary>
+        /// <param name="update"></param>
+        /// <returns></returns>
+        private String ParseUpdate(String update)
+        {
+            string[] words = update.Split(' ');
+
+            foreach (var word in words)
+            {
+                System.Console.WriteLine($"<{word}>");
+            }
+
+
+            if (update.Equals(StupidServer.UPDATE_GAME_CONNECTION_BROKEN))
+                return "Host left game. Please leave and join another game.";
+            else if (update.Equals(StupidServer.UPDATE_PLAYER_JOINED))
+                return "A player joined!";
+            else
+                return "";
+        }
 
         /// <summary>
         /// Refresh infomation in Player Panel
         /// </summary>
         private void RefreshPlayerInfo()
         {
+            // This player info
+            //lblYouArePlayer.Text = "You are player " + Program.GetConnector().GetPlayerOrder()[] something;
+            //lblYouArePlayer.Show();
+
+            // Other player info
             // Up to 4 players in game, thus up to 3 players in players panel
             // players in players panel are identified by PlayerX, PlayerY, and PlayerZ
             // lblPlayer_score
@@ -231,6 +252,21 @@ namespace StupidBlackjackSln
                 btnHit.Enabled = false;   //Disable Hit Button
                 RefreshPlayerInfo();    // Refresh info on rhs panel
                 timer1.Stop();
+                UpdateInfoFromServer();
+            }
+        }
+
+        /// <summary>
+        /// Updates the information in the panel from server update
+        /// </summary>
+        private void UpdateInfoFromServer()
+        {
+            String update = Program.GetConnector().CheckForUpdate();
+
+            if (update != null)
+            {
+                ParseUpdate(update);
+                RefreshPlayerInfo();
             }
         }
     }
