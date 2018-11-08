@@ -18,6 +18,7 @@ namespace StupidBlackjackSln
     {
         public static Deck deck;
         private BlackjackPlayer player1;
+        public Dealer dealer1;
         private PictureBox[] picPlayerCards;
         private int ticks = 15;  //15 seconds for a player's turn
         private int id = 0;
@@ -59,6 +60,7 @@ namespace StupidBlackjackSln
         {
             deck = new Deck(FindBitmap);
             player1 = new BlackjackPlayer();
+            dealer1 = new Dealer();
 
             player1.giveHand(new List<Card>() { deck.dealCard(), deck.dealCard() });
             showHand();
