@@ -59,14 +59,14 @@ namespace StupidBlackjackSln.Code
         /// <summary>arg[1] -> the index of the player that has disconnected</summary>
         public static readonly String UPDATE_PLAYER_CONNECTION_BROKEN = "U_P_BREAK";
 
-        /// <summary>no args, means that a player has decided to join the game</summary>
+        /// <summary>no args, means that a player has decided to join the game. Can only be recieved before game has started</summary>
         public static readonly String UPDATE_PLAYER_JOINED = "U_P_JOINED";
 
         /// <summary>arg[1] -> the index of the player that has drawn // 
         /// arg[2] -> String representation of the card drawn (defined by Card.ToString)</summary>
         public static readonly String UPDATE_PLAYER_DRAW = "U_P_DRAW";
 
-        /// <summary>arg[1] -> the index of the player that has standed/stood/stunned/whatever</summary>
+        /// <summary>arg[1] -> the index of the player that has standed/stood/stund/whatever</summary>
         public static readonly String UPDATE_PLAYER_STAND = "U_P_STAND";
 
         /// <summary>no args, means that your turn has begun</summary>
@@ -138,7 +138,7 @@ namespace StupidBlackjackSln.Code
         }
 
         /// <summary>
-        /// Send am message to all clients connected to a particular game.
+        /// Send a message to all clients connected to a particular game.
         /// </summary>
         /// <param name="game">GameRep to pull clients from</param>
         /// <param name="s">String to broadcast</param>
