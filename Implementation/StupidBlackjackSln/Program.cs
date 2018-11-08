@@ -22,6 +22,8 @@ namespace StupidBlackjackSln
         [STAThread]
         static void Main()
         {
+            AppDomain.CurrentDomain.ProcessExit += (s, e) => {CloseStupidConnector(); CloseStupidServer();};
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new frmTitle());
