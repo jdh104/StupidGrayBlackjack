@@ -69,6 +69,7 @@
             this.lblPlayerZscore = new System.Windows.Forms.Label();
             this.lblPlayerZname = new System.Windows.Forms.Label();
             this.picPlayerZ = new System.Windows.Forms.PictureBox();
+            this.lblYouArePlayer = new System.Windows.Forms.Label();
             this.pnlTopBtns.SuspendLayout();
             this.flowPnlPlayers.SuspendLayout();
             this.pnlTableHolder.SuspendLayout();
@@ -165,6 +166,7 @@
             this.tablePnlGamePlay.Controls.Add(this.flowPnlCards, 0, 2);
             this.tablePnlGamePlay.Controls.Add(this.pnlGameFunctions, 0, 1);
             this.tablePnlGamePlay.Controls.Add(this.pnlDealer, 0, 0);
+            this.tablePnlGamePlay.Controls.Add(this.lblYouArePlayer, 0, 3);
             this.tablePnlGamePlay.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tablePnlGamePlay.Location = new System.Drawing.Point(0, 0);
             this.tablePnlGamePlay.Margin = new System.Windows.Forms.Padding(4);
@@ -587,6 +589,18 @@
             this.picPlayerZ.TabIndex = 0;
             this.picPlayerZ.TabStop = false;
             // 
+            // lblYouArePlayer
+            // 
+            this.lblYouArePlayer.AutoSize = true;
+            this.lblYouArePlayer.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblYouArePlayer.ForeColor = System.Drawing.Color.Gainsboro;
+            this.lblYouArePlayer.Location = new System.Drawing.Point(3, 652);
+            this.lblYouArePlayer.Name = "lblYouArePlayer";
+            this.lblYouArePlayer.Size = new System.Drawing.Size(252, 37);
+            this.lblYouArePlayer.TabIndex = 5;
+            this.lblYouArePlayer.Text = "You are player _";
+            this.lblYouArePlayer.Visible = false;
+            // 
             // FrmNewGame
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
@@ -684,5 +698,6 @@
         private System.Windows.Forms.Label lblPlayerZscore;
         private System.Windows.Forms.Label lblPlayerZname;
         private System.Windows.Forms.PictureBox picPlayerZ;
+        private System.Windows.Forms.Label lblYouArePlayer;
     }
 }
