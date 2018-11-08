@@ -53,6 +53,10 @@ namespace StupidBlackjackSln
             }
         }
 
+        /// <summary>
+        /// Grabs the quasi-singleton StupidConnector object.
+        /// </summary>
+        /// <returns>null if not instantiated</returns>
         public static StupidConnector GetConnector()
         {
             return connector;
