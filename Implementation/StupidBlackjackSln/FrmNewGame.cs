@@ -134,6 +134,8 @@ namespace StupidBlackjackSln
         {
             BlackjackPlayer.isTurn2 = false;
             ticks = 0;    //ends turn and sets time to 0
+            lblTimer.Text = ticks.ToString();
+            timer1.Stop();
             btnHit.Enabled = false;   //Disable Hit Button
         }
     }
