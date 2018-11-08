@@ -361,5 +361,14 @@
   <ItemGroup>
     <None Include="Resources\greenfelt1.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\100_win_icon.png" />
+    <Content Include="Resources\10_win_icon.png" />
+    <Content Include="Resources\1_win_icon.png" />
+    <Content Include="Resources\25_win_icon.png" />
+    <Content Include="Resources\blackjack_icon.png" />
+    <Content Include="Resources\instant_win_icon.png" />
+    <Content Include="Resources\online_win_icon.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

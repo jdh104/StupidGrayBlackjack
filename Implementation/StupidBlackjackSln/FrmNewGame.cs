@@ -20,7 +20,7 @@ namespace StupidBlackjackSln
         private Player player1;
         private PictureBox[] picPlayerCards;
         private int ticks = 15;  //15 seconds for a player's turn
-        private int gameID;
+        private int id = 0;
 
 
         /// <summary>
@@ -52,7 +52,7 @@ namespace StupidBlackjackSln
                 picPlayerCards[i] = Controls.Find("picPlayerCard" + (i + 1).ToString(), true)[0] as PictureBox;
             }
 
-            this.gameID = id;
+            this.id = id;
         }
 
         private void FrmNewGame_Load(object sender, EventArgs e)
@@ -75,7 +75,7 @@ namespace StupidBlackjackSln
 
         private void FrmNewGame_FormClosed(object sender, FormClosedEventArgs e)
         {
-            
+            this.Close();
         }
 
         private void btnHit_Click(object sender, EventArgs e)
@@ -102,27 +102,32 @@ namespace StupidBlackjackSln
 
         private void btnStand_Click(object sender, EventArgs e)
         {
-            Player.isTurn = false; 
+            Player.isTurn = false;
+            ticks = 15;    //ends turn and resets time
+            //ToDo Disable hit button
+            btnHit.Enabled = false;
         }
 
         private void buttonExit_Click(object sender, EventArgs e)
         {
+            //if (this.id != 0)
+              //  Program.GetConnector().RemoveHostedGame(id);
             this.Close();
-            //Get rid of connection to server
-            //TODO
         }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
             ticks--;    //Time ticks down each second
-            label2.Text = ticks.ToString();
+            lblTimer.Text = ticks.ToString();
             this.Text = ticks.ToString();
 
             if (ticks <= 0)
             {
                 this.Text = "Turn Over";
-                timer1.Stop();        //ToDo
-            }                        //This would end the player's turn and make them Stand.
+                ticks = 15;      //resets time
+                //We could switch turns here and keep going with the clock
+                Player.isTurn = false;
+            }                        
         }
 
     }

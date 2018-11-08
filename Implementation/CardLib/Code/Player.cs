@@ -15,6 +15,7 @@ namespace StupidBlackjackSln.Code
         }
 
         public static Boolean isTurn;
+        public static Boolean isWin;
 
         public List<Card> Hand
         {
