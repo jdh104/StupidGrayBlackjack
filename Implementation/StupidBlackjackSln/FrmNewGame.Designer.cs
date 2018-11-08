@@ -49,18 +49,20 @@
             this.btnHit = new System.Windows.Forms.Button();
             this.pnlDealer = new System.Windows.Forms.Panel();
             this.pnlPlayerX = new System.Windows.Forms.Panel();
-            this.pnlCtrPlayerX = new System.Windows.Forms.SplitContainer();
+            this.picPlayerX = new System.Windows.Forms.PictureBox();
             this.lblPlayerXname = new System.Windows.Forms.Label();
             this.lblPlayerXscore = new System.Windows.Forms.Label();
             this.lblPlayerXstatus = new System.Windows.Forms.Label();
             this.pnlPlayerXcards = new System.Windows.Forms.Panel();
-            this.picPlayerX = new System.Windows.Forms.PictureBox();
+            this.pnlCtrPlayerX = new System.Windows.Forms.SplitContainer();
+            this.pnlPlayerY = new System.Windows.Forms.Panel();
             this.pnlCtrPlayerY = new System.Windows.Forms.SplitContainer();
             this.pnlPlayerYcards = new System.Windows.Forms.Panel();
             this.lblPlayerYstatus = new System.Windows.Forms.Label();
             this.lblPlayerYscore = new System.Windows.Forms.Label();
             this.lblPlayerYname = new System.Windows.Forms.Label();
             this.picPlayerY = new System.Windows.Forms.PictureBox();
+            this.pnlPlayerZ = new System.Windows.Forms.Panel();
             this.pnlCtrPlayerZ = new System.Windows.Forms.SplitContainer();
             this.pnlPlayerZcards = new System.Windows.Forms.Panel();
             this.lblPlayerZstatus = new System.Windows.Forms.Label();
@@ -80,16 +82,18 @@
             this.pnlGameFunctions.SuspendLayout();
             this.pnlScoreTimer.SuspendLayout();
             this.pnlPlayerX.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picPlayerX)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pnlCtrPlayerX)).BeginInit();
             this.pnlCtrPlayerX.Panel1.SuspendLayout();
             this.pnlCtrPlayerX.Panel2.SuspendLayout();
             this.pnlCtrPlayerX.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picPlayerX)).BeginInit();
+            this.pnlPlayerY.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pnlCtrPlayerY)).BeginInit();
             this.pnlCtrPlayerY.Panel1.SuspendLayout();
             this.pnlCtrPlayerY.Panel2.SuspendLayout();
             this.pnlCtrPlayerY.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picPlayerY)).BeginInit();
+            this.pnlPlayerZ.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pnlCtrPlayerZ)).BeginInit();
             this.pnlCtrPlayerZ.Panel1.SuspendLayout();
             this.pnlCtrPlayerZ.Panel2.SuspendLayout();
@@ -129,8 +133,8 @@
             // 
             this.flowPnlPlayers.BackColor = System.Drawing.Color.Transparent;
             this.flowPnlPlayers.Controls.Add(this.pnlPlayerX);
-            this.flowPnlPlayers.Controls.Add(this.pnlCtrPlayerY);
-            this.flowPnlPlayers.Controls.Add(this.pnlCtrPlayerZ);
+            this.flowPnlPlayers.Controls.Add(this.pnlPlayerY);
+            this.flowPnlPlayers.Controls.Add(this.pnlPlayerZ);
             this.flowPnlPlayers.Dock = System.Windows.Forms.DockStyle.Right;
             this.flowPnlPlayers.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flowPnlPlayers.Location = new System.Drawing.Point(1122, 58);
@@ -138,6 +142,7 @@
             this.flowPnlPlayers.Name = "flowPnlPlayers";
             this.flowPnlPlayers.Size = new System.Drawing.Size(360, 690);
             this.flowPnlPlayers.TabIndex = 12;
+            this.flowPnlPlayers.Visible = false;
             // 
             // pnlTableHolder
             // 
@@ -333,32 +338,21 @@
             this.pnlPlayerX.Controls.Add(this.pnlCtrPlayerX);
             this.pnlPlayerX.Location = new System.Drawing.Point(3, 3);
             this.pnlPlayerX.Name = "pnlPlayerX";
+            this.pnlPlayerX.Padding = new System.Windows.Forms.Padding(3);
             this.pnlPlayerX.Size = new System.Drawing.Size(357, 200);
             this.pnlPlayerX.TabIndex = 0;
+            this.pnlPlayerX.Visible = false;
             // 
-            // pnlCtrPlayerX
+            // picPlayerX
             // 
-            this.pnlCtrPlayerX.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlCtrPlayerX.Location = new System.Drawing.Point(0, 0);
-            this.pnlCtrPlayerX.Name = "pnlCtrPlayerX";
-            // 
-            // pnlCtrPlayerX.Panel1
-            // 
-            this.pnlCtrPlayerX.Panel1.Controls.Add(this.pnlPlayerXcards);
-            this.pnlCtrPlayerX.Panel1.Controls.Add(this.lblPlayerXstatus);
-            this.pnlCtrPlayerX.Panel1.Controls.Add(this.lblPlayerXscore);
-            this.pnlCtrPlayerX.Panel1.Controls.Add(this.lblPlayerXname);
-            this.pnlCtrPlayerX.Panel1MinSize = 100;
-            // 
-            // pnlCtrPlayerX.Panel2
-            // 
-            this.pnlCtrPlayerX.Panel2.BackColor = System.Drawing.Color.Transparent;
-            this.pnlCtrPlayerX.Panel2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pnlCtrPlayerX.Panel2.Controls.Add(this.picPlayerX);
-            this.pnlCtrPlayerX.Panel2MinSize = 100;
-            this.pnlCtrPlayerX.Size = new System.Drawing.Size(357, 200);
-            this.pnlCtrPlayerX.SplitterDistance = 175;
-            this.pnlCtrPlayerX.TabIndex = 0;
+            this.picPlayerX.BackgroundImage = global::StupidBlackjackSln.Properties.Resources.user1;
+            this.picPlayerX.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.picPlayerX.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.picPlayerX.Location = new System.Drawing.Point(0, 0);
+            this.picPlayerX.Name = "picPlayerX";
+            this.picPlayerX.Size = new System.Drawing.Size(175, 194);
+            this.picPlayerX.TabIndex = 0;
+            this.picPlayerX.TabStop = false;
             // 
             // lblPlayerXname
             // 
@@ -374,7 +368,7 @@
             // 
             this.lblPlayerXscore.AutoSize = true;
             this.lblPlayerXscore.Dock = System.Windows.Forms.DockStyle.Right;
-            this.lblPlayerXscore.Location = new System.Drawing.Point(110, 25);
+            this.lblPlayerXscore.Location = new System.Drawing.Point(107, 25);
             this.lblPlayerXscore.Name = "lblPlayerXscore";
             this.lblPlayerXscore.Size = new System.Drawing.Size(65, 25);
             this.lblPlayerXscore.TabIndex = 1;
@@ -384,7 +378,7 @@
             // 
             this.lblPlayerXstatus.AutoSize = true;
             this.lblPlayerXstatus.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.lblPlayerXstatus.Location = new System.Drawing.Point(0, 175);
+            this.lblPlayerXstatus.Location = new System.Drawing.Point(0, 169);
             this.lblPlayerXstatus.Name = "lblPlayerXstatus";
             this.lblPlayerXstatus.Size = new System.Drawing.Size(70, 25);
             this.lblPlayerXstatus.TabIndex = 2;
@@ -395,24 +389,49 @@
             this.pnlPlayerXcards.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlPlayerXcards.Location = new System.Drawing.Point(0, 25);
             this.pnlPlayerXcards.Name = "pnlPlayerXcards";
-            this.pnlPlayerXcards.Size = new System.Drawing.Size(110, 150);
+            this.pnlPlayerXcards.Size = new System.Drawing.Size(107, 144);
             this.pnlPlayerXcards.TabIndex = 3;
             // 
-            // picPlayerX
+            // pnlCtrPlayerX
             // 
-            this.picPlayerX.BackgroundImage = global::StupidBlackjackSln.Properties.Resources.user1;
-            this.picPlayerX.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.picPlayerX.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.picPlayerX.Location = new System.Drawing.Point(0, 0);
-            this.picPlayerX.Name = "picPlayerX";
-            this.picPlayerX.Size = new System.Drawing.Size(178, 200);
-            this.picPlayerX.TabIndex = 0;
-            this.picPlayerX.TabStop = false;
+            this.pnlCtrPlayerX.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlCtrPlayerX.Location = new System.Drawing.Point(3, 3);
+            this.pnlCtrPlayerX.Name = "pnlCtrPlayerX";
+            // 
+            // pnlCtrPlayerX.Panel1
+            // 
+            this.pnlCtrPlayerX.Panel1.Controls.Add(this.pnlPlayerXcards);
+            this.pnlCtrPlayerX.Panel1.Controls.Add(this.lblPlayerXstatus);
+            this.pnlCtrPlayerX.Panel1.Controls.Add(this.lblPlayerXscore);
+            this.pnlCtrPlayerX.Panel1.Controls.Add(this.lblPlayerXname);
+            this.pnlCtrPlayerX.Panel1.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.pnlCtrPlayerX.Panel1MinSize = 100;
+            // 
+            // pnlCtrPlayerX.Panel2
+            // 
+            this.pnlCtrPlayerX.Panel2.BackColor = System.Drawing.Color.Transparent;
+            this.pnlCtrPlayerX.Panel2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pnlCtrPlayerX.Panel2.Controls.Add(this.picPlayerX);
+            this.pnlCtrPlayerX.Panel2.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.pnlCtrPlayerX.Panel2MinSize = 100;
+            this.pnlCtrPlayerX.Size = new System.Drawing.Size(351, 194);
+            this.pnlCtrPlayerX.SplitterDistance = 172;
+            this.pnlCtrPlayerX.TabIndex = 0;
+            // 
+            // pnlPlayerY
+            // 
+            this.pnlPlayerY.Controls.Add(this.pnlCtrPlayerY);
+            this.pnlPlayerY.Location = new System.Drawing.Point(3, 209);
+            this.pnlPlayerY.Name = "pnlPlayerY";
+            this.pnlPlayerY.Padding = new System.Windows.Forms.Padding(3);
+            this.pnlPlayerY.Size = new System.Drawing.Size(345, 193);
+            this.pnlPlayerY.TabIndex = 3;
+            this.pnlPlayerY.Visible = false;
             // 
             // pnlCtrPlayerY
             // 
             this.pnlCtrPlayerY.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlCtrPlayerY.Location = new System.Drawing.Point(3, 209);
+            this.pnlCtrPlayerY.Location = new System.Drawing.Point(3, 3);
             this.pnlCtrPlayerY.Name = "pnlCtrPlayerY";
             // 
             // pnlCtrPlayerY.Panel1
@@ -421,6 +440,7 @@
             this.pnlCtrPlayerY.Panel1.Controls.Add(this.lblPlayerYstatus);
             this.pnlCtrPlayerY.Panel1.Controls.Add(this.lblPlayerYscore);
             this.pnlCtrPlayerY.Panel1.Controls.Add(this.lblPlayerYname);
+            this.pnlCtrPlayerY.Panel1.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.pnlCtrPlayerY.Panel1MinSize = 100;
             // 
             // pnlCtrPlayerY.Panel2
@@ -428,24 +448,25 @@
             this.pnlCtrPlayerY.Panel2.BackColor = System.Drawing.Color.Transparent;
             this.pnlCtrPlayerY.Panel2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pnlCtrPlayerY.Panel2.Controls.Add(this.picPlayerY);
+            this.pnlCtrPlayerY.Panel2.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.pnlCtrPlayerY.Panel2MinSize = 100;
-            this.pnlCtrPlayerY.Size = new System.Drawing.Size(357, 200);
-            this.pnlCtrPlayerY.SplitterDistance = 175;
-            this.pnlCtrPlayerY.TabIndex = 1;
+            this.pnlCtrPlayerY.Size = new System.Drawing.Size(339, 187);
+            this.pnlCtrPlayerY.SplitterDistance = 172;
+            this.pnlCtrPlayerY.TabIndex = 2;
             // 
             // pnlPlayerYcards
             // 
             this.pnlPlayerYcards.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlPlayerYcards.Location = new System.Drawing.Point(0, 25);
             this.pnlPlayerYcards.Name = "pnlPlayerYcards";
-            this.pnlPlayerYcards.Size = new System.Drawing.Size(110, 150);
+            this.pnlPlayerYcards.Size = new System.Drawing.Size(107, 137);
             this.pnlPlayerYcards.TabIndex = 3;
             // 
             // lblPlayerYstatus
             // 
             this.lblPlayerYstatus.AutoSize = true;
             this.lblPlayerYstatus.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.lblPlayerYstatus.Location = new System.Drawing.Point(0, 175);
+            this.lblPlayerYstatus.Location = new System.Drawing.Point(0, 162);
             this.lblPlayerYstatus.Name = "lblPlayerYstatus";
             this.lblPlayerYstatus.Size = new System.Drawing.Size(70, 25);
             this.lblPlayerYstatus.TabIndex = 2;
@@ -455,7 +476,7 @@
             // 
             this.lblPlayerYscore.AutoSize = true;
             this.lblPlayerYscore.Dock = System.Windows.Forms.DockStyle.Right;
-            this.lblPlayerYscore.Location = new System.Drawing.Point(110, 25);
+            this.lblPlayerYscore.Location = new System.Drawing.Point(107, 25);
             this.lblPlayerYscore.Name = "lblPlayerYscore";
             this.lblPlayerYscore.Size = new System.Drawing.Size(65, 25);
             this.lblPlayerYscore.TabIndex = 1;
@@ -478,14 +499,23 @@
             this.picPlayerY.Dock = System.Windows.Forms.DockStyle.Fill;
             this.picPlayerY.Location = new System.Drawing.Point(0, 0);
             this.picPlayerY.Name = "picPlayerY";
-            this.picPlayerY.Size = new System.Drawing.Size(178, 200);
+            this.picPlayerY.Size = new System.Drawing.Size(163, 187);
             this.picPlayerY.TabIndex = 0;
             this.picPlayerY.TabStop = false;
+            // 
+            // pnlPlayerZ
+            // 
+            this.pnlPlayerZ.Controls.Add(this.pnlCtrPlayerZ);
+            this.pnlPlayerZ.Location = new System.Drawing.Point(3, 408);
+            this.pnlPlayerZ.Name = "pnlPlayerZ";
+            this.pnlPlayerZ.Size = new System.Drawing.Size(354, 196);
+            this.pnlPlayerZ.TabIndex = 4;
+            this.pnlPlayerZ.Visible = false;
             // 
             // pnlCtrPlayerZ
             // 
             this.pnlCtrPlayerZ.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlCtrPlayerZ.Location = new System.Drawing.Point(3, 415);
+            this.pnlCtrPlayerZ.Location = new System.Drawing.Point(0, 0);
             this.pnlCtrPlayerZ.Name = "pnlCtrPlayerZ";
             // 
             // pnlCtrPlayerZ.Panel1
@@ -494,6 +524,7 @@
             this.pnlCtrPlayerZ.Panel1.Controls.Add(this.lblPlayerZstatus);
             this.pnlCtrPlayerZ.Panel1.Controls.Add(this.lblPlayerZscore);
             this.pnlCtrPlayerZ.Panel1.Controls.Add(this.lblPlayerZname);
+            this.pnlCtrPlayerZ.Panel1.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.pnlCtrPlayerZ.Panel1MinSize = 100;
             // 
             // pnlCtrPlayerZ.Panel2
@@ -501,24 +532,25 @@
             this.pnlCtrPlayerZ.Panel2.BackColor = System.Drawing.Color.Transparent;
             this.pnlCtrPlayerZ.Panel2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pnlCtrPlayerZ.Panel2.Controls.Add(this.picPlayerZ);
+            this.pnlCtrPlayerZ.Panel2.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.pnlCtrPlayerZ.Panel2MinSize = 100;
-            this.pnlCtrPlayerZ.Size = new System.Drawing.Size(357, 200);
-            this.pnlCtrPlayerZ.SplitterDistance = 175;
-            this.pnlCtrPlayerZ.TabIndex = 2;
+            this.pnlCtrPlayerZ.Size = new System.Drawing.Size(354, 196);
+            this.pnlCtrPlayerZ.SplitterDistance = 170;
+            this.pnlCtrPlayerZ.TabIndex = 3;
             // 
             // pnlPlayerZcards
             // 
             this.pnlPlayerZcards.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlPlayerZcards.Location = new System.Drawing.Point(0, 25);
             this.pnlPlayerZcards.Name = "pnlPlayerZcards";
-            this.pnlPlayerZcards.Size = new System.Drawing.Size(110, 150);
+            this.pnlPlayerZcards.Size = new System.Drawing.Size(105, 146);
             this.pnlPlayerZcards.TabIndex = 3;
             // 
             // lblPlayerZstatus
             // 
             this.lblPlayerZstatus.AutoSize = true;
             this.lblPlayerZstatus.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.lblPlayerZstatus.Location = new System.Drawing.Point(0, 175);
+            this.lblPlayerZstatus.Location = new System.Drawing.Point(0, 171);
             this.lblPlayerZstatus.Name = "lblPlayerZstatus";
             this.lblPlayerZstatus.Size = new System.Drawing.Size(70, 25);
             this.lblPlayerZstatus.TabIndex = 2;
@@ -528,7 +560,7 @@
             // 
             this.lblPlayerZscore.AutoSize = true;
             this.lblPlayerZscore.Dock = System.Windows.Forms.DockStyle.Right;
-            this.lblPlayerZscore.Location = new System.Drawing.Point(110, 25);
+            this.lblPlayerZscore.Location = new System.Drawing.Point(105, 25);
             this.lblPlayerZscore.Name = "lblPlayerZscore";
             this.lblPlayerZscore.Size = new System.Drawing.Size(65, 25);
             this.lblPlayerZscore.TabIndex = 1;
@@ -551,7 +583,7 @@
             this.picPlayerZ.Dock = System.Windows.Forms.DockStyle.Fill;
             this.picPlayerZ.Location = new System.Drawing.Point(0, 0);
             this.picPlayerZ.Name = "picPlayerZ";
-            this.picPlayerZ.Size = new System.Drawing.Size(178, 200);
+            this.picPlayerZ.Size = new System.Drawing.Size(180, 196);
             this.picPlayerZ.TabIndex = 0;
             this.picPlayerZ.TabStop = false;
             // 
@@ -587,18 +619,20 @@
             this.pnlScoreTimer.ResumeLayout(false);
             this.pnlScoreTimer.PerformLayout();
             this.pnlPlayerX.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.picPlayerX)).EndInit();
             this.pnlCtrPlayerX.Panel1.ResumeLayout(false);
             this.pnlCtrPlayerX.Panel1.PerformLayout();
             this.pnlCtrPlayerX.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pnlCtrPlayerX)).EndInit();
             this.pnlCtrPlayerX.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.picPlayerX)).EndInit();
+            this.pnlPlayerY.ResumeLayout(false);
             this.pnlCtrPlayerY.Panel1.ResumeLayout(false);
             this.pnlCtrPlayerY.Panel1.PerformLayout();
             this.pnlCtrPlayerY.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pnlCtrPlayerY)).EndInit();
             this.pnlCtrPlayerY.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.picPlayerY)).EndInit();
+            this.pnlPlayerZ.ResumeLayout(false);
             this.pnlCtrPlayerZ.Panel1.ResumeLayout(false);
             this.pnlCtrPlayerZ.Panel1.PerformLayout();
             this.pnlCtrPlayerZ.Panel2.ResumeLayout(false);
@@ -631,17 +665,19 @@
         private System.Windows.Forms.PictureBox picPlayerCard3;
         private System.Windows.Forms.Panel pnlPlayerX;
         private System.Windows.Forms.SplitContainer pnlCtrPlayerX;
-        private System.Windows.Forms.Label lblPlayerXname;
         private System.Windows.Forms.Panel pnlPlayerXcards;
         private System.Windows.Forms.Label lblPlayerXstatus;
         private System.Windows.Forms.Label lblPlayerXscore;
+        private System.Windows.Forms.Label lblPlayerXname;
         private System.Windows.Forms.PictureBox picPlayerX;
+        private System.Windows.Forms.Panel pnlPlayerY;
         private System.Windows.Forms.SplitContainer pnlCtrPlayerY;
         private System.Windows.Forms.Panel pnlPlayerYcards;
         private System.Windows.Forms.Label lblPlayerYstatus;
         private System.Windows.Forms.Label lblPlayerYscore;
         private System.Windows.Forms.Label lblPlayerYname;
         private System.Windows.Forms.PictureBox picPlayerY;
+        private System.Windows.Forms.Panel pnlPlayerZ;
         private System.Windows.Forms.SplitContainer pnlCtrPlayerZ;
         private System.Windows.Forms.Panel pnlPlayerZcards;
         private System.Windows.Forms.Label lblPlayerZstatus;

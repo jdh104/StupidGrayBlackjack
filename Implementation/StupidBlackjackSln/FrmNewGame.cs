@@ -59,10 +59,20 @@ namespace StupidBlackjackSln
 
         private void LoadPlayers(int? nPlayers)
         {
-            for (int i = 0; i < nPlayers; i++)
+            if (nPlayers >= 2)
             {
-                // TODO make player panel to add
+                pnlPlayerX.Show();
             }
+            if (nPlayers >= 3)
+            {
+                pnlPlayerY.Show();
+            }
+            if (nPlayers == 4)
+            {
+                pnlPlayerZ.Show();
+            }
+
+            flowPnlPlayers.Show();
         }
 
         private void FrmNewGame_Load(object sender, EventArgs e)
