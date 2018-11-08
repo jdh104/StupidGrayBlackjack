@@ -85,13 +85,16 @@ namespace StupidBlackjackSln
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void btnHit_Click_1(object sender, EventArgs e)
+        private void btnHit_Click(object sender, EventArgs e)
         {
             player1.giveCard(deck.dealCard());
             showHand();
             if (player1.getBusted() == true)
             {
                 btnHit.Enabled = false;   //Disable Hit Button
+                ticks = 0;    //ends turn and sets time to 0
+                timer1.Stop();
+                lblTimer.Text = ticks.ToString();
                 BlackjackPlayer.isTurn2 = false;
             }
         }
@@ -102,7 +105,7 @@ namespace StupidBlackjackSln
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void btnStand_Click_1(object sender, EventArgs e)
+        private void btnStand_Click(object sender, EventArgs e)
         {
             BlackjackPlayer.isTurn2 = false;
             ticks = 0;    //ends turn and sets time to 0
@@ -230,9 +233,5 @@ namespace StupidBlackjackSln
                 timer1.Stop();
             }
         }
-
-
-
-
     }
 }
