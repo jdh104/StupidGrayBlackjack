@@ -113,13 +113,35 @@ namespace StupidBlackjackSln.Code
         /// <param name="s">String to broadcast</param>
         private void Broadcast(String s)
         {
-            lock (clients) {
+            lock (clients)
+            {
                 lock (outputbox)
                 {
-                    OutputToForm("Broadcasting:");
+                    OutputToForm("\tBroadcasting:\r\n\t");
                     OutputToForm(s);
                 }
                 foreach (TcpClient client in clients)
+                {
+                    this.WriteLine(client, s);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Send am message to all clients connected to a particular game.
+        /// </summary>
+        /// <param name="game">GameRep to pull clients from</param>
+        /// <param name="s">String to broadcast</param>
+        private void BroadcastToGame(GameRep game, String s)
+        {
+            lock (clients)
+            {
+                lock (outputbox)
+                {
+                    OutputToForm("\tBroadcasting to game " + game.id.ToString() + ":\r\n\t");
+                    OutputToForm(s);
+                }
+                foreach (TcpClient client in game.GetClientList())
                 {
                     this.WriteLine(client, s);
                 }
@@ -162,6 +184,11 @@ namespace StupidBlackjackSln.Code
             }
         }
 
+        /// <summary>
+        /// Grab the remote address of a TcpClient.
+        /// </summary>
+        /// <param name="client">TcpClient to ask</param>
+        /// <returns>String representation of the remote address</returns>
         private static String GetIPAddressOf(TcpClient client)
         {
             return client.Client.RemoteEndPoint.ToString();
@@ -193,7 +220,7 @@ namespace StupidBlackjackSln.Code
         {
             lock (outputbox)
             {
-                this.OutputToForm(sender.Client.RemoteEndPoint.ToString() + "\r\n$ " + cmd);
+                this.OutputToForm(GetIPAddressOf(sender) + "\r\n$ " + cmd);
 
                 String[] args = cmd.Trim().Split(' ');
                 String op = args[0];
@@ -311,7 +338,7 @@ namespace StupidBlackjackSln.Code
                         id = Int32.Parse(args[1]);
                         key = Int32.Parse(args[2]);
                     }
-                    catch (Exception)
+                    catch
                     {
                         OutputToForm("Syntax Error: Failed to parse id");
                         return COMMAND_SYNTAX_ERROR;
@@ -331,6 +358,74 @@ namespace StupidBlackjackSln.Code
                         }
                     }
                     OutputToForm("Could not find requested game, responding with COMMAND_FAILED");
+                    return COMMAND_FAILED;
+                }
+                else if (op.Equals(NOTIFY_CARD_DRAW))
+                {
+                    int id, key;
+                    String cardrep;
+                    try
+                    {
+                        id = Int32.Parse(args[1]);
+                        key = Int32.Parse(args[2]);
+                        cardrep = args[3];
+                    }
+                    catch
+                    {
+                        OutputToForm("Syntax Error: Failed to parse command");
+                        return COMMAND_SYNTAX_ERROR;
+                    }
+                    foreach (GameRep game in games)
+                    {
+                        if (game.id == id)
+                        {
+                            int? player_index = game.GetIndexOfClient(sender);
+                            if (player_index == null)
+                            {
+                                OutputToForm("Failed to find player " + key.ToString());
+                                return COMMAND_FAILED;
+                            }
+                            else
+                            {
+                                BroadcastToGame(game, UPDATE_PLAYER_DRAW + " " + player_index.ToString() + " " + cardrep);
+                                return COMMAND_SUCCEEDED;
+                            }
+                        }
+                    }
+                    OutputToForm("Failed to find game " + id.ToString());
+                    return COMMAND_FAILED;
+                }
+                else if (op.Equals(NOTIFY_STAND))
+                {
+                    int id, key;
+                    try
+                    {
+                        id = Int32.Parse(args[1]);
+                        key = Int32.Parse(args[2]);
+                    }
+                    catch
+                    {
+                        OutputToForm("Syntax Error: Failed to parse command");
+                        return COMMAND_SYNTAX_ERROR;
+                    }
+                    foreach (GameRep game in games)
+                    {
+                        if (game.id == id)
+                        {
+                            int? player_index = game.GetIndexOfClient(sender);
+                            if (player_index == null)
+                            {
+                                OutputToForm("Failed to find player " + key.ToString());
+                                return COMMAND_FAILED;
+                            }
+                            else
+                            {
+                                BroadcastToGame(game, UPDATE_PLAYER_STAND + " " + player_index.ToString());
+                                return COMMAND_SUCCEEDED;
+                            }
+                        }
+                    }
+                    OutputToForm("Failed to find game " + id.ToString());
                     return COMMAND_FAILED;
                 }
                 else if (op.Equals(REMOVE_GAME_BY_ID_COMMAND))
@@ -680,6 +775,20 @@ namespace StupidBlackjackSln.Code
             public TcpClient GetHost()
             {
                 return client_dict[-1];
+            }
+
+            public int? GetIndexOfClient(TcpClient cli)
+            {
+                int index = 0;
+                foreach (KeyValuePair<int, TcpClient> kvp in client_dict)
+                {
+                    if (kvp.Value == cli)
+                    {
+                        return index;
+                    }
+                    index++;
+                }
+                return null;
             }
 
             /*public void RemoveClientByKey(int key)
