@@ -194,6 +194,17 @@ namespace StupidBlackjackSln.Code
             String[] response = this.WriteLine(StupidServer.REMOVE_PLAYER_FROM_GAME_COMMAND + " " + id + " " + key);
             return response[0].Equals(StupidServer.COMMAND_SUCCEEDED);
         }
+
+        /// <summary>
+        /// Notify other players of the card that you have drawn.
+        /// </summary>
+        /// <param name="c">The card object to notify</param>
+        /// <returns>true if the server responds with COMMAND_SUCCEDED, else false</returns>
+        public bool NotifyCardDrawn(Card c, int connected_game_id)
+        {
+            String[] response = this.WriteLine(StupidServer.NOTIFY_CARD_DRAW + " " + connected_game_id + " " + c.ToString());
+            return response[0].Equals(StupidServer.COMMAND_SUCCEEDED);
+        }
         
         /// <summary>
         /// Read from StupidServer until a newline is reached

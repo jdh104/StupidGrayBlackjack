@@ -31,6 +31,8 @@ namespace StupidBlackjackSln.Code
         public static readonly String GET_GAME_POP_BY_ID_COMMAND = "GPOP";
         public static readonly String HOST_NEW_GAME_COMMAND = "HOST";
         public static readonly String JOIN_GAME_BY_ID_COMMAND = "JOIN";
+        public static readonly String NOTIFY_CARD_DRAW = "N_DRAW";
+        public static readonly String NOTIFY_STAND = "N_STAND";
         public static readonly String REMOVE_GAME_BY_ID_COMMAND = "RGAME";
         public static readonly String REMOVE_PLAYER_FROM_GAME_COMMAND = "RPLAYER";
         public static readonly String START_GAME_BY_ID_COMMAND = "START";
