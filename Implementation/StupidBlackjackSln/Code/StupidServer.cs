@@ -42,6 +42,7 @@ namespace StupidBlackjackSln.Code
         public static readonly String UPDATE_PLAYER_JOINED = "U_JOINED";
         public static readonly String UPDATE_PLAYER_DRAW = "U_P_DRAW";
         public static readonly String UPDATE_PLAYER_STAND = "U_P_STAND";
+        public static readonly String UPDATE_YOUR_TURN = "U_TURN";
         public static readonly byte NEWLINE = Encoding.ASCII.GetBytes("\n")[0];
 
         private System.Windows.Forms.TextBox outputbox;
