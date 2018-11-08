@@ -74,7 +74,7 @@
             this.pnlTopBtns.Location = new System.Drawing.Point(0, 0);
             this.pnlTopBtns.Margin = new System.Windows.Forms.Padding(2);
             this.pnlTopBtns.Name = "pnlTopBtns";
-            this.pnlTopBtns.Size = new System.Drawing.Size(685, 30);
+            this.pnlTopBtns.Size = new System.Drawing.Size(794, 30);
             this.pnlTopBtns.TabIndex = 11;
             // 
             // btnExitGame
@@ -92,10 +92,10 @@
             // 
             this.flowPnlPlayers.BackColor = System.Drawing.Color.Transparent;
             this.flowPnlPlayers.Dock = System.Windows.Forms.DockStyle.Right;
-            this.flowPnlPlayers.Location = new System.Drawing.Point(571, 30);
+            this.flowPnlPlayers.Location = new System.Drawing.Point(680, 30);
             this.flowPnlPlayers.Margin = new System.Windows.Forms.Padding(2);
             this.flowPnlPlayers.Name = "flowPnlPlayers";
-            this.flowPnlPlayers.Size = new System.Drawing.Size(114, 359);
+            this.flowPnlPlayers.Size = new System.Drawing.Size(114, 415);
             this.flowPnlPlayers.TabIndex = 12;
             // 
             // pnlTableHolder
@@ -107,7 +107,7 @@
             this.pnlTableHolder.Location = new System.Drawing.Point(0, 30);
             this.pnlTableHolder.Margin = new System.Windows.Forms.Padding(2);
             this.pnlTableHolder.Name = "pnlTableHolder";
-            this.pnlTableHolder.Size = new System.Drawing.Size(571, 359);
+            this.pnlTableHolder.Size = new System.Drawing.Size(680, 415);
             this.pnlTableHolder.TabIndex = 13;
             // 
             // tablePnlGamePlay
@@ -128,7 +128,7 @@
             this.tablePnlGamePlay.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 32.40418F));
             this.tablePnlGamePlay.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 307F));
             this.tablePnlGamePlay.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 19F));
-            this.tablePnlGamePlay.Size = new System.Drawing.Size(571, 359);
+            this.tablePnlGamePlay.Size = new System.Drawing.Size(680, 415);
             this.tablePnlGamePlay.TabIndex = 11;
             // 
             // flowPnlCards
@@ -140,10 +140,10 @@
             this.flowPnlCards.Controls.Add(this.picPlayerCard4);
             this.flowPnlCards.Controls.Add(this.picPlayerCard5);
             this.flowPnlCards.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowPnlCards.Location = new System.Drawing.Point(2, 34);
+            this.flowPnlCards.Location = new System.Drawing.Point(2, 90);
             this.flowPnlCards.Margin = new System.Windows.Forms.Padding(2);
             this.flowPnlCards.Name = "flowPnlCards";
-            this.flowPnlCards.Size = new System.Drawing.Size(567, 303);
+            this.flowPnlCards.Size = new System.Drawing.Size(676, 303);
             this.flowPnlCards.TabIndex = 3;
             // 
             // picPlayerCard1
@@ -203,10 +203,10 @@
             this.pnlGameFunctions.Controls.Add(this.btnStand);
             this.pnlGameFunctions.Controls.Add(this.btnHit);
             this.pnlGameFunctions.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlGameFunctions.Location = new System.Drawing.Point(2, 24);
+            this.pnlGameFunctions.Location = new System.Drawing.Point(2, 62);
             this.pnlGameFunctions.Margin = new System.Windows.Forms.Padding(2);
             this.pnlGameFunctions.Name = "pnlGameFunctions";
-            this.pnlGameFunctions.Size = new System.Drawing.Size(567, 6);
+            this.pnlGameFunctions.Size = new System.Drawing.Size(676, 24);
             this.pnlGameFunctions.TabIndex = 2;
             // 
             // panel1
@@ -217,7 +217,7 @@
             this.panel1.Location = new System.Drawing.Point(30, 0);
             this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(484, 6);
+            this.panel1.Size = new System.Drawing.Size(593, 24);
             this.panel1.TabIndex = 15;
             // 
             // lblTimer
@@ -225,7 +225,7 @@
             this.lblTimer.AutoSize = true;
             this.lblTimer.Dock = System.Windows.Forms.DockStyle.Right;
             this.lblTimer.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTimer.Location = new System.Drawing.Point(484, 0);
+            this.lblTimer.Location = new System.Drawing.Point(593, 0);
             this.lblTimer.Name = "lblTimer";
             this.lblTimer.Size = new System.Drawing.Size(0, 37);
             this.lblTimer.TabIndex = 11;
@@ -248,13 +248,14 @@
             this.btnStand.AutoSize = true;
             this.btnStand.BackColor = System.Drawing.Color.Gainsboro;
             this.btnStand.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnStand.Location = new System.Drawing.Point(514, 0);
+            this.btnStand.Location = new System.Drawing.Point(623, 0);
             this.btnStand.Name = "btnStand";
-            this.btnStand.Size = new System.Drawing.Size(53, 6);
+            this.btnStand.Size = new System.Drawing.Size(53, 24);
             this.btnStand.TabIndex = 7;
             this.btnStand.Text = "Stand";
             this.btnStand.UseCompatibleTextRendering = true;
             this.btnStand.UseVisualStyleBackColor = false;
+            this.btnStand.Click += new System.EventHandler(this.btnStand_Click_1);
             // 
             // btnHit
             // 
@@ -263,16 +264,17 @@
             this.btnHit.Dock = System.Windows.Forms.DockStyle.Left;
             this.btnHit.Location = new System.Drawing.Point(0, 0);
             this.btnHit.Name = "btnHit";
-            this.btnHit.Size = new System.Drawing.Size(30, 6);
+            this.btnHit.Size = new System.Drawing.Size(30, 24);
             this.btnHit.TabIndex = 6;
             this.btnHit.Text = "Hit";
             this.btnHit.UseVisualStyleBackColor = false;
+            this.btnHit.Click += new System.EventHandler(this.btnHit_Click_1);
             // 
             // pnlDealer
             // 
             this.pnlDealer.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.pnlDealer.AutoSize = true;
-            this.pnlDealer.Location = new System.Drawing.Point(2, 20);
+            this.pnlDealer.Location = new System.Drawing.Point(2, 58);
             this.pnlDealer.Margin = new System.Windows.Forms.Padding(2);
             this.pnlDealer.Name = "pnlDealer";
             this.pnlDealer.Size = new System.Drawing.Size(0, 0);
@@ -284,7 +286,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.BackgroundImage = global::StupidBlackjackSln.Properties.Resources.greenfelt;
-            this.ClientSize = new System.Drawing.Size(685, 389);
+            this.ClientSize = new System.Drawing.Size(794, 445);
             this.Controls.Add(this.pnlTableHolder);
             this.Controls.Add(this.flowPnlPlayers);
             this.Controls.Add(this.pnlTopBtns);
