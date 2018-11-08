@@ -177,7 +177,7 @@ namespace StupidBlackjackSln.Code
         /// Join a game using its identification number.
         /// </summary>
         /// <param name="id">id of game to join</param>
-        /// <returns>True if join succeeded</returns>
+        /// <returns>true if join succeeded</returns>
         public bool JoinGameByID(int id)
         {
             String[] response = this.WriteLine(StupidServer.JOIN_GAME_BY_ID_COMMAND + " " + id + " " + key);
@@ -224,7 +224,7 @@ namespace StupidBlackjackSln.Code
         /// <summary>
         /// Set IP address of server.
         /// </summary>
-        /// <param name="ip"></param>
+        /// <param name="ip">ip address in parsable String format</param>
         public static void SetIP(String ip)
         {
             StupidConnector.ip = ip;
@@ -233,7 +233,7 @@ namespace StupidBlackjackSln.Code
         /// <summary>
         /// Set port of server.
         /// </summary>
-        /// <param name="port"></param>
+        /// <param name="port">port for connection</param>
         public static void SetPort(int port)
         {
             StupidConnector.port = port;
