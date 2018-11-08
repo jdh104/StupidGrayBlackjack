@@ -89,7 +89,8 @@ namespace StupidBlackjackSln
         {
             player1.giveCard(deck.dealCard());
             showHand();
-            if (player1.getBusted() == true)
+            //Program.GetConnector().NotifyCardDrawn(deck.getRecentCard(), id); //Notify server what was drawn
+            if (player1.getBusted() == true)                        //currently returns null TODO - needs to test
             {
                 btnHit.Enabled = false;   //Disable Hit Button
                 ticks = 0;    //ends turn and sets time to 0
@@ -112,8 +113,8 @@ namespace StupidBlackjackSln
             lblTimer.Text = ticks.ToString();
             timer1.Stop();
             btnHit.Enabled = false;   //Disable Hit Button
-            Program.GetConnector().NotifyStand(id); //Notify Server this player has stands
-        }
+            //Program.GetConnector().NotifyStand(id); //Notify Server this player has stands
+        }                                             //Currently returns null TODO - test this
 
 
         /// <summary>
