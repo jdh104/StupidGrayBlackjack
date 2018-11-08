@@ -112,6 +112,7 @@ namespace StupidBlackjackSln
             lblTimer.Text = ticks.ToString();
             timer1.Stop();
             btnHit.Enabled = false;   //Disable Hit Button
+            Program.GetConnector().NotifyStand(id); //Notify Server this player has stands
         }
 
 
