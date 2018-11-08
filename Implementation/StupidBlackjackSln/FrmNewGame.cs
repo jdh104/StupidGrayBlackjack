@@ -115,7 +115,7 @@ namespace StupidBlackjackSln
         /// <summary>
         /// Find image corresponding to card
         /// </summary>
-        /// <param name="value">Value of card A,1-9,J,Q,K</param>
+        /// <param name="value">Value of card A,2-9,J,Q,K</param>
         /// <param name="suit">Suit of card heart, club, diamond, spade</param>
         /// <returns></returns>
         private Bitmap FindBitmap(string value, string suit)
