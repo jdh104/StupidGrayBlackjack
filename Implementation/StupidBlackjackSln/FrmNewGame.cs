@@ -17,7 +17,7 @@ namespace StupidBlackjackSln
     public partial class FrmNewGame : Form
     {
         public static Deck deck;
-        private Player player1;
+        private BlackjackPlayer player1;
         private PictureBox[] picPlayerCards;
         private int ticks = 15;  //15 seconds for a player's turn
         private int id = 0;
@@ -88,11 +88,6 @@ namespace StupidBlackjackSln
             
         }
 
-        private void btnHit_Click(object sender, EventArgs e)
-        {
-            player1.giveCard(deck.dealCard());
-            showHand();
-        }
 
         private Bitmap FindBitmap(string value, string suit)
         {
@@ -110,14 +105,6 @@ namespace StupidBlackjackSln
             return (Bitmap)Resources.ResourceManager.GetObject(textName);
         }
 
-        private void btnStand_Click(object sender, EventArgs e)
-        {
-            Player.isTurn = false;
-            ticks = 15;    //ends turn and resets time
-            //ToDo Disable hit button
-            btnHit.Enabled = false;
-        }
-
         private void buttonExit_Click(object sender, EventArgs e)
         {
             // TODO - something like this
@@ -131,15 +118,35 @@ namespace StupidBlackjackSln
         {
             ticks--;    //Time ticks down each second
             lblTimer.Text = ticks.ToString();
-            this.Text = ticks.ToString();
+            this.Text = "Stupid Gray Blackjack";
 
             if (ticks <= 0)
             {
-                this.Text = "Turn Over";
-                ticks = 15;      //resets time
                 //We could switch turns here and keep going with the clock
-                Player.isTurn = false;
+                BlackjackPlayer.isTurn2 = false;
+                btnHit.Enabled = false;   //Disable Hit Button
+                timer1.Stop();
             }                        
+        }
+
+        private void btnHit_Click_1(object sender, EventArgs e)
+        {
+            player1.giveCard(deck.dealCard());
+            showHand();
+                if(player1.getBusted() == true)
+            {
+                btnHit.Enabled = false;   //Disable Hit Button
+                BlackjackPlayer.isTurn2 = false;
+            }
+        }
+
+        private void btnStand_Click_1(object sender, EventArgs e)
+        {
+            BlackjackPlayer.isTurn2 = false;
+            ticks = 0;    //ends turn and sets time to 0
+            lblTimer.Text = ticks.ToString();
+            timer1.Stop();
+            btnHit.Enabled = false;   //Disable Hit Button
         }
     }
 }

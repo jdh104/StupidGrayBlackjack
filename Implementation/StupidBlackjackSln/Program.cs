@@ -14,7 +14,7 @@ namespace StupidBlackjackSln
 
         private static StupidServer server = null;
         private static StupidConnector connector = null;
-        private static AchievementMonitor achievements = AchievementMonitor.GetInstance();
+        //private static AchievementMonitor achievements = AchievementMonitor.GetInstance();
 
         /// <summary>
         /// The main entry point for the application.
@@ -22,6 +22,8 @@ namespace StupidBlackjackSln
         [STAThread]
         static void Main()
         {
+            AppDomain.CurrentDomain.ProcessExit += (s, e) => {Program.CloseStupidConnector(); Program.CloseStupidServer();};
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new frmTitle());
@@ -51,6 +53,10 @@ namespace StupidBlackjackSln
             }
         }
 
+        /// <summary>
+        /// Grabs the quasi-singleton StupidConnector object.
+        /// </summary>
+        /// <returns>null if not instantiated</returns>
         public static StupidConnector GetConnector()
         {
             return connector;

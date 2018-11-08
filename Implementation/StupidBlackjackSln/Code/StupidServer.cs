@@ -31,12 +31,21 @@ namespace StupidBlackjackSln.Code
         public static readonly String GET_GAME_POP_BY_ID_COMMAND = "GPOP";
         public static readonly String HOST_NEW_GAME_COMMAND = "HOST";
         public static readonly String JOIN_GAME_BY_ID_COMMAND = "JOIN";
+        public static readonly String NOTIFY_CARD_DRAW = "N_DRAW";
+        public static readonly String NOTIFY_STAND = "N_STAND";
         public static readonly String REMOVE_GAME_BY_ID_COMMAND = "RGAME";
         public static readonly String REMOVE_PLAYER_FROM_GAME_COMMAND = "RPLAYER";
         public static readonly String START_GAME_BY_ID_COMMAND = "START";
+        public static readonly String UPDATE_DEALER_DRAW = "U_D_DRAW";
+        public static readonly String UPDATE_DEALER_STAND = "U_D_STAND";
+        public static readonly String UPDATE_DEALER_TURN = "U_D_TURN";
         public static readonly String UPDATE_GAME_CONNECTION_BROKEN = "U_BREAK";
         public static readonly String UPDATE_GAME_HAS_STARTED = "U_START";
+        public static readonly String UPDATE_PLAYER_CONNECTION_BROKEN = "U_P_BREAK";
         public static readonly String UPDATE_PLAYER_JOINED = "U_JOINED";
+        public static readonly String UPDATE_PLAYER_DRAW = "U_P_DRAW";
+        public static readonly String UPDATE_PLAYER_STAND = "U_P_STAND";
+        public static readonly String UPDATE_YOUR_TURN = "U_TURN";
         public static readonly byte NEWLINE = Encoding.ASCII.GetBytes("\n")[0];
 
         private System.Windows.Forms.TextBox outputbox;
@@ -383,7 +392,11 @@ namespace StupidBlackjackSln.Code
                                 if (game.ContainsClientByKey(key))
                                 {
                                     OutputToForm("Removing client with key: " + key);
-                                    game.RemoveClientByKey(key);
+                                    int? index = game.RemoveClient(game.client_dict[key]);
+                                    foreach (TcpClient cli in game.GetClientList())
+                                    {
+                                        this.WriteLine(cli, UPDATE_PLAYER_CONNECTION_BROKEN + " " + index);
+                                    }
                                     return COMMAND_SUCCEEDED;
                                 }
                                 else
@@ -514,7 +527,19 @@ namespace StupidBlackjackSln.Code
                 }
                 catch (System.IO.IOException)
                 {
+                    // When player disconnects, remove it from all games
                     not_killed = false;
+                    foreach (GameRep game in games)
+                    {
+                        int? index = game.RemoveClient(c);
+                        if (index != null)
+                        {
+                            foreach (TcpClient cli in game.GetClientList())
+                            {
+                                this.WriteLine(cli, UPDATE_PLAYER_CONNECTION_BROKEN + " " + index.ToString());
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -580,7 +605,6 @@ namespace StupidBlackjackSln.Code
         /// <returns>this (for chaining purposes)</returns>
         public StupidServer Start()
         {
-
             OutputToForm("Attempting to bind server to: " + ip.ToString() + ":" + port.ToString());
 
             try
@@ -609,9 +633,12 @@ namespace StupidBlackjackSln.Code
         /// <param name="toWrite">The String to be written</param>
         private void WriteLine(TcpClient client, String toWrite)
         {
-            byte[] data = Encoding.ASCII.GetBytes(toWrite.Trim());
-            client.GetStream().Write(data, 0, data.Length);
-            client.GetStream().Write(new byte[] {NEWLINE}, 0, 1);
+            if (toWrite != null)
+            {
+                byte[] data = Encoding.ASCII.GetBytes(toWrite.Trim());
+                client.GetStream().Write(data, 0, data.Length);
+                client.GetStream().Write(new byte[] { NEWLINE }, 0, 1);
+            }
         }
 
         /// <summary>
@@ -620,7 +647,7 @@ namespace StupidBlackjackSln.Code
         private class GameRep
         {
             public static int nextID;
-            private Dictionary<int, TcpClient> client_dict = new Dictionary<int, TcpClient>(); // <TcpClient>
+            public Dictionary<int, TcpClient> client_dict = new Dictionary<int, TcpClient>(); // <TcpClient>
             public bool started = false;
             public int key;
             public int id;
@@ -655,9 +682,30 @@ namespace StupidBlackjackSln.Code
                 return client_dict[-1];
             }
 
-            public void RemoveClientByKey(int key)
+            /*public void RemoveClientByKey(int key)
             {
                 client_dict.Remove(key);
+            }*/
+
+            public int? RemoveClient(TcpClient cli)
+            {
+                int keytoremove = -2; // guaranteed not to be in client_dict
+                int client_index = 0;
+                foreach (KeyValuePair<int, TcpClient> kvp in client_dict)
+                {
+                    if (kvp.Value == cli)
+                    {
+                        keytoremove = kvp.Key;
+                        break; // need to get out of loop to remove
+                    }
+                    client_index++;
+                }
+                if (keytoremove != -2)
+                {
+                    client_dict.Remove(keytoremove);
+                    return client_index;
+                }
+                return null;
             }
 
             public void SetHost(TcpClient host)
