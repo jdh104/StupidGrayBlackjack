@@ -36,15 +36,36 @@ namespace StupidBlackjackSln.Code
         public static readonly String REMOVE_GAME_BY_ID_COMMAND = "RGAME";
         public static readonly String REMOVE_PLAYER_FROM_GAME_COMMAND = "RPLAYER";
         public static readonly String START_GAME_BY_ID_COMMAND = "START";
+
+        /// arg[1] -> String representation of a Card object (defined by Card.ToString)
         public static readonly String UPDATE_DEALER_DRAW = "U_D_DRAW";
+
+        /// no args, means that the dealer's turn has ended
         public static readonly String UPDATE_DEALER_STAND = "U_D_STAND";
+
+        /// no args, means that the dealer's turn has started
         public static readonly String UPDATE_DEALER_TURN = "U_D_TURN";
+
+        /// no args, means that the game is no longer connected
         public static readonly String UPDATE_GAME_CONNECTION_BROKEN = "U_BREAK";
+
+        /// no args, means that the game host has started the game
         public static readonly String UPDATE_GAME_HAS_STARTED = "U_START";
+
+        /// arg[1] -> the index of the player that has disconnected
         public static readonly String UPDATE_PLAYER_CONNECTION_BROKEN = "U_P_BREAK";
+
+        /// no args, means that a player has decided to join the game
         public static readonly String UPDATE_PLAYER_JOINED = "U_JOINED";
+
+        /// arg[1] -> the index of the player that has drawn
+        /// arg[2] -> String representation of the card drawn (defined by Card.ToString)
         public static readonly String UPDATE_PLAYER_DRAW = "U_P_DRAW";
+
+        /// arg[1] -> the index of the player that has standed/stood/stunned/whatever
         public static readonly String UPDATE_PLAYER_STAND = "U_P_STAND";
+
+        /// no args, means that your turn has begun
         public static readonly String UPDATE_YOUR_TURN = "U_TURN";
         public static readonly byte NEWLINE = Encoding.ASCII.GetBytes("\n")[0];
 
@@ -451,11 +472,7 @@ namespace StupidBlackjackSln.Code
                             {
                                 OutputToForm("Found game: " + id.ToString() + ", removing...");
                                 games.RemoveAt(i);
-                                foreach (TcpClient cli in game.GetClientList())
-                                {
-                                    OutputToForm("\tNotifying client: " + GetIPAddressOf(cli));
-                                    this.WriteLine(cli, UPDATE_GAME_CONNECTION_BROKEN);
-                                }
+                                this.BroadcastToGame(game, UPDATE_GAME_CONNECTION_BROKEN);
                                 return COMMAND_SUCCEEDED;
                             }
                         }
@@ -488,10 +505,7 @@ namespace StupidBlackjackSln.Code
                                 {
                                     OutputToForm("Removing client with key: " + key);
                                     int? index = game.RemoveClient(game.client_dict[key]);
-                                    foreach (TcpClient cli in game.GetClientList())
-                                    {
-                                        this.WriteLine(cli, UPDATE_PLAYER_CONNECTION_BROKEN + " " + index);
-                                    }
+                                    this.BroadcastToGame(game, UPDATE_PLAYER_CONNECTION_BROKEN + " " + index.ToString());
                                     return COMMAND_SUCCEEDED;
                                 }
                                 else
@@ -527,10 +541,7 @@ namespace StupidBlackjackSln.Code
                             if (game.id.Equals(id))
                             {
                                 game.started = true;
-                                foreach (TcpClient cli in game.GetClientList())
-                                {
-                                    this.WriteLine(cli, UPDATE_GAME_HAS_STARTED);
-                                }
+                                this.BroadcastToGame(game, UPDATE_GAME_HAS_STARTED);
                                 break;
                             }
                         }
@@ -629,10 +640,7 @@ namespace StupidBlackjackSln.Code
                         int? index = game.RemoveClient(c);
                         if (index != null)
                         {
-                            foreach (TcpClient cli in game.GetClientList())
-                            {
-                                this.WriteLine(cli, UPDATE_PLAYER_CONNECTION_BROKEN + " " + index.ToString());
-                            }
+                            this.BroadcastToGame(game, UPDATE_PLAYER_CONNECTION_BROKEN + " " + index.ToString());
                         }
                     }
                 }
