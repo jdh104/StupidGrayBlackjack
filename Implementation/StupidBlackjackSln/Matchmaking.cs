@@ -16,6 +16,7 @@ namespace StupidBlackjackSln
     public partial class Matchmaking : Form
     {
         delegate void myDelegate();
+        private static Thread refreshThread;
 
         public Matchmaking()
         {
@@ -25,6 +26,11 @@ namespace StupidBlackjackSln
             int id = Program.GetConnector().GetKey();
             newGameName.Text = "Game_" + id.ToString();
 
+        }
+
+        public static void AbortFetchThread()
+        {
+            refreshThread.Abort();
         }
 
         private void AutoRefreshLstBox()
@@ -100,8 +106,8 @@ namespace StupidBlackjackSln
         /// <param name="e"></param>
         private void Matchmaking_Load(object sender, EventArgs e)
         {
-            Thread t = new Thread(AutoRefreshLstBox);
-            t.Start();
+            refreshThread = new Thread(AutoRefreshLstBox);
+            refreshThread.Start();
 
             this.RefreshGameList();
         }

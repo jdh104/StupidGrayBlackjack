@@ -92,6 +92,7 @@ namespace StupidBlackjackSln
             else if (update.Equals(StupidServer.UPDATE_GAME_HAS_STARTED))
             {
                 timer1.Stop();
+                Matchmaking.AbortFetchThread();
                 new FrmNewGame(id, Int32.Parse(args[1])).Show();
                 this.Close();
                 return "";

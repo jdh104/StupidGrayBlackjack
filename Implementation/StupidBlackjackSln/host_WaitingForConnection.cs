@@ -113,6 +113,7 @@ namespace StupidBlackjackSln
         private void BtnHostStartGame_Click(object sender, EventArgs e)
         {
             timer1.Stop();
+            Matchmaking.AbortFetchThread();
             String[] response = Program.GetConnector().StartHostedGame(id);
 
             new FrmNewGame(id, Convert.ToInt32(response[1])).Show();
