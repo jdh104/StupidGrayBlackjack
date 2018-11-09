@@ -245,6 +245,7 @@ namespace StupidBlackjackSln
                 dealer.giveCard(cardToDraw);
                 deck.RemoveCard(cardToDraw);
                 lblDealerCards.Text += cardToDraw.GetUnicode() + "  ";
+                lblDealerScore.Text = dealer.Score.ToString();
                 lblDealerCards.Enabled = true;
             }
             else if (update_array[0].Equals(StupidServer.UPDATE_DEALER_SETUP))
@@ -273,14 +274,8 @@ namespace StupidBlackjackSln
                 {
                     System.Windows.Forms.MessageBox.Show("You busted, loser!", "Hey Player" + myindex.ToString());
                 }
-                else if (players[myindex].Score >= scoresToCompare.Max<int>())
+                else if (players[myindex].Score > dealer.Score || dealer.Score > 21)
                 {
-                    if (players[myindex].Score == scoresToCompare[array_size - 1])
-                    {
-                        System.Windows.Forms.MessageBox.Show("You tied!", "Hey Player" + myindex.ToString());
-                    }
-                    else
-                    {
                         System.Windows.Forms.MessageBox.Show("You won!", "Hey Player" + myindex.ToString());
                         AchievementMonitor.GetInstance().AddWin();
                         if (isOnline)
@@ -291,16 +286,14 @@ namespace StupidBlackjackSln
                         {
                             AchievementMonitor.GetInstance().AddInstantWinAchievement();
                         }
-                        
-                    }
                 }
-                else if (players[myindex].Score < scoresToCompare.Max<int>())
+                else if (players[myindex].Score == dealer.Score)
                 {
-                    System.Windows.Forms.MessageBox.Show("You took the L!", "Hey Player" + myindex.ToString());
+                    System.Windows.Forms.MessageBox.Show("You tied!", "Hey Player" + myindex.ToString());
                 }
                 else
                 {
-                    System.Windows.Forms.MessageBox.Show("You are in an impossible situation!", "Hey Player" + myindex.ToString());
+                    System.Windows.Forms.MessageBox.Show("You took the L!", "Hey Player" + myindex.ToString());
                 }
             }
             else if (update_array[0].Equals(StupidServer.UPDATE_DEALER_TURN))
