@@ -118,7 +118,7 @@
             // newGameName
             // 
             this.newGameName.HideSelection = false;
-            this.newGameName.Location = new System.Drawing.Point(187, 444);
+            this.newGameName.Location = new System.Drawing.Point(226, 444);
             this.newGameName.Margin = new System.Windows.Forms.Padding(4);
             this.newGameName.Name = "newGameName";
             this.newGameName.Size = new System.Drawing.Size(214, 31);
