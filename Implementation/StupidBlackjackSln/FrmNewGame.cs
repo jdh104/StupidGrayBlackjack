@@ -290,6 +290,8 @@ namespace StupidBlackjackSln
             else if (update_array[0].Equals(StupidServer.UPDATE_YOUR_TURN))
             {
                 System.Windows.Forms.MessageBox.Show("It's your turn!", "Hey Player" + myindex.ToString());
+                btnHit.Enabled = true;
+                btnStand.Enabled = true;
             }
             else
             {
