@@ -589,9 +589,11 @@ namespace StupidBlackjackSln.Code
                                 try
                                 {
                                     this.WriteLine(game.GetClientList()[game.turn_index], UPDATE_YOUR_TURN);
+                                    OutputToForm("Passing turn to player: " + game.turn_index);
                                 }
                                 catch
                                 {
+                                    OutputToForm("Passing turn to dealer");
                                     this.WriteLine(game.GetClientList()[0], UPDATE_DEALER_TURN);
                                 }
                                 return RESPONSE_SUCCESS;
@@ -891,9 +893,24 @@ namespace StupidBlackjackSln.Code
         {
             if (toWrite != null)
             {
-                byte[] data = Encoding.ASCII.GetBytes(toWrite.Trim());
-                client.GetStream().Write(data, 0, data.Length);
-                client.GetStream().Write(new byte[] { NEWLINE }, 0, 1);
+                try
+                {
+                    byte[] data = Encoding.ASCII.GetBytes(toWrite.Trim());
+                    client.GetStream().Write(data, 0, data.Length);
+                    client.GetStream().Write(new byte[] { NEWLINE }, 0, 1);
+                }
+                catch
+                {
+                    // disconnect the player
+                    foreach (GameRep game in games)
+                    {
+                        if (game.GetClientList().Contains(client))
+                        {
+                            BroadcastToGame(game, UPDATE_PLAYER_CONNECTION_BROKEN + game.GetIndexOfClient(client));
+                            game.RemoveClient(client);
+                        }
+                    }
+                }
             }
         }
 
