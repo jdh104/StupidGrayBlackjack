@@ -125,7 +125,7 @@
             this.pnlTopBtns.Location = new System.Drawing.Point(0, 0);
             this.pnlTopBtns.Margin = new System.Windows.Forms.Padding(4);
             this.pnlTopBtns.Name = "pnlTopBtns";
-            this.pnlTopBtns.Size = new System.Drawing.Size(2883, 112);
+            this.pnlTopBtns.Size = new System.Drawing.Size(2464, 112);
             this.pnlTopBtns.TabIndex = 11;
             // 
             // btnExitGame
@@ -148,7 +148,7 @@
             this.flowPnlPlayers.Controls.Add(this.pnlPlayerZ);
             this.flowPnlPlayers.Dock = System.Windows.Forms.DockStyle.Right;
             this.flowPnlPlayers.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flowPnlPlayers.Location = new System.Drawing.Point(2183, 112);
+            this.flowPnlPlayers.Location = new System.Drawing.Point(1764, 112);
             this.flowPnlPlayers.Margin = new System.Windows.Forms.Padding(8);
             this.flowPnlPlayers.Name = "flowPnlPlayers";
             this.flowPnlPlayers.Size = new System.Drawing.Size(700, 1311);
@@ -477,7 +477,7 @@
             this.pnlTableHolder.Location = new System.Drawing.Point(0, 112);
             this.pnlTableHolder.Margin = new System.Windows.Forms.Padding(4);
             this.pnlTableHolder.Name = "pnlTableHolder";
-            this.pnlTableHolder.Size = new System.Drawing.Size(2183, 1311);
+            this.pnlTableHolder.Size = new System.Drawing.Size(1764, 1311);
             this.pnlTableHolder.TabIndex = 13;
             // 
             // tablePnlGamePlay
@@ -499,7 +499,7 @@
             this.tablePnlGamePlay.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 32.40418F));
             this.tablePnlGamePlay.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 798F));
             this.tablePnlGamePlay.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 71F));
-            this.tablePnlGamePlay.Size = new System.Drawing.Size(2183, 1311);
+            this.tablePnlGamePlay.Size = new System.Drawing.Size(1764, 1311);
             this.tablePnlGamePlay.TabIndex = 11;
             // 
             // flowPnlCards
@@ -514,7 +514,7 @@
             this.flowPnlCards.Location = new System.Drawing.Point(4, 445);
             this.flowPnlCards.Margin = new System.Windows.Forms.Padding(4);
             this.flowPnlCards.Name = "flowPnlCards";
-            this.flowPnlCards.Size = new System.Drawing.Size(2175, 790);
+            this.flowPnlCards.Size = new System.Drawing.Size(1756, 790);
             this.flowPnlCards.TabIndex = 3;
             // 
             // picPlayerCard1
@@ -582,7 +582,7 @@
             this.pnlGameFunctions.Location = new System.Drawing.Point(4, 302);
             this.pnlGameFunctions.Margin = new System.Windows.Forms.Padding(4);
             this.pnlGameFunctions.Name = "pnlGameFunctions";
-            this.pnlGameFunctions.Size = new System.Drawing.Size(2175, 135);
+            this.pnlGameFunctions.Size = new System.Drawing.Size(1756, 135);
             this.pnlGameFunctions.TabIndex = 2;
             // 
             // pnlScoreTimer
@@ -593,7 +593,7 @@
             this.pnlScoreTimer.Location = new System.Drawing.Point(96, 0);
             this.pnlScoreTimer.Margin = new System.Windows.Forms.Padding(4);
             this.pnlScoreTimer.Name = "pnlScoreTimer";
-            this.pnlScoreTimer.Size = new System.Drawing.Size(1931, 135);
+            this.pnlScoreTimer.Size = new System.Drawing.Size(1512, 135);
             this.pnlScoreTimer.TabIndex = 15;
             // 
             // lblTimer
@@ -601,7 +601,7 @@
             this.lblTimer.AutoSize = true;
             this.lblTimer.Dock = System.Windows.Forms.DockStyle.Right;
             this.lblTimer.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTimer.Location = new System.Drawing.Point(1931, 0);
+            this.lblTimer.Location = new System.Drawing.Point(1512, 0);
             this.lblTimer.Margin = new System.Windows.Forms.Padding(12, 0, 12, 0);
             this.lblTimer.Name = "lblTimer";
             this.lblTimer.Size = new System.Drawing.Size(0, 73);
@@ -626,7 +626,7 @@
             this.btnStand.AutoSize = true;
             this.btnStand.BackColor = System.Drawing.Color.Gainsboro;
             this.btnStand.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnStand.Location = new System.Drawing.Point(2027, 0);
+            this.btnStand.Location = new System.Drawing.Point(1608, 0);
             this.btnStand.Margin = new System.Windows.Forms.Padding(12);
             this.btnStand.Name = "btnStand";
             this.btnStand.Size = new System.Drawing.Size(148, 135);
@@ -674,19 +674,19 @@
             this.pnlDealer.Location = new System.Drawing.Point(8, 8);
             this.pnlDealer.Margin = new System.Windows.Forms.Padding(8);
             this.pnlDealer.Name = "pnlDealer";
-            this.pnlDealer.Size = new System.Drawing.Size(2167, 282);
+            this.pnlDealer.Size = new System.Drawing.Size(1748, 282);
             this.pnlDealer.TabIndex = 4;
             // 
             // lblDealerCards
             // 
             this.lblDealerCards.AutoSize = true;
             this.lblDealerCards.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblDealerCards.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDealerCards.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
             this.lblDealerCards.ForeColor = System.Drawing.Color.Gainsboro;
-            this.lblDealerCards.Location = new System.Drawing.Point(0, 37);
+            this.lblDealerCards.Location = new System.Drawing.Point(0, 73);
             this.lblDealerCards.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblDealerCards.Name = "lblDealerCards";
-            this.lblDealerCards.Size = new System.Drawing.Size(0, 33);
+            this.lblDealerCards.Size = new System.Drawing.Size(0, 46);
             this.lblDealerCards.TabIndex = 2;
             // 
             // lblDealerScore
@@ -695,7 +695,7 @@
             this.lblDealerScore.Dock = System.Windows.Forms.DockStyle.Left;
             this.lblDealerScore.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblDealerScore.ForeColor = System.Drawing.Color.Gainsboro;
-            this.lblDealerScore.Location = new System.Drawing.Point(0, 37);
+            this.lblDealerScore.Location = new System.Drawing.Point(0, 73);
             this.lblDealerScore.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblDealerScore.Name = "lblDealerScore";
             this.lblDealerScore.Size = new System.Drawing.Size(0, 37);
@@ -705,12 +705,12 @@
             // 
             this.lblDealer.AutoSize = true;
             this.lblDealer.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lblDealer.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDealer.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F);
             this.lblDealer.ForeColor = System.Drawing.Color.Gainsboro;
             this.lblDealer.Location = new System.Drawing.Point(0, 0);
             this.lblDealer.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblDealer.Name = "lblDealer";
-            this.lblDealer.Size = new System.Drawing.Size(110, 37);
+            this.lblDealer.Size = new System.Drawing.Size(221, 73);
             this.lblDealer.TabIndex = 0;
             this.lblDealer.Text = "Dealer";
             // 
@@ -753,7 +753,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.BackgroundImage = global::StupidBlackjackSln.Properties.Resources.greenfelt;
-            this.ClientSize = new System.Drawing.Size(2883, 1423);
+            this.ClientSize = new System.Drawing.Size(2464, 1423);
             this.Controls.Add(this.pnlTableHolder);
             this.Controls.Add(this.flowPnlPlayers);
             this.Controls.Add(this.pnlTopBtns);
