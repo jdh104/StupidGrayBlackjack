@@ -113,7 +113,7 @@ namespace StupidBlackjackSln
             Program.GetConnector().StartHostedGame(id);
 
             String response = Program.GetConnector().CheckForUpdate();
-            while (response == null && !response.StartsWith(StupidServer.UPDATE_GAME_HAS_STARTED))
+            while (response == null || !response.StartsWith(StupidServer.UPDATE_GAME_HAS_STARTED))
             {
                 Thread.Sleep(100);
                 response = Program.GetConnector().CheckForUpdate();
