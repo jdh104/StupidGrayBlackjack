@@ -39,6 +39,7 @@ namespace StupidBlackjackSln.Code
         public static readonly String RESPONSE_FAIL = "RES_F";
 
         public static readonly String NOTIFY_CARD_DRAW = "N_DRAW";
+        public static readonly String NOTIFY_SETUP_FINISH = "N_SFIN";
         public static readonly String NOTIFY_STAND = "N_STAND";
 
         /// <summary>arg[1] -> String representation of a Card object (defined by Card.ToString)</summary>
@@ -68,6 +69,9 @@ namespace StupidBlackjackSln.Code
 
         /// <summary>arg[1] -> the index of the player that has standed/stood/stund/whatever</summary>
         public static readonly String UPDATE_PLAYER_STAND = "U_P_STAND";
+
+        /// <summary>no args, means that your setup turn has begun. Draw 2 cards and notify.</summary>
+        public static readonly String UPDATE_YOUR_SETUP = "U_SETUP";
 
         /// <summary>no args, means that your turn has begun</summary>
         public static readonly String UPDATE_YOUR_TURN = "U_TURN";
@@ -405,6 +409,39 @@ namespace StupidBlackjackSln.Code
                     OutputToForm("Failed to find game " + id.ToString());
                     return RESPONSE_FAIL;
                 }
+                else if (op.Equals(NOTIFY_SETUP_FINISH))
+                {
+                    int id;
+                    try
+                    {
+                        id = Int32.Parse(args[1]);
+                    }
+                    catch
+                    {
+                        OutputToForm("Syntax Error: Failed to parse command");
+                        return RESPONSE_SYNTAX_ERROR;
+                    }
+                    foreach (GameRep game in games)
+                    {
+                        if (game.id == id)
+                        {
+                            int? player_index = game.GetIndexOfClient(sender);
+                            if (player_index == null)
+                            {
+                                OutputToForm("Failed to find player at " + sender.Client.RemoteEndPoint.ToString());
+                                return RESPONSE_FAIL;
+                            }
+                            else
+                            {
+                                game.turn_index++;
+                                this.WriteLine(game.GetClientList()[game.turn_index], UPDATE_YOUR_SETUP);
+                                return RESPONSE_SUCCESS;
+                            }
+                        }
+                    }
+                    OutputToForm("Failed to find game: " + id.ToString());
+                    return RESPONSE_FAIL;
+                }
                 else if (op.Equals(NOTIFY_STAND))
                 {
                     int id, key;
@@ -431,6 +468,8 @@ namespace StupidBlackjackSln.Code
                             else
                             {
                                 BroadcastToGame(game, UPDATE_PLAYER_STAND + " " + player_index.ToString());
+                                game.turn_index++;
+                                this.WriteLine(game.GetClientList()[game.turn_index], UPDATE_YOUR_TURN);
                                 return RESPONSE_SUCCESS;
                             }
                         }
@@ -745,8 +784,7 @@ namespace StupidBlackjackSln.Code
             public static int nextID;
             public Dictionary<int, TcpClient> client_dict = new Dictionary<int, TcpClient>(); // <TcpClient>
             public bool started = false;
-            public int key;
-            public int id;
+            public int key, id, turn_index = 0;
             public String name;
             public int population = 1;
 
