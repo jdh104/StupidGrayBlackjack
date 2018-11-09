@@ -80,6 +80,9 @@ namespace StupidBlackjackSln
             this.myindex = myindex;
             this.isOnline = true;
 
+            btnHit.Enabled = false;
+            btnStand.Enabled = false;
+
             ParseUpdate(Program.GetConnector().NotifyInitializationComplete(id));
             timer1.Start();
         }
