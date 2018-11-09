@@ -434,6 +434,7 @@ namespace StupidBlackjackSln.Code
                             else
                             {
                                 game.turn_index++;
+                                OutputToForm("Passing setup turn to player index: " + game.turn_index.ToString());
                                 this.WriteLine(game.GetClientList()[game.turn_index], UPDATE_YOUR_SETUP);
                                 return RESPONSE_SUCCESS;
                             }

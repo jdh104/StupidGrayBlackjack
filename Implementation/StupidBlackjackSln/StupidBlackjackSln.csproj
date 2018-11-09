@@ -53,7 +53,6 @@
     <Compile Include="Code\AchievementMonitor.cs" />
     <Compile Include="Code\BlackjackPlayer.cs" />
     <Compile Include="Code\Dealer.cs" />
-    <Compile Include="Code\NetworkedPlayer.cs" />
     <Compile Include="Code\StupidConnector.cs" />
     <Compile Include="Code\StupidServer.cs" />
     <Compile Include="Client_WaitingForConnection.cs">
