@@ -12,7 +12,6 @@ namespace StupidBlackjackSln.Code
     {
         public bool hasBusted = false;     //true if they go over 21
         public bool hasWon = false;       // true if they win
-        public static Boolean isTurn2;
 
         private String playerName;
         private String status;

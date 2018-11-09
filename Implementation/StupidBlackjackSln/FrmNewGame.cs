@@ -109,7 +109,6 @@ namespace StupidBlackjackSln
                 ticks = 0;    //ends turn and sets time to 0
                 timer1.Stop();
                 lblTimer.Text = ticks.ToString();
-                BlackjackPlayer.isTurn2 = false;
             }
         }
 
@@ -121,7 +120,6 @@ namespace StupidBlackjackSln
         /// <param name="e"></param>
         private void btnStand_Click(object sender, EventArgs e)
         {
-            BlackjackPlayer.isTurn2 = false;
             ticks = 0;    //ends turn and sets time to 0
             lblTimer.Text = ticks.ToString();
             timer1.Stop();
@@ -291,8 +289,9 @@ namespace StupidBlackjackSln
             if (ticks <= 0)
             {
                 //We could switch turns here and keep going with the clock
-                BlackjackPlayer.isTurn2 = false;
+                Program.GetConnector().NotifyStand(this.id);
                 btnHit.Enabled = false;   //Disable Hit Button
+                btnStand.Enabled = false;
                 RefreshPlayerInfo();    // Refresh info on rhs panel
                 timer1.Stop();
             }
