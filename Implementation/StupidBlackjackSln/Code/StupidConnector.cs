@@ -200,10 +200,21 @@ namespace StupidBlackjackSln.Code
         /// </summary>
         /// <param name="c">The card object to notify</param>
         /// <param name="connected_game_id">The id of the game connection</param>
-        /// <returns>true if the server responds with COMMAND_SUCCEDED, else false</returns>
+        /// <returns>true if the server responds with RESPONSE_SUCCESS, else false</returns>
         public bool NotifyCardDrawn(Card c, int connected_game_id)
         {
             String[] response = this.WriteLine(StupidServer.NOTIFY_CARD_DRAW + " " + connected_game_id + " " + key.ToString() + " " + c.ToString());
+            return response[0].Equals(StupidServer.RESPONSE_SUCCESS);
+        }
+
+        /// <summary>
+        /// Notify the server that the initial 2 cards have been drawn.
+        /// </summary>
+        /// <param name="connected_game_id">The id of the game connection</param>
+        /// <returns>true if the server responds with RESPONSE_SUCCESS, else false</returns>
+        public bool NotifySetupFinished(int connected_game_id)
+        {
+            String[] response = this.WriteLine(StupidServer.NOTIFY_SETUP_FINISH + " " + connected_game_id);
             return response[0].Equals(StupidServer.RESPONSE_SUCCESS);
         }
 

@@ -80,9 +80,9 @@ namespace StupidBlackjackSln
         /// <param name="e"></param>
         private void buttonExit_Click(object sender, EventArgs e)
         {
-            // TODO - something like this
-            //if (this.id != 0)
-            //  Program.GetConnector().RemoveHostedGame(id);
+            deck = new Deck(FindBitmap);
+            player1 = new BlackjackPlayer();
+            dealer1 = new Dealer();
 
             this.Close();
         }
