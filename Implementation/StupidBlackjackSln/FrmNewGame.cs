@@ -210,12 +210,12 @@ namespace StupidBlackjackSln
             }
             if (nPlayers >= 3)
             {
-                lblPlayerXname.Text = "Player" + otherPlayers[1].ToString();
+                lblPlayerYname.Text = "Player" + otherPlayers[1].ToString();
                 pnlPlayerY.Show();
             }
             if (nPlayers == 4)
             {
-                lblPlayerXname.Text = "Player" + otherPlayers[2].ToString();
+                lblPlayerZname.Text = "Player" + otherPlayers[2].ToString();
                 pnlPlayerZ.Show();
             }
 
