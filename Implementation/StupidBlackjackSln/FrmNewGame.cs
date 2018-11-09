@@ -26,6 +26,7 @@ namespace StupidBlackjackSln
         private int ticks = 60;  //15 seconds for a player's turn
         private int id = 0;
         private int myindex;
+        private Dealer dealer;
 
 
         /// <summary>
@@ -58,6 +59,7 @@ namespace StupidBlackjackSln
         {
             InitializeComponent();
             deck = new Deck(FindBitmap);
+            dealer = new Dealer("Bob");
 
             picPlayerCards = new PictureBox[5];
             for (int i = 0; i < 5; i++)
