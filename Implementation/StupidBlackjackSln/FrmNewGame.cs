@@ -252,7 +252,7 @@ namespace StupidBlackjackSln
                 int playerindex = Int32.Parse(update_array[1]);
                 players[playerindex].SetStatus("Stand");
             }
-            else if (update[0].Equals(StupidServer.UPDATE_PLAYER_STAND)) { }
+
             else if (update[0].Equals(StupidServer.UPDATE_YOUR_SETUP))
             {
                 Card card1 = deck.dealCard();
@@ -266,14 +266,6 @@ namespace StupidBlackjackSln
             {
 
             }
-            else if (update_array[0].Equals(StupidServer.NOTIFY_CARD_DRAW))
-            {
-
-            }
-            else if (update_array[0].Equals(StupidServer.NOTIFY_STAND))
-            {
-
-            }
 
         }
 
@@ -284,22 +276,24 @@ namespace StupidBlackjackSln
         {
             if (nPlayers >= 2)
             {
-                //otherPlayers[0]
+                lblPlayerXscore.Text = players[otherPlayers[0]].GetScore().ToString();
+                lblPlayerXstatus.Text = players[otherPlayers[0]].GetStatus();
             }
             if (nPlayers >= 3)
             {
-                //otherPlayers[1]
+                lblPlayerYscore.Text = players[otherPlayers[1]].GetScore().ToString();
+                lblPlayerYstatus.Text = players[otherPlayers[1]].GetStatus();
             }
             if (nPlayers == 4)
             {
-                //otherPlayers[2]
+                lblPlayerZscore.Text = players[otherPlayers[2]].GetScore().ToString();
+                lblPlayerZstatus.Text = players[otherPlayers[2]].GetStatus();
             }
 
 
             // Other player info
             // Up to 4 players in game, thus up to 3 players in players panel
             // players in players panel are identified by PlayerX, PlayerY, and PlayerZ
-            // lblPlayer_score
             // lblPlayer_cards
             // lblPlayer_status
         }

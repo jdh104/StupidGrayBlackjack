@@ -37,6 +37,11 @@ namespace StupidBlackjackSln.Code
             return status;
         }
 
+        public int GetScore()
+        {
+            return Score;
+        }
+
         public void SetStatus(String status)
         {
             this.status = status;
