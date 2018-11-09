@@ -195,7 +195,7 @@ namespace StupidBlackjackSln
 
             for (int i = 0; i < nPlayers; i++)
             {
-                players[i] = new BlackjackPlayer("player" + (i + 1).ToString() );
+                players[i] = new BlackjackPlayer("player" + (i).ToString() );
                 otherPlayers.Add(i);
                 players[i].giveHand(new List<Card>());
             }
