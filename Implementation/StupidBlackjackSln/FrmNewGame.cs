@@ -209,19 +209,28 @@ namespace StupidBlackjackSln
         {
             String[] update_array = update.Split(' ');
 
-            if (update[0].Equals(StupidServer.UPDATE_GAME_CONNECTION_BROKEN))
+            if (update_array[0].Equals(StupidServer.UPDATE_GAME_CONNECTION_BROKEN))
             {
                 Program.CloseStupidConnector();
                 this.Close();
             }
-            else if (update[0].Equals(StupidServer.UPDATE_DEALER_DRAW)) { }
-            else if (update[0].Equals(StupidServer.UPDATE_DEALER_TURN)) { }
-            else if (update[0].Equals(StupidServer.UPDATE_PLAYER_CONNECTION_BROKEN))
+            else if (update_array[0].Equals(StupidServer.UPDATE_DEALER_DRAW))
+            {
+
+            }
+            else if (update_array[0].Equals(StupidServer.UPDATE_DEALER_TURN))
+            {
+
+            }
+            else if (update_array[0].Equals(StupidServer.UPDATE_PLAYER_CONNECTION_BROKEN))
             {
                 // TODO
             }
-            else if (update[0].Equals(StupidServer.UPDATE_PLAYER_JOINED)) { }
-            else if (update[0].Equals(StupidServer.UPDATE_PLAYER_DRAW))
+            else if (update_array[0].Equals(StupidServer.UPDATE_PLAYER_JOINED))
+            {
+
+            }
+            else if (update_array[0].Equals(StupidServer.UPDATE_PLAYER_DRAW))
             {
                 int playerindex = Int32.Parse(update_array[1]);
                 if (myindex != playerindex)
@@ -231,8 +240,11 @@ namespace StupidBlackjackSln
                     deck.RemoveCard(cardToDraw);
                 }
             }
-            else if (update[0].Equals(StupidServer.UPDATE_PLAYER_STAND)) { }
-            else if (update[0].Equals(StupidServer.UPDATE_YOUR_SETUP))
+            else if (update_array[0].Equals(StupidServer.UPDATE_PLAYER_STAND))
+            {
+
+            }
+            else if (update_array[0].Equals(StupidServer.UPDATE_YOUR_SETUP))
             {
                 Card card1 = deck.dealCard();
                 Card card2 = deck.dealCard();
@@ -241,9 +253,18 @@ namespace StupidBlackjackSln
                 Program.GetConnector().NotifyCardDrawn(card2, this.id);
                 Program.GetConnector().NotifySetupFinished(this.id);
             }
-            else if (update[0].Equals(StupidServer.UPDATE_YOUR_TURN)) { }
-            else if (update[0].Equals(StupidServer.NOTIFY_CARD_DRAW)) { }
-            else if (update[0].Equals(StupidServer.NOTIFY_STAND)) { }
+            else if (update_array[0].Equals(StupidServer.UPDATE_YOUR_TURN))
+            {
+
+            }
+            else if (update_array[0].Equals(StupidServer.NOTIFY_CARD_DRAW))
+            {
+
+            }
+            else if (update_array[0].Equals(StupidServer.NOTIFY_STAND))
+            {
+
+            }
 
         }
 
