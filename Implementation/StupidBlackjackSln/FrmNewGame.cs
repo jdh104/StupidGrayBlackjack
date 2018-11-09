@@ -228,7 +228,11 @@ namespace StupidBlackjackSln
             }
             else if (update_array[0].Equals(StupidServer.UPDATE_DEALER_DRAW))
             {
-
+                Card cardToDraw = Card.Parse(update_array[1]);
+                dealer.giveCard(cardToDraw);
+                deck.RemoveCard(cardToDraw);
+                lblDealerCards.Text += cardToDraw.GetUnicode() + "  ";
+                lblDealerCards.Enabled = true;
             }
             else if (update_array[0].Equals(StupidServer.UPDATE_DEALER_SETUP))
             {
@@ -240,9 +244,13 @@ namespace StupidBlackjackSln
                 Program.GetConnector().NotifyDealerDraw(card2, this.id);
                 Program.GetConnector().NotifyDealerSetupFinished(this.id);
             }
+            else if (update_array[0].Equals(StupidServer.UPDATE_DEALER_STAND))
+            {
+                // basically end the round
+            }
             else if (update_array[0].Equals(StupidServer.UPDATE_DEALER_TURN))
             {
-
+                // do dealer logic
             }
             else if (update_array[0].Equals(StupidServer.UPDATE_PLAYER_CONNECTION_BROKEN))
             {
@@ -283,7 +291,10 @@ namespace StupidBlackjackSln
             {
                 System.Windows.Forms.MessageBox.Show("It's your turn!", "Hey Player" + myindex.ToString());
             }
-
+            else
+            {
+                // unrecognized update
+            }
         }
 
         /// <summary>
