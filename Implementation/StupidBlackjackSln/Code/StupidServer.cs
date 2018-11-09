@@ -42,7 +42,7 @@ namespace StupidBlackjackSln.Code
         public static readonly String NOTIFY_SETUP_FINISH = "N_SFIN";
         public static readonly String NOTIFY_STAND = "N_STAND";
 
-        /// <summary>arg[1] -> String representation of a Card object (defined by Card.ToString)</summary>
+        /// <summary>args[1] -> String representation of a Card object (defined by Card.ToString)</summary>
         public static readonly String UPDATE_DEALER_DRAW = "U_D_DRAW";
 
         /// <summary>no args, means that the dealer's turn has ended</summary>
@@ -51,23 +51,23 @@ namespace StupidBlackjackSln.Code
         /// <summary>no args, means that the dealer's turn has started</summary>
         public static readonly String UPDATE_DEALER_TURN = "U_D_TURN";
 
-        /// <summary>arg[1] -> the player index of the client</summary>
+        /// <summary>args[1] -> the player index of the client</summary>
         public static readonly String UPDATE_GAME_CONNECTION_BROKEN = "U_G_BREAK";
 
-        /// <summary>no args, means that the game host has started the game</summary>
+        /// <summary>args[1] -> the local player's index</summary>
         public static readonly String UPDATE_GAME_HAS_STARTED = "U_G_START";
 
-        /// <summary>arg[1] -> the index of the player that has disconnected</summary>
+        /// <summary>args[1] -> the index of the player that has disconnected</summary>
         public static readonly String UPDATE_PLAYER_CONNECTION_BROKEN = "U_P_BREAK";
 
         /// <summary>no args, means that a player has decided to join the game. Can only be recieved before game has started</summary>
         public static readonly String UPDATE_PLAYER_JOINED = "U_P_JOINED";
 
-        /// <summary>arg[1] -> the index of the player that has drawn // 
-        /// arg[2] -> String representation of the card drawn (defined by Card.ToString)</summary>
+        /// <summary>args[1] -> the index of the player that has drawn // 
+        /// args[2] -> String representation of the card drawn (defined by Card.ToString)</summary>
         public static readonly String UPDATE_PLAYER_DRAW = "U_P_DRAW";
 
-        /// <summary>arg[1] -> the index of the player that has standed/stood/stund/whatever</summary>
+        /// <summary>args[1] -> the index of the player that has standed/stood/stund/whatever</summary>
         public static readonly String UPDATE_PLAYER_STAND = "U_P_STAND";
 
         /// <summary>no args, means that your setup turn has begun. Draw 2 cards and notify.</summary>
