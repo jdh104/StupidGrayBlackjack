@@ -133,9 +133,9 @@ namespace StupidBlackjackSln
         {
             isMyTurn = false;
             this.ParseUpdate(Program.GetConnector().NotifyStand(id));
-            ticks = 0;    //ends turn and sets time to 0
+            ticks = 60;    //ends turn and sets time to 0
             lblTimer.Text = ticks.ToString();
-            timer1.Stop();
+            //timer1.Stop();
             btnHit.Enabled = false;
             btnStand.Enabled = false;//Disable Hit Button
             this.RefreshPlayerInfo();

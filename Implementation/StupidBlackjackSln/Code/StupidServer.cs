@@ -247,7 +247,6 @@ namespace StupidBlackjackSln.Code
 
                 String[] args = cmd.Trim().Split(' ');
                 String op = args[0];
-                OutputToForm("op=" + op);
                 if (op.Equals(CMD_FETCH))
                 {
                     this.PurgeDeadGames();
@@ -596,7 +595,7 @@ namespace StupidBlackjackSln.Code
                                 catch
                                 {
                                     OutputToForm("Passing turn to dealer");
-                                    this.WriteLine(game.GetClientList()[0], UPDATE_DEALER_TURN);
+                                    this.WriteLine(sender, UPDATE_DEALER_TURN);
                                 }
                                 return RESPONSE_SUCCESS;
                             }
