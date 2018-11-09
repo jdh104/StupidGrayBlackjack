@@ -272,6 +272,15 @@ namespace StupidBlackjackSln.Code
         {
             StupidConnector.port = port;
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="game_id"></param>
+        public void StartHostedGame(int game_id)
+        {
+            String[] response = this.WriteLine(StupidServer.CMD_START_GAME_BY_ID + " " + game_id + " " + key);
+        }
         
         /// <summary>
         /// Write a String to the connection followed by a newline character, and get a response.
