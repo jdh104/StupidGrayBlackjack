@@ -238,8 +238,8 @@ namespace StupidBlackjackSln
             {
                 Card card1 = deck.dealCard();
                 Card card2 = deck.dealCard();
-                dealer.giveCard(card1);
-                dealer.giveCard(card2);
+               /// dealer.giveCard(card1);
+               /// dealer.giveCard(card2);
                 Program.GetConnector().NotifyDealerDraw(card1, this.id);
                 Program.GetConnector().NotifyDealerDraw(card2, this.id);
                 Program.GetConnector().NotifyDealerSetupFinished(this.id);
