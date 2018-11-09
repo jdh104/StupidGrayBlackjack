@@ -231,7 +231,8 @@ namespace StupidBlackjackSln
             }
             else if (update_array[0].Equals(StupidServer.UPDATE_PLAYER_CONNECTION_BROKEN))
             {
-                // TODO
+                int playerindex = Int32.Parse(update_array[1]);
+                players[playerindex].SetStatus("Left game");
             }
             else if (update_array[0].Equals(StupidServer.UPDATE_PLAYER_JOINED))
             {
@@ -246,11 +247,12 @@ namespace StupidBlackjackSln
                     players[playerindex].giveCard(cardToDraw);
                     deck.RemoveCard(cardToDraw);
                 }
+                players[playerindex].SetStatus("Drew a card");
             }
             else if (update[0].Equals(StupidServer.UPDATE_PLAYER_STAND))
             {
                 int playerindex = Int32.Parse(update_array[1]);
-                players[playerindex].SetStatus("Stand");
+                players[playerindex].SetStatus("Stood");
             }
 
             else if (update[0].Equals(StupidServer.UPDATE_YOUR_SETUP))
@@ -264,7 +266,7 @@ namespace StupidBlackjackSln
             }
             else if (update_array[0].Equals(StupidServer.UPDATE_YOUR_TURN))
             {
-
+                System.Windows.Forms.MessageBox.Show("It's your turn!", "Hey Player" + myindex.ToString());
             }
 
         }
