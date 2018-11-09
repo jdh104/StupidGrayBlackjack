@@ -589,9 +589,11 @@ namespace StupidBlackjackSln.Code
                                 try
                                 {
                                     this.WriteLine(game.GetClientList()[game.turn_index], UPDATE_YOUR_TURN);
+                                    OutputToForm("Passing turn to player: " + game.turn_index);
                                 }
                                 catch
                                 {
+                                    OutputToForm("Passing turn to dealer");
                                     this.WriteLine(game.GetClientList()[0], UPDATE_DEALER_TURN);
                                 }
                                 return RESPONSE_SUCCESS;
