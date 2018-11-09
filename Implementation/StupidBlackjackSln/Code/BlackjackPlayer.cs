@@ -1,4 +1,6 @@
-﻿using System;
+﻿// Class Master: Madelyn
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,6 +13,15 @@ namespace StupidBlackjackSln.Code
         public bool hasBusted = false;     //true if they go over 21
         public bool hasWon = false;       // true if they win
         public static Boolean isTurn2;
+
+        public String playerName;
+        private String status;
+
+        
+        public BlackjackPlayer(String name)
+        {
+            playerName = name;
+        }
 
         public bool getBusted()
         {

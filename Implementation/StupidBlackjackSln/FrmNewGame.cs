@@ -17,7 +17,9 @@ namespace StupidBlackjackSln
     public partial class FrmNewGame : Form
     {
         public static Deck deck;
-        private BlackjackPlayer player1;
+        private BlackjackPlayer host_player;
+        private int nPlayers;
+        private BlackjackPlayer[] players;
         private PictureBox[] picPlayerCards;
         private int ticks = 15;  //15 seconds for a player's turn
         private int id = 0;
@@ -35,6 +37,13 @@ namespace StupidBlackjackSln
             {
                 picPlayerCards[i] = Controls.Find("picPlayerCard" + (i + 1).ToString(), true)[0] as PictureBox;
             }
+
+            host_player = new BlackjackPlayer("host_player");
+
+            deck = new Deck(FindBitmap);
+
+            host_player.giveHand(new List<Card>() { deck.dealCard(), deck.dealCard() });
+            showHand();
         }
 
         /// <summary>
@@ -51,8 +60,12 @@ namespace StupidBlackjackSln
                 picPlayerCards[i] = Controls.Find("picPlayerCard" + (i + 1).ToString(), true)[0] as PictureBox;
             }
 
-            int? nPlayers = Program.GetConnector().GetGamePopulationByID(id);
-            LoadPlayers(nPlayers);
+            if (Program.GetConnector().GetGamePopulationByID(id) != null)
+            {
+                nPlayers = System.Convert.ToInt32(Program.GetConnector().GetGamePopulationByID(id));
+            }
+                
+            LoadPlayers();
 
             // Update information in panel with info from server
             UpdateInfoFromServer();
@@ -82,10 +95,10 @@ namespace StupidBlackjackSln
         /// <param name="e"></param>
         private void btnHit_Click(object sender, EventArgs e)
         {
-            player1.giveCard(deck.dealCard());
+            host_player.giveCard(deck.dealCard());
             showHand();
             //Program.GetConnector().NotifyCardDrawn(deck.getRecentCard(), id); //Notify server what was drawn
-            if (player1.getBusted() == true)                        //currently returns null TODO - needs to test
+            if (host_player.getBusted() == true)                        //currently returns null TODO - needs to test
             {
                 btnHit.Enabled = false;   //Disable Hit Button
                 ticks = 0;    //ends turn and sets time to 0
@@ -151,20 +164,22 @@ namespace StupidBlackjackSln
         /// <param name="e"></param>
         private void FrmNewGame_Load(object sender, EventArgs e)
         {
-            deck = new Deck(FindBitmap);
-            player1 = new BlackjackPlayer();
-
-            player1.giveHand(new List<Card>() { deck.dealCard(), deck.dealCard() });
-            showHand();
+            
         }
 
 
         /// <summary>
         /// Load Player Profiles in Players Panel
         /// </summary>
-        /// <param name="nPlayers">Number of players in game</param>
-        private void LoadPlayers(int? nPlayers)
+        private void LoadPlayers()
         {
+            players = new BlackjackPlayer[nPlayers-1];
+            players[0] = new BlackjackPlayer("host_player");
+            for (int i = 1; i < nPlayers; i++)
+            {
+                players[i] = new BlackjackPlayer("player" + (i + 1).ToString());
+            }
+
             if (nPlayers >= 2)
             {
                 // lblPlayerXname.Text = "Player" + Program.GetConnector().GetPlayerOrder()[]something like this.toString();
@@ -187,24 +202,22 @@ namespace StupidBlackjackSln
         /// <summary>
         /// Parse input string for update type and return meaningful update message
         /// </summary>
-        /// <param name="update"></param>
-        /// <returns></returns>
-        private String ParseUpdate(String update)
+        /// <param name="update">Update from server</param>
+        private void ParseUpdate(String update)
         {
-            string[] words = update.Split(' ');
+            String[] update_array = update.Split(' ');
 
-            foreach (var word in words)
-            {
-                System.Console.WriteLine($"<{word}>");
-            }
+            if (update[0].Equals(StupidServer.UPDATE_GAME_CONNECTION_BROKEN)) { }
+            else if (update[0].Equals(StupidServer.UPDATE_PLAYER_JOINED)) { }
+            else if (update[0].Equals(StupidServer.UPDATE_DEALER_DRAW)) { }
+            else if (update[0].Equals(StupidServer.UPDATE_DEALER_TURN)) { }
+            else if (update[0].Equals(StupidServer.UPDATE_GAME_CONNECTION_BROKEN)) { }
+            else if (update[0].Equals(StupidServer.UPDATE_PLAYER_CONNECTION_BROKEN)) { }
+            else if (update[0].Equals(StupidServer.UPDATE_PLAYER_JOINED)) { }
+            else if (update[0].Equals(StupidServer.UPDATE_PLAYER_DRAW)) { }
+            else if (update[0].Equals(StupidServer.UPDATE_PLAYER_STAND)) { }
+            else if (update[0].Equals(StupidServer.UPDATE_YOUR_TURN)) { }
 
-
-            if (update.Equals(StupidServer.UPDATE_GAME_CONNECTION_BROKEN))
-                return "Host left game. Please leave and join another game.";
-            else if (update.Equals(StupidServer.UPDATE_PLAYER_JOINED))
-                return "A player joined!";
-            else
-                return "";
         }
 
         /// <summary>
@@ -229,11 +242,11 @@ namespace StupidBlackjackSln
         /// </summary>
         private void showHand()
         {
-            for (int i = 0; i < player1.Hand.Count(); i++)
+            for (int i = 0; i < host_player.Hand.Count(); i++)
             {
-                picPlayerCards[i].BackgroundImage = player1.Hand[i].Bitmap;
+                picPlayerCards[i].BackgroundImage = host_player.Hand[i].Bitmap;
             }
-            lblPlayerScore.Text = player1.Score.ToString();
+            lblPlayerScore.Text = host_player.Score.ToString();
         }
 
         /// <summary>
@@ -244,6 +257,7 @@ namespace StupidBlackjackSln
         private void timer1_Tick(object sender, EventArgs e)
         {
             ticks--;    //Time ticks down each second
+            UpdateInfoFromServer();
             lblTimer.Text = ticks.ToString();
             this.Text = "Stupid Gray Blackjack";
 
@@ -254,7 +268,6 @@ namespace StupidBlackjackSln
                 btnHit.Enabled = false;   //Disable Hit Button
                 RefreshPlayerInfo();    // Refresh info on rhs panel
                 timer1.Stop();
-                UpdateInfoFromServer();
             }
         }
 
