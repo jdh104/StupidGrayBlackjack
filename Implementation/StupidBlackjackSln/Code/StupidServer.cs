@@ -586,7 +586,14 @@ namespace StupidBlackjackSln.Code
                             {
                                 BroadcastToGame(game, UPDATE_PLAYER_STAND + " " + player_index.ToString());
                                 game.turn_index++;
-                                this.WriteLine(game.GetClientList()[game.turn_index], UPDATE_YOUR_TURN);
+                                try
+                                {
+                                    this.WriteLine(game.GetClientList()[game.turn_index], UPDATE_YOUR_TURN);
+                                }
+                                catch
+                                {
+                                    this.WriteLine(game.GetClientList()[0], UPDATE_DEALER_TURN);
+                                }
                                 return RESPONSE_SUCCESS;
                             }
                         }
@@ -924,7 +931,14 @@ namespace StupidBlackjackSln.Code
 
             public TcpClient[] GetClientList()
             {
-                return client_dict.Values.ToArray<TcpClient>();
+                if (started)
+                {
+                    return client_list ?? (client_list = client_dict.Values.ToArray<TcpClient>());
+                }
+                else
+                {
+                    return client_dict.Values.ToArray<TcpClient>();
+                }
             }
 
             public TcpClient GetHost()

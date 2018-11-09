@@ -185,10 +185,10 @@ namespace StupidBlackjackSln.Code
         /// </summary>
         /// <param name="id">id of game to join</param>
         /// <returns>true if join succeeded</returns>
-        public bool JoinGameByID(int id)
+        public String[] JoinGameByID(int id)
         {
             String[] response = this.WriteLine(StupidServer.CMD_JOIN_GAME_BY_ID + " " + id + " " + key);
-            return response[0].Equals(StupidServer.RESPONSE_SUCCESS);
+            return response;
         }
 
         /// <summary>
@@ -196,10 +196,10 @@ namespace StupidBlackjackSln.Code
         /// </summary>
         /// <param name="id">The id of the game to be removed from</param>
         /// <returns>True if the server responds with RESPONSE_SUCCESS, else false</returns>
-        public bool LeaveGameByID(int id)
+        public String[] LeaveGameByID(int id)
         {
             String[] response = this.WriteLine(StupidServer.CMD_REMOVE_PLAYER_FROM_GAME + " " + id + " " + key);
-            return response[0].Equals(StupidServer.RESPONSE_SUCCESS);
+            return response;
         }
 
         /// <summary>
@@ -208,10 +208,10 @@ namespace StupidBlackjackSln.Code
         /// <param name="c">The card object to notify</param>
         /// <param name="connected_game_id">The id of the game connection</param>
         /// <returns>true if the server responds with RESPONSE_SUCCESS, else false</returns>
-        public bool NotifyCardDrawn(Card c, int connected_game_id)
+        public String[] NotifyCardDrawn(Card c, int connected_game_id)
         {
             String[] response = this.WriteLine(StupidServer.NOTIFY_CARD_DRAW + " " + connected_game_id + " " + key.ToString() + " " + c.ToString());
-            return response[0].Equals(StupidServer.RESPONSE_SUCCESS);
+            return response;
         }
 
         /// <summary>
@@ -220,10 +220,10 @@ namespace StupidBlackjackSln.Code
         /// <param name="c"></param>
         /// <param name="connected_game_id"></param>
         /// <returns></returns>
-        public bool NotifyDealerDraw(Card c, int connected_game_id)
+        public String[] NotifyDealerDraw(Card c, int connected_game_id)
         {
             String[] response = this.WriteLine(StupidServer.NOTIFY_DEALER_DRAW + " " + connected_game_id + " " + c.ToString());
-            return response[0].Equals(StupidServer.RESPONSE_SUCCESS);
+            return response;
         }
 
         /// <summary>
@@ -231,10 +231,10 @@ namespace StupidBlackjackSln.Code
         /// </summary>
         /// <param name="connected_game_id"></param>
         /// <returns></returns>
-        public bool NotifyDealerSetupFinished(int connected_game_id)
+        public String[] NotifyDealerSetupFinished(int connected_game_id)
         {
             String[] response = this.WriteLine(StupidServer.NOTIFY_DEALER_SETUP_FINISH + " " + connected_game_id + " " + key.ToString());
-            return response[0].Equals(StupidServer.RESPONSE_SUCCESS);
+            return response;
         }
 
         /// <summary>
@@ -242,10 +242,10 @@ namespace StupidBlackjackSln.Code
         /// </summary>
         /// <param name="connected_game_id"></param>
         /// <returns></returns>
-        public bool NotifyDealerStand(int connected_game_id)
+        public String[] NotifyDealerStand(int connected_game_id)
         {
             String[] response = this.WriteLine(StupidServer.NOTIFY_DEALER_STAND + " " + connected_game_id + " " + key.ToString());
-            return response[0].Equals(StupidServer.RESPONSE_SUCCESS);
+            return response;
         }
 
         /// <summary>
@@ -253,10 +253,10 @@ namespace StupidBlackjackSln.Code
         /// </summary>
         /// <param name="connected_game_id"></param>
         /// <returns></returns>
-        public String NotifyInitializationComplete(int connected_game_id)
+        public String[] NotifyInitializationComplete(int connected_game_id)
         {
             String[] response = this.WriteLine(StupidServer.NOTIFY_INIT + " " + connected_game_id);
-            return response[0];
+            return response;
         }
 
         /// <summary>
@@ -264,10 +264,10 @@ namespace StupidBlackjackSln.Code
         /// </summary>
         /// <param name="connected_game_id">The id of the game connection</param>
         /// <returns>true if the server responds with RESPONSE_SUCCESS, else false</returns>
-        public bool NotifySetupFinished(int connected_game_id)
+        public String[] NotifySetupFinished(int connected_game_id)
         {
             String[] response = this.WriteLine(StupidServer.NOTIFY_SETUP_FINISH + " " + connected_game_id);
-            return response[0].Equals(StupidServer.RESPONSE_SUCCESS);
+            return response;
         }
 
         /// <summary>
@@ -275,10 +275,10 @@ namespace StupidBlackjackSln.Code
         /// </summary>
         /// <param name="connected_game_id">The id of the game connection</param>
         /// <returns>true if the server responds with RESPONSE_SUCCESS, else false</returns>
-        public bool NotifyStand(int connected_game_id)
+        public String[] NotifyStand(int connected_game_id)
         {
             String[] response = this.WriteLine(StupidServer.NOTIFY_STAND + " " + connected_game_id + " " + key.ToString());
-            return response[0].Equals(StupidServer.RESPONSE_SUCCESS);
+            return response;
         }
         
         /// <summary>

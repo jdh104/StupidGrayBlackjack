@@ -64,10 +64,16 @@ namespace StupidBlackjackSln
             {
                 picPlayerCards[i] = Controls.Find("picPlayerCard" + (i + 1).ToString(), true)[0] as PictureBox;
             }
-
-            if (Program.GetConnector().GetGamePopulationByID(id) != null)
+            
+            while (Program.GetConnector().HasResponse())
             {
-                nPlayers = System.Convert.ToInt32(Program.GetConnector().GetGamePopulationByID(id));
+                ParseUpdate(Program.GetConnector().CheckForUpdate());
+            }
+
+            int? pop = Program.GetConnector().GetGamePopulationByID(id);
+            if (pop != null)
+            {
+                nPlayers = (int)pop;
             }
                 
             LoadPlayers();
@@ -107,7 +113,7 @@ namespace StupidBlackjackSln
         {
             Card c = deck.dealCard();
             players[myindex].giveCard(c);
-            Program.GetConnector().NotifyCardDrawn(c, id);
+            this.ParseUpdate(Program.GetConnector().NotifyCardDrawn(c, id));
             showHand();
             if (players[myindex].getBusted() == true)                        //currently returns null TODO - needs to test
             {
@@ -123,7 +129,7 @@ namespace StupidBlackjackSln
         /// <param name="e"></param>
         private void btnStand_Click(object sender, EventArgs e)
         {
-            Program.GetConnector().NotifyStand(id);
+            this.ParseUpdate(Program.GetConnector().NotifyStand(id));
             ticks = 0;    //ends turn and sets time to 0
             lblTimer.Text = ticks.ToString();
             timer1.Stop();
@@ -219,7 +225,11 @@ namespace StupidBlackjackSln
         private void ParseUpdate(String update)
         {
             String[] update_array = update.Split(' ');
+            ParseUpdate(update_array);
+        }
 
+        private void ParseUpdate(String[] update_array)
+        {
             if (update_array[0].Equals(StupidServer.UPDATE_GAME_CONNECTION_BROKEN))
             {
                 Program.CloseStupidConnector();
@@ -239,9 +249,9 @@ namespace StupidBlackjackSln
                 Card card2 = deck.dealCard();
                /// dealer.giveCard(card1);
                /// dealer.giveCard(card2);
-                Program.GetConnector().NotifyDealerDraw(card1, this.id);
-                Program.GetConnector().NotifyDealerDraw(card2, this.id);
-                Program.GetConnector().NotifyDealerSetupFinished(this.id);
+                ParseUpdate(Program.GetConnector().NotifyDealerDraw(card1, this.id));
+                ParseUpdate(Program.GetConnector().NotifyDealerDraw(card2, this.id));
+                ParseUpdate(Program.GetConnector().NotifyDealerSetupFinished(this.id));
             }
             else if (update_array[0].Equals(StupidServer.UPDATE_DEALER_STAND))
             {
@@ -282,9 +292,9 @@ namespace StupidBlackjackSln
                 Card card2 = deck.dealCard();
                 players[myindex].giveCard(card1);
                 players[myindex].giveCard(card2);
-                Program.GetConnector().NotifyCardDrawn(card1, this.id);
-                Program.GetConnector().NotifyCardDrawn(card2, this.id);
-                Program.GetConnector().NotifySetupFinished(this.id);
+                this.ParseUpdate(Program.GetConnector().NotifyCardDrawn(card1, this.id));
+                this.ParseUpdate(Program.GetConnector().NotifyCardDrawn(card2, this.id));
+                this.ParseUpdate(Program.GetConnector().NotifySetupFinished(this.id));
             }
             else if (update_array[0].Equals(StupidServer.UPDATE_YOUR_TURN))
             {
@@ -355,7 +365,7 @@ namespace StupidBlackjackSln
             if (ticks <= 0)
             {
                 //We could switch turns here and keep going with the clock
-                Program.GetConnector().NotifyStand(this.id);
+                this.ParseUpdate(Program.GetConnector().NotifyStand(this.id));
                 btnHit.Enabled = false;   //Disable Hit Button
                 btnStand.Enabled = false;
                 RefreshPlayerInfo();    // Refresh info on rhs panel
