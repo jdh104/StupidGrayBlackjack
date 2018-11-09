@@ -35,6 +35,7 @@ namespace StupidBlackjackSln
 
         private void BtnLeaveGame_Click(object sender, EventArgs e)
         {
+            Program.GetConnector().LeaveGameByID(id);
             this.Close();
         }
 
@@ -71,7 +72,7 @@ namespace StupidBlackjackSln
         /// <param name="e"></param>
         private void Client_WaitingForConnection_FormClosed(object sender, FormClosedEventArgs e)
         {
-            Program.GetConnector().LeaveGameByID(id);
+            
         }
 
 
