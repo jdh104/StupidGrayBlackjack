@@ -18,6 +18,7 @@ namespace StupidBlackjackSln
     {
         public static Deck deck;
         private bool isOnline;
+        private int turnCount = 0;
         ///private BlackjackPlayer host_player;
         private int nPlayers;
         private BlackjackPlayer[] players;
@@ -258,6 +259,7 @@ namespace StupidBlackjackSln
             }
             else if (update_array[0].Equals(StupidServer.UPDATE_DEALER_STAND))
             {
+                turnCount++; //Keeps track of the number of times this method has been called
                 int array_size = nPlayers + 1;
                 int[] scoresToCompare = new int[array_size];
                 for (int i=0; i<array_size-1; i++)
@@ -280,6 +282,16 @@ namespace StupidBlackjackSln
                     else
                     {
                         System.Windows.Forms.MessageBox.Show("You won!", "Hey Player" + myindex.ToString());
+                        AchievementMonitor.GetInstance().AddWin();
+                        if (isOnline)
+                        {
+                            AchievementMonitor.GetInstance().AddOnlineWinAchievement();
+                        }
+                        if (turnCount == 1)
+                        {
+                            AchievementMonitor.GetInstance().AddInstantWinAchievement();
+                        }
+                        
                     }
                 }
                 else if (players[myindex].Score < scoresToCompare.Max<int>())
