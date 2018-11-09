@@ -250,7 +250,7 @@ namespace StupidBlackjackSln
             }
             else if (update_array[0].Equals(StupidServer.UPDATE_DEALER_TURN))
             {
-                // do dealer logic
+                // dealer.TakeTurn(id);
             }
             else if (update_array[0].Equals(StupidServer.UPDATE_PLAYER_CONNECTION_BROKEN))
             {
@@ -295,7 +295,7 @@ namespace StupidBlackjackSln
             }
             else
             {
-                // unrecognized update
+                // unrecognized update, probably leftover RESPONSE_SUCCESS
             }
         }
 
