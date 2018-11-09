@@ -74,14 +74,11 @@ namespace StupidBlackjackSln
             lblYouArePlayer.Text = "You are player " + myIndex.ToString();
             lblYouArePlayer.Show();
 
-            // Update information in panel with info from server
-            UpdateInfoFromServer();
-
             this.id = id;
             this.myindex = myindex;
             this.isOnline = true;
 
-            Program.GetConnector().NotifyInitializationComplete(id);
+            ParseUpdate(Program.GetConnector().NotifyInitializationComplete(id));
             timer1.Start();
         }
 

@@ -219,10 +219,10 @@ namespace StupidBlackjackSln.Code
         /// </summary>
         /// <param name="connected_game_id"></param>
         /// <returns></returns>
-        public bool NotifyInitializationComplete(int connected_game_id)
+        public String NotifyInitializationComplete(int connected_game_id)
         {
             String[] response = this.WriteLine(StupidServer.NOTIFY_INIT + " " + connected_game_id);
-            return response[0].Equals(StupidServer.RESPONSE_SUCCESS);
+            return response[0];
         }
 
         /// <summary>
