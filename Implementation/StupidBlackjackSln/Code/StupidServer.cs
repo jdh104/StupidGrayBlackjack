@@ -576,6 +576,7 @@ namespace StupidBlackjackSln.Code
                     {
                         if (game.id == id)
                         {
+                            OutputToForm("Found game: " + id + ": checking turn");
                             int? player_index = game.GetIndexOfClient(sender);
                             if (player_index == null)
                             {
