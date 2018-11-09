@@ -113,9 +113,6 @@ namespace StupidBlackjackSln
 
             String[] response = Program.GetConnector().StartHostedGame(id);
 
-            // clear up the input stream
-            while (!Program.GetConnector().CheckForUpdate().Equals(StupidServer.RESPONSE_SUCCESS)) ;
-
             new FrmNewGame(id, Convert.ToInt32(response[1])).Show();
             this.Close();
         }

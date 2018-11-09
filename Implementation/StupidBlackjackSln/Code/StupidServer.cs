@@ -580,7 +580,7 @@ namespace StupidBlackjackSln.Code
                                 {
                                     this.WriteLine(cli, UPDATE_GAME_HAS_STARTED + " " + game.GetIndexOfClient(cli));
                                 }
-                                return RESPONSE_SUCCESS;
+                                return UPDATE_YOUR_SETUP;
                             }
                         }
                         return RESPONSE_FAIL;
