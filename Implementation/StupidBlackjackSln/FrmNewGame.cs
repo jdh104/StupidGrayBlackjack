@@ -185,6 +185,7 @@ namespace StupidBlackjackSln
             {
                 players[i] = new BlackjackPlayer("player" + (i + 1).ToString() );
                 otherPlayers.Add(i);
+                players[i].giveHand(new List<Card>());
             }
 
             otherPlayers.RemoveAt(myindex);
@@ -257,7 +258,8 @@ namespace StupidBlackjackSln
             {
                 Card card1 = deck.dealCard();
                 Card card2 = deck.dealCard();
-                players[myindex].giveHand(new List<Card>() {card1, card2});
+                players[myindex].giveCard(card1);
+                players[myindex].giveCard(card2);
                 Program.GetConnector().NotifyCardDrawn(card1, this.id);
                 Program.GetConnector().NotifyCardDrawn(card2, this.id);
                 Program.GetConnector().NotifySetupFinished(this.id);
