@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace StupidBlackjackSln.Code
 {
-    class BlackjackPlayer : Player
+    public class BlackjackPlayer : Player
     {
         public bool hasBusted = false;     //true if they go over 21
         public bool hasWon = false;       // true if they win
