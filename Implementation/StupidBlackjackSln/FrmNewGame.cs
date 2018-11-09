@@ -294,6 +294,7 @@ namespace StupidBlackjackSln
                 lblPlayerZstatus.Text = players[otherPlayers[2]].GetStatus();
             }
 
+            showHand();
 
             // Other player info
             // Up to 4 players in game, thus up to 3 players in players panel
@@ -307,11 +308,11 @@ namespace StupidBlackjackSln
         /// </summary>
         private void showHand()
         {
-            for (int i = 0; i < host_player.Hand.Count(); i++)
+            for (int i = 0; i < players[myindex].Hand.Count(); i++)
             {
-                picPlayerCards[i].BackgroundImage = host_player.Hand[i].Bitmap;
+                picPlayerCards[i].BackgroundImage = players[myindex].Hand[i].Bitmap;
             }
-            lblPlayerScore.Text = host_player.Score.ToString();
+            lblPlayerScore.Text = players[myindex].Score.ToString();
         }
 
         /// <summary>
