@@ -110,17 +110,10 @@ namespace StupidBlackjackSln
         /// <param name="e"></param>
         private void BtnHostStartGame_Click(object sender, EventArgs e)
         {
-            Program.GetConnector().StartHostedGame(id);
 
-            String response = Program.GetConnector().CheckForUpdate();
-            while (response == null || !response.StartsWith(StupidServer.UPDATE_GAME_HAS_STARTED))
-            {
-                Thread.Sleep(100);
-                response = Program.GetConnector().CheckForUpdate();
-            }
-            String[] args = response.Split(' ');
-
-            new FrmNewGame(id, Convert.ToInt32(args[1])).Show();
+            String[] response = Program.GetConnector().StartHostedGame(id);
+         
+            new FrmNewGame(id, Convert.ToInt32(response[1])).Show();
             this.Close();
         }
     }
