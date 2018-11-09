@@ -16,7 +16,7 @@ namespace StupidBlackjackSln.Code
         public const char DELIM = ':';
         private string id;
 
-        private static String[] possibleRanks = new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "jack", "queen", "king", "ace" };
+        private static String[] possibleRanks = new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "jack", "queen", "king", "ace" };
         private static String[] possibleSuits = new String[] { "hearts", "spades", "diamonds", "clubs" };
 
         public Bitmap Bitmap
