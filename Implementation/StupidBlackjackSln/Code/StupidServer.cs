@@ -530,7 +530,11 @@ namespace StupidBlackjackSln.Code
                             if (game.id.Equals(id))
                             {
                                 game.started = true;
-                                this.BroadcastToGame(game, UPDATE_GAME_HAS_STARTED);
+                                OutputToForm("Updating clients with player index");
+                                foreach (TcpClient cli in game.GetClientList())
+                                {
+                                    this.WriteLine(cli, UPDATE_GAME_HAS_STARTED + " " + game.GetIndexOfClient(cli));
+                                }
                                 break;
                             }
                         }
