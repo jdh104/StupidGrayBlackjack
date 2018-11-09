@@ -905,6 +905,7 @@ namespace StupidBlackjackSln.Code
                         if (game.GetClientList().Contains(client))
                         {
                             BroadcastToGame(game, UPDATE_PLAYER_CONNECTION_BROKEN + game.GetIndexOfClient(client));
+                            game.RemoveClient(client);
                         }
                     }
                 }
