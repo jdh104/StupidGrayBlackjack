@@ -60,6 +60,7 @@ namespace StupidBlackjackSln
             InitializeComponent();
             deck = new Deck(FindBitmap);
             dealer = new Dealer("Bob");
+            dealer.giveHand(new List<Card>());
 
             picPlayerCards = new PictureBox[5];
             for (int i = 0; i < 5; i++)
