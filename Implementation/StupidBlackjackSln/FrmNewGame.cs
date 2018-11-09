@@ -317,16 +317,19 @@ namespace StupidBlackjackSln
             {
                 lblPlayerXscore.Text = players[otherPlayers[0]].GetScore().ToString();
                 lblPlayerXstatus.Text = players[otherPlayers[0]].GetStatus();
+                lblPlayerXcards.Text = players[otherPlayers[0]].GetUnicodeHand();
             }
             if (nPlayers >= 3)
             {
                 lblPlayerYscore.Text = players[otherPlayers[1]].GetScore().ToString();
                 lblPlayerYstatus.Text = players[otherPlayers[1]].GetStatus();
+                lblPlayerYcards.Text = players[otherPlayers[1]].GetUnicodeHand();
             }
             if (nPlayers == 4)
             {
                 lblPlayerZscore.Text = players[otherPlayers[2]].GetScore().ToString();
                 lblPlayerZstatus.Text = players[otherPlayers[2]].GetStatus();
+                lblPlayerZcards.Text = players[otherPlayers[2]].GetUnicodeHand();
             }
 
             showHand();

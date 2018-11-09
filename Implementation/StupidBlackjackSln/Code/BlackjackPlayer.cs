@@ -37,6 +37,17 @@ namespace StupidBlackjackSln.Code
             return Hand;
         }
 
+        public String GetUnicodeHand()
+        {
+            Hand = GetHand();
+            String unicodeHand = "";
+            foreach (Card c in Hand) {
+                unicodeHand += c.GetUnicode();
+            }
+
+            return unicodeHand;
+        }
+
         public String GetStatus()
         {
             return status;

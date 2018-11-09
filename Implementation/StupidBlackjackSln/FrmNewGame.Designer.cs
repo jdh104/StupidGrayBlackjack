@@ -73,6 +73,9 @@
             this.lblDealerCards = new System.Windows.Forms.Label();
             this.lblDealerScore = new System.Windows.Forms.Label();
             this.lblDealer = new System.Windows.Forms.Label();
+            this.lblPlayerXcards = new System.Windows.Forms.Label();
+            this.lblPlayerYcards = new System.Windows.Forms.Label();
+            this.lblPlayerZcards = new System.Windows.Forms.Label();
             this.pnlTopBtns.SuspendLayout();
             this.flowPnlPlayers.SuspendLayout();
             this.pnlPlayerX.SuspendLayout();
@@ -80,18 +83,21 @@
             this.pnlCtrPlayerX.Panel1.SuspendLayout();
             this.pnlCtrPlayerX.Panel2.SuspendLayout();
             this.pnlCtrPlayerX.SuspendLayout();
+            this.pnlPlayerXcards.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picPlayerX)).BeginInit();
             this.pnlPlayerY.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pnlCtrPlayerY)).BeginInit();
             this.pnlCtrPlayerY.Panel1.SuspendLayout();
             this.pnlCtrPlayerY.Panel2.SuspendLayout();
             this.pnlCtrPlayerY.SuspendLayout();
+            this.pnlPlayerYcards.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picPlayerY)).BeginInit();
             this.pnlPlayerZ.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pnlCtrPlayerZ)).BeginInit();
             this.pnlCtrPlayerZ.Panel1.SuspendLayout();
             this.pnlCtrPlayerZ.Panel2.SuspendLayout();
             this.pnlCtrPlayerZ.SuspendLayout();
+            this.pnlPlayerZcards.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picPlayerZ)).BeginInit();
             this.pnlTableHolder.SuspendLayout();
             this.tablePnlGamePlay.SuspendLayout();
@@ -192,6 +198,7 @@
             // 
             // pnlPlayerXcards
             // 
+            this.pnlPlayerXcards.Controls.Add(this.lblPlayerXcards);
             this.pnlPlayerXcards.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlPlayerXcards.Location = new System.Drawing.Point(0, 33);
             this.pnlPlayerXcards.Margin = new System.Windows.Forms.Padding(8);
@@ -293,6 +300,7 @@
             // 
             // pnlPlayerYcards
             // 
+            this.pnlPlayerYcards.Controls.Add(this.lblPlayerYcards);
             this.pnlPlayerYcards.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlPlayerYcards.Location = new System.Drawing.Point(0, 33);
             this.pnlPlayerYcards.Margin = new System.Windows.Forms.Padding(8);
@@ -393,6 +401,7 @@
             // 
             // pnlPlayerZcards
             // 
+            this.pnlPlayerZcards.Controls.Add(this.lblPlayerZcards);
             this.pnlPlayerZcards.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlPlayerZcards.Location = new System.Drawing.Point(0, 33);
             this.pnlPlayerZcards.Margin = new System.Windows.Forms.Padding(8);
@@ -697,6 +706,32 @@
             this.lblDealer.TabIndex = 0;
             this.lblDealer.Text = "Dealer";
             // 
+            // lblPlayerXcards
+            // 
+            this.lblPlayerXcards.AutoSize = true;
+            this.lblPlayerXcards.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblPlayerXcards.Location = new System.Drawing.Point(0, 0);
+            this.lblPlayerXcards.Name = "lblPlayerXcards";
+            this.lblPlayerXcards.Size = new System.Drawing.Size(0, 25);
+            this.lblPlayerXcards.TabIndex = 0;
+            // 
+            // lblPlayerYcards
+            // 
+            this.lblPlayerYcards.AutoSize = true;
+            this.lblPlayerYcards.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblPlayerYcards.Location = new System.Drawing.Point(0, 0);
+            this.lblPlayerYcards.Name = "lblPlayerYcards";
+            this.lblPlayerYcards.Size = new System.Drawing.Size(0, 25);
+            this.lblPlayerYcards.TabIndex = 0;
+            // 
+            // lblPlayerZcards
+            // 
+            this.lblPlayerZcards.AutoSize = true;
+            this.lblPlayerZcards.Location = new System.Drawing.Point(56, 57);
+            this.lblPlayerZcards.Name = "lblPlayerZcards";
+            this.lblPlayerZcards.Size = new System.Drawing.Size(0, 25);
+            this.lblPlayerZcards.TabIndex = 0;
+            // 
             // FrmNewGame
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
@@ -721,6 +756,8 @@
             this.pnlCtrPlayerX.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pnlCtrPlayerX)).EndInit();
             this.pnlCtrPlayerX.ResumeLayout(false);
+            this.pnlPlayerXcards.ResumeLayout(false);
+            this.pnlPlayerXcards.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picPlayerX)).EndInit();
             this.pnlPlayerY.ResumeLayout(false);
             this.pnlCtrPlayerY.Panel1.ResumeLayout(false);
@@ -728,6 +765,8 @@
             this.pnlCtrPlayerY.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pnlCtrPlayerY)).EndInit();
             this.pnlCtrPlayerY.ResumeLayout(false);
+            this.pnlPlayerYcards.ResumeLayout(false);
+            this.pnlPlayerYcards.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picPlayerY)).EndInit();
             this.pnlPlayerZ.ResumeLayout(false);
             this.pnlCtrPlayerZ.Panel1.ResumeLayout(false);
@@ -735,6 +774,8 @@
             this.pnlCtrPlayerZ.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pnlCtrPlayerZ)).EndInit();
             this.pnlCtrPlayerZ.ResumeLayout(false);
+            this.pnlPlayerZcards.ResumeLayout(false);
+            this.pnlPlayerZcards.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picPlayerZ)).EndInit();
             this.pnlTableHolder.ResumeLayout(false);
             this.pnlTableHolder.PerformLayout();
@@ -801,5 +842,8 @@
         private System.Windows.Forms.Label lblDealerCards;
         private System.Windows.Forms.Label lblDealerScore;
         private System.Windows.Forms.Label lblDealer;
+        private System.Windows.Forms.Label lblPlayerXcards;
+        private System.Windows.Forms.Label lblPlayerYcards;
+        private System.Windows.Forms.Label lblPlayerZcards;
     }
 }
