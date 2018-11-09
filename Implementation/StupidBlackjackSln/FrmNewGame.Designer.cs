@@ -716,26 +716,33 @@
             // 
             this.lblPlayerXcards.AutoSize = true;
             this.lblPlayerXcards.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblPlayerXcards.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPlayerXcards.ForeColor = System.Drawing.Color.Gainsboro;
             this.lblPlayerXcards.Location = new System.Drawing.Point(0, 0);
             this.lblPlayerXcards.Name = "lblPlayerXcards";
-            this.lblPlayerXcards.Size = new System.Drawing.Size(0, 25);
+            this.lblPlayerXcards.Size = new System.Drawing.Size(0, 37);
             this.lblPlayerXcards.TabIndex = 0;
             // 
             // lblPlayerYcards
             // 
             this.lblPlayerYcards.AutoSize = true;
             this.lblPlayerYcards.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblPlayerYcards.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPlayerYcards.ForeColor = System.Drawing.Color.Gainsboro;
             this.lblPlayerYcards.Location = new System.Drawing.Point(0, 0);
             this.lblPlayerYcards.Name = "lblPlayerYcards";
-            this.lblPlayerYcards.Size = new System.Drawing.Size(0, 25);
+            this.lblPlayerYcards.Size = new System.Drawing.Size(0, 37);
             this.lblPlayerYcards.TabIndex = 0;
             // 
             // lblPlayerZcards
             // 
             this.lblPlayerZcards.AutoSize = true;
-            this.lblPlayerZcards.Location = new System.Drawing.Point(56, 57);
+            this.lblPlayerZcards.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblPlayerZcards.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPlayerZcards.ForeColor = System.Drawing.Color.Gainsboro;
+            this.lblPlayerZcards.Location = new System.Drawing.Point(0, 0);
             this.lblPlayerZcards.Name = "lblPlayerZcards";
-            this.lblPlayerZcards.Size = new System.Drawing.Size(0, 25);
+            this.lblPlayerZcards.Size = new System.Drawing.Size(0, 37);
             this.lblPlayerZcards.TabIndex = 0;
             // 
             // FrmNewGame

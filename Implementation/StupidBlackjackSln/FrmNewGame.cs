@@ -381,11 +381,6 @@ namespace StupidBlackjackSln
 
             showHand();
 
-            // Other player info
-            // Up to 4 players in game, thus up to 3 players in players panel
-            // players in players panel are identified by PlayerX, PlayerY, and PlayerZ
-            // lblPlayer_cards
-            // lblPlayer_status
         }
 
         /// <summary>
