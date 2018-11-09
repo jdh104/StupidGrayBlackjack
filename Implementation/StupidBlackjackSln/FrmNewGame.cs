@@ -246,7 +246,7 @@ namespace StupidBlackjackSln
                 deck.RemoveCard(cardToDraw);
                 lblDealerCards.Text += cardToDraw.GetUnicode() + "  ";
                 lblDealerScore.Text = dealer.Score.ToString();
-                lblDealerCards.Enabled = true;
+                //lblDealerCards.Enabled = true;
             }
             else if (update_array[0].Equals(StupidServer.UPDATE_DEALER_SETUP))
             {
