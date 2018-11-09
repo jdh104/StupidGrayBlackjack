@@ -681,10 +681,12 @@
             // 
             this.lblDealerCards.AutoSize = true;
             this.lblDealerCards.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblDealerCards.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.875F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDealerCards.ForeColor = System.Drawing.Color.Gainsboro;
             this.lblDealerCards.Location = new System.Drawing.Point(0, 37);
             this.lblDealerCards.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblDealerCards.Name = "lblDealerCards";
-            this.lblDealerCards.Size = new System.Drawing.Size(0, 25);
+            this.lblDealerCards.Size = new System.Drawing.Size(0, 33);
             this.lblDealerCards.TabIndex = 2;
             // 
             // lblDealerScore
