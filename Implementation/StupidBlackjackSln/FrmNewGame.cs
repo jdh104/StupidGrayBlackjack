@@ -23,7 +23,7 @@ namespace StupidBlackjackSln
         private BlackjackPlayer[] players;
         private List<int> otherPlayers;
         private PictureBox[] picPlayerCards;
-        private int ticks = 15;  //15 seconds for a player's turn
+        private int ticks = 60;  //15 seconds for a player's turn
         private int id = 0;
         private int myindex;
 
@@ -247,13 +247,13 @@ namespace StupidBlackjackSln
                     deck.RemoveCard(cardToDraw);
                 }
             }
-            else if (update[0].Equals(StupidServer.UPDATE_PLAYER_STAND))
+            else if (update_array[0].Equals(StupidServer.UPDATE_PLAYER_STAND))
             {
                 int playerindex = Int32.Parse(update_array[1]);
                 players[playerindex].SetStatus("Stand");
             }
-            else if (update[0].Equals(StupidServer.UPDATE_PLAYER_STAND)) { }
-            else if (update[0].Equals(StupidServer.UPDATE_YOUR_SETUP))
+            else if (update_array[0].Equals(StupidServer.UPDATE_PLAYER_STAND)) { }
+            else if (update_array[0].Equals(StupidServer.UPDATE_YOUR_SETUP))
             {
                 Card card1 = deck.dealCard();
                 Card card2 = deck.dealCard();
