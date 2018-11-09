@@ -41,7 +41,7 @@ namespace StupidBlackjackSln.Code
             return id.Split(DELIM)[1];
         }
 
-        public static Card Parse(String rep, Func<string, string, Bitmap> CardToBitmap)
+        public static Card Parse(String rep)
         {
             String[] args = rep.Split(':');
             try
@@ -56,7 +56,7 @@ namespace StupidBlackjackSln.Code
                 throw e;
             }
 
-            return new Card(args[0] + DELIM + args[1], CardToBitmap.Invoke(args[0], args[1]));
+            return Deck.GenerateCard(args[0] + DELIM + args[1]);
         }
 
         public String ToString()

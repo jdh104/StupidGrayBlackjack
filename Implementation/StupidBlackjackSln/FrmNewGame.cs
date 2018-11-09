@@ -17,12 +17,14 @@ namespace StupidBlackjackSln
     public partial class FrmNewGame : Form
     {
         public static Deck deck;
+        private bool isOnline;
         private BlackjackPlayer host_player;
         private int nPlayers;
         private BlackjackPlayer[] players;
         private PictureBox[] picPlayerCards;
         private int ticks = 15;  //15 seconds for a player's turn
         private int id = 0;
+        private int myindex;
 
 
         /// <summary>
@@ -44,6 +46,7 @@ namespace StupidBlackjackSln
 
             host_player.giveHand(new List<Card>() { deck.dealCard(), deck.dealCard() });
             showHand();
+            isOnline = false;
         }
 
         /// <summary>
@@ -75,6 +78,8 @@ namespace StupidBlackjackSln
             UpdateInfoFromServer();
 
             this.id = id;
+            this.myindex = myindex;
+            this.isOnline = true;
         }
 
         /// <summary>
@@ -211,7 +216,6 @@ namespace StupidBlackjackSln
                 Program.CloseStupidConnector();
                 this.Close();
             }
-
             else if (update[0].Equals(StupidServer.UPDATE_DEALER_DRAW)) { }
             else if (update[0].Equals(StupidServer.UPDATE_DEALER_TURN)) { }
             else if (update[0].Equals(StupidServer.UPDATE_PLAYER_CONNECTION_BROKEN))
@@ -219,8 +223,26 @@ namespace StupidBlackjackSln
                 // TODO
             }
             else if (update[0].Equals(StupidServer.UPDATE_PLAYER_JOINED)) { }
-            else if (update[0].Equals(StupidServer.UPDATE_PLAYER_DRAW)) { }
+            else if (update[0].Equals(StupidServer.UPDATE_PLAYER_DRAW))
+            {
+                int playerindex = Int32.Parse(update_array[1]);
+                if (myindex != playerindex)
+                {
+                    Card cardToDraw = Card.Parse(update_array[2]);
+                    players[playerindex].giveCard(cardToDraw);
+                    deck.RemoveCard(cardToDraw);
+                }
+            }
             else if (update[0].Equals(StupidServer.UPDATE_PLAYER_STAND)) { }
+            else if (update[0].Equals(StupidServer.UPDATE_YOUR_SETUP))
+            {
+                Card card1 = deck.dealCard();
+                Card card2 = deck.dealCard();
+                players[myindex].giveHand(new List<Card>() {card1, card2});
+                Program.GetConnector().NotifyCardDrawn(card1, this.id);
+                Program.GetConnector().NotifyCardDrawn(card2, this.id);
+                Program.GetConnector().NotifySetupFinished(this.id);
+            }
             else if (update[0].Equals(StupidServer.UPDATE_YOUR_TURN)) { }
             else if (update[0].Equals(StupidServer.NOTIFY_CARD_DRAW)) { }
             else if (update[0].Equals(StupidServer.NOTIFY_STAND)) { }

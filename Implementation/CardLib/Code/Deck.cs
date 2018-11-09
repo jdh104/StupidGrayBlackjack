@@ -9,14 +9,21 @@ namespace StupidBlackjackSln.Code
 {
     public class Deck
     {
+        private static Func<string, string, Bitmap> CardToBitmapFunction;
         private List<Card> cards;
         private Random rand;
         private Card currentCard;
 
         public Deck(Func<string, string, Bitmap> CardToBitmap)
         {
+            CardToBitmapFunction = CardToBitmap;
             newDeck(CardToBitmap);
             rand = new Random();
+        }
+
+        public static Card GenerateCard(string id)
+        {
+            return new Card(id, CardToBitmapFunction.Invoke(id.Split(Card.DELIM)[0], id.Split(Card.DELIM)[1]));
         }
 
         /// <summary>
@@ -40,7 +47,7 @@ namespace StupidBlackjackSln.Code
             {
                 foreach (string value in values)
                 {
-                    cards.Add(new Card(value + Card.DELIM + suit, CardToBitmap.Invoke(value, suit)));
+                    cards.Add(GenerateCard(value + Card.DELIM + suit));
                 }
             }
         }
@@ -65,6 +72,18 @@ namespace StupidBlackjackSln.Code
         public Card getRecentCard()
         {
             return currentCard;
+        }
+        
+        public void RemoveCard(Card card)
+        {
+            for (int i=0; i<cards.Count; i++)
+            {
+                if (card.ToString().Equals(cards[i].ToString()))
+                {
+                    cards.RemoveAt(i);
+                    return;
+                }
+            }
         }
     }
 }
