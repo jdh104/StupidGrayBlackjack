@@ -241,7 +241,12 @@ namespace StupidBlackjackSln.Code
                 if (op.Equals(CMD_FETCH))
                 {
                     this.PurgeDeadGames();
-                    if (games.Count == 0)
+                    int active_count = 0;
+                    foreach (GameRep game in games)
+                    {
+                        active_count += game.started ? 0 : 1;
+                    }
+                    if (active_count == 0)
                     {
                         this.OutputToForm("Responded with RESPONSE_FAIL");
                         return RESPONSE_FAIL;
