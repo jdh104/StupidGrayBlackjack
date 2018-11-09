@@ -202,19 +202,16 @@ namespace StupidBlackjackSln
             if (nPlayers >= 2)
             {
                 lblPlayerXname.Text = "Player" + otherPlayers[0].ToString();
-                lblPlayerXstatus.Text = "Waiting";
                 pnlPlayerX.Show();
             }
             if (nPlayers >= 3)
             {
-                lblPlayerYname.Text = "Player" + otherPlayers[1].ToString();
-                lblPlayerYstatus.Text = "Waiting";
+                lblPlayerXname.Text = "Player" + otherPlayers[1].ToString();
                 pnlPlayerY.Show();
             }
             if (nPlayers == 4)
             {
-                lblPlayerZname.Text = "Player" + otherPlayers[2].ToString();
-                lblPlayerZstatus.Text = "Waiting";
+                lblPlayerXname.Text = "Player" + otherPlayers[2].ToString();
                 pnlPlayerZ.Show();
             }
 
@@ -262,7 +259,7 @@ namespace StupidBlackjackSln
             }
             else if (update_array[0].Equals(StupidServer.UPDATE_DEALER_TURN))
             {
-                // dealer.TakeTurn(id);
+                dealer.TakeTurn(id);
             }
             else if (update_array[0].Equals(StupidServer.UPDATE_PLAYER_CONNECTION_BROKEN))
             {

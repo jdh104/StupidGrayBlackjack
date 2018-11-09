@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace StupidBlackjackSln.Code
 {
-   public class Dealer : BlackjackPlayer
+    public class Dealer : BlackjackPlayer
     {
         private String name;
-       public Dealer(String name) : base(name) //test
+        public Dealer(String name) : base(name) //test
         {
             this.name = name;
         }
@@ -18,7 +18,7 @@ namespace StupidBlackjackSln.Code
             return name;
         }
 
-        public void MakeMove(int id)
+        public bool MakeMove(int id)
         {
             this.calcScore();
             if (Score <= 16)
@@ -26,12 +26,19 @@ namespace StupidBlackjackSln.Code
                 Card c = FrmNewGame.deck.dealCard();
                 this.giveCard(c);
                 Program.GetConnector().NotifyDealerDraw(c, id);
+                return true;
             }
             else
             {
                 Program.GetConnector().NotifyDealerStand(id);
+                return false;
             }
         }
+        public void MakeTurn(int id)
+        {
+            while (MakeMove(id));
+        }
+
     }
 
 }
