@@ -125,7 +125,14 @@ namespace StupidBlackjackSln.Code
             }
             else
             {
-                return Int32.Parse(response[1]);
+                try
+                {
+                    return Int32.Parse(response[1]);
+                }
+                catch
+                {
+                    return null;
+                }
             }
         }
 
