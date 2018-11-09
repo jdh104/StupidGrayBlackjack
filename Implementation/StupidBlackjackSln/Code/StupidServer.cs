@@ -818,6 +818,7 @@ namespace StupidBlackjackSln.Code
             public String name;
             public int population = 1;
             public int waiting;
+            public TcpClient[] client_list;
 
             public GameRep(String _name, int _key)
             {

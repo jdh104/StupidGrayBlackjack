@@ -57,6 +57,7 @@ namespace StupidBlackjackSln
                 {
                     lbl_ConnectorUpdate.Text = ParseUpdate(update);
                     lbl_ConnectorUpdate.Show();
+                    ParseUpdate(update);
                     UpdatePlayers();
                 }
 
