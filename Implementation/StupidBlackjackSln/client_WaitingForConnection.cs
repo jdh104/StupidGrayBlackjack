@@ -80,15 +80,17 @@ namespace StupidBlackjackSln
         /// </summary>
         /// <param name="update"></param>
         /// <returns></returns>
-        private String ParseUpdate(String update)
+        private String ParseUpdate(String u)
         {
+            String[] args = u.Split(' ');
+            String update = args[0];
             if (update.Equals(StupidServer.UPDATE_GAME_CONNECTION_BROKEN))
                 return "Host left game. Please leave and join another game.";
             else if (update.Equals(StupidServer.UPDATE_PLAYER_JOINED))
                 return "Another player has joined!";
             else if (update.Equals(StupidServer.UPDATE_GAME_HAS_STARTED))
             {
-                new FrmNewGame(id).Show();
+                new FrmNewGame(id, args[1]).Show();
                 this.Close();
                 return "";
             }
