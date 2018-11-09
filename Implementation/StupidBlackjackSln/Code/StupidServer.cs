@@ -891,9 +891,23 @@ namespace StupidBlackjackSln.Code
         {
             if (toWrite != null)
             {
-                byte[] data = Encoding.ASCII.GetBytes(toWrite.Trim());
-                client.GetStream().Write(data, 0, data.Length);
-                client.GetStream().Write(new byte[] { NEWLINE }, 0, 1);
+                try
+                {
+                    byte[] data = Encoding.ASCII.GetBytes(toWrite.Trim());
+                    client.GetStream().Write(data, 0, data.Length);
+                    client.GetStream().Write(new byte[] { NEWLINE }, 0, 1);
+                }
+                catch
+                {
+                    // disconnect the player
+                    foreach (GameRep game in games)
+                    {
+                        if (game.GetClientList().Contains(client))
+                        {
+                            BroadcastToGame(game, UPDATE_PLAYER_CONNECTION_BROKEN + game.GetIndexOfClient(client));
+                        }
+                    }
+                }
             }
         }
 
