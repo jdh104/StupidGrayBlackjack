@@ -46,6 +46,11 @@ namespace StupidBlackjackSln.Code
         /// <summary>args[1] -> String representation of a Card object (defined by Card.ToString)</summary>
         public static readonly String UPDATE_DEALER_DRAW = "U_D_DRAW";
 
+        /// <summary>
+        /// no args
+        /// </summary>
+        public static readonly String UPDATE_DEALER_SETUP = "U_D_SETUP";
+
         /// <summary>no args, means that the dealer's turn has ended</summary>
         public static readonly String UPDATE_DEALER_STAND = "U_D_STAND";
         
@@ -467,7 +472,14 @@ namespace StupidBlackjackSln.Code
                             {
                                 game.turn_index++;
                                 OutputToForm("Passing setup turn to player index: " + game.turn_index.ToString());
-                                this.WriteLine(game.GetClientList()[game.turn_index], UPDATE_YOUR_SETUP);
+                                try
+                                {
+                                    this.WriteLine(game.GetClientList()[game.turn_index], UPDATE_YOUR_SETUP);
+                                }
+                                catch
+                                {
+                                    this.WriteLine(game.GetClientList()[0], UPDATE_DEALER_SETUP);
+                                }
                                 return RESPONSE_SUCCESS;
                             }
                         }
