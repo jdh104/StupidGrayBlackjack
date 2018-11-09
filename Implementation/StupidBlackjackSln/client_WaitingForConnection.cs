@@ -91,6 +91,7 @@ namespace StupidBlackjackSln
                 return "Another player has joined!";
             else if (update.Equals(StupidServer.UPDATE_GAME_HAS_STARTED))
             {
+                timer1.Stop();
                 new FrmNewGame(id, Int32.Parse(args[1])).Show();
                 this.Close();
                 return "";
