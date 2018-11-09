@@ -63,5 +63,34 @@ namespace StupidBlackjackSln.Code
         {
             return id;
         }
+        /*
+        public var CardtoUnicode(String value, String suit)
+        {
+            char u_val;
+            char u_suit;
+
+            if (value.Length == 1)
+                u_val = value.ToCharArray()[0];     
+            else if (value.Equals("jack"))
+                u_val = 'B';
+            else if (value.Equals("queen"))
+                u_val = 'D';
+            else if (value.Equals("king"))
+                u_val = 'E';
+            else if (value.Equals("ace"))
+                u_val = '1';
+
+            if (suit.Equals("spades"))
+                u_suit = 'A';
+            else if (suit.Equals("hearts"))
+                u_suit = 'B';
+            else if (suit.Equals("diamonds"))
+                u_suit = 'C';
+            else if (suit.Equals("clubs"))
+                u_suit = 'D';
+
+            //var unicode = 1f0 + u_suit + u_val;
+            return '';
+        } */
     }
 }

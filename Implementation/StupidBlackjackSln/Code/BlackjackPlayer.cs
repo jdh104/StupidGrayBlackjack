@@ -32,6 +32,11 @@ namespace StupidBlackjackSln.Code
             return hasWon;
         }
 
+        public List<Card> GetHand()
+        {
+            return Hand;
+        }
+
         public String GetStatus()
         {
             return status;
