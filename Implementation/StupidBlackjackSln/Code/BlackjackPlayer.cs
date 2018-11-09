@@ -66,7 +66,7 @@ namespace StupidBlackjackSln.Code
         protected override void calcScore()
         {
             this.Score = 0;
-            int numAces = 0;
+            int numAces = 0; 
             foreach (Card card in Hand)
             {
                 int value;
@@ -104,6 +104,23 @@ namespace StupidBlackjackSln.Code
                 if(this.Score > 21)
                 {
                     hasBusted = true;
+                }
+            }
+
+            //Check for blackjack condition
+            if (this.Score == 21)
+            {
+                if (Hand.Count == 2)
+                {
+                    if ((Hand[0].GetValue() == "jack") && ((Hand[0].GetSuit() == "spades") || (Hand[0].GetSuit() == ("clubs"))))
+                    {
+                        AchievementMonitor.GetInstance().AddBlackjackAchievement();
+                    }
+
+                    else if ((Hand[1].GetValue() == "jack") && ((Hand[0].GetSuit() == "spades") || (Hand[1].GetSuit() == ("clubs"))))
+                    {
+                        AchievementMonitor.GetInstance().AddBlackjackAchievement();
+                    }
                 }
             }
         }
