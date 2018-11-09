@@ -247,6 +247,7 @@ namespace StupidBlackjackSln.Code
 
                 String[] args = cmd.Trim().Split(' ');
                 String op = args[0];
+                OutputToForm("op=" + op);
                 if (op.Equals(CMD_FETCH))
                 {
                     this.PurgeDeadGames();
