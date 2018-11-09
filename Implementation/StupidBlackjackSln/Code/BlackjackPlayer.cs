@@ -115,11 +115,13 @@ namespace StupidBlackjackSln.Code
                     if ((Hand[0].GetValue() == "jack") && ((Hand[0].GetSuit() == "spades") || (Hand[0].GetSuit() == ("clubs"))))
                     {
                         AchievementMonitor.GetInstance().AddBlackjackAchievement();
+                        frmTitle.getInstance().UpdateAchievements();
                     }
 
                     else if ((Hand[1].GetValue() == "jack") && ((Hand[0].GetSuit() == "spades") || (Hand[1].GetSuit() == ("clubs"))))
                     {
                         AchievementMonitor.GetInstance().AddBlackjackAchievement();
+                        frmTitle.getInstance().UpdateAchievements();
                     }
                 }
             }

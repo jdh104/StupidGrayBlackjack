@@ -9,42 +9,29 @@ namespace StupidBlackjackSln
 {
     public partial class frmTitle : Form
     {
+        private static frmTitle instance = null;
 
         public frmTitle()
         {
+            if (instance == null)
+            {
+                instance = this;
+            }
             InitializeComponent();
             SetStyle(ControlStyles.SupportsTransparentBackColor, true);
+            frmTitle.getInstance().UpdateAchievements();
             btnNewGame.Enabled = false;
+
+        }
+
+        public static frmTitle getInstance()
+        {
+            return instance;
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            AchievementMonitor achievements = AchievementMonitor.GetInstance();
-            List<Achievement> achievementList = achievements.GetAchievements();
             
-            for (int i = achievementList.Count - 1; i >= 0; i--)
-            {
-                //Create new icon
-                PictureBox icon = new PictureBox();
-
-                //Set icon properties
-                icon.Tag = i;
-                icon.Image = achievementList[i].GetIcon();
-                icon.Width = 38;
-                icon.Height = 34;
-                icon.SizeMode = PictureBoxSizeMode.StretchImage;
-
-                //Set tooltip
-                icon.MouseHover += (s, exp) =>
-                {
-                    int index = (int) icon.Tag;
-                    MakeToolTip(icon, achievementList[index].GetName() +
-                        "\n\r" + achievementList[index].GetDescription() +
-                        "\n\r Date Earned: " + achievementList[index].GetReadableTime());
-                };
-
-                flowPnlAchievements.Controls.Add(icon);
-            }
         }
 
         private void btnRulebook_Click(object sender, EventArgs e)
@@ -129,6 +116,38 @@ namespace StupidBlackjackSln
 
             // Set up the ToolTip text for the Achievement
             tt.SetToolTip(i, message);
+        }
+
+        public void UpdateAchievements()
+        {
+            AchievementMonitor achievements = AchievementMonitor.GetInstance();
+            List<Achievement> achievementList = achievements.GetAchievements();
+
+            flowPnlAchievements.Controls.Clear();
+
+            for (int i = achievementList.Count - 1; i >= 0; i--)
+            {
+                //Create new icon
+                PictureBox icon = new PictureBox();
+
+                //Set icon properties
+                icon.Tag = i;
+                icon.Image = achievementList[i].GetIcon();
+                icon.Width = 38;
+                icon.Height = 34;
+                icon.SizeMode = PictureBoxSizeMode.StretchImage;
+
+                //Set tooltip
+                icon.MouseHover += (s, exp) =>
+                {
+                    int index = (int)icon.Tag;
+                    MakeToolTip(icon, achievementList[index].GetName() +
+                        "\n\r" + achievementList[index].GetDescription() +
+                        "\n\r Date Earned: " + achievementList[index].GetReadableTime());
+                };
+
+                flowPnlAchievements.Controls.Add(icon);
+            }
         }
         
     }

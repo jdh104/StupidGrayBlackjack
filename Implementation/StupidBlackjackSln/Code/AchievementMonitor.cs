@@ -68,7 +68,7 @@ namespace StupidBlackjackSln.Code
         {
             if (!onlineWin)
             {
-                AddAchievement("Online Win", "You won an online game!", "online_win_icon.png");
+                AddAchievement("Online Win", "You won an online game!", "online_win_icon");
                 onlineWin = true;
             }
 
@@ -79,7 +79,7 @@ namespace StupidBlackjackSln.Code
         {
             if (!instantWin)
             {
-                AddAchievement("Instant Win", "You won a game without hitting!", "instant_win_icon.png");
+                AddAchievement("Instant Win", "You won a game without hitting!", "instant_win_icon");
                 instantWin = true;
             }
 
@@ -90,7 +90,7 @@ namespace StupidBlackjackSln.Code
         {
             if (!blackjack)
             {
-                AddAchievement("Blackjack", "You got a Blackjack!", "blackjack_icon.png");
+                AddAchievement("Blackjack", "You got a Blackjack!", "blackjack_icon");
                 blackjack = true;
             }
 

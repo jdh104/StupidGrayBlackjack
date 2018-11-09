@@ -286,6 +286,7 @@ namespace StupidBlackjackSln
                         {
                             AchievementMonitor.GetInstance().AddInstantWinAchievement();
                         }
+                        frmTitle.getInstance().UpdateAchievements();
                 }
                 else if (players[myindex].Score == dealer.Score)
                 {
