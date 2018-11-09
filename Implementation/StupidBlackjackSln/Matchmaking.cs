@@ -151,6 +151,7 @@ namespace StupidBlackjackSln
 
                     Program.GetConnector().JoinGameByID(id);
                     new Client_WaitingForConnection(id).ShowDialog();
+                    this.Hide();
                 }
                 catch
                 {
