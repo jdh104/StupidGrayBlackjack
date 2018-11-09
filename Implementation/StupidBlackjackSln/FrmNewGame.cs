@@ -18,7 +18,7 @@ namespace StupidBlackjackSln
     {
         public static Deck deck;
         private bool isOnline;
-        private BlackjackPlayer host_player;
+        ///private BlackjackPlayer host_player;
         private int nPlayers;
         private BlackjackPlayer[] players;
         private List<int> otherPlayers;
@@ -42,11 +42,8 @@ namespace StupidBlackjackSln
                 picPlayerCards[i] = Controls.Find("picPlayerCard" + (i + 1).ToString(), true)[0] as PictureBox;
             }
 
-            host_player = new BlackjackPlayer("host_player");
-
             deck = new Deck(FindBitmap);
 
-            host_player.giveHand(new List<Card>() { deck.dealCard(), deck.dealCard() });
             showHand();
             isOnline = false;
         }
@@ -105,10 +102,10 @@ namespace StupidBlackjackSln
         /// <param name="e"></param>
         private void btnHit_Click(object sender, EventArgs e)
         {
-            host_player.giveCard(deck.dealCard());
+            players[myindex].giveCard(deck.dealCard());
             showHand();
             //Program.GetConnector().NotifyCardDrawn(deck.getRecentCard(), id); //Notify server what was drawn
-            if (host_player.getBusted() == true)                        //currently returns null TODO - needs to test
+            if (players[myindex].getBusted() == true)                        //currently returns null TODO - needs to test
             {
                 btnHit.Enabled = false;   //Disable Hit Button
                 ticks = 0;    //ends turn and sets time to 0
