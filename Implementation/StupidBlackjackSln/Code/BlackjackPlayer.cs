@@ -42,7 +42,7 @@ namespace StupidBlackjackSln.Code
             Hand = GetHand();
             String unicodeHand = "";
             foreach (Card c in Hand) {
-                unicodeHand += c.GetUnicode();
+                unicodeHand += c.GetUnicode() + "  ";
             }
 
             return unicodeHand;
