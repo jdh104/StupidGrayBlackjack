@@ -21,6 +21,7 @@ namespace StupidBlackjackSln
         private BlackjackPlayer host_player;
         private int nPlayers;
         private BlackjackPlayer[] players;
+        private List<int> otherPlayers;
         private PictureBox[] picPlayerCards;
         private int ticks = 15;  //15 seconds for a player's turn
         private int id = 0;
@@ -177,7 +178,7 @@ namespace StupidBlackjackSln
         private void LoadPlayers()
         {
             players = new BlackjackPlayer[nPlayers];
-            List<int> otherPlayers = new List<int>;
+            otherPlayers = new List<int>();
 
             for (int i = 0; i < nPlayers; i++)
             {
@@ -281,9 +282,20 @@ namespace StupidBlackjackSln
         /// </summary>
         private void RefreshPlayerInfo()
         {
+            if (nPlayers >= 2)
+            {
+                //otherPlayers[0]
+            }
+            if (nPlayers >= 3)
+            {
+                //otherPlayers[1]
+            }
+            if (nPlayers == 4)
+            {
+                //otherPlayers[2]
+            }
 
 
-            
             // Other player info
             // Up to 4 players in game, thus up to 3 players in players panel
             // players in players panel are identified by PlayerX, PlayerY, and PlayerZ
