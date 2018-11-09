@@ -259,7 +259,7 @@ namespace StupidBlackjackSln
             }
             else if (update_array[0].Equals(StupidServer.UPDATE_DEALER_TURN))
             {
-                // dealer.TakeTurn(id);
+                dealer.TakeTurn(id);
             }
             else if (update_array[0].Equals(StupidServer.UPDATE_PLAYER_CONNECTION_BROKEN))
             {
