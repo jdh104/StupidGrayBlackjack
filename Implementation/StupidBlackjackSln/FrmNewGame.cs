@@ -105,15 +105,13 @@ namespace StupidBlackjackSln
         /// <param name="e"></param>
         private void btnHit_Click(object sender, EventArgs e)
         {
-            players[myindex].giveCard(deck.dealCard());
+            Card c = deck.dealCard();
+            players[myindex].giveCard(c);
+            Program.GetConnector().NotifyCardDrawn(c, id);
             showHand();
-            //Program.GetConnector().NotifyCardDrawn(deck.getRecentCard(), id); //Notify server what was drawn
             if (players[myindex].getBusted() == true)                        //currently returns null TODO - needs to test
             {
-                btnHit.Enabled = false;   //Disable Hit Button
-                ticks = 0;    //ends turn and sets time to 0
-                timer1.Stop();
-                lblTimer.Text = ticks.ToString();
+                btnStand_Click(sender, e);
             }
         }
 
@@ -125,11 +123,12 @@ namespace StupidBlackjackSln
         /// <param name="e"></param>
         private void btnStand_Click(object sender, EventArgs e)
         {
+            Program.GetConnector().NotifyStand(id);
             ticks = 0;    //ends turn and sets time to 0
             lblTimer.Text = ticks.ToString();
             timer1.Stop();
-            btnHit.Enabled = false;   //Disable Hit Button
-            //Program.GetConnector().NotifyStand(id); //Notify Server this player has stands
+            btnHit.Enabled = false;
+            btnStand.Enabled = false;//Disable Hit Button
         }                                             //Currently returns null TODO - test this
 
         /// <summary>
