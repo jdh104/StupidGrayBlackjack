@@ -50,7 +50,7 @@ namespace StupidBlackjackSln.Code
         /// <summary>no args, means that the dealer's turn has started</summary>
         public static readonly String UPDATE_DEALER_TURN = "U_D_TURN";
 
-        /// <summary>no args, means that the game is no longer connected</summary>
+        /// <summary>arg[1] -> the player index of the client</summary>
         public static readonly String UPDATE_GAME_CONNECTION_BROKEN = "U_G_BREAK";
 
         /// <summary>no args, means that the game host has started the game</summary>
