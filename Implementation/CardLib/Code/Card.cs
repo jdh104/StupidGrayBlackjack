@@ -16,6 +16,9 @@ namespace StupidBlackjackSln.Code
         public const char DELIM = ':';
         private string id;
 
+        private static String[] possibleRanks = new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "jack", "queen", "king", "ace" };
+        private static String[] possibleSuits = new String[] { "hearts", "spades", "diamonds", "clubs" };
+
         public Bitmap Bitmap
         {
             get;
@@ -28,13 +31,37 @@ namespace StupidBlackjackSln.Code
             Bitmap = bitmap;
         }
 
-        public string getValue()
+        public String GetValue()
         {
             return id.Split(DELIM)[0];
         }
-        public string getSuit()
+
+        public String GetSuit()
         {
             return id.Split(DELIM)[1];
+        }
+
+        public static Card Parse(String rep, Func<string, string, Bitmap> CardToBitmap)
+        {
+            String[] args = rep.Split(':');
+            try
+            {
+                if (!possibleRanks.Contains(args[0]) || !possibleSuits.Contains(args[1]))
+                {
+                    throw new Exception("Parse failed");
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return new Card(args[0] + DELIM + args[1], CardToBitmap.Invoke(args[0], args[1]));
+        }
+
+        public String ToString()
+        {
+            return id;
         }
     }
 }

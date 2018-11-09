@@ -369,6 +369,8 @@
     <Content Include="Resources\blackjack_icon.png" />
     <Content Include="Resources\instant_win_icon.png" />
     <Content Include="Resources\online_win_icon.png" />
+    <Content Include="Resources\user1.png" />
+    <None Include="Resources\user11.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

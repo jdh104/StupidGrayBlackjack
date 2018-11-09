@@ -11,6 +11,7 @@ namespace StupidBlackjackSln.Code
     {
         private List<Card> cards;
         private Random rand;
+        private Card currentCard;
 
         public Deck(Func<string, string, Bitmap> CardToBitmap)
         {
@@ -53,7 +54,17 @@ namespace StupidBlackjackSln.Code
             int cardIndex = rand.Next(cards.Count);
             Card card = cards[cardIndex];
             cards.RemoveAt(cardIndex);
+            currentCard = card;
             return card;
+        }
+
+        /// <summary>
+        /// Returns the last card obtained (for server information)
+        /// </summary>
+        /// <returns></returns>
+        public Card getRecentCard()
+        {
+            return currentCard;
         }
     }
 }

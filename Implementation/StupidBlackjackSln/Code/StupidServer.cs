@@ -19,36 +19,60 @@ namespace StupidBlackjackSln.Code
     class StupidServer
     {
         private delegate void StringDelegateReturningVoid(String s);
-        
+
+        public static readonly byte NEWLINE = Encoding.ASCII.GetBytes("\n")[0];
         public static readonly int DEFAULT_PORT = 61537;
         public static readonly String DEFAULT_DOMAIN = "173.217.233.48";
-        public static readonly String COMMAND_SUCCEEDED = "CMD_S";
-        public static readonly String COMMAND_UNRECOGNIZED = "CMD_U";
-        public static readonly String COMMAND_SYNTAX_ERROR = "CMD_E";
-        public static readonly String COMMAND_FAILED = "CMD_F";
-        public static readonly String FETCH_COMMAND = "FETCH";
-        public static readonly String GET_GAME_NAME_BY_ID_COMMAND = "GNAME";
-        public static readonly String GET_GAME_POP_BY_ID_COMMAND = "GPOP";
-        public static readonly String HOST_NEW_GAME_COMMAND = "HOST";
-        public static readonly String JOIN_GAME_BY_ID_COMMAND = "JOIN";
+        
+        public static readonly String CMD_FETCH = "FETCH";
+        public static readonly String CMD_GET_GAME_NAME_BY_ID = "GNAME";
+        public static readonly String CMD_GET_GAME_POP_BY_ID = "GPOP";
+        public static readonly String CMD_HOST_NEW_GAME = "HOST";
+        public static readonly String CMD_JOIN_GAME_BY_ID = "JOIN";
+        public static readonly String CMD_REMOVE_GAME_BY_ID = "RGAME";
+        public static readonly String CMD_REMOVE_PLAYER_FROM_GAME = "RPLAYER";
+        public static readonly String CMD_START_GAME_BY_ID = "START";
+
+        public static readonly String RESPONSE_SUCCESS = "RES_S";
+        public static readonly String RESPONSE_UNRECOGNIZED_CMD = "RES_U";
+        public static readonly String RESPONSE_SYNTAX_ERROR = "RES_E";
+        public static readonly String RESPONSE_FAIL = "RES_F";
+
         public static readonly String NOTIFY_CARD_DRAW = "N_DRAW";
         public static readonly String NOTIFY_STAND = "N_STAND";
-        public static readonly String REMOVE_GAME_BY_ID_COMMAND = "RGAME";
-        public static readonly String REMOVE_PLAYER_FROM_GAME_COMMAND = "RPLAYER";
-        public static readonly String START_GAME_BY_ID_COMMAND = "START";
-        public static readonly String UPDATE_DEALER_DRAW = "U_D_DRAW";
-        public static readonly String UPDATE_DEALER_STAND = "U_D_STAND";
-        public static readonly String UPDATE_DEALER_TURN = "U_D_TURN";
-        public static readonly String UPDATE_GAME_CONNECTION_BROKEN = "U_BREAK";
-        public static readonly String UPDATE_GAME_HAS_STARTED = "U_START";
-        public static readonly String UPDATE_PLAYER_CONNECTION_BROKEN = "U_P_BREAK";
-        public static readonly String UPDATE_PLAYER_JOINED = "U_JOINED";
-        public static readonly String UPDATE_PLAYER_DRAW = "U_P_DRAW";
-        public static readonly String UPDATE_PLAYER_STAND = "U_P_STAND";
-        public static readonly String UPDATE_YOUR_TURN = "U_TURN";
-        public static readonly byte NEWLINE = Encoding.ASCII.GetBytes("\n")[0];
 
-        private System.Windows.Forms.TextBox outputbox;
+        /// <summary>arg[1] -> String representation of a Card object (defined by Card.ToString)</summary>
+        public static readonly String UPDATE_DEALER_DRAW = "U_D_DRAW";
+
+        /// <summary>no args, means that the dealer's turn has ended</summary>
+        public static readonly String UPDATE_DEALER_STAND = "U_D_STAND";
+        
+        /// <summary>no args, means that the dealer's turn has started</summary>
+        public static readonly String UPDATE_DEALER_TURN = "U_D_TURN";
+
+        /// <summary>arg[1] -> the player index of the client</summary>
+        public static readonly String UPDATE_GAME_CONNECTION_BROKEN = "U_G_BREAK";
+
+        /// <summary>no args, means that the game host has started the game</summary>
+        public static readonly String UPDATE_GAME_HAS_STARTED = "U_G_START";
+
+        /// <summary>arg[1] -> the index of the player that has disconnected</summary>
+        public static readonly String UPDATE_PLAYER_CONNECTION_BROKEN = "U_P_BREAK";
+
+        /// <summary>no args, means that a player has decided to join the game. Can only be recieved before game has started</summary>
+        public static readonly String UPDATE_PLAYER_JOINED = "U_P_JOINED";
+
+        /// <summary>arg[1] -> the index of the player that has drawn // 
+        /// arg[2] -> String representation of the card drawn (defined by Card.ToString)</summary>
+        public static readonly String UPDATE_PLAYER_DRAW = "U_P_DRAW";
+
+        /// <summary>arg[1] -> the index of the player that has standed/stood/stund/whatever</summary>
+        public static readonly String UPDATE_PLAYER_STAND = "U_P_STAND";
+
+        /// <summary>no args, means that your turn has begun</summary>
+        public static readonly String UPDATE_YOUR_TURN = "U_TURN";
+
+        private System.Windows.Forms.TextBox outputbox = null;
         private bool started = false;
         private int port = DEFAULT_PORT;
         private ArrayList clients = new ArrayList();
@@ -67,13 +91,6 @@ namespace StupidBlackjackSln.Code
             IPEndPoint ipLocalEndPoint = new IPEndPoint(ip, DEFAULT_PORT);
             server = new TcpListener(ipLocalEndPoint);
             GameRep.nextID = 1;
-            if (outputbox != null)
-            {
-                lock (outputbox)
-                {
-                    OutputToForm("Server successfully created");
-                }
-            }
         }
 
         /// <summary>
@@ -87,13 +104,6 @@ namespace StupidBlackjackSln.Code
             IPEndPoint ipLocalEndPoint = new IPEndPoint(ip, port);
             server = new TcpListener(ipLocalEndPoint);
             GameRep.nextID = 1;
-            if (outputbox != null)
-            {
-                lock (outputbox)
-                {
-                    OutputToForm("Server successfully created");
-                }
-            }
         }
 
         /// <summary>
@@ -113,13 +123,35 @@ namespace StupidBlackjackSln.Code
         /// <param name="s">String to broadcast</param>
         private void Broadcast(String s)
         {
-            lock (clients) {
+            lock (clients)
+            {
                 lock (outputbox)
                 {
-                    OutputToForm("Broadcasting:");
+                    OutputToForm("\tBroadcasting:\r\n\t");
                     OutputToForm(s);
                 }
                 foreach (TcpClient client in clients)
+                {
+                    this.WriteLine(client, s);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Send a message to all clients connected to a particular game.
+        /// </summary>
+        /// <param name="game">GameRep to pull clients from</param>
+        /// <param name="s">String to broadcast</param>
+        private void BroadcastToGame(GameRep game, String s)
+        {
+            lock (clients)
+            {
+                lock (outputbox)
+                {
+                    OutputToForm("\tBroadcasting to game " + game.id.ToString() + ":\r\n\t");
+                    OutputToForm(s);
+                }
+                foreach (TcpClient client in game.GetClientList())
                 {
                     this.WriteLine(client, s);
                 }
@@ -162,6 +194,11 @@ namespace StupidBlackjackSln.Code
             }
         }
 
+        /// <summary>
+        /// Grab the remote address of a TcpClient.
+        /// </summary>
+        /// <param name="client">TcpClient to ask</param>
+        /// <returns>String representation of the remote address</returns>
         private static String GetIPAddressOf(TcpClient client)
         {
             return client.Client.RemoteEndPoint.ToString();
@@ -193,17 +230,17 @@ namespace StupidBlackjackSln.Code
         {
             lock (outputbox)
             {
-                this.OutputToForm(sender.Client.RemoteEndPoint.ToString() + "\r\n$ " + cmd);
+                this.OutputToForm(GetIPAddressOf(sender) + "\r\n$ " + cmd);
 
                 String[] args = cmd.Trim().Split(' ');
                 String op = args[0];
-                if (op.Equals(FETCH_COMMAND))
+                if (op.Equals(CMD_FETCH))
                 {
                     this.PurgeDeadGames();
                     if (games.Count == 0)
                     {
-                        this.OutputToForm("Responded with COMMAND_FAILED");
-                        return COMMAND_FAILED;
+                        this.OutputToForm("Responded with RESPONSE_FAIL");
+                        return RESPONSE_FAIL;
                     }
                     String ToSend = "";
                     foreach (GameRep game in games)
@@ -214,10 +251,10 @@ namespace StupidBlackjackSln.Code
                         }
                     }
                     this.OutputToForm("Responded with:");
-                    this.OutputToForm("COMMAND_SUCCEEDED " + ToSend);
-                    return COMMAND_SUCCEEDED + " " + ToSend;
+                    this.OutputToForm("RESPONSE_SUCCESS " + ToSend);
+                    return RESPONSE_SUCCESS + " " + ToSend;
                 }
-                else if (op.Equals(GET_GAME_NAME_BY_ID_COMMAND))
+                else if (op.Equals(CMD_GET_GAME_NAME_BY_ID))
                 {
                     int id;
                     try
@@ -227,7 +264,7 @@ namespace StupidBlackjackSln.Code
                     catch (Exception)
                     {
                         OutputToForm("Syntax error: cannot parse game id");
-                        return COMMAND_SYNTAX_ERROR;
+                        return RESPONSE_SYNTAX_ERROR;
                     }
                     lock (games)
                     {
@@ -237,14 +274,14 @@ namespace StupidBlackjackSln.Code
                             if (game.id == id)
                             {
                                 OutputToForm("Found game: " + game.name);
-                                return COMMAND_SUCCEEDED + " " + game.name;
+                                return RESPONSE_SUCCESS + " " + game.name;
                             }
                         }
                         OutputToForm("Failed to find game: " + id.ToString());
-                        return COMMAND_FAILED;
+                        return RESPONSE_FAIL;
                     }
                 }
-                else if (op.Equals(GET_GAME_POP_BY_ID_COMMAND))
+                else if (op.Equals(CMD_GET_GAME_POP_BY_ID))
                 {
                     int id;
                     try
@@ -254,7 +291,7 @@ namespace StupidBlackjackSln.Code
                     catch (Exception)
                     {
                         OutputToForm("Syntax error: cannot parse game id");
-                        return COMMAND_SYNTAX_ERROR;
+                        return RESPONSE_SYNTAX_ERROR;
                     }
                     lock (games)
                     {
@@ -264,14 +301,14 @@ namespace StupidBlackjackSln.Code
                             if (game.id == id)
                             {
                                 OutputToForm("Found game: " + game.name + ", pop: " + game.population.ToString());
-                                return COMMAND_SUCCEEDED + " " + game.population.ToString();
+                                return RESPONSE_SUCCESS + " " + game.population.ToString();
                             }
                         }
                         OutputToForm("Failed to find game: " + id.ToString());
-                        return COMMAND_FAILED;
+                        return RESPONSE_FAIL;
                     }
                 }
-                else if (op.Equals(HOST_NEW_GAME_COMMAND))
+                else if (op.Equals(CMD_HOST_NEW_GAME))
                 {
                     String new_game_name;
                     int key;
@@ -283,7 +320,7 @@ namespace StupidBlackjackSln.Code
                     catch (Exception)
                     {
                         OutputToForm("Syntax Error: Failed to parse name and key");
-                        return COMMAND_SYNTAX_ERROR;
+                        return RESPONSE_SYNTAX_ERROR;
                     }
                     lock (games)
                     {
@@ -292,18 +329,18 @@ namespace StupidBlackjackSln.Code
                         {
                             if (game.name.Equals(new_game_name) || game.name.Trim().Equals(""))
                             {
-                                OutputToForm("Found duplicate game, Responding with COMMAND_FAILED");
-                                return COMMAND_FAILED;
+                                OutputToForm("Found duplicate game, Responding with RESPONSE_FAIL");
+                                return RESPONSE_FAIL;
                             }
                         }
                         OutputToForm("Constructing New Game: " + new_game_name + " with key: " + key.ToString());
                         GameRep newGame = new GameRep(new_game_name, key);
                         newGame.SetHost(sender);
                         games.Add(newGame);
-                        return COMMAND_SUCCEEDED + " " + newGame.id.ToString();
+                        return RESPONSE_SUCCESS + " " + newGame.id.ToString();
                     }
                 }
-                else if (op.Equals(JOIN_GAME_BY_ID_COMMAND))
+                else if (op.Equals(CMD_JOIN_GAME_BY_ID))
                 {
                     int id, key;
                     try
@@ -311,10 +348,10 @@ namespace StupidBlackjackSln.Code
                         id = Int32.Parse(args[1]);
                         key = Int32.Parse(args[2]);
                     }
-                    catch (Exception)
+                    catch
                     {
                         OutputToForm("Syntax Error: Failed to parse id");
-                        return COMMAND_SYNTAX_ERROR;
+                        return RESPONSE_SYNTAX_ERROR;
                     }
                     lock (games)
                     {
@@ -326,14 +363,82 @@ namespace StupidBlackjackSln.Code
                                 OutputToForm("Found requested game, linking");
                                 game.AddClient(key, sender);
                                 this.WriteLine(game.GetHost(), UPDATE_PLAYER_JOINED);
-                                return COMMAND_SUCCEEDED + " " + game.population.ToString();
+                                return RESPONSE_SUCCESS + " " + game.population.ToString();
                             }
                         }
                     }
-                    OutputToForm("Could not find requested game, responding with COMMAND_FAILED");
-                    return COMMAND_FAILED;
+                    OutputToForm("Could not find requested game, responding with RESPONSE_FAIL");
+                    return RESPONSE_FAIL;
                 }
-                else if (op.Equals(REMOVE_GAME_BY_ID_COMMAND))
+                else if (op.Equals(NOTIFY_CARD_DRAW))
+                {
+                    int id, key;
+                    String cardrep;
+                    try
+                    {
+                        id = Int32.Parse(args[1]);
+                        key = Int32.Parse(args[2]);
+                        cardrep = args[3];
+                    }
+                    catch
+                    {
+                        OutputToForm("Syntax Error: Failed to parse command");
+                        return RESPONSE_SYNTAX_ERROR;
+                    }
+                    foreach (GameRep game in games)
+                    {
+                        if (game.id == id)
+                        {
+                            int? player_index = game.GetIndexOfClient(sender);
+                            if (player_index == null)
+                            {
+                                OutputToForm("Failed to find player " + key.ToString());
+                                return RESPONSE_FAIL;
+                            }
+                            else
+                            {
+                                BroadcastToGame(game, UPDATE_PLAYER_DRAW + " " + player_index.ToString() + " " + cardrep);
+                                return RESPONSE_SUCCESS;
+                            }
+                        }
+                    }
+                    OutputToForm("Failed to find game " + id.ToString());
+                    return RESPONSE_FAIL;
+                }
+                else if (op.Equals(NOTIFY_STAND))
+                {
+                    int id, key;
+                    try
+                    {
+                        id = Int32.Parse(args[1]);
+                        key = Int32.Parse(args[2]);
+                    }
+                    catch
+                    {
+                        OutputToForm("Syntax Error: Failed to parse command");
+                        return RESPONSE_SYNTAX_ERROR;
+                    }
+                    foreach (GameRep game in games)
+                    {
+                        if (game.id == id)
+                        {
+                            int? player_index = game.GetIndexOfClient(sender);
+                            if (player_index == null)
+                            {
+                                OutputToForm("Failed to find player " + key.ToString());
+                                return RESPONSE_FAIL;
+                            }
+                            else
+                            {
+                                BroadcastToGame(game, UPDATE_PLAYER_STAND + " " + player_index.ToString());
+                                return RESPONSE_SUCCESS;
+                            }
+                        }
+                    }
+                    OutputToForm("Failed to find game " + id.ToString());
+                    return RESPONSE_FAIL;
+                }
+                else if (op.Equals(CMD_REMOVE_GAME_BY_ID))
                 {
                     int id, key;
                     try
@@ -344,7 +449,7 @@ namespace StupidBlackjackSln.Code
                     catch (Exception)
                     {
                         OutputToForm("Syntax Error: Failed to parse id and key");
-                        return COMMAND_SYNTAX_ERROR;
+                        return RESPONSE_SYNTAX_ERROR;
                     }
                     lock (games)
                     {
@@ -356,19 +461,15 @@ namespace StupidBlackjackSln.Code
                             {
                                 OutputToForm("Found game: " + id.ToString() + ", removing...");
                                 games.RemoveAt(i);
-                                foreach (TcpClient cli in game.GetClientList())
-                                {
-                                    OutputToForm("\tNotifying client: " + GetIPAddressOf(cli));
-                                    this.WriteLine(cli, UPDATE_GAME_CONNECTION_BROKEN);
-                                }
-                                return COMMAND_SUCCEEDED;
+                                this.BroadcastToGame(game, UPDATE_GAME_CONNECTION_BROKEN);
+                                return RESPONSE_SUCCESS;
                             }
                         }
                     }
                     OutputToForm("Failed to remove game: Game " + id.ToString() + " doesn't exist or key does not match");
-                    return COMMAND_FAILED;
+                    return RESPONSE_FAIL;
                 }
-                else if (op.Equals(REMOVE_PLAYER_FROM_GAME_COMMAND))
+                else if (op.Equals(CMD_REMOVE_PLAYER_FROM_GAME))
                 {
                     int id, key;
                     try
@@ -379,7 +480,7 @@ namespace StupidBlackjackSln.Code
                     catch (Exception)
                     {
                         OutputToForm("Syntax Error: Failed to parse id and key");
-                        return COMMAND_SYNTAX_ERROR;
+                        return RESPONSE_SYNTAX_ERROR;
                     }
                     lock (games)
                     {
@@ -393,24 +494,21 @@ namespace StupidBlackjackSln.Code
                                 {
                                     OutputToForm("Removing client with key: " + key);
                                     int? index = game.RemoveClient(game.client_dict[key]);
-                                    foreach (TcpClient cli in game.GetClientList())
-                                    {
-                                        this.WriteLine(cli, UPDATE_PLAYER_CONNECTION_BROKEN + " " + index);
-                                    }
-                                    return COMMAND_SUCCEEDED;
+                                    this.BroadcastToGame(game, UPDATE_PLAYER_CONNECTION_BROKEN + " " + index.ToString());
+                                    return RESPONSE_SUCCESS;
                                 }
                                 else
                                 {
                                     OutputToForm("Client" + key + " not found in game dict");
-                                    return COMMAND_FAILED;
+                                    return RESPONSE_FAIL;
                                 }
                             }
                         }
-                        OutputToForm("Failed to find game, responded with COMMAND_FAILED");
-                        return COMMAND_FAILED;
+                        OutputToForm("Failed to find game, responded with RESPONSE_FAIL");
+                        return RESPONSE_FAIL;
                     }
                 }
-                else if (op.Equals(START_GAME_BY_ID_COMMAND))
+                else if (op.Equals(CMD_START_GAME_BY_ID))
                 {
                     int id, key;
                     try
@@ -421,7 +519,7 @@ namespace StupidBlackjackSln.Code
                     catch (Exception)
                     {
                         OutputToForm("Syntax Error: Failed to parse id and key");
-                        return COMMAND_SYNTAX_ERROR;
+                        return RESPONSE_SYNTAX_ERROR;
                     }
                     lock (games)
                     {
@@ -432,27 +530,28 @@ namespace StupidBlackjackSln.Code
                             if (game.id.Equals(id))
                             {
                                 game.started = true;
+                                OutputToForm("Updating clients with player index");
                                 foreach (TcpClient cli in game.GetClientList())
                                 {
-                                    this.WriteLine(cli, UPDATE_GAME_HAS_STARTED);
+                                    this.WriteLine(cli, UPDATE_GAME_HAS_STARTED + " " + game.GetIndexOfClient(cli));
                                 }
                                 break;
                             }
                         }
                         if (gameToStart == null)
                         {
-                            return COMMAND_FAILED;
+                            return RESPONSE_FAIL;
                         }
                         else
                         {
-                            return COMMAND_SUCCEEDED;
+                            return RESPONSE_SUCCESS;
                         }
                     }
                 }
                 else
                 {
-                    OutputToForm("Unrecognized command, responding with COMMAND_UNRECOGNIZED");
-                    return COMMAND_UNRECOGNIZED;
+                    OutputToForm("Unrecognized command, responding with RESPONSE_UNRECOGNIZED_CMD");
+                    return RESPONSE_UNRECOGNIZED_CMD;
                 }
             }
         }
@@ -534,10 +633,7 @@ namespace StupidBlackjackSln.Code
                         int? index = game.RemoveClient(c);
                         if (index != null)
                         {
-                            foreach (TcpClient cli in game.GetClientList())
-                            {
-                                this.WriteLine(cli, UPDATE_PLAYER_CONNECTION_BROKEN + " " + index.ToString());
-                            }
+                            this.BroadcastToGame(game, UPDATE_PLAYER_CONNECTION_BROKEN + " " + index.ToString());
                         }
                     }
                 }
@@ -680,6 +776,20 @@ namespace StupidBlackjackSln.Code
             public TcpClient GetHost()
             {
                 return client_dict[-1];
+            }
+
+            public int? GetIndexOfClient(TcpClient cli)
+            {
+                int index = 0;
+                foreach (KeyValuePair<int, TcpClient> kvp in client_dict)
+                {
+                    if (kvp.Value == cli)
+                    {
+                        return index;
+                    }
+                    index++;
+                }
+                return null;
             }
 
             /*public void RemoveClientByKey(int key)

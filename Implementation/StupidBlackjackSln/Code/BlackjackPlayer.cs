@@ -29,7 +29,7 @@ namespace StupidBlackjackSln.Code
             foreach (Card card in Hand)
             {
                 int value;
-                string cardValue = card.getValue();
+                string cardValue = card.GetValue();
                 // 2 - 10
                 if (int.TryParse(cardValue, out value))
                 {

@@ -30,7 +30,7 @@ namespace StupidBlackjackSln
         public FrmNewGame()
         {
             InitializeComponent();
-            timer1.Start();
+            timer1.Start(); // Do we need a timer for a local game? -mnm
             picPlayerCards = new PictureBox[5];
             for (int i = 0; i < 5; i++)
             {
@@ -38,11 +38,10 @@ namespace StupidBlackjackSln
             }
         }
 
-
         /// <summary>
         /// For an online game
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="id">Game ID</param>
         public FrmNewGame(int id)
         {
             InitializeComponent();
@@ -53,34 +52,72 @@ namespace StupidBlackjackSln
                 picPlayerCards[i] = Controls.Find("picPlayerCard" + (i + 1).ToString(), true)[0] as PictureBox;
             }
 
+            int? nPlayers = Program.GetConnector().GetGamePopulationByID(id);
+            LoadPlayers(nPlayers);
+
+            // Update information in panel with info from server
+            UpdateInfoFromServer();
+
             this.id = id;
         }
 
-        private void FrmNewGame_Load(object sender, EventArgs e)
+        /// <summary>
+        /// Exit game
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void buttonExit_Click(object sender, EventArgs e)
         {
             deck = new Deck(FindBitmap);
             player1 = new BlackjackPlayer();
             dealer1 = new Dealer();
 
-            player1.giveHand(new List<Card>() { deck.dealCard(), deck.dealCard() });
+            this.Close();
+        }
+
+
+        /// <summary>
+        /// Hit (get another card to try to reach 21)
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnHit_Click(object sender, EventArgs e)
+        {
+            player1.giveCard(deck.dealCard());
             showHand();
-        }
-
-        private void showHand()
-        {
-            for (int i = 0; i < player1.Hand.Count(); i++)
+            //Program.GetConnector().NotifyCardDrawn(deck.getRecentCard(), id); //Notify server what was drawn
+            if (player1.getBusted() == true)                        //currently returns null TODO - needs to test
             {
-                picPlayerCards[i].BackgroundImage = player1.Hand[i].Bitmap;
+                btnHit.Enabled = false;   //Disable Hit Button
+                ticks = 0;    //ends turn and sets time to 0
+                timer1.Stop();
+                lblTimer.Text = ticks.ToString();
+                BlackjackPlayer.isTurn2 = false;
             }
-            lblPlayerScore.Text = player1.Score.ToString();
         }
 
-        private void FrmNewGame_FormClosed(object sender, FormClosedEventArgs e)
+
+        /// <summary>
+        /// Stand (don't want to add any more cards to hand)
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnStand_Click(object sender, EventArgs e)
         {
-            
-        }
+            BlackjackPlayer.isTurn2 = false;
+            ticks = 0;    //ends turn and sets time to 0
+            lblTimer.Text = ticks.ToString();
+            timer1.Stop();
+            btnHit.Enabled = false;   //Disable Hit Button
+            //Program.GetConnector().NotifyStand(id); //Notify Server this player has stands
+        }                                             //Currently returns null TODO - test this
 
-
+        /// <summary>
+        /// Find image corresponding to card
+        /// </summary>
+        /// <param name="value">Value of card A,2-9,J,Q,K</param>
+        /// <param name="suit">Suit of card heart, club, diamond, spade</param>
+        /// <returns></returns>
         private Bitmap FindBitmap(string value, string suit)
         {
             string textName = "";
@@ -97,15 +134,114 @@ namespace StupidBlackjackSln
             return (Bitmap)Resources.ResourceManager.GetObject(textName);
         }
 
-        private void buttonExit_Click(object sender, EventArgs e)
+        /// <summary>
+        /// Exit window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void FrmNewGame_FormClosed(object sender, FormClosedEventArgs e)
         {
-            // TODO - something like this
-            //if (this.id != 0)
-            //  Program.GetConnector().RemoveHostedGame(id);
 
-            this.Close();
         }
 
+
+        /// <summary>
+        /// On game load, get a deck, make a player, give player hand, and show player his/her hand
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void FrmNewGame_Load(object sender, EventArgs e)
+        {
+            deck = new Deck(FindBitmap);
+            player1 = new BlackjackPlayer();
+
+            player1.giveHand(new List<Card>() { deck.dealCard(), deck.dealCard() });
+            showHand();
+        }
+
+
+        /// <summary>
+        /// Load Player Profiles in Players Panel
+        /// </summary>
+        /// <param name="nPlayers">Number of players in game</param>
+        private void LoadPlayers(int? nPlayers)
+        {
+            if (nPlayers >= 2)
+            {
+                // lblPlayerXname.Text = "Player" + Program.GetConnector().GetPlayerOrder()[]something like this.toString();
+                pnlPlayerX.Show();
+            }
+            if (nPlayers >= 3)
+            {
+                // lblPlayerXname.Text = "Player" + Program.GetConnector().GetPlayerOrder()[]something like this.toString();
+                pnlPlayerY.Show();
+            }
+            if (nPlayers == 4)
+            {
+                // lblPlayerXname.Text = "Player" + Program.GetConnector().GetPlayerOrder()[]something like this.toString();
+                pnlPlayerZ.Show();
+            }
+
+            flowPnlPlayers.Show();
+        }
+
+        /// <summary>
+        /// Parse input string for update type and return meaningful update message
+        /// </summary>
+        /// <param name="update"></param>
+        /// <returns></returns>
+        private String ParseUpdate(String update)
+        {
+            string[] words = update.Split(' ');
+
+            foreach (var word in words)
+            {
+                System.Console.WriteLine($"<{word}>");
+            }
+
+
+            if (update.Equals(StupidServer.UPDATE_GAME_CONNECTION_BROKEN))
+                return "Host left game. Please leave and join another game.";
+            else if (update.Equals(StupidServer.UPDATE_PLAYER_JOINED))
+                return "A player joined!";
+            else
+                return "";
+        }
+
+        /// <summary>
+        /// Refresh infomation in Player Panel
+        /// </summary>
+        private void RefreshPlayerInfo()
+        {
+            // This player info
+            //lblYouArePlayer.Text = "You are player " + Program.GetConnector().GetPlayerOrder()[] something;
+            //lblYouArePlayer.Show();
+
+            // Other player info
+            // Up to 4 players in game, thus up to 3 players in players panel
+            // players in players panel are identified by PlayerX, PlayerY, and PlayerZ
+            // lblPlayer_score
+            // lblPlayer_cards
+            // lblPlayer_status
+        }
+
+        /// <summary>
+        /// Display cards in hand
+        /// </summary>
+        private void showHand()
+        {
+            for (int i = 0; i < player1.Hand.Count(); i++)
+            {
+                picPlayerCards[i].BackgroundImage = player1.Hand[i].Bitmap;
+            }
+            lblPlayerScore.Text = player1.Score.ToString();
+        }
+
+        /// <summary>
+        /// Timer functionality. How it ticks, show it somewhere, when clock hits 0
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void timer1_Tick(object sender, EventArgs e)
         {
             ticks--;    //Time ticks down each second
@@ -117,28 +253,24 @@ namespace StupidBlackjackSln
                 //We could switch turns here and keep going with the clock
                 BlackjackPlayer.isTurn2 = false;
                 btnHit.Enabled = false;   //Disable Hit Button
+                RefreshPlayerInfo();    // Refresh info on rhs panel
                 timer1.Stop();
-            }                        
-        }
-
-        private void btnHit_Click_1(object sender, EventArgs e)
-        {
-            player1.giveCard(deck.dealCard());
-            showHand();
-                if(player1.getBusted() == true)
-            {
-                btnHit.Enabled = false;   //Disable Hit Button
-                BlackjackPlayer.isTurn2 = false;
+                UpdateInfoFromServer();
             }
         }
 
-        private void btnStand_Click_1(object sender, EventArgs e)
+        /// <summary>
+        /// Updates the information in the panel from server update
+        /// </summary>
+        private void UpdateInfoFromServer()
         {
-            BlackjackPlayer.isTurn2 = false;
-            ticks = 0;    //ends turn and sets time to 0
-            lblTimer.Text = ticks.ToString();
-            timer1.Stop();
-            btnHit.Enabled = false;   //Disable Hit Button
+            String update = Program.GetConnector().CheckForUpdate();
+
+            if (update != null)
+            {
+                ParseUpdate(update);
+                RefreshPlayerInfo();
+            }
         }
     }
 }
