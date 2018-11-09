@@ -14,7 +14,7 @@ namespace StupidBlackjackSln.Code
         public bool hasWon = false;       // true if they win
         public static Boolean isTurn2;
 
-        public String playerName;
+        private String playerName;
         private String status;
 
         

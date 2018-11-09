@@ -203,16 +203,26 @@ namespace StupidBlackjackSln
         {
             String[] update_array = update.Split(' ');
 
-            if (update[0].Equals(StupidServer.UPDATE_GAME_CONNECTION_BROKEN)) { }
-            else if (update[0].Equals(StupidServer.UPDATE_PLAYER_JOINED)) { }
+            if (update[0].Equals(StupidServer.UPDATE_GAME_CONNECTION_BROKEN))
+            {
+                Program.CloseStupidConnector();
+                this.Close();
+            }
+            else if (update[0].Equals(StupidServer.UPDATE_PLAYER_JOINED))
+            {
+            }
             else if (update[0].Equals(StupidServer.UPDATE_DEALER_DRAW)) { }
             else if (update[0].Equals(StupidServer.UPDATE_DEALER_TURN)) { }
-            else if (update[0].Equals(StupidServer.UPDATE_GAME_CONNECTION_BROKEN)) { }
-            else if (update[0].Equals(StupidServer.UPDATE_PLAYER_CONNECTION_BROKEN)) { }
+            else if (update[0].Equals(StupidServer.UPDATE_PLAYER_CONNECTION_BROKEN))
+            {
+                // TODO
+            }
             else if (update[0].Equals(StupidServer.UPDATE_PLAYER_JOINED)) { }
             else if (update[0].Equals(StupidServer.UPDATE_PLAYER_DRAW)) { }
             else if (update[0].Equals(StupidServer.UPDATE_PLAYER_STAND)) { }
             else if (update[0].Equals(StupidServer.UPDATE_YOUR_TURN)) { }
+            else if (update[0].Equals(StupidServer.NOTIFY_CARD_DRAW)) { }
+            else if (update[0].Equals(StupidServer.NOTIFY_STAND)) { }
 
         }
 
