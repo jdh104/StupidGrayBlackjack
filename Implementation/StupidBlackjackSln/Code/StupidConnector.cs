@@ -277,9 +277,10 @@ namespace StupidBlackjackSln.Code
         /// 
         /// </summary>
         /// <param name="game_id"></param>
-        public void StartHostedGame(int game_id)
+        public String[] StartHostedGame(int game_id)
         {
             String[] response = this.WriteLine(StupidServer.CMD_START_GAME_BY_ID + " " + game_id + " " + key);
+            return response;
         }
         
         /// <summary>
