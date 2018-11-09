@@ -423,6 +423,30 @@ namespace StupidBlackjackSln.Code
                     OutputToForm("Failed to find game " + id.ToString());
                     return RESPONSE_FAIL;
                 }
+                else if (op.Equals(NOTIFY_DEALER_DRAW))
+                {
+                    int id;
+                    String cardString;
+                    try
+                    {
+                        id = Int32.Parse(args[1]);
+                        cardString = args[2];
+                    }
+                    catch
+                    {
+                        OutputToForm("Syntax Error: Failed to parse command");
+                        return RESPONSE_SYNTAX_ERROR;
+                    }
+                    foreach (GameRep game in games)
+                    {
+                        if (game.id == id)
+                        {
+                            BroadcastToGame(game, UPDATE_DEALER_DRAW + " " + cardString);
+                            return RESPONSE_SUCCESS;
+                        }
+                    }
+                    return RESPONSE_FAIL;
+                }
                 else if (op.Equals(NOTIFY_DEALER_SETUP_FINISH))
                 {
                     int id;
