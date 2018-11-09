@@ -56,10 +56,11 @@ namespace StupidBlackjackSln
                 {
                     lbl_ConnectorUpdate.Text = ParseUpdate(update);
                     lbl_ConnectorUpdate.Show();
+                    UpdatePlayers();
                 }
 
                 // Update number of players in game
-                UpdatePlayers();
+                
             };
             timer1.Interval = 750;
             timer1.Start();

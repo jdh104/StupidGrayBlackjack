@@ -150,7 +150,6 @@ namespace StupidBlackjackSln
                 {
                     // possible TODO
                 }
-
             }
         }
 
@@ -190,11 +189,6 @@ namespace StupidBlackjackSln
                     if (!games.Contains(lstBoxGames.Items[i]))
                         lstBoxGames.Items.RemoveAt(i);
             }
-
-
         }
-
-
-
     }
 }
