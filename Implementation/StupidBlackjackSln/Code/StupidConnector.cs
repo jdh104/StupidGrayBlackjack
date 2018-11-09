@@ -217,6 +217,18 @@ namespace StupidBlackjackSln.Code
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="c"></param>
+        /// <param name="connected_game_id"></param>
+        /// <returns></returns>
+        public bool NotifyDealerDraw(Card c, int connected_game_id)
+        {
+            String[] response = this.WriteLine(StupidServer.NOTIFY_DEALER_DRAW + " " + connected_game_id + " " + key.ToString() + " " + c.ToString());
+            return response[0].Equals(StupidServer.RESPONSE_SUCCESS);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="connected_game_id"></param>
         /// <returns></returns>
         public String NotifyInitializationComplete(int connected_game_id)

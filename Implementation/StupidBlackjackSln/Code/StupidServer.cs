@@ -39,6 +39,9 @@ namespace StupidBlackjackSln.Code
         public static readonly String RESPONSE_FAIL = "RES_F";
 
         public static readonly String NOTIFY_CARD_DRAW = "N_DRAW";
+        public static readonly String NOTIFY_DEALER_DRAW = "N_D_DRAW";
+        public static readonly String NOTIFY_DEALER_SETUP_FINISH = "N_D_SFIN";
+        public static readonly String NOTIFY_DEALER_STAND = "N_D_STAND";
         public static readonly String NOTIFY_INIT = "N_INIT";
         public static readonly String NOTIFY_SETUP_FINISH = "N_SFIN";
         public static readonly String NOTIFY_STAND = "N_STAND";
