@@ -215,6 +215,17 @@ namespace StupidBlackjackSln.Code
         }
 
         /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="connected_game_id"></param>
+        /// <returns></returns>
+        public bool NotifyInitializationComplete(int connected_game_id)
+        {
+            String[] response = this.WriteLine(StupidServer.NOTIFY_INIT + " " + connected_game_id);
+            return response[0].Equals(StupidServer.RESPONSE_SUCCESS);
+        }
+
+        /// <summary>
         /// Notify the server that the initial 2 cards have been drawn.
         /// </summary>
         /// <param name="connected_game_id">The id of the game connection</param>

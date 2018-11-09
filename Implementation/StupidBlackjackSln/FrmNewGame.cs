@@ -56,7 +56,7 @@ namespace StupidBlackjackSln
         public FrmNewGame(int id, int myIndex)
         {
             InitializeComponent();
-            timer1.Start();
+            
             picPlayerCards = new PictureBox[5];
             for (int i = 0; i < 5; i++)
             {
@@ -80,6 +80,9 @@ namespace StupidBlackjackSln
             this.id = id;
             this.myindex = myindex;
             this.isOnline = true;
+
+            Program.GetConnector().NotifyInitializationComplete(id);
+            timer1.Start();
         }
 
         /// <summary>

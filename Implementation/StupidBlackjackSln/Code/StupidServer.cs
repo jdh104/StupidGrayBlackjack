@@ -39,6 +39,7 @@ namespace StupidBlackjackSln.Code
         public static readonly String RESPONSE_FAIL = "RES_F";
 
         public static readonly String NOTIFY_CARD_DRAW = "N_DRAW";
+        public static readonly String NOTIFY_INIT = "N_INIT";
         public static readonly String NOTIFY_SETUP_FINISH = "N_SFIN";
         public static readonly String NOTIFY_STAND = "N_STAND";
 
@@ -414,6 +415,32 @@ namespace StupidBlackjackSln.Code
                     OutputToForm("Failed to find game " + id.ToString());
                     return RESPONSE_FAIL;
                 }
+                else if (op.Equals(NOTIFY_INIT))
+                {
+                    int id;
+                    try
+                    {
+                        id = Int32.Parse(args[1]);
+                    }
+                    catch
+                    {
+                        OutputToForm("Syntax Error: Failed to parse command");
+                        return RESPONSE_SYNTAX_ERROR;
+                    }
+                    foreach (GameRep game in games)
+                    {
+                        if (game.id == id)
+                        {
+                            game.waiting--;
+                            if (game.waiting == 0)
+                            {
+                                this.WriteLine(game.GetClientList()[0], UPDATE_YOUR_SETUP);
+                            }
+                            return RESPONSE_SUCCESS;
+                        }
+                    }
+                    return RESPONSE_FAIL;
+                }
                 else if (op.Equals(NOTIFY_SETUP_FINISH))
                 {
                     int id;
@@ -575,12 +602,16 @@ namespace StupidBlackjackSln.Code
                             if (game.id.Equals(id))
                             {
                                 game.started = true;
+                                game.waiting = game.population;
                                 OutputToForm("Updating clients with player index");
                                 foreach (TcpClient cli in game.GetClientList())
                                 {
-                                    this.WriteLine(cli, UPDATE_GAME_HAS_STARTED + " " + game.GetIndexOfClient(cli));
+                                    if (cli != sender)
+                                    {
+                                        this.WriteLine(cli, UPDATE_GAME_HAS_STARTED + " " + game.GetIndexOfClient(cli));
+                                    }
                                 }
-                                return UPDATE_YOUR_SETUP;
+                                return UPDATE_GAME_HAS_STARTED + " " + game.GetIndexOfClient(sender).ToString();
                             }
                         }
                         return RESPONSE_FAIL;
@@ -786,6 +817,7 @@ namespace StupidBlackjackSln.Code
             public int key, id, turn_index = 0;
             public String name;
             public int population = 1;
+            public int waiting;
 
             public GameRep(String _name, int _key)
             {
