@@ -7,6 +7,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using StupidBlackjackSln.Code;
@@ -108,7 +109,17 @@ namespace StupidBlackjackSln
         /// <param name="e"></param>
         private void BtnHostStartGame_Click(object sender, EventArgs e)
         {
-            new FrmNewGame(id).Show();
+            Program.GetConnector().StartHostedGame(id);
+
+            String response = Program.GetConnector().CheckForUpdate();
+            while (response == null && !response.StartsWith(StupidServer.UPDATE_GAME_HAS_STARTED))
+            {
+                Thread.Sleep(100);
+                response = Program.GetConnector().CheckForUpdate();
+            }
+            String[] args = response.Split(' ');
+
+            new FrmNewGame(id, Convert.ToInt32(args[1])).Show();
             this.Close();
         }
     }

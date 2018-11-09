@@ -50,7 +50,7 @@ namespace StupidBlackjackSln
         /// For an online game
         /// </summary>
         /// <param name="id">Game ID</param>
-        public FrmNewGame(int id)
+        public FrmNewGame(int id, int myIndex)
         {
             InitializeComponent();
             timer1.Start();
@@ -66,6 +66,10 @@ namespace StupidBlackjackSln
             }
                 
             LoadPlayers();
+
+            // This player info
+            lblYouArePlayer.Text = "You are player " + myIndex.ToString();
+            lblYouArePlayer.Show();
 
             // Update information in panel with info from server
             UpdateInfoFromServer();
@@ -149,7 +153,7 @@ namespace StupidBlackjackSln
         /// <param name="e"></param>
         private void FrmNewGame_FormClosed(object sender, FormClosedEventArgs e)
         {
-
+            Dealer dealer = new Dealer("dealer");
         }
 
 
@@ -169,11 +173,10 @@ namespace StupidBlackjackSln
         /// </summary>
         private void LoadPlayers()
         {
-            players = new BlackjackPlayer[nPlayers-1];
-            players[0] = new BlackjackPlayer("host_player");
-            for (int i = 1; i < nPlayers; i++)
+            players = new BlackjackPlayer[nPlayers];
+            for (int i = 0; i < nPlayers; i++)
             {
-                players[i] = new BlackjackPlayer("player" + (i + 1).ToString());
+                players[i] = new BlackjackPlayer("player" + (i + 1).ToString() );
             }
 
             if (nPlayers >= 2)
@@ -229,9 +232,7 @@ namespace StupidBlackjackSln
         /// </summary>
         private void RefreshPlayerInfo()
         {
-            // This player info
-            //lblYouArePlayer.Text = "You are player " + Program.GetConnector().GetPlayerOrder()[] something;
-            //lblYouArePlayer.Show();
+
 
             // Other player info
             // Up to 4 players in game, thus up to 3 players in players panel
