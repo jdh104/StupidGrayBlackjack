@@ -18,15 +18,15 @@ namespace StupidBlackjackSln
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btnCancel_Click(object sender, EventArgs e)
         {
-            StupidConnector.SetIP(txtBoxIP.Text);
-            StupidConnector.SetPort(Int32.Parse(txtBoxPort.Text));
             this.Close();
         }
 
-        private void btnCancel_Click(object sender, EventArgs e)
+        private void btnOkay_Click(object sender, EventArgs e)
         {
+            StupidConnector.SetIP(txtBoxIP.Text);
+            StupidConnector.SetPort(Int32.Parse(txtBoxPort.Text));
             this.Close();
         }
     }

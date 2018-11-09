@@ -36,8 +36,8 @@
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.btnOkay = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
+            this.btnOkay = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
@@ -60,7 +60,7 @@
             // txtBoxIP
             // 
             this.txtBoxIP.Location = new System.Drawing.Point(168, 4);
-            this.txtBoxIP.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtBoxIP.Margin = new System.Windows.Forms.Padding(4);
             this.txtBoxIP.Name = "txtBoxIP";
             this.txtBoxIP.Size = new System.Drawing.Size(302, 31);
             this.txtBoxIP.TabIndex = 2;
@@ -68,7 +68,7 @@
             // txtBoxPort
             // 
             this.txtBoxPort.Location = new System.Drawing.Point(195, 4);
-            this.txtBoxPort.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtBoxPort.Margin = new System.Windows.Forms.Padding(4);
             this.txtBoxPort.Name = "txtBoxPort";
             this.txtBoxPort.Size = new System.Drawing.Size(140, 31);
             this.txtBoxPort.TabIndex = 3;
@@ -134,18 +134,6 @@
             this.panel1.Size = new System.Drawing.Size(854, 50);
             this.panel1.TabIndex = 7;
             // 
-            // btnOkay
-            // 
-            this.btnOkay.AutoSize = true;
-            this.btnOkay.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btnOkay.Location = new System.Drawing.Point(579, 5);
-            this.btnOkay.Margin = new System.Windows.Forms.Padding(4);
-            this.btnOkay.Name = "btnOkay";
-            this.btnOkay.Size = new System.Drawing.Size(270, 40);
-            this.btnOkay.TabIndex = 5;
-            this.btnOkay.Text = "Okay";
-            this.btnOkay.UseVisualStyleBackColor = true;
-            // 
             // btnCancel
             // 
             this.btnCancel.AutoSize = true;
@@ -159,6 +147,19 @@
             this.btnCancel.UseVisualStyleBackColor = false;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
+            // btnOkay
+            // 
+            this.btnOkay.AutoSize = true;
+            this.btnOkay.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnOkay.Location = new System.Drawing.Point(579, 5);
+            this.btnOkay.Margin = new System.Windows.Forms.Padding(4);
+            this.btnOkay.Name = "btnOkay";
+            this.btnOkay.Size = new System.Drawing.Size(270, 40);
+            this.btnOkay.TabIndex = 5;
+            this.btnOkay.Text = "Okay";
+            this.btnOkay.UseVisualStyleBackColor = true;
+            this.btnOkay.Click += new System.EventHandler(this.btnOkay_Click);
+            // 
             // Options
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
@@ -167,7 +168,7 @@
             this.ClientSize = new System.Drawing.Size(854, 494);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.tableLayoutPanel1);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Options";
             this.Text = "Stupid Gray Blackjack Options";
             this.tableLayoutPanel1.ResumeLayout(false);

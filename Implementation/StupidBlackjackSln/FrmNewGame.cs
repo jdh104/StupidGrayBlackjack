@@ -208,9 +208,7 @@ namespace StupidBlackjackSln
                 Program.CloseStupidConnector();
                 this.Close();
             }
-            else if (update[0].Equals(StupidServer.UPDATE_PLAYER_JOINED))
-            {
-            }
+
             else if (update[0].Equals(StupidServer.UPDATE_DEALER_DRAW)) { }
             else if (update[0].Equals(StupidServer.UPDATE_DEALER_TURN)) { }
             else if (update[0].Equals(StupidServer.UPDATE_PLAYER_CONNECTION_BROKEN))

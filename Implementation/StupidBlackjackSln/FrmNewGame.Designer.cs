@@ -113,7 +113,7 @@
             this.pnlTopBtns.Controls.Add(this.btnExitGame);
             this.pnlTopBtns.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlTopBtns.Location = new System.Drawing.Point(0, 0);
-            this.pnlTopBtns.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnlTopBtns.Margin = new System.Windows.Forms.Padding(4);
             this.pnlTopBtns.Name = "pnlTopBtns";
             this.pnlTopBtns.Size = new System.Drawing.Size(1362, 58);
             this.pnlTopBtns.TabIndex = 11;
@@ -122,7 +122,7 @@
             // 
             this.btnExitGame.Dock = System.Windows.Forms.DockStyle.Left;
             this.btnExitGame.Location = new System.Drawing.Point(0, 0);
-            this.btnExitGame.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.btnExitGame.Margin = new System.Windows.Forms.Padding(6);
             this.btnExitGame.Name = "btnExitGame";
             this.btnExitGame.Size = new System.Drawing.Size(150, 58);
             this.btnExitGame.TabIndex = 9;
@@ -139,7 +139,7 @@
             this.flowPnlPlayers.Dock = System.Windows.Forms.DockStyle.Right;
             this.flowPnlPlayers.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flowPnlPlayers.Location = new System.Drawing.Point(1002, 58);
-            this.flowPnlPlayers.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.flowPnlPlayers.Margin = new System.Windows.Forms.Padding(4);
             this.flowPnlPlayers.Name = "flowPnlPlayers";
             this.flowPnlPlayers.Size = new System.Drawing.Size(360, 682);
             this.flowPnlPlayers.TabIndex = 12;
@@ -149,9 +149,9 @@
             // 
             this.pnlPlayerX.Controls.Add(this.pnlCtrPlayerX);
             this.pnlPlayerX.Location = new System.Drawing.Point(4, 4);
-            this.pnlPlayerX.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnlPlayerX.Margin = new System.Windows.Forms.Padding(4);
             this.pnlPlayerX.Name = "pnlPlayerX";
-            this.pnlPlayerX.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnlPlayerX.Padding = new System.Windows.Forms.Padding(4);
             this.pnlPlayerX.Size = new System.Drawing.Size(356, 200);
             this.pnlPlayerX.TabIndex = 0;
             this.pnlPlayerX.Visible = false;
@@ -160,7 +160,7 @@
             // 
             this.pnlCtrPlayerX.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlCtrPlayerX.Location = new System.Drawing.Point(4, 4);
-            this.pnlCtrPlayerX.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnlCtrPlayerX.Margin = new System.Windows.Forms.Padding(4);
             this.pnlCtrPlayerX.Name = "pnlCtrPlayerX";
             // 
             // pnlCtrPlayerX.Panel1
@@ -186,7 +186,7 @@
             // 
             this.pnlPlayerXcards.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlPlayerXcards.Location = new System.Drawing.Point(0, 25);
-            this.pnlPlayerXcards.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnlPlayerXcards.Margin = new System.Windows.Forms.Padding(4);
             this.pnlPlayerXcards.Name = "pnlPlayerXcards";
             this.pnlPlayerXcards.Size = new System.Drawing.Size(225, 142);
             this.pnlPlayerXcards.TabIndex = 3;
@@ -230,7 +230,7 @@
             this.picPlayerX.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.picPlayerX.Dock = System.Windows.Forms.DockStyle.Fill;
             this.picPlayerX.Location = new System.Drawing.Point(0, 0);
-            this.picPlayerX.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.picPlayerX.Margin = new System.Windows.Forms.Padding(4);
             this.picPlayerX.Name = "picPlayerX";
             this.picPlayerX.Size = new System.Drawing.Size(54, 192);
             this.picPlayerX.TabIndex = 0;
@@ -240,9 +240,9 @@
             // 
             this.pnlPlayerY.Controls.Add(this.pnlCtrPlayerY);
             this.pnlPlayerY.Location = new System.Drawing.Point(4, 212);
-            this.pnlPlayerY.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnlPlayerY.Margin = new System.Windows.Forms.Padding(4);
             this.pnlPlayerY.Name = "pnlPlayerY";
-            this.pnlPlayerY.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnlPlayerY.Padding = new System.Windows.Forms.Padding(4);
             this.pnlPlayerY.Size = new System.Drawing.Size(344, 192);
             this.pnlPlayerY.TabIndex = 3;
             this.pnlPlayerY.Visible = false;
@@ -251,7 +251,7 @@
             // 
             this.pnlCtrPlayerY.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlCtrPlayerY.Location = new System.Drawing.Point(4, 4);
-            this.pnlCtrPlayerY.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnlCtrPlayerY.Margin = new System.Windows.Forms.Padding(4);
             this.pnlCtrPlayerY.Name = "pnlCtrPlayerY";
             // 
             // pnlCtrPlayerY.Panel1
@@ -277,7 +277,7 @@
             // 
             this.pnlPlayerYcards.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlPlayerYcards.Location = new System.Drawing.Point(0, 25);
-            this.pnlPlayerYcards.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnlPlayerYcards.Margin = new System.Windows.Forms.Padding(4);
             this.pnlPlayerYcards.Name = "pnlPlayerYcards";
             this.pnlPlayerYcards.Size = new System.Drawing.Size(213, 134);
             this.pnlPlayerYcards.TabIndex = 3;
@@ -321,7 +321,7 @@
             this.picPlayerY.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.picPlayerY.Dock = System.Windows.Forms.DockStyle.Fill;
             this.picPlayerY.Location = new System.Drawing.Point(0, 0);
-            this.picPlayerY.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.picPlayerY.Margin = new System.Windows.Forms.Padding(4);
             this.picPlayerY.Name = "picPlayerY";
             this.picPlayerY.Size = new System.Drawing.Size(54, 184);
             this.picPlayerY.TabIndex = 0;
@@ -331,7 +331,7 @@
             // 
             this.pnlPlayerZ.Controls.Add(this.pnlCtrPlayerZ);
             this.pnlPlayerZ.Location = new System.Drawing.Point(4, 412);
-            this.pnlPlayerZ.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnlPlayerZ.Margin = new System.Windows.Forms.Padding(4);
             this.pnlPlayerZ.Name = "pnlPlayerZ";
             this.pnlPlayerZ.Size = new System.Drawing.Size(354, 196);
             this.pnlPlayerZ.TabIndex = 4;
@@ -341,7 +341,7 @@
             // 
             this.pnlCtrPlayerZ.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlCtrPlayerZ.Location = new System.Drawing.Point(0, 0);
-            this.pnlCtrPlayerZ.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnlCtrPlayerZ.Margin = new System.Windows.Forms.Padding(4);
             this.pnlCtrPlayerZ.Name = "pnlCtrPlayerZ";
             // 
             // pnlCtrPlayerZ.Panel1
@@ -367,7 +367,7 @@
             // 
             this.pnlPlayerZcards.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlPlayerZcards.Location = new System.Drawing.Point(0, 25);
-            this.pnlPlayerZcards.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnlPlayerZcards.Margin = new System.Windows.Forms.Padding(4);
             this.pnlPlayerZcards.Name = "pnlPlayerZcards";
             this.pnlPlayerZcards.Size = new System.Drawing.Size(231, 146);
             this.pnlPlayerZcards.TabIndex = 3;
@@ -411,7 +411,7 @@
             this.picPlayerZ.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.picPlayerZ.Dock = System.Windows.Forms.DockStyle.Fill;
             this.picPlayerZ.Location = new System.Drawing.Point(0, 0);
-            this.picPlayerZ.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.picPlayerZ.Margin = new System.Windows.Forms.Padding(4);
             this.picPlayerZ.Name = "picPlayerZ";
             this.picPlayerZ.Size = new System.Drawing.Size(54, 196);
             this.picPlayerZ.TabIndex = 0;
@@ -424,7 +424,7 @@
             this.pnlTableHolder.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlTableHolder.ForeColor = System.Drawing.Color.Black;
             this.pnlTableHolder.Location = new System.Drawing.Point(0, 58);
-            this.pnlTableHolder.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnlTableHolder.Margin = new System.Windows.Forms.Padding(4);
             this.pnlTableHolder.Name = "pnlTableHolder";
             this.pnlTableHolder.Size = new System.Drawing.Size(1002, 682);
             this.pnlTableHolder.TabIndex = 13;
@@ -441,7 +441,7 @@
             this.tablePnlGamePlay.Controls.Add(this.lblYouArePlayer, 0, 3);
             this.tablePnlGamePlay.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tablePnlGamePlay.Location = new System.Drawing.Point(0, 0);
-            this.tablePnlGamePlay.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tablePnlGamePlay.Margin = new System.Windows.Forms.Padding(4);
             this.tablePnlGamePlay.Name = "tablePnlGamePlay";
             this.tablePnlGamePlay.RowCount = 4;
             this.tablePnlGamePlay.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 67.59582F));
@@ -461,7 +461,7 @@
             this.flowPnlCards.Controls.Add(this.picPlayerCard5);
             this.flowPnlCards.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowPnlCards.Location = new System.Drawing.Point(4, 233);
-            this.flowPnlCards.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.flowPnlCards.Margin = new System.Windows.Forms.Padding(4);
             this.flowPnlCards.Name = "flowPnlCards";
             this.flowPnlCards.Size = new System.Drawing.Size(994, 407);
             this.flowPnlCards.TabIndex = 3;
@@ -471,7 +471,7 @@
             this.picPlayerCard1.BackColor = System.Drawing.Color.Transparent;
             this.picPlayerCard1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.picPlayerCard1.Location = new System.Drawing.Point(6, 6);
-            this.picPlayerCard1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.picPlayerCard1.Margin = new System.Windows.Forms.Padding(6);
             this.picPlayerCard1.Name = "picPlayerCard1";
             this.picPlayerCard1.Size = new System.Drawing.Size(212, 277);
             this.picPlayerCard1.TabIndex = 1;
@@ -482,7 +482,7 @@
             this.picPlayerCard2.BackColor = System.Drawing.Color.Transparent;
             this.picPlayerCard2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.picPlayerCard2.Location = new System.Drawing.Point(230, 6);
-            this.picPlayerCard2.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.picPlayerCard2.Margin = new System.Windows.Forms.Padding(6);
             this.picPlayerCard2.Name = "picPlayerCard2";
             this.picPlayerCard2.Size = new System.Drawing.Size(212, 277);
             this.picPlayerCard2.TabIndex = 2;
@@ -493,7 +493,7 @@
             this.picPlayerCard3.BackColor = System.Drawing.Color.Transparent;
             this.picPlayerCard3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.picPlayerCard3.Location = new System.Drawing.Point(454, 6);
-            this.picPlayerCard3.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.picPlayerCard3.Margin = new System.Windows.Forms.Padding(6);
             this.picPlayerCard3.Name = "picPlayerCard3";
             this.picPlayerCard3.Size = new System.Drawing.Size(212, 277);
             this.picPlayerCard3.TabIndex = 6;
@@ -504,7 +504,7 @@
             this.picPlayerCard4.BackColor = System.Drawing.Color.Transparent;
             this.picPlayerCard4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.picPlayerCard4.Location = new System.Drawing.Point(678, 6);
-            this.picPlayerCard4.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.picPlayerCard4.Margin = new System.Windows.Forms.Padding(6);
             this.picPlayerCard4.Name = "picPlayerCard4";
             this.picPlayerCard4.Size = new System.Drawing.Size(212, 277);
             this.picPlayerCard4.TabIndex = 4;
@@ -515,7 +515,7 @@
             this.picPlayerCard5.BackColor = System.Drawing.Color.Transparent;
             this.picPlayerCard5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.picPlayerCard5.Location = new System.Drawing.Point(6, 295);
-            this.picPlayerCard5.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.picPlayerCard5.Margin = new System.Windows.Forms.Padding(6);
             this.picPlayerCard5.Name = "picPlayerCard5";
             this.picPlayerCard5.Size = new System.Drawing.Size(212, 277);
             this.picPlayerCard5.TabIndex = 5;
@@ -529,7 +529,7 @@
             this.pnlGameFunctions.Controls.Add(this.btnHit);
             this.pnlGameFunctions.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlGameFunctions.Location = new System.Drawing.Point(4, 159);
-            this.pnlGameFunctions.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnlGameFunctions.Margin = new System.Windows.Forms.Padding(4);
             this.pnlGameFunctions.Name = "pnlGameFunctions";
             this.pnlGameFunctions.Size = new System.Drawing.Size(994, 66);
             this.pnlGameFunctions.TabIndex = 2;
@@ -540,7 +540,7 @@
             this.pnlScoreTimer.Controls.Add(this.lblPlayerScore);
             this.pnlScoreTimer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlScoreTimer.Location = new System.Drawing.Point(96, 0);
-            this.pnlScoreTimer.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnlScoreTimer.Margin = new System.Windows.Forms.Padding(4);
             this.pnlScoreTimer.Name = "pnlScoreTimer";
             this.pnlScoreTimer.Size = new System.Drawing.Size(750, 66);
             this.pnlScoreTimer.TabIndex = 15;
@@ -576,7 +576,7 @@
             this.btnStand.BackColor = System.Drawing.Color.Gainsboro;
             this.btnStand.Dock = System.Windows.Forms.DockStyle.Right;
             this.btnStand.Location = new System.Drawing.Point(846, 0);
-            this.btnStand.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.btnStand.Margin = new System.Windows.Forms.Padding(6);
             this.btnStand.Name = "btnStand";
             this.btnStand.Size = new System.Drawing.Size(148, 66);
             this.btnStand.TabIndex = 7;
@@ -591,7 +591,7 @@
             this.btnHit.BackColor = System.Drawing.Color.Gainsboro;
             this.btnHit.Dock = System.Windows.Forms.DockStyle.Left;
             this.btnHit.Location = new System.Drawing.Point(0, 0);
-            this.btnHit.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.btnHit.Margin = new System.Windows.Forms.Padding(6);
             this.btnHit.Name = "btnHit";
             this.btnHit.Size = new System.Drawing.Size(96, 66);
             this.btnHit.TabIndex = 6;
@@ -604,7 +604,7 @@
             this.pnlDealer.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.pnlDealer.AutoSize = true;
             this.pnlDealer.Location = new System.Drawing.Point(4, 151);
-            this.pnlDealer.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pnlDealer.Margin = new System.Windows.Forms.Padding(4);
             this.pnlDealer.Name = "pnlDealer";
             this.pnlDealer.Size = new System.Drawing.Size(0, 0);
             this.pnlDealer.TabIndex = 4;
@@ -632,7 +632,7 @@
             this.Controls.Add(this.pnlTableHolder);
             this.Controls.Add(this.flowPnlPlayers);
             this.Controls.Add(this.pnlTopBtns);
-            this.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.Margin = new System.Windows.Forms.Padding(6);
             this.Name = "FrmNewGame";
             this.Text = "Stupid Gray Blackjack";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FrmNewGame_FormClosed);
