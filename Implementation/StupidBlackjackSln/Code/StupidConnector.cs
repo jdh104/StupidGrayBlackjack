@@ -222,7 +222,7 @@ namespace StupidBlackjackSln.Code
         /// <returns></returns>
         public bool NotifyDealerDraw(Card c, int connected_game_id)
         {
-            String[] response = this.WriteLine(StupidServer.NOTIFY_DEALER_DRAW + " " + connected_game_id + " " + key.ToString() + " " + c.ToString());
+            String[] response = this.WriteLine(StupidServer.NOTIFY_DEALER_DRAW + " " + connected_game_id + " " + c.ToString());
             return response[0].Equals(StupidServer.RESPONSE_SUCCESS);
         }
 

@@ -16,7 +16,7 @@ namespace StupidBlackjackSln.Code
         public const char DELIM = ':';
         private string id;
 
-        private static String[] possibleRanks = new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "jack", "queen", "king", "ace" };
+        private static String[] possibleRanks = new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "jack", "queen", "king", "ace" };
         private static String[] possibleSuits = new String[] { "hearts", "spades", "diamonds", "clubs" };
 
         public Bitmap Bitmap
@@ -48,7 +48,7 @@ namespace StupidBlackjackSln.Code
             {
                 if (!possibleRanks.Contains(args[0]) || !possibleSuits.Contains(args[1]))
                 {
-                    throw new Exception("Parse failed");
+                    throw new Exception("Parse failed: " + rep);
                 }
             }
             catch (Exception e)
@@ -63,34 +63,54 @@ namespace StupidBlackjackSln.Code
         {
             return id;
         }
-        /*
-        public var CardtoUnicode(String value, String suit)
+        
+        public String GetUnicode()
         {
-            char u_val;
-            char u_suit;
+            String rank = id.Split(DELIM)[0];
+            String suit = id.Split(DELIM)[1];
 
-            if (value.Length == 1)
-                u_val = value.ToCharArray()[0];     
-            else if (value.Equals("jack"))
-                u_val = 'B';
-            else if (value.Equals("queen"))
-                u_val = 'D';
-            else if (value.Equals("king"))
-                u_val = 'E';
-            else if (value.Equals("ace"))
-                u_val = '1';
+            try
+            {
+                Int32.Parse(rank);
+            }
+            catch
+            {
+                if (rank.Equals("jack"))
+                {
+                    rank = "J";
+                }
+                else if (rank.Equals("queen"))
+                {
+                    rank = "Q";
+                }
+                else if (rank.Equals("king"))
+                {
+                    rank = "K";
+                }
+                else if (rank.Equals("ace"))
+                {
+                    rank = "A";
+                }
+            }
 
-            if (suit.Equals("spades"))
-                u_suit = 'A';
-            else if (suit.Equals("hearts"))
-                u_suit = 'B';
+            if (suit.Equals("hearts"))
+            {
+                suit = "\u2665";
+            }
+            else if (suit.Equals("spades"))
+            {
+                suit = "\u2660";
+            }
             else if (suit.Equals("diamonds"))
-                u_suit = 'C';
-            else if (suit.Equals("clubs"))
-                u_suit = 'D';
+            {
+                suit = "\u2666";
+            }
+            else
+            {
+                suit = "\u2663";
+            }
 
-            //var unicode = 1f0 + u_suit + u_val;
-            return '';
-        } */
+            return rank + suit;
+        }
     }
 }
