@@ -177,24 +177,30 @@ namespace StupidBlackjackSln
         private void LoadPlayers()
         {
             players = new BlackjackPlayer[nPlayers];
+            List<int> otherPlayers = new List<int>;
+
             for (int i = 0; i < nPlayers; i++)
             {
                 players[i] = new BlackjackPlayer("player" + (i + 1).ToString() );
+                otherPlayers.Add(i);
             }
+
+            otherPlayers.RemoveAt(myindex);
+
 
             if (nPlayers >= 2)
             {
-                // lblPlayerXname.Text = "Player" + Program.GetConnector().GetPlayerOrder()[]something like this.toString();
+                lblPlayerXname.Text = "Player" + otherPlayers[0].ToString();
                 pnlPlayerX.Show();
             }
             if (nPlayers >= 3)
             {
-                // lblPlayerXname.Text = "Player" + Program.GetConnector().GetPlayerOrder()[]something like this.toString();
+                lblPlayerXname.Text = "Player" + otherPlayers[1].ToString();
                 pnlPlayerY.Show();
             }
             if (nPlayers == 4)
             {
-                // lblPlayerXname.Text = "Player" + Program.GetConnector().GetPlayerOrder()[]something like this.toString();
+                lblPlayerXname.Text = "Player" + otherPlayers[2].ToString();
                 pnlPlayerZ.Show();
             }
 
@@ -231,7 +237,11 @@ namespace StupidBlackjackSln
                     deck.RemoveCard(cardToDraw);
                 }
             }
-            else if (update[0].Equals(StupidServer.UPDATE_PLAYER_STAND)) { }
+            else if (update[0].Equals(StupidServer.UPDATE_PLAYER_STAND))
+            {
+                int playerindex = Int32.Parse(update_array[1]);
+                players[playerindex].SetStatus("Stand");
+            }
             else if (update[0].Equals(StupidServer.UPDATE_YOUR_SETUP))
             {
                 Card card1 = deck.dealCard();
@@ -254,6 +264,7 @@ namespace StupidBlackjackSln
         {
 
 
+            
             // Other player info
             // Up to 4 players in game, thus up to 3 players in players panel
             // players in players panel are identified by PlayerX, PlayerY, and PlayerZ

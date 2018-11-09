@@ -32,6 +32,16 @@ namespace StupidBlackjackSln.Code
             return hasWon;
         }
 
+        public String GetStatus()
+        {
+            return status;
+        }
+
+        public void SetStatus(String status)
+        {
+            this.status = status;
+        }
+
         protected override void calcScore()
         {
             this.Score = 0;
