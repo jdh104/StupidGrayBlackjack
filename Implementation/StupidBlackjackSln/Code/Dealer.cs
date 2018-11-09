@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace StupidBlackjackSln.Code
 {
-    class Dealer : BlackjackPlayer 
+   public class Dealer : BlackjackPlayer 
     {
        public Dealer()
         {
