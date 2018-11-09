@@ -11,21 +11,26 @@ namespace StupidBlackjackSln.Code
         private String name;
        public Dealer(String name) : base(name) //test
         {
-
             this.name = name;
-            this.calcScore();
-            if (Score <= 16)
-            {
-                this.giveCard(FrmNewGame.deck.dealCard());
-            }
-            else 
-            {
-                isTurn = false;
-            }
         }
         public String GetName()
         {
             return name;
+        }
+
+        public void MakeMove(int id)
+        {
+            this.calcScore();
+            if (Score <= 16)
+            {
+                Card c = FrmNewGame.deck.dealCard();
+                this.giveCard(c);
+                Program.GetConnector().NotifyDealerDraw(c, id);
+            }
+            else
+            {
+                Program.GetConnector().NotifyDealerStand(id);
+            }
         }
     }
 
