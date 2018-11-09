@@ -48,7 +48,7 @@ namespace StupidBlackjackSln.Code
             {
                 if (!possibleRanks.Contains(args[0]) || !possibleSuits.Contains(args[1]))
                 {
-                    throw new Exception("Parse failed");
+                    throw new Exception("Parse failed: " + rep);
                 }
             }
             catch (Exception e)
