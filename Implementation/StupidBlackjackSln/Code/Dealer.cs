@@ -6,10 +6,13 @@ using System.Threading.Tasks;
 
 namespace StupidBlackjackSln.Code
 {
-   public class Dealer : BlackjackPlayer 
+   public class Dealer : BlackjackPlayer
     {
-       public Dealer()
+        private String name;
+       public Dealer(String name) : base(name) //test
         {
+
+            this.name = name;
             this.calcScore();
             if (Score <= 16)
             {
@@ -20,7 +23,10 @@ namespace StupidBlackjackSln.Code
                 isTurn = false;
             }
         }
-
+        public String GetName()
+        {
+            return name;
+        }
     }
 
 }
