@@ -251,7 +251,7 @@ namespace StupidBlackjackSln
             }
             else if (update_array[0].Equals(StupidServer.UPDATE_PLAYER_JOINED))
             {
-
+                // do nothing
             }
             else if (update_array[0].Equals(StupidServer.UPDATE_PLAYER_DRAW))
             {
@@ -261,8 +261,8 @@ namespace StupidBlackjackSln
                     Card cardToDraw = Card.Parse(update_array[2]);
                     players[playerindex].giveCard(cardToDraw);
                     deck.RemoveCard(cardToDraw);
+                    players[playerindex].SetStatus("Drew: " + cardToDraw.ToString());
                 }
-                players[playerindex].SetStatus("Drew a card");
             }
             else if (update_array[0].Equals(StupidServer.UPDATE_PLAYER_STAND))
             {

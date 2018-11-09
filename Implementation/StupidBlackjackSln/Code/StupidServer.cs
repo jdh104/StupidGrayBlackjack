@@ -423,6 +423,51 @@ namespace StupidBlackjackSln.Code
                     OutputToForm("Failed to find game " + id.ToString());
                     return RESPONSE_FAIL;
                 }
+                else if (op.Equals(NOTIFY_DEALER_SETUP_FINISH))
+                {
+                    int id;
+                    try
+                    {
+                        id = Int32.Parse(args[1]);
+                    }
+                    catch
+                    {
+                        OutputToForm("Syntax Error: Failed to parse command");
+                        return RESPONSE_SYNTAX_ERROR;
+                    }
+                    foreach (GameRep game in games)
+                    {
+                        if (game.id == id)
+                        {
+                            game.turn_index = 0;
+                            this.WriteLine(game.GetClientList()[game.turn_index], UPDATE_YOUR_TURN);
+                            return RESPONSE_SUCCESS;
+                        }
+                    }
+                    return RESPONSE_FAIL;
+                }
+                else if (op.Equals(NOTIFY_DEALER_STAND))
+                {
+                    int id;
+                    try
+                    {
+                        id = Int32.Parse(args[1]);
+                    }
+                    catch
+                    {
+                        OutputToForm("Syntax Error: Failed to parse command");
+                        return RESPONSE_SYNTAX_ERROR;
+                    }
+                    foreach (GameRep game in games)
+                    {
+                        if (game.id == id)
+                        {
+                            this.BroadcastToGame(game, UPDATE_DEALER_STAND);
+                            return RESPONSE_SUCCESS;
+                        }
+                    }
+                    return RESPONSE_FAIL;
+                }
                 else if (op.Equals(NOTIFY_INIT))
                 {
                     int id;
