@@ -57,7 +57,8 @@ namespace StupidBlackjackSln
         public FrmNewGame(int id, int myIndex)
         {
             InitializeComponent();
-            
+            deck = new Deck(FindBitmap);
+
             picPlayerCards = new PictureBox[5];
             for (int i = 0; i < 5; i++)
             {
