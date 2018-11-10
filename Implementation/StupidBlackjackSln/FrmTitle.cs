@@ -14,6 +14,7 @@ namespace StupidBlackjackSln
         {
             InitializeComponent();
             SetStyle(ControlStyles.SupportsTransparentBackColor, true);
+            btnNewGame.Enabled = false;
         }
 
         private void Form1_Load(object sender, EventArgs e)
