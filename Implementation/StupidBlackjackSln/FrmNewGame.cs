@@ -27,6 +27,7 @@ namespace StupidBlackjackSln
         private int id = 0;
         private int myindex;
         private Dealer dealer;
+        private bool isMyTurn = false;
 
 
         /// <summary>
@@ -83,7 +84,7 @@ namespace StupidBlackjackSln
             lblYouArePlayer.Show();
 
             this.id = id;
-            this.myindex = myindex;
+            this.myindex = myIndex;
             this.isOnline = true;
 
             btnHit.Enabled = false;
@@ -129,12 +130,14 @@ namespace StupidBlackjackSln
         /// <param name="e"></param>
         private void btnStand_Click(object sender, EventArgs e)
         {
+            isMyTurn = false;
             this.ParseUpdate(Program.GetConnector().NotifyStand(id));
             ticks = 0;    //ends turn and sets time to 0
             lblTimer.Text = ticks.ToString();
             timer1.Stop();
             btnHit.Enabled = false;
             btnStand.Enabled = false;//Disable Hit Button
+            this.RefreshPlayerInfo();
         }                                             //Currently returns null TODO - test this
 
         /// <summary>
@@ -255,11 +258,42 @@ namespace StupidBlackjackSln
             }
             else if (update_array[0].Equals(StupidServer.UPDATE_DEALER_STAND))
             {
-                // basically end the round
+                int array_size = nPlayers + 1;
+                int[] scoresToCompare = new int[array_size];
+                for (int i=0; i<array_size-1; i++)
+                {
+                    scoresToCompare[i] = players[i].Score;
+                }
+                scoresToCompare[myindex] = 0;
+                scoresToCompare[array_size-1] = dealer.Score;
+
+                if (players[myindex].Score > 21)
+                {
+                    System.Windows.Forms.MessageBox.Show("You busted, loser!", "Hey Player" + myindex.ToString());
+                }
+                else if (players[myindex].Score >= scoresToCompare.Max<int>())
+                {
+                    if (players[myindex].Score == scoresToCompare[array_size - 1])
+                    {
+                        System.Windows.Forms.MessageBox.Show("You tied!", "Hey Player" + myindex.ToString());
+                    }
+                    else
+                    {
+                        System.Windows.Forms.MessageBox.Show("You won!", "Hey Player" + myindex.ToString());
+                    }
+                }
+                else if (players[myindex].Score < scoresToCompare.Max<int>())
+                {
+                    System.Windows.Forms.MessageBox.Show("You took the L!", "Hey Player" + myindex.ToString());
+                }
+                else
+                {
+                    System.Windows.Forms.MessageBox.Show("You are in an impossible situation!", "Hey Player" + myindex.ToString());
+                }
             }
             else if (update_array[0].Equals(StupidServer.UPDATE_DEALER_TURN))
             {
-                dealer.TakeTurn(id);
+                dealer.MakeTurn(id);
             }
             else if (update_array[0].Equals(StupidServer.UPDATE_PLAYER_CONNECTION_BROKEN))
             {
@@ -268,7 +302,7 @@ namespace StupidBlackjackSln
             }
             else if (update_array[0].Equals(StupidServer.UPDATE_PLAYER_JOINED))
             {
-                // do nothing
+                // ignore, game already started
             }
             else if (update_array[0].Equals(StupidServer.UPDATE_PLAYER_DRAW))
             {
@@ -298,6 +332,7 @@ namespace StupidBlackjackSln
             }
             else if (update_array[0].Equals(StupidServer.UPDATE_YOUR_TURN))
             {
+                isMyTurn = true;
                 System.Windows.Forms.MessageBox.Show("It's your turn!", "Hey Player" + myindex.ToString());
                 btnHit.Enabled = true;
                 btnStand.Enabled = true;
@@ -362,14 +397,15 @@ namespace StupidBlackjackSln
             lblTimer.Text = ticks.ToString();
             this.Text = "Stupid Gray Blackjack";
 
-            if (ticks <= 0)
+            if (ticks <= 0 && isMyTurn)
             {
                 //We could switch turns here and keep going with the clock
-                this.ParseUpdate(Program.GetConnector().NotifyStand(this.id));
-                btnHit.Enabled = false;   //Disable Hit Button
-                btnStand.Enabled = false;
-                RefreshPlayerInfo();    // Refresh info on rhs panel
-                timer1.Stop();
+                btnStand_Click(sender, e);
+                //this.ParseUpdate(Program.GetConnector().NotifyStand(this.id));
+                //btnHit.Enabled = false;   //Disable Hit Button
+                //btnStand.Enabled = false;
+                //RefreshPlayerInfo();    // Refresh info on rhs panel
+                //timer1.Stop();
             }
         }
 
