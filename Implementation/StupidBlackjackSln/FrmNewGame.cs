@@ -202,16 +202,19 @@ namespace StupidBlackjackSln
             if (nPlayers >= 2)
             {
                 lblPlayerXname.Text = "Player" + otherPlayers[0].ToString();
+                lblPlayerXstatus.Text = "Waiting";
                 pnlPlayerX.Show();
             }
             if (nPlayers >= 3)
             {
-                lblPlayerXname.Text = "Player" + otherPlayers[1].ToString();
+                lblPlayerYname.Text = "Player" + otherPlayers[1].ToString();
+                lblPlayerYstatus.Text = "Waiting";
                 pnlPlayerY.Show();
             }
             if (nPlayers == 4)
             {
-                lblPlayerXname.Text = "Player" + otherPlayers[2].ToString();
+                lblPlayerZname.Text = "Player" + otherPlayers[2].ToString();
+                lblPlayerZstatus.Text = "Waiting";
                 pnlPlayerZ.Show();
             }
 
